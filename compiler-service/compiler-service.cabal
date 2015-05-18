@@ -32,6 +32,7 @@ executable compiler-service
     process,
     bytestring,
     snap-core,
+    snap,
     snap-server,
     websockets,
     websockets-snap

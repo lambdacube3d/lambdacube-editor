@@ -19,6 +19,7 @@ import qualified Snap.Util.FileServe     as Snap
 import qualified System.IO               as IO
 import qualified System.Process          as Process
 
+import Snap.Snaplet.Config
 import System.IO
 import Control.Exception
 import Control.Monad.IO.Class
@@ -64,9 +65,6 @@ main :: IO ()
 main = do
   IO.hSetBuffering IO.stdout IO.NoBuffering
   IO.hSetBuffering IO.stdin IO.NoBuffering
-  let config =
-        Snap.setErrorLog  Snap.ConfigNoLog $
-        Snap.setAccessLog Snap.ConfigNoLog $
-        Snap.defaultConfig
+  config <- commandLineAppConfig Snap.defaultConfig
   Right prelude <- runMM (ioFetch ["."]) $ loadModule (ExpN "Prelude")
   Snap.httpServe config $ app prelude
