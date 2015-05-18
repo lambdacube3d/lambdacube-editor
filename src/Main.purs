@@ -2,8 +2,12 @@ module Main (main,run) where
 
 import Debug.Trace
 
+import Control.Bind
+import Control.Timer (timeout,clearTimeout)
 import Control.Monad.Eff
 import Control.Monad.Eff.Ref
+import Data.Date
+import Data.Time
 import Data.Foldable (for_, foldl)
 
 import Ace
@@ -34,21 +38,11 @@ import Input
 import PipelineJsonDecode
 import qualified Data.Argonaut as A
 
-import qualified Data.Matrix as M
-import qualified Data.Matrix4 as M
+import Data.Matrix (Mat(..))
+import Data.Matrix4
+import Data.Vector3
 
 main = return unit
-{-
-  done - websocket setup
-  done - compile button
-  done - lc compiler in snap server
-  done - json serializer for Pipeline
-  done - embed lambdacube-webgl
-    done - setup pipeline input
-    done - compile/replace pipeline
-  show error messages
-  trace result
--}
 
 {-
   control-b - compile/build
@@ -95,8 +89,25 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
         , uniforms : fromList [Tuple "MVP" M44F, Tuple "MVP2" M44F]
         }
   pplInput <- mkWebGLPipelineInput inputSchema
-  let mvp = V4 (V4 0.4692207 (-0.28573585) (-0.9593549) (-0.9574381)) (V4 0.0 2.395976 (-0.122928835) (-0.12268323)) (V4 (-1.719497) (-7.797232e-2) (-0.2617912) (-0.26126814)) (V4 0.0 0.0 3.8834958 4.0755367)
-  uniformM44F "MVP" pplInput.uniformSetter mvp
+  let --mvp = V4 (V4 0.4692207 (-0.28573585) (-0.9593549) (-0.9574381)) (V4 0.0 2.395976 (-0.122928835) (-0.12268323)) (V4 (-1.719497) (-7.797232e-2) (-0.2617912) (-0.26126814)) (V4 0.0 0.0 3.8834958 4.0755367)
+      toLCMat4 :: Mat4 -> M44F
+      toLCMat4 (Mat [x11, x21, x31, x41, x12, x22, x32, x42, x13, x23, x33, x43, x14, x24, x34, x44]) = let
+          v1 = V4 x11 x21 x31 x41
+          v2 = V4 x12 x22 x32 x42
+          v3 = V4 x13 x23 x33 x43
+          v4 = V4 x14 x24 x34 x44
+        in V4 v1 v2 v3 v4
+
+      updateInput t = do
+        let pi = 3.141592653589793
+            w  = 800
+            h  = 600
+            angle = pi / 24 * t
+            cm = makeLookAt (vec3 3 1.3 0.3) (vec3 0 0 0) (vec3 0 1 0)
+            mm = makeRotate angle (vec3 0 1 0)
+            pm = makePerspective 45 (w/h) 0.1 100
+            mvp = pm `mul` cm `mul` mm
+        uniformM44F "MVP" pplInput.uniformSetter $ toLCMat4 mvp
 
   gpuCube <- compileMesh myCube
 
@@ -137,7 +148,9 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   J.setText "Compile" btnCompile
   btnCompile `J.append` b
 
+  pipelineRef <- newRef Nothing
   let compile s = do
+        trace "compile"
         src <- Session.getValue session
         send s src
 
@@ -150,15 +163,27 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
         sortSlotObjects pplInput
         trace "Setup pipeline input"
 
-        renderPipeline ppl
+        old <- readRef pipelineRef
+        case old of
+          Nothing -> return unit
+          Just p -> do
+            disposePipeline p
+            trace "Pipeline disposed"
+        writeRef pipelineRef $ Just ppl
         trace "WebGL completed"
-        disposePipeline ppl
-        trace "Pipeline disposed"
 
   socket <- webSocket "ws://localhost:8000/compile" $
     { onOpen    : \s -> do
         trace "socket is ready"
         compile s
+        timerRef <- newRef Nothing
+        Session.onChange session $ do
+          t <- readRef timerRef
+          case t of
+            Nothing -> return unit
+            Just a -> clearTimeout a
+          writeRef timerRef =<< Just <$> timeout 1000 (compile s)
+
     , onClose   : trace "socket is closed"
     , onMessage : \s m -> do
         case A.jsonParser m >>= A.decodeJson of
@@ -176,4 +201,14 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
         compile ws
         trace "clicked compile"
       addCommand editor "Compile" "Ctrl-B" "Command-B" (\_ -> compile ws)
+      let renderLoop = do
+            Milliseconds t <- nowEpochMilliseconds
+            updateInput (t / 1000)
+            mppl <- readRef pipelineRef
+            case mppl of
+              Nothing -> return unit
+              Just ppl -> renderPipeline ppl
+            timeout (1000/25) renderLoop
+      -- render loop
+      renderLoop
       return unit
