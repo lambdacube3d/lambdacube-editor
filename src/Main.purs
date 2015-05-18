@@ -4,7 +4,7 @@ import Debug.Trace
 
 import Control.Monad.Eff
 import Control.Monad.Eff.Ref
-import Data.Foldable (for_)
+import Data.Foldable (for_, foldl)
 
 import Ace
 import Ace.Types
@@ -111,18 +111,24 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   range <- Range.create 8 0 9 0
   Session.addMarker range "lc_error" "line" false session
   typeInfoRef <- newRef []
+  let lessEqPos l c l' c' = l < l' || l == l' && c <= c'
+  let lessPos l c l' c' = l < l' || l == l' && c < c'
   let getTypeInfo l c = do
         x <- readRef typeInfoRef
-        return $ case head $ flip filter x $ \(TypeInfo i) -> i.startLine == l && l == i.endLine && i.startColumn <= c && c <= i.endColumn of
-          Nothing -> 
-              { startLine   : 10
-              , startColumn : 2
-              , endLine     : 10
-              , endColumn   : 10
+        let ps = flip filter x $ \(TypeInfo i) -> lessEqPos i.startLine i.startColumn l c && lessPos l c i.endLine i.endColumn
+        let f Nothing (TypeInfo i) = Just i
+            f (Just d) (TypeInfo i)
+                | lessPos d.startLine d.startColumn i.startLine i.startColumn = Just i
+                | otherwise = Just d
+        return $ case foldl f Nothing ps of
+          Nothing ->
+              { startLine   : 0
+              , startColumn : 0
+              , endLine     : 0
+              , endColumn   : 0
               , text        : ""
               }
-          Just a -> case a of
-            TypeInfo i -> i
+          Just a -> a
   tokenTooltip editor getTypeInfo
 
   b <- J.body
