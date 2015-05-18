@@ -16,12 +16,12 @@
 * clone lambdacube-editor
   - cd lambdacube-editor
   - bower update
-  - pulp build -O --to index.js
+  - pulp build -O --to editor.js
   - cd compiler-service
   - cabal install
   - run compiler-service
     - cd; mkdir lc_tmp; cd lc_tmp
     - cp Prelude.lc .
     - compiler-service
-  - open lambdacube-editor/index.html
+  - open lambdacube-editor/editor.html
 
