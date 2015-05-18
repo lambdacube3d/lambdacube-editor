@@ -155,7 +155,6 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
         compile s
     , onClose   : trace "socket is closed"
     , onMessage : \s m -> do
-        trace m
         case A.jsonParser m >>= A.decodeJson of
           Left e -> trace $ "decode error: " ++ e
           Right (MyLeft e) -> trace $ "compile error: " ++ e
