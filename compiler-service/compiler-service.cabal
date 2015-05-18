@@ -24,7 +24,7 @@ executable compiler-service
     base >=4.8 && <4.9,
     text >=1.2 && <1.3,
     aeson >=0.8 && <0.9,
-    lambdacube-dsl >=0.1 && <0.2,
+    lambdacube-compiler >=0.1 && <0.2,
     aeson-pretty,
     process,
     bytestring,

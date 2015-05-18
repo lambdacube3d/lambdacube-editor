@@ -43,7 +43,7 @@ compileApp pending = do
           putStrLn "receive"
           bs <- WS.receiveData c
           print bs
-          B.writeFile "src/gfx.lc" bs
+          B.writeFile "gfx.lc" bs
           putStrLn "compile"
           res <- compileMain WebGL1 "." (ExpN "gfx")
           putStrLn "print result"
