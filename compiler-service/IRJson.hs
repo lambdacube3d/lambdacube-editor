@@ -6,6 +6,7 @@ import Data.Text
 import Data.Aeson hiding (Value,Bool)
 import Data.Aeson.Types hiding (Value,Bool)
 import IR
+import Text.Parsec.Pos
 
 (.-) :: Text -> Text -> Pair
 a .- b = a .= b
@@ -237,8 +238,13 @@ instance ToJSON RenderTarget where
 instance ToJSON Pipeline where
   toJSON Pipeline{..} = object ["textures" .= textures, "samplers" .= samplers, "targets" .= targets, "programs" .= programs, "slots" .= slots, "commands" .= commands]
 
-newtype MyEither = MyEither (Either String Pipeline)
+newtype MyEither = MyEither (Either String (Pipeline,[(SourcePos,SourcePos,String)]))
 instance ToJSON MyEither where
   toJSON (MyEither e) = case e of
     Left a -> object ["tag" .- "Left", "value" .= a]
-    Right a -> object ["tag" .- "Right", "value" .= a]
+    Right (p,i) -> object ["tag" .- "Right", "pipeline" .= p, "infos" .= fmap TypeInfo i]
+
+-- instances for type info
+newtype TypeInfo = TypeInfo (SourcePos,SourcePos,String)
+instance ToJSON TypeInfo where
+  toJSON (TypeInfo (s,e,m)) = object ["startL" .= sourceLine s, "startC" .= sourceColumn s ,"endL" .= sourceLine e, "endC" .= sourceColumn e, "text" .= m]

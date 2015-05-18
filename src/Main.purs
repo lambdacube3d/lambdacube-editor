@@ -3,6 +3,8 @@ module Main (main,run) where
 import Debug.Trace
 
 import Control.Monad.Eff
+import Control.Monad.Eff.Ref
+import Data.Foldable (for_)
 
 import Ace
 import Ace.Types
@@ -21,6 +23,7 @@ import Sample
 import Data.Maybe
 import Data.StrMap
 import Data.Tuple
+import Data.Array(filter,head)
 
 import Backend
 import IR
@@ -75,11 +78,13 @@ foreign import addCommand """
 
 foreign import tokenTooltip """
   function tokenTooltip(editor) {
-    return function() {
-        editor.tokenTooltip = new myTokenTooltip(editor);
+    return function(getTy) {
+      return function() {
+          editor.tokenTooltip = new myTokenTooltip(editor,getTy);
+      };
     };
   }
-""" :: forall eff . Editor -> Eff (ace :: EAce | eff) Unit
+""" :: forall eff . Editor -> (Int -> Int -> Eff (ace :: EAce | eff) TypeInfoRecord) -> Eff (ace :: EAce | eff) Unit
 
 run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   -- setup pipeline input
@@ -105,7 +110,20 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   Session.setValue defaultSrc session
   range <- Range.create 8 0 9 0
   Session.addMarker range "lc_error" "line" false session
-  tokenTooltip editor
+  typeInfoRef <- newRef []
+  let getTypeInfo l c = do
+        x <- readRef typeInfoRef
+        return $ case head $ flip filter x $ \(TypeInfo i) -> i.startLine == l && l == i.endLine && i.startColumn <= c && c <= i.endColumn of
+          Nothing -> 
+              { startLine   : 10
+              , startColumn : 2
+              , endLine     : 10
+              , endColumn   : 10
+              , text        : ""
+              }
+          Just a -> case a of
+            TypeInfo i -> i
+  tokenTooltip editor getTypeInfo
 
   b <- J.body
   ui <- J.find "ui" b
@@ -141,7 +159,9 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
         case A.jsonParser m >>= A.decodeJson of
           Left e -> trace $ "decode error: " ++ e
           Right (MyLeft e) -> trace $ "compile error: " ++ e
-          Right (MyRight p) -> render p
+          Right (MyRight p infos) -> do
+            render p
+            writeRef typeInfoRef infos
     , onError   : \s m -> trace m
     }
   case socket of

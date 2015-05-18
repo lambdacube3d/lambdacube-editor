@@ -37,12 +37,13 @@ var event = ace.require("ace/lib/event");
 var Range = ace.require("ace/range").Range;
 var Tooltip = ace.require("ace/tooltip").Tooltip;
 
-function TokenTooltip (editor) {
+function TokenTooltip (editor,getTy) {
     if (editor.tokenTooltip)
         return;
     Tooltip.call(this, editor.container);
     editor.tokenTooltip = this;
     this.editor = editor;
+    this.getTypeAt = getTy;
 
     this.update = this.update.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -76,7 +77,19 @@ oop.inherits(TokenTooltip, Tooltip);
         var screenPos = {row: row, column: col, side: offset - col > 0 ? 1 : -1};
         var session = this.editor.session;
         var docPos = session.screenToDocumentPosition(screenPos.row, screenPos.column);
-        var token = session.getTokenAt(docPos.row, docPos.column);
+        
+        var token = this.getTypeAt(docPos.row+1)(docPos.column+1)();
+
+        /*
+          token:
+            startLine
+            startColumn
+            endLine
+            endColumn
+            text
+
+        */
+        if (token && token.text == "") token = null;
 
         if (!token && !session.getLine(docPos.row)) {
             token = {
@@ -90,17 +103,8 @@ oop.inherits(TokenTooltip, Tooltip);
             this.hide();
             return;
         }
-        var tokenText = 'Int -> Int'
-/*
-        var tokenText = token.type;
 
-        if (token.state)
-            tokenText += "|" + token.state;
-        if (token.merge)
-            tokenText += "\n  merge";
-        if (token.stateTransitions)
-            tokenText += "\n  " + token.stateTransitions.join("\n  ");
-*/
+        var tokenText = token.text
         if (this.tokenText != tokenText) {
             this.setText(tokenText);
             this.width = this.getWidth();
@@ -112,7 +116,7 @@ oop.inherits(TokenTooltip, Tooltip);
 
         this.token = token;
         session.removeMarker(this.marker);
-        this.range = new Range(docPos.row, token.start, docPos.row, token.start + token.value.length);
+        this.range = new Range(token.startLine-1, token.startColumn-1, token.endLine-1, token.endColumn-1);
         this.marker = session.addMarker(this.range, "ace_bracket", "text");
     };
     

@@ -543,9 +543,28 @@ instance decodeJsonPipeline :: DecodeJson Pipeline where
     commands <- obj .? "commands"
     pure $ Pipeline {textures:textures, samplers:samplers, targets:targets, programs:programs, slots:slots, commands:commands}
 
+type TypeInfoRecord =
+  { startLine   :: Int
+  , startColumn :: Int
+  , endLine     :: Int
+  , endColumn   :: Int
+  , text        :: String
+  }
+data TypeInfo = TypeInfo TypeInfoRecord
+
+instance decodeJsonTypeInfo :: DecodeJson TypeInfo where
+  decodeJson json = do
+    obj <- decodeJson json
+    startL <- obj .? "startL"
+    startC <- obj .? "startC"
+    endL <- obj .? "endL"
+    endC <- obj .? "endC"
+    text <- obj .? "text"
+    return $ TypeInfo {startLine:startL, startColumn:startC, endLine:endL, endColumn:endC, text:text}
+
 data MyEither
   = MyLeft String
-  | MyRight Pipeline
+  | MyRight Pipeline [TypeInfo]
 
 instance decodeJsonMyEither :: DecodeJson MyEither where
   decodeJson json = do
@@ -553,4 +572,4 @@ instance decodeJsonMyEither :: DecodeJson MyEither where
     tag <- obj .? "tag"
     case tag of
       "Left" -> MyLeft <$> obj .? "value"
-      "Right" -> MyRight <$> obj .? "value"
+      "Right" -> MyRight <$> obj .? "pipeline" <*> obj .? "infos"
