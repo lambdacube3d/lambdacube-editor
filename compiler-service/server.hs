@@ -22,32 +22,32 @@ import qualified System.Process          as Process
 import Data.Aeson.Encode.Pretty
 import IRJson
 import Driver
+import Type (PolyEnv)
 
 --------------------------------------------------------------------------------
-app :: Snap ()
-app = Snap.route
+app :: PolyEnv -> Snap ()
+app prelude = Snap.route
     [ ("compile", compile)
     ]
+  where
+--------------------------------------------------------------------------------
+    compile :: Snap ()
+    compile = do
+        WS.runWebSocketsSnap $ compileApp
 
 --------------------------------------------------------------------------------
-compile :: Snap ()
-compile = do
-    WS.runWebSocketsSnap $ compileApp
-
---------------------------------------------------------------------------------
-compileApp :: WS.ServerApp
-compileApp pending = do
-    print "compileApp"
-    c <- WS.acceptRequest pending
-    let go = do
-          bs <- WS.receiveData c
-          B.writeFile "gfx.lc" bs
-          res <- compileMain WebGL1 "." (ExpN "gfx")
-          let json = encodePretty $ MyEither res
-          WS.sendTextData c json
-          go
-    go
-    putStrLn $ "compileApp ended"
+    compileApp :: WS.ServerApp
+    compileApp pending = do
+        print "compileApp"
+        c <- WS.acceptRequest pending
+        let go = do
+              bs <- WS.receiveData c
+              res <- compileMain' prelude WebGL1 $ BC.unpack bs
+              let json = encodePretty $ MyEither res
+              WS.sendTextData c json
+              go
+        go
+        putStrLn $ "compileApp ended"
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -58,4 +58,5 @@ main = do
         Snap.setErrorLog  Snap.ConfigNoLog $
         Snap.setAccessLog Snap.ConfigNoLog $
         Snap.defaultConfig
-  Snap.httpServe config app
+  Right prelude <- runMM (ioFetch ["."]) $ loadModule (ExpN "Prelude")
+  Snap.httpServe config $ app prelude
