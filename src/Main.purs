@@ -143,14 +143,17 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   tokenTooltip editor getTypeInfo
 
   b <- J.body
-  ui <- J.find "ui" b
+  ui <- J.find "#ui" b
+  messagepanel <- J.find "#messagepanel" b
+  statuspanel <- J.find "#statuspanel" b
   btnCompile <- J.create "<button>"
-  J.setText "Compile" btnCompile
-  btnCompile `J.append` b
+  J.setText "Build" btnCompile
+  btnCompile `J.append` ui
 
   pipelineRef <- newRef Nothing
   let compile s = do
         trace "compile"
+        J.setText "Compiling..." statuspanel
         src <- Session.getValue session
         send s src
 
@@ -188,8 +191,13 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
     , onMessage : \s m -> do
         case A.jsonParser m >>= A.decodeJson of
           Left e -> trace $ "decode error: " ++ e
-          Right (MyLeft e) -> trace $ "compile error: " ++ e
+          Right (MyLeft e) -> do
+            J.setText "Error" statuspanel
+            J.setText e messagepanel
+            return unit
           Right (MyRight p infos) -> do
+            J.setText "Compiled" statuspanel
+            J.setText "No errors." messagepanel
             render p
             writeRef typeInfoRef infos
     , onError   : \s m -> trace m
