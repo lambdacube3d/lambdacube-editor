@@ -1,7 +1,7 @@
 <!doctype>
 <html>
 <head>
-  <title>Thermite Example</title>
+  <title>Try LambdaCube 3D</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
   <style>
@@ -9,7 +9,8 @@
       font-family: sans-serif;
     }
     .ace_editor { 
-        height: 300px;
+        width: 100%;
+        height: 100%;
     }
     .lc_error {
         background: red;
@@ -18,12 +19,18 @@
   </style>
 </head>
 
-<body>
-    <canvas id="glcanvas" width="400" height="300" style="border: 1px solid black; display: block; margin: auto;">
-      Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
-    </canvas>
-  <div id="ui"></div>
-  <div id="editor"></div>
+<body style="margin: 5px">
+  <div style="width: 100%; height: 95%">
+    <div style="float:right; width: 40%; height: 100%">
+        <canvas id="glcanvas" width="400" height="300" style="width: 100%; border: 1px solid black; margin: auto; vertical-align: center">
+          Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
+        </canvas>
+    </div>
+    <div style="float:left; width: 60%; height: 100%">
+        <div id="editor"></div>
+        <div id="ui"></div>
+    </div>
+  </div>
   <script src="token_tooltip.js"></script>
   <script src="index.js"></script>
   <script type="text/javascript"> var gl; onload = PS.Main.run;</script>
