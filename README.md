@@ -1,7 +1,7 @@
 # lambdacube-editor
 
-bower update
+`bower update`
 
-pulp build -O --to index.js
+`pulp build -O --to index.js`
 
-open index.html
+`open index.html`
