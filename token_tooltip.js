@@ -117,7 +117,7 @@ oop.inherits(TokenTooltip, Tooltip);
         this.token = token;
         session.removeMarker(this.marker);
         this.range = new Range(token.startLine-1, token.startColumn-1, token.endLine-1, token.endColumn-1);
-        this.marker = session.addMarker(this.range, "ace_bracket", "text");
+        this.marker = session.addMarker(this.range, "ace_selected-word", "text");
     };
     
     this.onMouseMove = function(e) {
