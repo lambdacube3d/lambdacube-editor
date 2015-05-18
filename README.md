@@ -1,7 +1,18 @@
 # lambdacube-editor
 
-`bower update`
+* install purescript
+  - cabal update
+  - cabal install purescript
 
-`pulp build -O --to index.js`
+* install node
+* install npm
+* install bower and pulp
+  - npm install -g bower pulp
 
-`open index.html`
+* clone lambdacube-editor
+  - bower update
+  - pulp build -O --to index.js
+  - cd compiler-service
+  - cabal install
+  - run compiler-service, put prelude into current dir
+  - open ../index.html
