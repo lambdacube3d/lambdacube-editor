@@ -19,6 +19,11 @@ import qualified Snap.Util.FileServe     as Snap
 import qualified System.IO               as IO
 import qualified System.Process          as Process
 
+import System.IO
+import Control.Exception
+import Control.Monad.IO.Class
+import Control.DeepSeq
+
 import Data.Aeson.Encode.Pretty
 import IRJson
 import Driver
@@ -42,12 +47,17 @@ app prelude = Snap.route
         c <- WS.acceptRequest pending
         let go = do
               bs <- WS.receiveData c
-              res <- compileMain' prelude WebGL1 $ BC.unpack bs
-              let json = encodePretty $ MyEither res
+              json <- liftIO $ catchErr $ encodePretty . MyEither <$> compileMain' prelude WebGL1 (BC.unpack bs)
               WS.sendTextData c json
               go
         go
         putStrLn $ "compileApp ended"
+
+    catchErr m = flip catch getErr $ do
+        x <- m
+        deepseq x `seq` return x
+    getErr :: ErrorCall -> IO BL.ByteString
+    getErr e = catchErr $ return . encodePretty . MyEither $ Left $ "\n!FAIL err\n" ++ show e
 
 --------------------------------------------------------------------------------
 main :: IO ()
