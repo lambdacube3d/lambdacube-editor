@@ -131,7 +131,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
         disposePipeline ppl
         trace "Pipeline disposed"
 
-  socket <- webSocket "ws://localhost:8000/console/bash" $
+  socket <- webSocket "ws://localhost:8000/compile" $
     { onOpen    : \s -> do
         trace "socket is ready"
         compile s
