@@ -40,19 +40,10 @@ compileApp pending = do
     print "compileApp"
     c <- WS.acceptRequest pending
     let go = do
-          putStrLn "receive"
           bs <- WS.receiveData c
-          print bs
           B.writeFile "gfx.lc" bs
-          putStrLn "compile"
           res <- compileMain WebGL1 "." (ExpN "gfx")
-          putStrLn "print result"
-          writeFile "gfx.out" $ show res
           let json = encodePretty $ MyEither res
-          BL.writeFile "gfx.json" json
-          --json <- BL.readFile "res.json"
-          print res
-          putStrLn "send result"
           WS.sendTextData c json
           go
     go
