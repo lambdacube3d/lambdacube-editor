@@ -201,14 +201,15 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
     , onMessage : \s m -> do
         case A.jsonParser m >>= A.decodeJson of
           Left e -> trace $ "decode error: " ++ e
-          Right (MyLeft (TypeInfo e)) -> do
+          Right (MyLeft (TypeInfo e) infos) -> do
             J.setText "Error" statuspanel
             J.setText e.text messagepanel
             range <- Range.create (e.startLine - 1) (e.startColumn - 1) (e.endLine - 1) (e.endColumn - 1)
-            mkr <- addMarker range "lc_error" "text" false session
             rs <- readRef markerRef
             for_ rs $ \mkr -> Session.removeMarker mkr session
+            mkr <- addMarker range "lc_error" "text" false session
             writeRef markerRef [mkr]
+            writeRef typeInfoRef infos
             return unit
           Right (MyRight p infos) -> do
             J.setText "Compiled" statuspanel

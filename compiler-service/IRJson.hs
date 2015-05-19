@@ -238,10 +238,12 @@ instance ToJSON RenderTarget where
 instance ToJSON Pipeline where
   toJSON Pipeline{..} = object ["textures" .= textures, "samplers" .= samplers, "targets" .= targets, "programs" .= programs, "slots" .= slots, "commands" .= commands]
 
-newtype MyEither = MyEither (Either (SourcePos,SourcePos,String) (Pipeline,[(SourcePos,SourcePos,String)]))
+type Info = (SourcePos,SourcePos,String)
+
+newtype MyEither = MyEither (Either (Info, [Info]) (Pipeline, [Info]))
 instance ToJSON MyEither where
   toJSON (MyEither e) = case e of
-    Left a -> object ["tag" .- "Left", "value" .= TypeInfo a]
+    Left (a,i) -> object ["tag" .- "Left", "value" .= TypeInfo a, "infos" .= fmap TypeInfo i]
     Right (p,i) -> object ["tag" .- "Right", "pipeline" .= p, "infos" .= fmap TypeInfo i]
 
 -- instances for type info

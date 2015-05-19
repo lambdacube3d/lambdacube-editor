@@ -563,7 +563,7 @@ instance decodeJsonTypeInfo :: DecodeJson TypeInfo where
     return $ TypeInfo {startLine:startL, startColumn:startC, endLine:endL, endColumn:endC, text:text}
 
 data MyEither
-  = MyLeft TypeInfo
+  = MyLeft TypeInfo [TypeInfo]
   | MyRight Pipeline [TypeInfo]
 
 instance decodeJsonMyEither :: DecodeJson MyEither where
@@ -571,5 +571,5 @@ instance decodeJsonMyEither :: DecodeJson MyEither where
     obj <- decodeJson json
     tag <- obj .? "tag"
     case tag of
-      "Left" -> MyLeft <$> obj .? "value"
+      "Left" -> MyLeft <$> obj .? "value" <*> obj .? "infos"
       "Right" -> MyRight <$> obj .? "pipeline" <*> obj .? "infos"

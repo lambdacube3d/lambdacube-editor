@@ -48,17 +48,20 @@ app prelude = Snap.route
         c <- WS.acceptRequest pending
         let go = do
               bs <- WS.receiveData c
-              json <- liftIO $ catchErr $ encodePretty . MyEither . either (Left . showErr) Right <$> compileMain' prelude WebGL1 (BC.unpack bs)
+              json <- liftIO $ catchErr $ encodePretty . MyEither . ff <$> compileMain' freshTypeVars prelude WebGL1 (BC.unpack bs)
               WS.sendTextData c json
               go
         go
         putStrLn $ "compileApp ended"
 
+    ff (Left err, infos) = Left (showErr err, infos)
+    ff (Right (m, _), infos) = Right (m, infos)
+
     catchErr m = flip catch getErr $ do
         x <- m
         deepseq x `seq` return x
     getErr :: ErrorCall -> IO BL.ByteString
-    getErr e = catchErr $ return $ encodePretty . MyEither $ Left (dummyPos, dummyPos, "\n!FAIL err\n" ++ show e)
+    getErr e = catchErr $ return $ encodePretty . MyEither $ Left ((dummyPos, dummyPos, "\n!FAIL err\n" ++ show e), [])
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -66,5 +69,5 @@ main = do
   IO.hSetBuffering IO.stdout IO.NoBuffering
   IO.hSetBuffering IO.stdin IO.NoBuffering
   config <- commandLineAppConfig Snap.defaultConfig
-  Right prelude <- runMM (ioFetch ["."]) $ loadModule (ExpN "Prelude")
+  (Right prelude, _) <- runMM (map ("tt" ++) $ map show [0..]) (ioFetch ["."]) $ loadModule (ExpN "Prelude")
   Snap.httpServe config $ app prelude
