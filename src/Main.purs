@@ -116,8 +116,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
         , uniforms : fromList [Tuple "MVP" M44F, Tuple "MVP2" M44F]
         }
   pplInput <- mkWebGLPipelineInput inputSchema
-  let --mvp = V4 (V4 0.4692207 (-0.28573585) (-0.9593549) (-0.9574381)) (V4 0.0 2.395976 (-0.122928835) (-0.12268323)) (V4 (-1.719497) (-7.797232e-2) (-0.2617912) (-0.26126814)) (V4 0.0 0.0 3.8834958 4.0755367)
-      toLCMat4 :: Mat4 -> M44F
+  let toLCMat4 :: Mat4 -> M44F
       toLCMat4 (Mat [x11, x21, x31, x41, x12, x22, x32, x42, x13, x23, x33, x43, x14, x24, x34, x44]) = let
           v1 = V4 x11 x21 x31 x41
           v2 = V4 x12 x22 x32 x42
@@ -134,7 +133,11 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
             mm = makeRotate angle (vec3 0 1 0)
             pm = makePerspective 45 (w/h) 0.1 100
             mvp = pm `mul` cm `mul` mm
+            cm' = makeLookAt (vec3 4 0.5 (-0.6)) (vec3 0 0 0) (vec3 0 1 0)
+            mvp2 = pm `mul` cm' `mul` mm
+
         uniformM44F "MVP" pplInput.uniformSetter $ toLCMat4 mvp
+        uniformM44F "MVP2" pplInput.uniformSetter $ toLCMat4 mvp2
 
   gpuCube <- compileMesh myCube
   addMesh pplInput "stream4" gpuCube []
