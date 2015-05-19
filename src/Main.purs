@@ -165,13 +165,13 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
             addMesh pplInput sname gpuMesh []
             sortSlotObjects pplInput
             return unit
-  timeout 1 $ do
-    addRemoteModel "line" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/line.mesh.json"
-    addRemoteModel "grid" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid.mesh.json"
-    --addRemoteModel "grid3d" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid3d.mesh.json"
-    addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo3.mesh.json"
-    --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo2.mesh.json"
-    --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo3.mesh.json"
+
+  --addRemoteModel "grid3d" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid3d.mesh.json"
+  --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo2.mesh.json"
+  --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo3.mesh.json"
+  addRemoteModel "grid" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid.mesh.json"
+  addRemoteModel "line" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/line.mesh.json"
+  addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo3.mesh.json"
 
   -- setup ace editor
   editor <- Ace.edit "editor" ace
