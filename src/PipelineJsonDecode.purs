@@ -563,7 +563,7 @@ instance decodeJsonTypeInfo :: DecodeJson TypeInfo where
     return $ TypeInfo {startLine:startL, startColumn:startC, endLine:endL, endColumn:endC, text:text}
 
 data MyEither
-  = MyLeft String
+  = MyLeft TypeInfo
   | MyRight Pipeline [TypeInfo]
 
 instance decodeJsonMyEither :: DecodeJson MyEither where

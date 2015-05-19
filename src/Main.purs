@@ -24,6 +24,7 @@ import DefaultText
 import Data.Either
 import Sample
 
+import Data.Function
 import Data.Maybe
 import Data.StrMap
 import Data.Tuple
@@ -80,6 +81,16 @@ foreign import tokenTooltip """
   }
 """ :: forall eff . Editor -> (Int -> Int -> Eff (ace :: EAce | eff) TypeInfoRecord) -> Eff (ace :: EAce | eff) Unit
 
+foreign import addMarkerImpl
+  "function addMarkerImpl(range, clazz, type, inFront, self) {\
+  \  return function() {\
+  \    return self.addMarker(range, clazz, type, inFront);\
+  \  };\
+  \}" :: forall eff. Fn5 Range String String Boolean EditSession (Eff (ace :: EAce | eff) Int)
+
+addMarker :: forall eff. Range -> String -> String -> Boolean -> EditSession -> Eff (ace :: EAce | eff) Int
+addMarker range clazz _type inFront self = runFn5 addMarkerImpl range clazz _type inFront self
+
 run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   -- setup pipeline input
   let inputSchema = 
@@ -119,9 +130,8 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   Editor.setTheme "ace/theme/terminal" editor
   Session.setMode "ace/mode/haskell" session
   Session.setValue defaultSrc session
-  range <- Range.create 8 0 9 0
-  Session.addMarker range "lc_error" "line" false session
   typeInfoRef <- newRef []
+  markerRef <- newRef []
   let lessEqPos l c l' c' = l < l' || l == l' && c <= c'
   let lessPos l c l' c' = l < l' || l == l' && c < c'
   let getTypeInfo l c = do
@@ -191,13 +201,21 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
     , onMessage : \s m -> do
         case A.jsonParser m >>= A.decodeJson of
           Left e -> trace $ "decode error: " ++ e
-          Right (MyLeft e) -> do
+          Right (MyLeft (TypeInfo e)) -> do
             J.setText "Error" statuspanel
-            J.setText e messagepanel
+            J.setText e.text messagepanel
+            range <- Range.create (e.startLine - 1) (e.startColumn - 1) (e.endLine - 1) (e.endColumn - 1)
+            mkr <- addMarker range "lc_error" "text" false session
+            rs <- readRef markerRef
+            for_ rs $ \mkr -> Session.removeMarker mkr session
+            writeRef markerRef [mkr]
             return unit
           Right (MyRight p infos) -> do
             J.setText "Compiled" statuspanel
             J.setText "No errors." messagepanel
+            rs <- readRef markerRef
+            for_ rs $ \mkr -> Session.removeMarker mkr session
+            writeRef markerRef []
             render p
             writeRef typeInfoRef infos
     , onError   : \s m -> trace m

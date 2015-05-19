@@ -48,7 +48,7 @@ app prelude = Snap.route
         c <- WS.acceptRequest pending
         let go = do
               bs <- WS.receiveData c
-              json <- liftIO $ catchErr $ encodePretty . MyEither <$> compileMain' prelude WebGL1 (BC.unpack bs)
+              json <- liftIO $ catchErr $ encodePretty . MyEither . either (Left . showErr) Right <$> compileMain' prelude WebGL1 (BC.unpack bs)
               WS.sendTextData c json
               go
         go
@@ -58,7 +58,7 @@ app prelude = Snap.route
         x <- m
         deepseq x `seq` return x
     getErr :: ErrorCall -> IO BL.ByteString
-    getErr e = catchErr $ return . encodePretty . MyEither $ Left $ "\n!FAIL err\n" ++ show e
+    getErr e = catchErr $ return $ encodePretty . MyEither $ Left (dummyPos, dummyPos, "\n!FAIL err\n" ++ show e)
 
 --------------------------------------------------------------------------------
 main :: IO ()
