@@ -213,11 +213,11 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
           Right (MyRight p infos) -> do
             J.setText "Compiled" statuspanel
             J.setText "No errors." messagepanel
+            writeRef typeInfoRef infos
             rs <- readRef markerRef
             for_ rs $ \mkr -> Session.removeMarker mkr session
             writeRef markerRef []
             render p
-            writeRef typeInfoRef infos
     , onError   : \s m -> trace m
     }
   case socket of
