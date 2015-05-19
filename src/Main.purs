@@ -39,6 +39,7 @@ import Input
 import MeshJsonDecode
 import PipelineJsonDecode
 import qualified Data.Argonaut as A
+import qualified Data.Argonaut.Core as AC
 
 import Data.Matrix (Mat(..))
 import Data.Matrix4
@@ -58,7 +59,7 @@ foreign import getJSON """
       };
     };
   }
-""" :: forall eff a. String -> (String -> Eff (dom :: DOM.DOM | eff) a) -> Eff (dom :: DOM.DOM | eff) Unit
+""" :: forall eff a. String -> (AC.Json -> Eff (dom :: DOM.DOM | eff) a) -> Eff (dom :: DOM.DOM | eff) Unit
 
 {-
   control-b - compile/build
@@ -138,12 +139,16 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   gpuCube <- compileMesh myCube
   addMesh pplInput "stream4" gpuCube []
 
-  getJSON "https://raw.githubusercontent.com/lambdacube3d/lambdacube-editor/master/mesh/monkey.json" $ \m -> case A.jsonParser m >>= A.decodeJson of
-    Left e -> trace $ "decode error: " ++ e
-    Right (MeshData mesh) -> do
-      gpuMesh <- compileMesh mesh
-      addMesh pplInput "stream" gpuMesh []
-      return unit
+  trace "try add monkey"
+  getJSON "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/monkey.json" $ \m -> do
+    case A.decodeJson m of
+      Left e -> trace $ "decode error: " ++ e
+      Right (MeshData mesh) -> do
+        gpuMesh <- compileMesh mesh
+        addMesh pplInput "stream" gpuMesh []
+        sortSlotObjects pplInput
+        trace "******* mesh added"
+        return unit
 
   -- setup ace editor
   editor <- Ace.edit "editor" ace
