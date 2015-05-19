@@ -255,6 +255,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
 
     , onClose   : trace "socket is closed"
     , onMessage : \s m -> do
+        trace "got response"
         case A.jsonParser m >>= A.decodeJson of
           Left e -> trace $ "decode error: " ++ e
           Right (MyLeft (TypeInfo e) infos) -> do
@@ -275,7 +276,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
             for_ rs $ \mkr -> Session.removeMarker mkr session
             writeRef markerRef []
             render p
-    , onError   : \s m -> trace m
+    , onError   : \s m -> trace $ "error: " ++ m
     }
   case socket of
     Left m -> trace $ "error: " ++ m

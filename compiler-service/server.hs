@@ -34,13 +34,15 @@ import Driver
 import Type (PolyEnv)
 
 --------------------------------------------------------------------------------
+runApp x = WS.runWebSocketsSnapWith (WS.ConnectionOptions $ putStrLn "pong received") x
 app :: PolyEnv -> Snap ()
 app prelude = Snap.route
-    [ (,) "compile" $ WS.runWebSocketsSnap $ compileApp
-    , (,) "exerciselist" $ WS.runWebSocketsSnap $ exerciselist
-    , (,) "getexercise" $ WS.runWebSocketsSnap $ getexercise
+    [ (,) "compile" $ runApp compileApp
+    , (,) "exerciselist" $ runApp exerciselist
+    , (,) "getexercise" $ runApp getexercise
     ]
   where
+
     exerciselist :: WS.ServerApp
     exerciselist pending = do
         c <- WS.acceptRequest pending
@@ -71,10 +73,16 @@ app prelude = Snap.route
     compileApp pending = do
         print "compileApp"
         c <- WS.acceptRequest pending
+        WS.forkPingThread c 5 
         let go = do
+              WS.sendPing c ("hello" :: B.ByteString)
+              putStr "wait "
               bs <- WS.receiveData c
+              putStr "recived "
               json <- liftIO $ catchErr $ encodePretty . MyEither . ff <$> compileMain' freshTypeVars prelude WebGL1 (BC.unpack bs)
-              WS.sendTextData c json
+              putStr "compiled "
+              WS.sendTextData c $ deepseq json json
+              putStrLn "sent"
               go
         go
         putStrLn $ "compileApp ended"
@@ -84,7 +92,8 @@ app prelude = Snap.route
 
     catchErr m = flip catch getErr $ do
         x <- m
-        deepseq x `seq` return x
+        evaluate $ deepseq x x
+        --deepseq x `seq` return $ deepseq x x
     getErr :: ErrorCall -> IO BL.ByteString
     getErr e = catchErr $ return $ encodePretty . MyEither $ Left ((dummyPos, dummyPos, "\n!FAIL err\n" ++ show e), [])
 
