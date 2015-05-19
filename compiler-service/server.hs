@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 module Main where
 
 
@@ -21,11 +22,13 @@ import qualified System.Process          as Process
 
 import Snap.Snaplet.Config
 import System.IO
+import System.Directory
 import Control.Exception
 import Control.Monad.IO.Class
 import Control.DeepSeq
 
 import Data.Aeson.Encode.Pretty
+import Data.Aeson
 import IRJson
 import Driver
 import Type (PolyEnv)
@@ -33,15 +36,37 @@ import Type (PolyEnv)
 --------------------------------------------------------------------------------
 app :: PolyEnv -> Snap ()
 app prelude = Snap.route
-    [ ("compile", compile)
+    [ (,) "compile" $ WS.runWebSocketsSnap $ compileApp
+    , (,) "exerciselist" $ WS.runWebSocketsSnap $ exerciselist
+    , (,) "getexercise" $ WS.runWebSocketsSnap $ getexercise
     ]
   where
---------------------------------------------------------------------------------
-    compile :: Snap ()
-    compile = do
-        WS.runWebSocketsSnap $ compileApp
+    exerciselist :: WS.ServerApp
+    exerciselist pending = do
+        c <- WS.acceptRequest pending
+        let go = do
+              (_ :: BC.ByteString) <- WS.receiveData c
+              list <- filter (`notElem` [".",".."]) <$> getDirectoryContents "exercises"
+              print list
+              WS.sendTextData c $ encodePretty $ toJSON list
+              go
+        go
 
---------------------------------------------------------------------------------
+    getexercise :: WS.ServerApp
+    getexercise pending = do
+        c <- WS.acceptRequest pending
+        let go = do
+              (name :: BC.ByteString) <- WS.receiveData c
+              let fname = "exercises/" ++ BC.unpack name
+              b <- doesFileExist fname
+              if b then do
+                    src <- readFile fname
+                    print fname
+                    WS.sendTextData c $ encodePretty $ toJSON src
+                else return ()
+              go
+        go
+
     compileApp :: WS.ServerApp
     compileApp pending = do
         print "compileApp"

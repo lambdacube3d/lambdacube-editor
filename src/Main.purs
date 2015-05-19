@@ -97,6 +97,17 @@ foreign import tokenTooltip """
   }
 """ :: forall eff . Editor -> (Int -> Int -> Eff (ace :: EAce | eff) TypeInfoRecord) -> Eff (ace :: EAce | eff) Unit
 
+foreign import add
+  """
+  function add(ob1) {
+    return function(ob) {
+      return function () {
+        return ob.add(ob1);
+      };
+    };
+  }
+  """ :: forall eff. J.JQuery -> J.JQuery -> Eff (dom :: DOM.DOM | eff) J.JQuery
+
 foreign import addMarkerImpl
   "function addMarkerImpl(range, clazz, type, inFront, self) {\
   \  return function() {\
@@ -183,12 +194,10 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   tokenTooltip editor getTypeInfo
 
   b <- J.body
-  ui <- J.find "#ui" b
   messagepanel <- J.find "#messagepanel" b
   statuspanel <- J.find "#statuspanel" b
-  btnCompile <- J.create "<button>"
-  J.setText "Build" btnCompile
-  btnCompile `J.append` ui
+  btnCompile <- J.find "#compilebutton" b
+  exerciseselect <- J.find "#exerciseselect" b
 
   pipelineRef <- newRef Nothing
   let compile s = do
@@ -214,6 +223,23 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
             trace "Pipeline disposed"
         writeRef pipelineRef $ Just ppl
         trace "WebGL completed"
+
+  socket1 <- webSocket "ws://localhost:8000/exerciselist" $
+    { onOpen    : \s -> do
+        send s "query"
+        trace "socket1 is ready"
+        return unit
+    , onMessage : \s m -> case A.jsonParser m >>= A.decodeJson of
+          Left e -> trace $ "decode error: " ++ e
+          Right es -> do
+            for_ (es :: [String]) $ \e -> do
+                op <- J.create "<option></option>"
+                J.setText e op
+                J.append op exerciseselect
+            return unit
+    , onError   : \s m -> trace m
+    , onClose   : trace "socket1 is closed"
+    }
 
   socket <- webSocket "ws://localhost:8000/compile" $
     { onOpen    : \s -> do
@@ -254,6 +280,25 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   case socket of
     Left m -> trace $ "error: " ++ m
     Right ws -> do
+
+      socket2 <- webSocket "ws://localhost:8000/getexercise" $
+        { onOpen    : \s -> do
+            trace "socket2 is ready"
+            flip (J.on "change") exerciseselect $ \_ _ -> do
+                sel <- J.find ":selected" exerciseselect
+                txt <- J.getText sel
+                send s txt
+            return unit
+        , onMessage : \s m -> case A.jsonParser m >>= A.decodeJson of
+              Left e -> trace $ "decode error: " ++ e
+              Right src -> do
+                Session.setValue src session
+                compile ws
+                return unit
+        , onError   : \s m -> trace m
+        , onClose   : trace "socket2 is closed"
+        }
+
       flip (J.on "click") btnCompile $ \_ _ -> do
         compile ws
         trace "clicked compile"
