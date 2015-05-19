@@ -142,16 +142,17 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   gpuCube <- compileMesh myCube
   addMesh pplInput "stream4" gpuCube []
 
-  trace "try add monkey"
-  getJSON "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/monkey.json" $ \m -> do
-    case A.decodeJson m of
-      Left e -> trace $ "decode error: " ++ e
-      Right (MeshData mesh) -> do
-        gpuMesh <- compileMesh mesh
-        addMesh pplInput "stream" gpuMesh []
-        sortSlotObjects pplInput
-        trace "******* mesh added"
-        return unit
+  let addRemoteModel uri = getJSON uri $ \m -> do
+        case A.decodeJson m of
+          Left e -> trace $ "decode error: " ++ e
+          Right (MeshData mesh) -> do
+            gpuMesh <- compileMesh mesh
+            addMesh pplInput "stream" gpuMesh []
+            sortSlotObjects pplInput
+            return unit
+  addRemoteModel "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo1.json"
+  --addRemoteModel "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo2.json"
+  --addRemoteModel "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo3.json"
 
   -- setup ace editor
   editor <- Ace.edit "editor" ace
