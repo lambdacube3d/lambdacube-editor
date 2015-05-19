@@ -2,6 +2,7 @@ module Main (main,run) where
 
 import Debug.Trace
 
+import Control.Monad.Aff
 import Control.Bind
 import Control.Timer (timeout,clearTimeout)
 import Control.Monad.Eff
@@ -123,6 +124,9 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   let inputSchema = 
         { slots : fromList [ Tuple "stream"  {primitive: Triangles, attributes: fromList [Tuple "position"  TV3F, Tuple "normal" TV3F, Tuple "UVTex" TV2F]}
                            , Tuple "stream4" {primitive: Triangles, attributes: fromList [Tuple "position4" TV4F, Tuple "vertexUV" TV2F]}
+                           , Tuple "line"    {primitive: Triangles, attributes: fromList [Tuple "position" TV3F]}
+                           , Tuple "grid"    {primitive: Triangles, attributes: fromList [Tuple "position" TV3F]}
+                           , Tuple "grid3d"  {primitive: Points,    attributes: fromList [Tuple "position" TV3F]}
                            ]
         , uniforms : fromList [Tuple "MVP" M44F, Tuple "MVP2" M44F]
         }
@@ -144,7 +148,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
             mm = makeRotate angle (vec3 0 1 0)
             pm = makePerspective 45 (w/h) 0.1 100
             mvp = pm `mul` cm `mul` mm
-            cm' = makeLookAt (vec3 4 0.5 (-0.6)) (vec3 0 0 0) (vec3 0 1 0)
+            cm' = makeLookAt (vec3 4 0.5 (-10.6)) (vec3 0 0 0) (vec3 0 1 0)
             mvp2 = pm `mul` cm' `mul` mm
 
         uniformM44F "MVP" pplInput.uniformSetter $ toLCMat4 mvp
@@ -153,17 +157,21 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   gpuCube <- compileMesh myCube
   addMesh pplInput "stream4" gpuCube []
 
-  let addRemoteModel uri = getJSON uri $ \m -> do
+  let addRemoteModel sname uri = getJSON uri $ \m -> do
         case A.decodeJson m of
           Left e -> trace $ "decode error: " ++ e
           Right (MeshData mesh) -> do
             gpuMesh <- compileMesh mesh
-            addMesh pplInput "stream" gpuMesh []
+            addMesh pplInput sname gpuMesh []
             sortSlotObjects pplInput
             return unit
-  addRemoteModel "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo1.json"
-  --addRemoteModel "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo2.json"
-  --addRemoteModel "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo3.json"
+  timeout 1 $ do
+    addRemoteModel "line" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/line.mesh.json"
+    addRemoteModel "grid" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid.mesh.json"
+    --addRemoteModel "grid3d" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid3d.mesh.json"
+    addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo3.mesh.json"
+    --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo2.mesh.json"
+    --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo3.mesh.json"
 
   -- setup ace editor
   editor <- Ace.edit "editor" ace

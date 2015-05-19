@@ -27,13 +27,13 @@ instance decodeJsonMeshAttribute :: DecodeJson MeshAttribute where
     obj <- decodeJson json
     tag <- obj .? "tag"
     case tag of
-      "A_Float" -> A_Float <$> obj .? "values"
-      "A_V2F"   -> A_V2F   <$> obj .? "values"
-      "A_V3F"   -> A_V3F   <$> obj .? "values"
-      "A_V4F"   -> A_V4F   <$> obj .? "values"
-      "A_M22F"  -> A_M22F  <$> obj .? "values"
-      "A_M33F"  -> A_M33F  <$> obj .? "values"
-      "A_M44F"  -> A_M44F  <$> obj .? "values"
+      "A_Float" -> A_Flat AT_Float <$> obj .? "values"
+      "A_V2F"   -> A_Flat AT_V2F   <$> obj .? "values"
+      "A_V3F"   -> A_Flat AT_V3F   <$> obj .? "values"
+      "A_V4F"   -> A_Flat AT_V4F   <$> obj .? "values"
+      "A_M22F"  -> A_Flat AT_M22F  <$> obj .? "values"
+      "A_M33F"  -> A_Flat AT_M33F  <$> obj .? "values"
+      "A_M44F"  -> A_Flat AT_M44F  <$> obj .? "values"
 
 newtype MeshData = MeshData Mesh
 instance decodeJsonMesh :: DecodeJson MeshData where

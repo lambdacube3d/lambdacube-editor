@@ -75,7 +75,7 @@ app prelude = Snap.route
     compileApp pending = do
         print "compileApp"
         c <- WS.acceptRequest pending
-        WS.forkPingThread c 5 
+        --WS.forkPingThread c 5 
         let go = do
               WS.sendPing c ("hello" :: B.ByteString)
               bs <- WS.receiveData c
