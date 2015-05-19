@@ -34,7 +34,9 @@ import Driver
 import Type (PolyEnv)
 
 --------------------------------------------------------------------------------
-runApp x = WS.runWebSocketsSnapWith (WS.ConnectionOptions $ putStrLn "pong received") x
+--runApp x = WS.runWebSocketsSnapWith (WS.ConnectionOptions $ putStrLn "pong received") x
+runApp x = WS.runWebSocketsSnap x
+
 app :: PolyEnv -> Snap ()
 app prelude = Snap.route
     [ (,) "compile" $ runApp compileApp
@@ -76,13 +78,9 @@ app prelude = Snap.route
         WS.forkPingThread c 5 
         let go = do
               WS.sendPing c ("hello" :: B.ByteString)
-              putStr "wait "
               bs <- WS.receiveData c
-              putStr "recived "
               json <- liftIO $ catchErr $ encodePretty . MyEither . ff <$> compileMain' freshTypeVars prelude WebGL1 (BC.unpack bs)
-              putStr "compiled "
               WS.sendTextData c $ deepseq json json
-              putStrLn "sent"
               go
         go
         putStrLn $ "compileApp ended"
@@ -93,7 +91,7 @@ app prelude = Snap.route
     catchErr m = flip catch getErr $ do
         x <- m
         evaluate $ deepseq x x
-        --deepseq x `seq` return $ deepseq x x
+
     getErr :: ErrorCall -> IO BL.ByteString
     getErr e = catchErr $ return $ encodePretty . MyEither $ Left ((dummyPos, dummyPos, "\n!FAIL err\n" ++ show e), [])
 
