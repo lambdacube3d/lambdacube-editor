@@ -36,6 +36,7 @@ import Mesh
 import Type
 import Input
 
+import MeshJsonDecode
 import PipelineJsonDecode
 import qualified Data.Argonaut as A
 
@@ -43,7 +44,21 @@ import Data.Matrix (Mat(..))
 import Data.Matrix4
 import Data.Vector3
 
+import qualified DOM as DOM
+
 main = return unit
+
+foreign import getJSON """
+  function getJSON(uri) {
+    return function(act) {
+      return function() {
+        $.getJSON(uri, function(data) {
+          act(data)();
+        });
+      };
+    };
+  }
+""" :: forall eff a. String -> (String -> Eff (dom :: DOM.DOM | eff) a) -> Eff (dom :: DOM.DOM | eff) Unit
 
 {-
   control-b - compile/build
@@ -121,8 +136,14 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
         uniformM44F "MVP" pplInput.uniformSetter $ toLCMat4 mvp
 
   gpuCube <- compileMesh myCube
-
   addMesh pplInput "stream4" gpuCube []
+
+  getJSON "https://raw.githubusercontent.com/lambdacube3d/lambdacube-editor/master/mesh/monkey.json" $ \m -> case A.jsonParser m >>= A.decodeJson of
+    Left e -> trace $ "decode error: " ++ e
+    Right (MeshData mesh) -> do
+      gpuMesh <- compileMesh mesh
+      addMesh pplInput "stream" gpuMesh []
+      return unit
 
   -- setup ace editor
   editor <- Ace.edit "editor" ace
