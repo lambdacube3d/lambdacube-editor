@@ -102,5 +102,7 @@ main = do
   IO.hSetBuffering IO.stdout IO.NoBuffering
   IO.hSetBuffering IO.stdin IO.NoBuffering
   config <- commandLineAppConfig Snap.defaultConfig
-  (Right prelude, _) <- runMM (map ("tt" ++) $ map show [0..]) (ioFetch ["."]) $ loadModule (ExpN "Prelude")
-  Snap.httpServe config $ app prelude
+  res <- runMM (map ("tt" ++) $ map show [0..]) (ioFetch ["."]) $ loadModule (ExpN "Prelude")
+  case res of
+    (Right prelude, _) -> Snap.httpServe config $ app prelude
+    (Left err, i) -> error $ "Prelude could not compiled: " ++ show err
