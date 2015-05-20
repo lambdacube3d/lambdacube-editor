@@ -126,9 +126,10 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
                            , Tuple "stream4" {primitive: Triangles, attributes: fromList [Tuple "position4" TV4F]}
                            , Tuple "line"    {primitive: Triangles, attributes: fromList [Tuple "position" TV3F]}
                            , Tuple "grid"    {primitive: Triangles, attributes: fromList [Tuple "position" TV3F]}
+                           , Tuple "quad"    {primitive: Triangles, attributes: fromList [Tuple "position" TV4F]}
                            , Tuple "grid3d"  {primitive: Points,    attributes: fromList [Tuple "position" TV3F]}
                            ]
-        , uniforms : fromList [Tuple "MVP" M44F, Tuple "MVP2" M44F]
+        , uniforms : fromList [Tuple "MVP" M44F, Tuple "MVP2" M44F, Tuple "Time" Float]
         }
   pplInput <- mkWebGLPipelineInput inputSchema
   let toLCMat4 :: Mat4 -> M44F
@@ -151,6 +152,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
             cm' = makeLookAt (vec3 4 0.5 (-0.6)) (vec3 0 0 0) (vec3 0 1 0)
             mvp2 = pm `mul` cm' `mul` mm
 
+        uniformFloat "Time" pplInput.uniformSetter t
         uniformM44F "MVP" pplInput.uniformSetter $ toLCMat4 mvp
         uniformM44F "MVP2" pplInput.uniformSetter $ toLCMat4 mvp2
 
@@ -169,6 +171,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   --addRemoteModel "grid3d" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid3d.mesh.json"
   --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo2.mesh.json"
   --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo3.mesh.json"
+  addRemoteModel "quad"   "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/quad.mesh.json"
   addRemoteModel "grid"   "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid.mesh.json"
   addRemoteModel "line"   "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/line.mesh.json"
   addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/ico.mesh.json"
