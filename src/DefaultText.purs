@@ -26,6 +26,6 @@ x & f = f x
 main =             cubeVertexStream         -- cube vertices
     `transform`    (scale 0.5 . rotate')    -- scale them
      &             rasterizeWith triangles  -- rasterize
-    `mapFragments` id                       -- set every pixel blue
+    `mapFragments` id
      &             ScreenOut                -- draw into screen
 """
