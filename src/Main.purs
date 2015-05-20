@@ -215,22 +215,20 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
         send s src
 
       render ir = do
-        trace "WebGL ready"
-        ppl <- allocPipeline ir -- gfx03Pipeline -- samplePipeline
-        trace "Pipeline allocated"
-
-        setPipelineInput ppl (Just pplInput)
-        sortSlotObjects pplInput
-        trace "Setup pipeline input"
-
         old <- readRef pipelineRef
+        writeRef pipelineRef Nothing
         case old of
           Nothing -> return unit
           Just p -> do
-            --FIXME: disposePipeline p -- test against race conditions
-            trace "Pipeline disposed"
+            trace "dispose old pipeline"
+            disposePipeline p
+        trace "allocate new pipeline"
+        ppl <- allocPipeline ir -- gfx03Pipeline -- samplePipeline
+        trace "attach pipeline input"
+        setPipelineInput ppl (Just pplInput)
+        trace "generate object commands"
+        sortSlotObjects pplInput
         writeRef pipelineRef $ Just ppl
-        trace "WebGL completed"
 
   socket1 <- webSocket "ws://localhost:8000/exerciselist" $
     { onOpen    : \s -> do
