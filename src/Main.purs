@@ -122,8 +122,8 @@ addMarker range clazz _type inFront self = runFn5 addMarkerImpl range clazz _typ
 run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   -- setup pipeline input
   let inputSchema = 
-        { slots : fromList [ Tuple "stream"  {primitive: Triangles, attributes: fromList [Tuple "position"  TV3F, Tuple "normal" TV3F, Tuple "UVTex" TV2F]}
-                           , Tuple "stream4" {primitive: Triangles, attributes: fromList [Tuple "position4" TV4F, Tuple "vertexUV" TV2F]}
+        { slots : fromList [ Tuple "stream"  {primitive: Triangles, attributes: fromList [Tuple "position"  TV3F, Tuple "normal" TV3F]}
+                           , Tuple "stream4" {primitive: Triangles, attributes: fromList [Tuple "position4" TV4F]}
                            , Tuple "line"    {primitive: Triangles, attributes: fromList [Tuple "position" TV3F]}
                            , Tuple "grid"    {primitive: Triangles, attributes: fromList [Tuple "position" TV3F]}
                            , Tuple "grid3d"  {primitive: Points,    attributes: fromList [Tuple "position" TV3F]}
@@ -140,15 +140,15 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
         in V4 v1 v2 v3 v4
 
       updateInput t = do
+        w <- GL.getCanvasWidth context
+        h <- GL.getCanvasHeight context
         let pi = 3.141592653589793
-            w  = 800
-            h  = 600
             angle = pi / 24 * t
             cm = makeLookAt (vec3 3 1.3 0.3) (vec3 0 0 0) (vec3 0 1 0)
             mm = makeRotate angle (vec3 0 1 0)
             pm = makePerspective 45 (w/h) 0.1 100
             mvp = pm `mul` cm `mul` mm
-            cm' = makeLookAt (vec3 4 0.5 (-10.6)) (vec3 0 0 0) (vec3 0 1 0)
+            cm' = makeLookAt (vec3 4 0.5 (-0.6)) (vec3 0 0 0) (vec3 0 1 0)
             mvp2 = pm `mul` cm' `mul` mm
 
         uniformM44F "MVP" pplInput.uniformSetter $ toLCMat4 mvp
@@ -169,9 +169,9 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   --addRemoteModel "grid3d" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid3d.mesh.json"
   --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo2.mesh.json"
   --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo3.mesh.json"
-  addRemoteModel "grid" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid.mesh.json"
-  addRemoteModel "line" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/line.mesh.json"
-  addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo3.mesh.json"
+  addRemoteModel "grid"   "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid.mesh.json"
+  addRemoteModel "line"   "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/line.mesh.json"
+  addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/ico.mesh.json"
 
   -- setup ace editor
   editor <- Ace.edit "editor" ace
