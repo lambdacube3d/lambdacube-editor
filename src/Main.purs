@@ -227,7 +227,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
         case old of
           Nothing -> return unit
           Just p -> do
-            disposePipeline p
+            --FIXME: disposePipeline p -- test against race conditions
             trace "Pipeline disposed"
         writeRef pipelineRef $ Just ppl
         trace "WebGL completed"
