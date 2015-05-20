@@ -20,6 +20,7 @@ import qualified Snap.Util.FileServe     as Snap
 import qualified System.IO               as IO
 import qualified System.Process          as Process
 
+import Data.List (sort)
 import Snap.Snaplet.Config
 import System.IO
 import System.Directory
@@ -50,7 +51,7 @@ app prelude = Snap.route
         c <- WS.acceptRequest pending
         let go = do
               (_ :: BC.ByteString) <- WS.receiveData c
-              list <- filter (`notElem` [".",".."]) <$> getDirectoryContents "exercises"
+              list <- sort . filter (`notElem` [".",".."]) <$> getDirectoryContents "exercises"
               print list
               WS.sendTextData c $ encodePretty $ toJSON list
               go
