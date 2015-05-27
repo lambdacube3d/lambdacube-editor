@@ -1,7 +1,6 @@
 module DefaultText where
 
 defaultSrc = """
-blue = V4F 0 0 1 1
 dark = V4F 0.1 0.0 0.2 1
 clear = FrameBuffer $ (DepthImage @1 1000, ColorImage @1 dark)   -- ...
 
