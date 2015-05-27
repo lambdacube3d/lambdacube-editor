@@ -12,9 +12,9 @@ cubeVertexStream = Fetch "stream4" Triangles (IV4F "position4")
 mapFragments s fs = Accumulate colorFragmentCtx PassAll (\a -> FragmentOutRastDepth $ fs a) s clear
 transform s f =  Transform (\v -> VertexOut (f v) 1 () (Smooth v)) s
 
-scale t v = v `PrimMul` V4 t t t 1
+scale t v = v * V4 t t t 1
 
-rotate' v = (Uni $ IM44F "MVP") `PrimMulMatVec` v
+rotate' v = (Uni $ IM44F "MVP") *. v
 const x y = x
 x & f = f x
 

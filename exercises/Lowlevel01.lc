@@ -19,13 +19,13 @@ fragmentCtx = AccumulationContext
                 )
 -- shader functions
 vertexShader (v,n) =
-    let v2 = PrimV3FToV4F v
-        n2 = PrimV3FToV4F n
-        projected = PrimMulMatVec modelViewProj v2
+    let v2 = V4F v.x v.y v.z 1
+        n2 = V4F n.x n.y n.z 1
+        projected = modelViewProj *. v2
     in VertexOut projected 1.0 () (Smooth n2,Smooth v2)
 
 fragmentShader (v,a) =
-    let c = PrimMul v (V4F 1.0 1.4 1.0 0.6)
+    let c = v * V4F 1.0 1.4 1.0 0.6
     in FragmentOutRastDepth c
 
 -- streams: buffer --> vertex transform --> fragment transform --> image

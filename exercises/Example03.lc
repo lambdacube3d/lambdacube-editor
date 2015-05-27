@@ -11,7 +11,7 @@ cubeVertexStream = Fetch "stream4" Triangles (IV4F "position4")
 
 transform s f =  Transform (\v -> VertexOut (f v) 1 () ()) s
 
-scale t v = v `PrimMul` V4 t t t 1
+scale t v = v * V4 t t t 1
 const x y = x
 x & f = f x
 

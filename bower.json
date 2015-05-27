@@ -16,7 +16,6 @@
     "purescript-argonaut": "~0.5.0",
     "purescript-datetime" : "*",
     "purescript-timers" : "*",
-    "purescript-aff": "*",
     "lambdacube-webgl": "git://github.com/lambdacube3d/lambdacube-webgl.git#master"
   }
 }
