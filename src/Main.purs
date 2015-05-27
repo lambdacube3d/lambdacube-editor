@@ -2,7 +2,6 @@ module Main (main,run) where
 
 import Debug.Trace
 
-import Control.Monad.Aff
 import Control.Bind
 import Control.Timer (timeout,clearTimeout)
 import Control.Monad.Eff
@@ -120,6 +119,7 @@ addMarker :: forall eff. Range -> String -> String -> Boolean -> EditSession -> 
 addMarker range clazz _type inFront self = runFn5 addMarkerImpl range clazz _type inFront self
 
 run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
+  Milliseconds baseTime <- nowEpochMilliseconds
   -- setup pipeline input
   let inputSchema = 
         { slots : fromList [ Tuple "stream"  {primitive: Triangles, attributes: fromList [Tuple "position"  TV3F, Tuple "normal" TV3F]}
@@ -315,7 +315,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
       addCommand editor "Compile" "Ctrl-B" "Command-B" (\_ -> compile ws)
       let renderLoop = do
             Milliseconds t <- nowEpochMilliseconds
-            updateInput (t / 1000)
+            updateInput ((t - baseTime) / 1000)
             mppl <- readRef pipelineRef
             case mppl of
               Nothing -> return unit
