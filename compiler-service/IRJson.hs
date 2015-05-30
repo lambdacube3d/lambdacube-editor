@@ -140,12 +140,6 @@ instance ToJSON FragmentOperation where
 instance ToJSON AccumulationContext where
   toJSON (AccumulationContext a b) = object ["viewportName" .= a, "operations" .= b]
 
-instance ToJSON Image where
-  toJSON v = case v of
-    DepthImage l v -> object ["tag" .- "DepthImage", "layers" .= l, "value" .= v]
-    StencilImage l v -> object ["tag" .- "StencilImage", "layers" .= l, "value" .= v]
-    ColorImage l v -> object ["tag" .- "ColorImage", "layers" .= l, "value" .= v]
-
 instance ToJSON TextureDataType where
   toJSON v = case v of
     FloatT a -> object ["tag" .- "FloatT", "arity" .= a]

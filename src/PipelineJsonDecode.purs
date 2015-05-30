@@ -357,15 +357,6 @@ instance decodeJsonAccumulationContext :: DecodeJson AccumulationContext where
     accOperations <- obj .? "operations"
     pure $ AccumulationContext {accViewportName:accViewportName, accOperations:accOperations}
 
-instance decodeJsonImage :: DecodeJson Image where
-  decodeJson json = do
-    obj <- decodeJson json
-    tag <- obj .? "tag"
-    case tag of
-      "DepthImage" -> DepthImage <$> obj .? "layers" <*> obj .? "value"
-      "StencilImage" -> StencilImage <$> obj .? "layers" <*> obj .? "value"
-      "ColorImage" -> ColorImage <$> obj .? "layers" <*> obj .? "value"
-
 instance decodeJsonTextureDataType :: DecodeJson TextureDataType where
   decodeJson json = do
     obj <- decodeJson json
