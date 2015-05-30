@@ -123,7 +123,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   -- setup pipeline input
   let inputSchema = 
         { slots : fromList [ Tuple "stream"  {primitive: Triangles, attributes: fromList [Tuple "position"  TV3F, Tuple "normal" TV3F]}
-                           , Tuple "stream4" {primitive: Triangles, attributes: fromList [Tuple "position4" TV4F]}
+                           , Tuple "stream4" {primitive: Triangles, attributes: fromList [Tuple "position4" TV4F, Tuple "vertexUV" TV2F]}
                            , Tuple "line"    {primitive: Triangles, attributes: fromList [Tuple "position" TV3F]}
                            , Tuple "grid"    {primitive: Triangles, attributes: fromList [Tuple "position" TV3F]}
                            , Tuple "quad"    {primitive: Triangles, attributes: fromList [Tuple "position" TV4F]}
