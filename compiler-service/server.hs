@@ -24,9 +24,9 @@ import Data.List (sort)
 import Snap.Snaplet.Config
 import System.IO
 import System.Directory
-import Control.Exception
-import Control.Monad.IO.Class
-import Control.DeepSeq
+--import Control.Exception
+--import Control.Monad.IO.Class
+--import Control.DeepSeq
 
 import Data.Aeson.Encode.Pretty
 import Data.Aeson
@@ -80,8 +80,8 @@ app prelude = Snap.route
         let go = do
               WS.sendPing c ("hello" :: B.ByteString)
               bs <- WS.receiveData c
-              json <- liftIO $ catchErr $ encodePretty . MyEither . ff <$> compileMain' freshTypeVars prelude WebGL1 (BC.unpack bs)
-              WS.sendTextData c $ deepseq json json
+              json <- catchErr er $ encodePretty . MyEither . ff <$> compileMain' freshTypeVars prelude WebGL1 (BC.unpack bs)
+              WS.sendTextData c json -- $ deepseq json json
               go
         go
         putStrLn $ "compileApp ended"
@@ -89,12 +89,7 @@ app prelude = Snap.route
     ff (Left err, infos) = Left (showErr err, infos)
     ff (Right (m, _), infos) = Right (m, infos)
 
-    catchErr m = flip catch getErr $ do
-        x <- m
-        evaluate $ deepseq x x
-
-    getErr :: ErrorCall -> IO BL.ByteString
-    getErr e = catchErr $ return $ encodePretty . MyEither $ Left ((dummyPos, dummyPos, "\n!FAIL err\n" ++ show e), [])
+    er e = return $ encodePretty . MyEither $ Left ((dummyPos, dummyPos, "\n!FAIL err\n" ++ e), [])
 
 --------------------------------------------------------------------------------
 main :: IO ()
