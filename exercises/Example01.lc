@@ -1,3 +1,2 @@
-main' = ScreenOut $ FrameBuffer $ ColorImage @1 $ V4F 0 1 0 1
-
-main = ScreenOut (FrameBuffer (ColorImage @1 (V4F 0.1 0.0 0.3 1)))
+main = ScreenOut $ FrameBuffer $ ColorImage @1 $ (V4 0 1 0 1.0)
+ where a = [() | x <- [1.0,2,3,4]]

@@ -1,4 +1,6 @@
-clear = FrameBuffer $ (DepthImage @1 1000, ColorImage @1 navy)   -- ...
+
+dark = V4 0.1 0.0 0.2 1
+clear = FrameBuffer $ (DepthImage @1 1000, ColorImage @1 dark)   -- ...
 
 triangleRasterCtx = TriangleCtx CullNone PolygonFill NoOffset LastVertex
 colorFragmentCtx = AccumulationContext (DepthOp Less True, ColorOp NoBlending (V4 True True True True))
@@ -15,5 +17,5 @@ rotate' v = (Uniform "MVP" :: Mat 4 4 Float) `PrimMulMatVec` v
 main =             cubeVertexStream         -- cube vertices
     `transform`    (scale 0.5 . rotate')    -- scale them
      &             rasterizeWith triangles  -- rasterize
-    `mapFragments` id
-     &             ScreenOut                --  draw into screen
+    `mapFragments` (\a -> if a%r < 0.5 then blue else red)
+     &             ScreenOut                -- draw into screen
