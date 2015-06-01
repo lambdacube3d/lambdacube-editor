@@ -18,12 +18,22 @@ cube v f bg = (cubeVertexStream         -- cube vertices
 trMat a b = a *. b
 rotate' v = (Uniform "MVP" :: Mat 4 4 Float) *. v
 trX a b = V4 (a :: Float) 0 0.0 0 + b
+
 main = ScreenOut $ 
     foldl' (\fb a -> cube (
-        trMat (rotMatrixZ time) .
-        (trX a) . 
-        (scale 0.1) . 
-        trMat (rotMatrixX time)
+        trMat (rotMatrixZ $ time *! a) .
+        rotate' .
+        (trX (0.5 *! a +! sin time *! 0.1)) . 
+        (scale 0.04) . 
+        trMat (rotMatrixX (time *! 2.0 *! a))
         ) id fb)
     (image navy)
-    [a | x <- [(-0.5,False),(0.0,True),(0.5,False)], let (a,_) = x]
+    [ a | x <- [ (-0.5,True)
+               , (0.0,True)
+               , (0.5,True)
+               , (0.3,True)
+               , (0.75,True)
+               ] `append` [(a,True) | a <- [(-1.0)..2.0]]
+    , let (a,b) = x
+    , b
+    ]
