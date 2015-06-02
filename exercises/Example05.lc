@@ -1,12 +1,12 @@
 clear = FrameBuffer $ ColorImage @1 red   -- ...
 
 triangleRasterCtx = TriangleCtx CullNone PolygonFill NoOffset LastVertex
-colorFragmentCtx = AccumulationContext (ColorOp NoBlending (V4B True True True True))
+colorFragmentCtx = AccumulationContext (ColorOp NoBlending (V4 True True True True))
 
 rasterizeWith = Rasterize
 triangles = triangleRasterCtx
 
-cubeVertexStream = Fetch "stream4" Triangles (IV4F "position4")
+cubeVertexStream = Fetch "stream4" Triangles (Attribute "position4" :: Vec 4 Float)
 mapFragments s fs = Accumulate colorFragmentCtx PassAll (\a -> FragmentOut $ fs a) s clear
 transform s f =  Transform (\v -> VertexOut (f v) 1 () (Smooth v)) s
 
@@ -18,7 +18,7 @@ rotate a v = M44F (V4F c (-s) 0 0) (V4F s c 0 0) (V4F 0 0 1 0) (V4F 0 0 0 1) *. 
     c = cos a
     s = sin a
 -}
-rotate' v = (Uni $ IM44F "MVP") *. v
+rotate' v = (Uniform "MVP" :: Mat 4 4 Float) *. v
 const x y = x
 x & f = f x
 

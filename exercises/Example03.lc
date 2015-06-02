@@ -1,12 +1,12 @@
-clear = FrameBuffer $ ColorImage @1 $ V4F 1 0 0 0.5
+clear = FrameBuffer $ ColorImage @1 $ V4 1 0 0 0.5
 
 triangleRasterCtx = TriangleCtx CullNone PolygonFill NoOffset LastVertex
-colorFragmentCtx = AccumulationContext (ColorOp NoBlending (V4B True True True True))
+colorFragmentCtx = AccumulationContext (ColorOp NoBlending (V4 True True True True))
 
 rasterizeWith = Rasterize
 triangles = triangleRasterCtx
 
-cubeVertexStream = Fetch "stream4" Triangles (IV4F "position4")
+cubeVertexStream = Fetch "stream4" Triangles (Attribute "position4" :: Vec 4 Float)
 
 transform s f =  Transform (\v -> VertexOut (f v) 1 () ()) s
 
