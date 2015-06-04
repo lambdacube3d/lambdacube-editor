@@ -143,6 +143,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
       updateInput t = do
         w <- GL.getCanvasWidth context
         h <- GL.getCanvasHeight context
+        setScreenSize pplInput (V2 w h)
         let pi = 3.141592653589793
             angle = pi / 24 * t
             cm = makeLookAt (vec3 3 1.3 0.3) (vec3 0 0 0) (vec3 0 1 0)
