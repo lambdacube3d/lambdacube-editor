@@ -1,8 +1,0 @@
--- empty framebuffer
-singleColorFramebuffer = FrameBuffer
-
--- purely functional GPU stream operations 
-fetch = Fetch
-transform = Transform
-rasterize = Rasterize
-accumulate = Accumulate
