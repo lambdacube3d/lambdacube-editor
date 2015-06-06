@@ -32,14 +32,13 @@ import Data.Aeson.Encode.Pretty
 import Data.Aeson
 import IRJson
 import Driver
-import Type (PolyEnv)
 
 --------------------------------------------------------------------------------
 --runApp x = WS.runWebSocketsSnapWith (WS.ConnectionOptions $ putStrLn "pong received") x
 runApp x = WS.runWebSocketsSnap x
 
-app :: PolyEnv -> Snap ()
-app prelude = Snap.route
+app :: (String -> IO (Err (Pipeline, Infos))) -> Snap ()
+app compiler = Snap.route
     [ (,) "compile" $ runApp compileApp
     , (,) "exerciselist" $ runApp exerciselist
     , (,) "getexercise" $ runApp getexercise
@@ -80,7 +79,7 @@ app prelude = Snap.route
         let go = do
               WS.sendPing c ("hello" :: B.ByteString)
               bs <- WS.receiveData c
-              json <- catchErr er $ encodePretty . MyEither . ff <$> compileMain' freshTypeVars prelude WebGL1 (BC.unpack bs)
+              json <- catchErr er $ encodePretty . MyEither . ff <$> compiler (BC.unpack bs)
               WS.sendTextData c json -- $ deepseq json json
               go
         go
@@ -97,7 +96,5 @@ main = do
   IO.hSetBuffering IO.stdout IO.NoBuffering
   IO.hSetBuffering IO.stdin IO.NoBuffering
   config <- commandLineAppConfig Snap.defaultConfig
-  res <- runMM (map ("tt" ++) $ map show [0..]) (ioFetch ["."]) $ loadModule (ExpN "DemoUtils")
-  case res of
-    (Right prelude, _) -> Snap.httpServe config $ app prelude
-    (Left err, i) -> error $ "Prelude could not compiled: " ++ show err
+  compiler <- preCompile ["."] WebGL1 "DemoUtils"
+  Snap.httpServe config $ app compiler
