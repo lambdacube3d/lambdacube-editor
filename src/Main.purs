@@ -126,8 +126,9 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
                            , Tuple "stream4" {primitive: Triangles, attributes: fromList [Tuple "position4" TV4F, Tuple "vertexUV" TV2F]}
                            , Tuple "line"    {primitive: Triangles, attributes: fromList [Tuple "position" TV3F]}
                            , Tuple "grid"    {primitive: Triangles, attributes: fromList [Tuple "position" TV3F]}
-                           , Tuple "quad"    {primitive: Triangles, attributes: fromList [Tuple "position" TV4F]}
                            , Tuple "grid3d"  {primitive: Points,    attributes: fromList [Tuple "position" TV3F]}
+                           , Tuple "quad"    {primitive: Triangles, attributes: fromList [Tuple "position" TV2F]}
+                           , Tuple "cube"    {primitive: Triangles, attributes: fromList [Tuple "position"  TV3F, Tuple "normal" TV3F]}
                            ]
         , uniforms : fromList [Tuple "MVP" M44F, Tuple "MVP2" M44F, Tuple "Time" Float]
         }
@@ -159,6 +160,9 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
 
   gpuCube <- compileMesh myCube
   addMesh pplInput "stream4" gpuCube []
+
+  gpuQuad <- compileMesh myQuad
+  addMesh pplInput "quad" gpuQuad []
 
   let addRemoteModel sname uri = getJSON uri $ \m -> do
         case A.decodeJson m of
