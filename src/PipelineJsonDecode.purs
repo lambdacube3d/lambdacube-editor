@@ -23,6 +23,16 @@ instance decodeJsonV4 :: (DecodeJson a) => DecodeJson (V4 a) where
     obj <- decodeJson json
     V4 <$> obj .? "x" <*> obj .? "y" <*> obj .? "z" <*> obj .? "w"
 
+instance decodeJsonArrayValue :: DecodeJson ArrayValue where
+  decodeJson json = do
+    obj <- decodeJson json
+    tag <- obj .? "tag"
+    case tag of
+      "VBoolArray"  -> VBoolArray   <$> obj .? "value"
+      "VIntArray"   -> VIntArray    <$> obj .? "value"
+      "VWordArray"  -> VWordArray   <$> obj .? "value"
+      "VFloatArray" -> VFloatArray  <$> obj .? "value"
+
 instance decodeJsonValue :: DecodeJson Value where
   decodeJson json = do
     obj <- decodeJson json
@@ -448,6 +458,7 @@ instance decodeJsonCommand :: DecodeJson Command where
       "SetTexture" -> SetTexture <$> obj .? "texUnit" <*> obj .? "tex"
       "SetSampler" -> SetSampler <$> obj .? "texUnit" <*> obj .? "sampler"
       "RenderSlot" -> RenderSlot <$> obj .? "slot"
+      "RenderStream" -> RenderStream <$> obj .? "stream"
       "ClearRenderTarget" -> ClearRenderTarget <$> obj .? "values"
       "GenerateMipMap" -> GenerateMipMap <$> obj .? "texUnit"
       "SaveImage" -> SaveImage <$> obj .? "src" <*> obj .? "dst"
@@ -510,6 +521,15 @@ instance decodeJsonSlot :: DecodeJson Slot where
     slotPrograms <- obj .? "slotPrograms"
     pure $ Slot {slotName:slotName, slotUniforms:slotUniforms, slotStreams:slotStreams, slotPrimitive:slotPrimitive, slotPrograms:slotPrograms}
 
+instance decodeJsonStreamData :: DecodeJson StreamData where
+  decodeJson json = do
+    obj <- decodeJson json
+    streamData <- obj .? "streamData"
+    streamType <- obj .? "streamType"
+    streamPrimitive <- obj .? "streamPrimitive"
+    streamPrograms <- obj .? "streamPrograms"
+    pure $ StreamData {streamData:streamData, streamType:streamType, streamPrimitive:streamPrimitive, streamPrograms:streamPrograms}
+
 instance decodeJsonTargetItem :: DecodeJson TargetItem where
   decodeJson json = do
     obj <- decodeJson json
@@ -531,8 +551,9 @@ instance decodeJsonPipeline :: DecodeJson Pipeline where
     targets <- obj .? "targets"
     programs <- obj .? "programs"
     slots <- obj .? "slots"
+    streams <- obj .? "streams"
     commands <- obj .? "commands"
-    pure $ Pipeline {textures:textures, samplers:samplers, targets:targets, programs:programs, slots:slots, commands:commands}
+    pure $ Pipeline {textures:textures, samplers:samplers, targets:targets, programs:programs, slots:slots, streams:streams, commands:commands}
 
 type TypeInfoRecord =
   { startLine   :: Int

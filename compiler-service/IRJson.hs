@@ -20,6 +20,13 @@ instance ToJSON a => ToJSON (V3 a) where
 instance ToJSON a => ToJSON (V4 a) where
   toJSON (V4 x y z w) = object ["x" .= x, "y" .= y, "z" .= z, "w" .= w]
 
+instance ToJSON ArrayValue where
+  toJSON v = case v of
+    VBoolArray  a -> object ["tag" .- "VBoolArray"  , "value" .= a]
+    VIntArray   a -> object ["tag" .- "VIntArray"   , "value" .= a]
+    VWordArray  a -> object ["tag" .- "VWordArray"  , "value" .= a]
+    VFloatArray a -> object ["tag" .- "VFloatArray" , "value" .= a]
+
 instance ToJSON Value where
   toJSON v = case v of
     VBool  a -> object ["tag" .- "VBool"  , "value" .= a]
@@ -191,6 +198,7 @@ instance ToJSON Command where
     SetTexture a b -> object ["tag" .- "SetTexture", "texUnit" .= a, "tex" .= b]
     SetSampler a b -> object ["tag" .- "SetSampler", "texUnit" .= a, "sampler" .= b]
     RenderSlot a -> object ["tag" .- "RenderSlot", "slot" .= a]
+    RenderStream a -> object ["tag" .- "RenderStream", "stream" .= a]
     ClearRenderTarget a -> object ["tag" .- "ClearRenderTarget", "values" .= fmap ClearImage a]
     GenerateMipMap a -> object ["tag" .- "GenerateMipMap", "texUnit" .= a]
     SaveImage a b -> object ["tag" .- "SaveImage", "src" .= a, "dst" .= b]
@@ -222,6 +230,11 @@ instance ToJSON Slot where
                            , "slotPrimitive" .= slotPrimitive, "slotPrograms" .= slotPrograms
                            ]
 
+instance ToJSON StreamData where
+  toJSON StreamData{..} = object [ "streamData" .= streamData, "streamType" .= streamType
+                                 , "streamPrimitive" .= streamPrimitive, "streamPrograms" .= streamPrograms
+                                 ]
+
 newtype TargetItem = TargetItem (ImageSemantic,Maybe ImageRef)
 instance ToJSON TargetItem where
   toJSON (TargetItem (s,r)) = object ["semantic" .= s, "ref" .= r]
@@ -230,7 +243,9 @@ instance ToJSON RenderTarget where
   toJSON RenderTarget{..} = object ["renderTargets" .= fmap TargetItem renderTargets]
 
 instance ToJSON Pipeline where
-  toJSON Pipeline{..} = object ["textures" .= textures, "samplers" .= samplers, "targets" .= targets, "programs" .= programs, "slots" .= slots, "commands" .= commands]
+  toJSON Pipeline{..} = object [ "textures" .= textures, "samplers" .= samplers, "targets" .= targets
+                               , "programs" .= programs, "slots" .= slots, "streams" .= streams, "commands" .= commands
+                               ]
 
 type Info = (SourcePos,SourcePos,String)
 
