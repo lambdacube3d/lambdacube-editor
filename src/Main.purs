@@ -232,7 +232,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
             trace "dispose old pipeline"
             disposePipeline p
         trace "allocate new pipeline"
-        ppl <- allocPipeline ir -- gfx03Pipeline -- samplePipeline
+        ppl <- allocPipeline ir
         trace "attach pipeline input"
         setPipelineInput ppl (Just pplInput)
         trace "generate object commands"
