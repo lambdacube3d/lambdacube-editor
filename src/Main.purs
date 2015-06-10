@@ -49,6 +49,24 @@ import qualified DOM as DOM
 
 main = return unit
 
+foreign import getMousePos """
+  function getMousePos(e) {
+      return function() {
+        var mouseX, mouseY;
+
+        if(e.offsetX) {
+            mouseX = e.offsetX;
+            mouseY = e.offsetY;
+        }
+        else if(e.layerX) {
+            mouseX = e.layerX;
+            mouseY = e.layerY;
+        }
+        return [mouseX,mouseY];
+      };
+  }
+""" :: forall eff a. J.JQueryEvent -> Eff (dom :: DOM.DOM | eff) [Number]
+
 foreign import getJSON """
   function getJSON(uri) {
     return function(act) {
@@ -130,7 +148,7 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
                            , Tuple "quad"    {primitive: Triangles, attributes: fromList [Tuple "position" TV2F]}
                            , Tuple "cube"    {primitive: Triangles, attributes: fromList [Tuple "position"  TV3F, Tuple "normal" TV3F]}
                            ]
-        , uniforms : fromList [Tuple "MVP" M44F, Tuple "MVP2" M44F, Tuple "Time" Float]
+        , uniforms : fromList [Tuple "MVP" M44F, Tuple "MVP2" M44F, Tuple "Time" Float, Tuple "Mouse" V2F]
         }
   pplInput <- mkWebGLPipelineInput inputSchema
   let toLCMat4 :: Mat4 -> M44F
@@ -215,6 +233,12 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   statuspanel <- J.find "#statuspanel" b
   btnCompile <- J.find "#compilebutton" b
   exerciseselect <- J.find "#exerciseselect" b
+  glcanvas <- J.find "#glcanvas" b
+  flip (J.on "mousemove") glcanvas $ \e _ -> do
+    w <- GL.getCanvasWidth context
+    h <- GL.getCanvasHeight context
+    [x,y] <- getMousePos e
+    uniformV2F "Mouse" pplInput.uniformSetter $ V2 (x/w) (y/h)
 
   pipelineRef <- newRef Nothing
   let compile s = do
