@@ -1,7 +1,9 @@
 module Sample where
 
+import Prelude
 import Data.Maybe
-import Data.StrMap
+import Data.StrMap (fromList)
+import Data.List (toList)
 import Data.Tuple
 
 import Backend
@@ -93,7 +95,7 @@ g_uv_buffer_data =
 
 myCube :: Mesh
 myCube =
-    { attributes: fromList
+    { attributes: fromList $ toList
         [ Tuple "position4" (A_V4F g_vertex_buffer_data)
         , Tuple "vertexUV"  (A_V2F g_uv_buffer_data)
         ]
@@ -103,7 +105,7 @@ myCube =
 
 myCube2 :: Mesh
 myCube2 =
-  { attributes: fromList 
+  { attributes: fromList $ toList
         [ Tuple "normal"    (A_V3F [V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-0.0) 1.0,V3 0.0 (-0.0) 1.0,V3 0.0 (-0.0) 1.0,V3 (-0.0) 0.0 1.0,V3 (-0.0) 0.0 1.0,V3 (-0.0) 0.0 1.0,V3 (-0.0) (-0.0) (-1.0),V3 (-0.0) (-0.0) (-1.0),V3 (-0.0) (-0.0) (-1.0),V3 0.0 0.0 (-1.0),V3 0.0 0.0 (-1.0),V3 0.0 0.0 (-1.0),V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0])
         , Tuple "position"  (A_V3F [V3 1.0 1.0 1.0,V3 (-1.0) 1.0 1.0,V3 (-1.0) 1.0 (-1.0),V3 (-1.0) 1.0 (-1.0),V3 1.0 1.0 (-1.0),V3 1.0 1.0 1.0,V3 1.0 (-1.0) (-1.0),V3 (-1.0) (-1.0) (-1.0),V3 (-1.0) (-1.0) 1.0,V3 (-1.0) (-1.0) 1.0,V3 1.0 (-1.0) 1.0,V3 1.0 (-1.0) (-1.0),V3 1.0 (-1.0) 1.0,V3 (-1.0) (-1.0) 1.0,V3 (-1.0) 1.0 1.0,V3 (-1.0) 1.0 1.0,V3 1.0 1.0 1.0,V3 1.0 (-1.0) 1.0,V3 1.0 1.0 (-1.0),V3 (-1.0) 1.0 (-1.0),V3 (-1.0) (-1.0) (-1.0),V3 (-1.0) (-1.0) (-1.0),V3 1.0 (-1.0) (-1.0),V3 1.0 1.0 (-1.0),V3 (-1.0) (-1.0) 1.0,V3 (-1.0) (-1.0) (-1.0),V3 (-1.0) 1.0 (-1.0),V3 (-1.0) 1.0 (-1.0),V3 (-1.0) 1.0 1.0,V3 (-1.0) (-1.0) 1.0,V3 1.0 (-1.0) (-1.0),V3 1.0 (-1.0) 1.0,V3 1.0 1.0 1.0,V3 1.0 1.0 1.0,V3 1.0 1.0 (-1.0),V3 1.0 (-1.0) (-1.0)])
         ]
@@ -113,7 +115,7 @@ myCube2 =
 
 myQuad :: Mesh
 myQuad =
-  { attributes: fromList
+  { attributes: fromList $ toList
       [ Tuple "position" (A_V2F [V2 (-1.0) 1.0,V2 (-1.0) (-1.0),V2 1.0 (-1.0),V2 1.0 (-1.0),V2 1.0 1.0,V2 (-1.0) 1.0])]
   , primitive: P_Triangles
   , gpuData: Nothing

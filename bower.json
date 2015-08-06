@@ -10,12 +10,10 @@
     "output"
   ],
   "dependencies": {
-    "purescript-ace": "~0.3.0",
-    "purescript-jquery": "~0.4.0",
-    "purescript-webgl": "~0.6.21",
-    "purescript-argonaut": "~0.5.0",
-    "purescript-datetime" : "*",
-    "purescript-timers" : "*",
-    "lambdacube-webgl": "git://github.com/lambdacube3d/lambdacube-webgl.git#master"
+    "purescript-ace": "~0.5.0",
+    "purescript-jquery": "~0.5.0",
+    "purescript-webgl": "~0.8.8",
+    "purescript-argonaut-codecs": "~0.1.0",
+    "lambdacube-webgl": "git://github.com/lambdacube3d/purescript-lambdacube-webgl.git#master"
   }
 }

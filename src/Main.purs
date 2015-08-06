@@ -1,13 +1,14 @@
 module Main (main,run) where
 
-import Debug.Trace
+import Prelude
+import Extensions
+
+import qualified Control.Monad.Eff.Console as C
 
 import Control.Bind
-import Control.Timer (timeout,clearTimeout)
+import Timer
 import Control.Monad.Eff
 import Control.Monad.Eff.Ref
-import Data.Date
-import Data.Time
 import Data.Foldable (for_, foldl)
 
 import Ace
@@ -17,7 +18,7 @@ import qualified Ace.EditSession as Session
 import qualified Ace.Range as Range
 
 import qualified Graphics.WebGL as GL
-import qualified Control.Monad.JQuery as J
+import qualified Control.Monad.Eff.JQuery as J
 
 import WebSocket
 import DefaultText
@@ -26,9 +27,11 @@ import Sample
 
 import Data.Function
 import Data.Maybe
-import Data.StrMap
+import Data.StrMap(fromList,StrMap(..))
+import Data.List(toList)
 import Data.Tuple
-import Data.Array(filter,head)
+import Data.Array
+import Data.Int
 
 import Backend
 import IR
@@ -38,8 +41,10 @@ import Input
 
 import MeshJsonDecode
 import PipelineJsonDecode
-import qualified Data.Argonaut as A
+import Data.Argonaut.Parser (jsonParser)
+import Data.Argonaut.Decode (DecodeJson, decodeJson)
 import qualified Data.Argonaut.Core as AC
+
 
 import Data.Matrix (Mat(..))
 import Data.Matrix4
@@ -47,110 +52,44 @@ import Data.Vector3
 
 import qualified DOM as DOM
 
+main :: forall m. (Applicative m) => m Unit
 main = return unit
+--run :: forall m. (Applicative m) => m Unit
+--run = return unit
 
-foreign import getMousePos """
-  function getMousePos(e) {
-      return function() {
-        var mouseX, mouseY;
+foreign import getMousePos :: forall eff a. J.JQueryEvent -> Eff (dom :: DOM.DOM | eff) (Array Number)
+foreign import getJSON :: forall eff a. String -> (AC.Json -> Eff (dom :: DOM.DOM | eff) a) -> Eff (dom :: DOM.DOM | eff) Unit
 
-        if(e.offsetX) {
-            mouseX = e.offsetX;
-            mouseY = e.offsetY;
-        }
-        else if(e.layerX) {
-            mouseX = e.layerX;
-            mouseY = e.layerY;
-        }
-        return [mouseX,mouseY];
-      };
-  }
-""" :: forall eff a. J.JQueryEvent -> Eff (dom :: DOM.DOM | eff) [Number]
+--  control-b - compile/build
+--  control-n - new
 
-foreign import getJSON """
-  function getJSON(uri) {
-    return function(act) {
-      return function() {
-        $.getJSON(uri, function(data) {
-          act(data)();
-        });
-      };
-    };
-  }
-""" :: forall eff a. String -> (AC.Json -> Eff (dom :: DOM.DOM | eff) a) -> Eff (dom :: DOM.DOM | eff) Unit
+foreign import addCommand :: forall eff . Editor -> String -> String -> String -> (Editor -> Eff (ace :: ACE | eff) Unit) -> Eff (ace :: ACE | eff) Unit
+foreign import tokenTooltip :: forall eff . Editor -> (Int -> Int -> Eff (ace :: ACE | eff) TypeInfoRecord) -> Eff (ace :: ACE | eff) Unit
+foreign import addMarkerImpl :: forall eff. Fn5 Range String String Boolean EditSession (Eff (ace :: ACE | eff) Int)
 
-{-
-  control-b - compile/build
-  control-n - new
--}
-foreign import addCommand """
-  function addCommand(editor) {
-    return function(cmdName) {
-      return function(winKey) {
-        return function(macKey) {
-          return function(cmd) {
-            return function() {
-              editor.commands.addCommand({
-                name: cmdName,
-                bindKey: {win: winKey,  mac: macKey},
-                exec: function(editor) {
-                  cmd(editor)();
-                }
-              });
-            };
-          };
-        };
-      };
-    };
-  }
-""" :: forall eff . Editor -> String -> String -> String -> (Editor -> Eff (ace :: EAce | eff) Unit) -> Eff (ace :: EAce | eff) Unit
-
-foreign import tokenTooltip """
-  function tokenTooltip(editor) {
-    return function(getTy) {
-      return function() {
-          editor.tokenTooltip = new myTokenTooltip(editor,getTy);
-      };
-    };
-  }
-""" :: forall eff . Editor -> (Int -> Int -> Eff (ace :: EAce | eff) TypeInfoRecord) -> Eff (ace :: EAce | eff) Unit
-
-foreign import add
-  """
-  function add(ob1) {
-    return function(ob) {
-      return function () {
-        return ob.add(ob1);
-      };
-    };
-  }
-  """ :: forall eff. J.JQuery -> J.JQuery -> Eff (dom :: DOM.DOM | eff) J.JQuery
-
-foreign import addMarkerImpl
-  "function addMarkerImpl(range, clazz, type, inFront, self) {\
-  \  return function() {\
-  \    return self.addMarker(range, clazz, type, inFront);\
-  \  };\
-  \}" :: forall eff. Fn5 Range String String Boolean EditSession (Eff (ace :: EAce | eff) Int)
-
-addMarker :: forall eff. Range -> String -> String -> Boolean -> EditSession -> Eff (ace :: EAce | eff) Int
+addMarker :: forall eff. Range -> String -> String -> Boolean -> EditSession -> Eff (ace :: ACE | eff) Int
 addMarker range clazz _type inFront self = runFn5 addMarkerImpl range clazz _type inFront self
 
-run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
-  Milliseconds baseTime <- nowEpochMilliseconds
+--fromArray :: forall a f. (Foldable f) => f (Tuple String a) -> StrMap a
+fromArray :: forall a. Array (Tuple String a) -> StrMap a
+fromArray a = fromList (toList a)
+
+run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
+  baseTime <- nowEpochMilliseconds
   -- setup pipeline input
   let inputSchema = 
-        { slots : fromList [ Tuple "stream"  {primitive: Triangles, attributes: fromList [Tuple "position"  TV3F, Tuple "normal" TV3F]}
-                           , Tuple "stream4" {primitive: Triangles, attributes: fromList [Tuple "position4" TV4F, Tuple "vertexUV" TV2F]}
-                           , Tuple "line"    {primitive: Triangles, attributes: fromList [Tuple "position" TV3F]}
-                           , Tuple "grid"    {primitive: Triangles, attributes: fromList [Tuple "position" TV3F]}
-                           , Tuple "grid3d"  {primitive: Points,    attributes: fromList [Tuple "position" TV3F]}
-                           , Tuple "quad"    {primitive: Triangles, attributes: fromList [Tuple "position" TV2F]}
-                           , Tuple "cube"    {primitive: Triangles, attributes: fromList [Tuple "position"  TV3F, Tuple "normal" TV3F]}
-                           ]
-        , uniforms : fromList [Tuple "MVP" M44F, Tuple "MVP2" M44F, Tuple "Time" Float, Tuple "Mouse" V2F]
+        { slots : fromArray [ Tuple "stream"  {primitive: Triangles, attributes: fromArray [Tuple "position"  TV3F, Tuple "normal" TV3F]}
+                            , Tuple "stream4" {primitive: Triangles, attributes: fromArray [Tuple "position4" TV4F, Tuple "vertexUV" TV2F]}
+                            , Tuple "line"    {primitive: Triangles, attributes: fromArray [Tuple "position" TV3F]}
+                            , Tuple "grid"    {primitive: Triangles, attributes: fromArray [Tuple "position" TV3F]}
+                            , Tuple "grid3d"  {primitive: Points,    attributes: fromArray [Tuple "position" TV3F]}
+                            , Tuple "quad"    {primitive: Triangles, attributes: fromArray [Tuple "position" TV2F]}
+                            , Tuple "cube"    {primitive: Triangles, attributes: fromArray [Tuple "position"  TV3F, Tuple "normal" TV3F]}
+                            ]
+        , uniforms : fromArray [Tuple "MVP" M44F, Tuple "MVP2" M44F, Tuple "Time" Float, Tuple "Mouse" V2F]
         }
   pplInput <- mkWebGLPipelineInput inputSchema
+
   let toLCMat4 :: Mat4 -> M44F
       toLCMat4 (Mat [x11, x21, x31, x41, x12, x22, x32, x42, x13, x23, x33, x43, x14, x24, x34, x44]) = let
           v1 = V4 x11 x21 x31 x41
@@ -158,19 +97,20 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
           v3 = V4 x13 x23 x33 x43
           v4 = V4 x14 x24 x34 x44
         in V4 v1 v2 v3 v4
+      toLCMat4 _ = fail "invalid Mat4"
 
       updateInput t = do
         w <- GL.getCanvasWidth context
         h <- GL.getCanvasHeight context
         setScreenSize pplInput (V2 w h)
         let pi = 3.141592653589793
-            angle = pi / 24 * t
-            cm = makeLookAt (vec3 3 1.3 0.3) (vec3 0 0 0) (vec3 0 1 0)
-            mm = makeRotate angle (vec3 0 1 0)
-            pm = makePerspective 30 (w/h) 0.1 100
-            mvp = pm `mul` cm `mul` mm
-            cm' = makeLookAt (vec3 4 0.5 (-0.6)) (vec3 0 0 0) (vec3 0 1 0)
-            mvp2 = pm `mul` cm' `mul` mm
+            angle = pi / 24.0 * t
+            cm = makeLookAt (vec3 3.0 1.3 0.3) (vec3 0.0 0.0 0.0) (vec3 0.0 1.0 0.0)
+            mm = makeRotate angle (vec3 0.0 1.0 0.0)
+            pm = makePerspective 30.0 (toNumber w / toNumber h) 0.1 100.0
+            mvp = pm `mulM` cm `mulM` mm
+            cm' = makeLookAt (vec3 4.0 0.5 (-0.6)) (vec3 0.0 0.0 0.0) (vec3 0.0 1.0 0.0)
+            mvp2 = pm `mulM` cm' `mulM` mm
 
         uniformFloat "Time" pplInput.uniformSetter t
         uniformM44F "MVP" pplInput.uniformSetter $ toLCMat4 mvp
@@ -183,8 +123,8 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   addMesh pplInput "quad" gpuQuad []
 
   let addRemoteModel sname uri = getJSON uri $ \m -> do
-        case A.decodeJson m of
-          Left e -> trace $ "decode error: " ++ e
+        case decodeJson m of
+          Left e -> C.log $ "decode error: " ++ e
           Right (MeshData mesh) -> do
             gpuMesh <- compileMesh mesh
             addMesh pplInput sname gpuMesh []
@@ -194,12 +134,12 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
   --addRemoteModel "grid3d" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid3d.mesh.json"
   --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo2.mesh.json"
   --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo3.mesh.json"
-{-
-  addRemoteModel "quad"   "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/quad.mesh.json"
-  addRemoteModel "grid"   "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid.mesh.json"
-  addRemoteModel "line"   "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/line.mesh.json"
-  addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/ico.mesh.json"
--}
+
+  --addRemoteModel "quad"   "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/quad.mesh.json"
+  --addRemoteModel "grid"   "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid.mesh.json"
+  --addRemoteModel "line"   "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/line.mesh.json"
+  --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/ico.mesh.json"
+
   -- setup ace editor
   editor <- Ace.edit "editor" ace
   session <- Editor.getSession editor
@@ -238,11 +178,11 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
     w <- GL.getCanvasWidth context
     h <- GL.getCanvasHeight context
     [x,y] <- getMousePos e
-    uniformV2F "Mouse" pplInput.uniformSetter $ V2 (x/w) (y/h)
+    uniformV2F "Mouse" pplInput.uniformSetter $ V2 (x / toNumber w) (y / toNumber h)
 
   pipelineRef <- newRef Nothing
   let compile s = do
-        trace "compile"
+        C.log "compile"
         J.setText "Compiling..." statuspanel
         src <- Session.getValue session
         send s src
@@ -253,36 +193,36 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
         case old of
           Nothing -> return unit
           Just p -> do
-            trace "dispose old pipeline"
+            C.log "dispose old pipeline"
             disposePipeline p
-        trace "allocate new pipeline"
+        C.log "allocate new pipeline"
         ppl <- allocPipeline ir
-        trace "attach pipeline input"
+        C.log "attach pipeline input"
         setPipelineInput ppl (Just pplInput)
-        trace "generate object commands"
+        C.log "generate object commands"
         sortSlotObjects pplInput
         writeRef pipelineRef $ Just ppl
 
   socket1 <- webSocket "ws://localhost:8000/exerciselist" $
     { onOpen    : \s -> do
         send s "query"
-        trace "socket1 is ready"
+        C.log "socket1 is ready"
         return unit
-    , onMessage : \s m -> case A.jsonParser m >>= A.decodeJson of
-          Left e -> trace $ "decode error: " ++ e
+    , onMessage : \s m -> case jsonParser m >>= decodeJson of
+          Left e -> C.log $ "decode error: " ++ e
           Right es -> do
-            for_ (es :: [String]) $ \e -> do
+            for_ (es :: Array String) $ \e -> do
                 op <- J.create "<option></option>"
                 J.setText e op
                 J.append op exerciseselect
             return unit
-    , onError   : \s m -> trace m
-    , onClose   : trace "socket1 is closed"
+    , onError   : \s m -> C.log m
+    , onClose   : C.log "socket1 is closed"
     }
 
   socket <- webSocket "ws://localhost:8000/compile" $
     { onOpen    : \s -> do
-        trace "socket is ready"
+        C.log "socket is ready"
         compile s
         timerRef <- newRef Nothing
         Session.onChange session $ do
@@ -292,11 +232,11 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
             Just a -> clearTimeout a
           writeRef timerRef =<< Just <$> timeout 1000 (compile s)
 
-    , onClose   : trace "socket is closed"
+    , onClose   : C.log "socket is closed"
     , onMessage : \s m -> do
-        trace "got response"
-        case A.jsonParser m >>= A.decodeJson of
-          Left e -> trace $ "decode error: " ++ e
+        C.log "got response"
+        case jsonParser m >>= decodeJson of
+          Left e -> C.log $ "decode error: " ++ e
           Right (MyLeft (TypeInfo e) infos) -> do
             J.setText "Error" statuspanel
             J.setText e.text messagepanel
@@ -315,37 +255,38 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
             for_ rs $ \mkr -> Session.removeMarker mkr session
             writeRef markerRef []
             render p
-    , onError   : \s m -> trace $ "error: " ++ m
+    , onError   : \s m -> C.log $ "error: " ++ m
     }
   case socket of
-    Left m -> trace $ "error: " ++ m
+    Left m -> C.log $ "error: " ++ m
     Right ws -> do
 
       socket2 <- webSocket "ws://localhost:8000/getexercise" $
         { onOpen    : \s -> do
-            trace "socket2 is ready"
+            C.log "socket2 is ready"
             flip (J.on "change") exerciseselect $ \_ _ -> do
                 sel <- J.find ":selected" exerciseselect
                 txt <- J.getText sel
                 send s txt
             return unit
-        , onMessage : \s m -> case A.jsonParser m >>= A.decodeJson of
-              Left e -> trace $ "decode error: " ++ e
+        , onMessage : \s m -> case jsonParser m >>= decodeJson of
+              Left e -> C.log $ "decode error: " ++ e
               Right src -> do
                 Session.setValue src session
                 compile ws
                 return unit
-        , onError   : \s m -> trace m
-        , onClose   : trace "socket2 is closed"
+        , onError   : \s m -> C.log m
+        , onClose   : C.log "socket2 is closed"
         }
 
       flip (J.on "click") btnCompile $ \_ _ -> do
         compile ws
-        trace "clicked compile"
+        C.log "clicked compile"
       addCommand editor "Compile" "Ctrl-B" "Command-B" (\_ -> compile ws)
+      
       let renderLoop = do
-            Milliseconds t <- nowEpochMilliseconds
-            updateInput ((t - baseTime) / 1000)
+            t <- nowEpochMilliseconds
+            updateInput ((t - baseTime) / 1000.0)
             mppl <- readRef pipelineRef
             case mppl of
               Nothing -> return unit
@@ -353,4 +294,5 @@ run = GL.runWebGL "glcanvas" (\s -> trace s) $ \context -> do
             timeout (1000/25) renderLoop
       -- render loop
       renderLoop
+      
       return unit

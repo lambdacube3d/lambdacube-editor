@@ -1,11 +1,14 @@
 module PipelineJsonDecode where
 
-import Data.Argonaut ((~>), (:=), (.?), jsonEmptyObject, printJson)
+import Prelude
+import Data.Argonaut.Combinators ((~>), (:=), (.?))
+import Data.Argonaut.Core (jsonEmptyObject)
+import Data.Argonaut.Printer (printJson)
 import Data.Argonaut.Encode (EncodeJson, encodeJson)
 import Data.Argonaut.Decode (DecodeJson, decodeJson)
 
 import Data.Maybe
-import Data.StrMap
+import qualified Data.StrMap as StrMap
 import IR
 
 instance decodeJsonV2 :: (DecodeJson a) => DecodeJson (V2 a) where
@@ -575,8 +578,8 @@ instance decodeJsonTypeInfo :: DecodeJson TypeInfo where
     return $ TypeInfo {startLine:startL, startColumn:startC, endLine:endL, endColumn:endC, text:text}
 
 data MyEither
-  = MyLeft TypeInfo [TypeInfo]
-  | MyRight Pipeline [TypeInfo]
+  = MyLeft TypeInfo (Array TypeInfo)
+  | MyRight Pipeline (Array TypeInfo)
 
 instance decodeJsonMyEither :: DecodeJson MyEither where
   decodeJson json = do

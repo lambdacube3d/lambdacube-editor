@@ -1,8 +1,12 @@
 module PipelineJsonEncode where
 
-import Data.Argonaut ((~>), (:=), (.?), jsonEmptyObject, printJson)
+import Prelude
+import Data.Argonaut.Combinators ((~>), (:=), (.?))
+import Data.Argonaut.Core (jsonEmptyObject)
+import Data.Argonaut.Printer (printJson)
 import Data.Argonaut.Encode (EncodeJson, encodeJson)
 import Data.Argonaut.Decode (DecodeJson, decodeJson)
+
 
 import Data.Maybe
 import Data.StrMap
