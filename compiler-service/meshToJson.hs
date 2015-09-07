@@ -10,6 +10,7 @@ import qualified Data.Trie as T
 import qualified Data.Map as Map
 
 import IRJson
+import IREncode
 
 import Data.String
 import Data.Text hiding (concatMap,map)

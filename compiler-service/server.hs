@@ -31,6 +31,7 @@ import System.Directory
 import Data.Aeson.Encode.Pretty
 import Data.Aeson
 import IRJson
+import IREncode
 import Driver
 
 --------------------------------------------------------------------------------
