@@ -1,5 +1,5 @@
 -- generated file, do not modify!
--- 2015-09-07T16:37:55.938829000000Z
+-- 2015-09-09T11:09:31.728951000000Z
 
 {-# LANGUAGE OverloadedStrings, RecordWildCards #-}
 module IREncode where
@@ -263,7 +263,16 @@ instance ToJSON Blending where
   toJSON v = case v of
     NoBlending -> object [ "tag" .- "NoBlending"]
     BlendLogicOp arg0 -> object [ "tag" .- "BlendLogicOp", "arg0" .= arg0]
-    Blend arg0 arg1 arg2 -> object [ "tag" .- "Blend", "arg0" .= arg0, "arg1" .= arg1, "arg2" .= arg2]
+    Blend{..} -> object
+      [ "tag" .- "Blend"
+      , "colorEqSrc" .= colorEqSrc
+      , "alphaEqSrc" .= alphaEqSrc
+      , "colorFSrc" .= colorFSrc
+      , "colorFDst" .= colorFDst
+      , "alphaFSrc" .= alphaFSrc
+      , "alphaFDst" .= alphaFDst
+      , "color" .= color
+      ]
 
 instance ToJSON RasterContext where
   toJSON v = case v of
@@ -335,6 +344,14 @@ instance ToJSON ImageSemantic where
     Stencil -> object [ "tag" .- "Stencil"]
     Color -> object [ "tag" .- "Color"]
 
+instance ToJSON ClearImage where
+  toJSON v = case v of
+    ClearImage{..} -> object
+      [ "tag" .- "ClearImage"
+      , "imageSemantic" .= imageSemantic
+      , "clearValue" .= clearValue
+      ]
+
 instance ToJSON Command where
   toJSON v = case v of
     SetRasterContext arg0 -> object [ "tag" .- "SetRasterContext", "arg0" .= arg0]
@@ -379,6 +396,14 @@ instance ToJSON SamplerDescriptor where
       , "samplerCompareFunc" .= samplerCompareFunc
       ]
 
+instance ToJSON Parameter where
+  toJSON v = case v of
+    Parameter{..} -> object
+      [ "tag" .- "Parameter"
+      , "name" .= name
+      , "ty" .= ty
+      ]
+
 instance ToJSON Program where
   toJSON v = case v of
     Program{..} -> object
@@ -411,6 +436,14 @@ instance ToJSON StreamData where
       , "streamType" .= streamType
       , "streamPrimitive" .= streamPrimitive
       , "streamPrograms" .= streamPrograms
+      ]
+
+instance ToJSON TargetItem where
+  toJSON v = case v of
+    TargetItem{..} -> object
+      [ "tag" .- "TargetItem"
+      , "targetSemantic" .= targetSemantic
+      , "targetRef" .= targetRef
       ]
 
 instance ToJSON RenderTarget where
