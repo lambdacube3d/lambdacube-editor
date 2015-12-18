@@ -20,6 +20,7 @@ import qualified Snap.Util.FileServe     as Snap
 import qualified System.IO               as IO
 import qualified System.Process          as Process
 
+import qualified Data.Vector as V
 import Data.List (sort)
 import Snap.Snaplet.Config
 import System.IO
@@ -28,11 +29,12 @@ import System.Directory
 --import Control.Monad.IO.Class
 --import Control.DeepSeq
 
+import Text.Parsec.Pos
 import Data.Aeson.Encode.Pretty
 import Data.Aeson
-import IRJson
-import IREncode
+import TypeInfo
 import Driver
+import CGExp
 
 --------------------------------------------------------------------------------
 --runApp x = WS.runWebSocketsSnapWith (WS.ConnectionOptions $ putStrLn "pong received") x
@@ -80,16 +82,24 @@ app compiler = Snap.route
         let go = do
               WS.sendPing c ("hello" :: B.ByteString)
               bs <- WS.receiveData c
-              json <- catchErr er $ encodePretty . MyEither . ff <$> compiler (BC.unpack bs)
+              json <- catchErr er $ encodePretty . ff <$> compiler (BC.unpack bs)
               WS.sendTextData c json -- $ deepseq json json
               go
         go
         putStrLn $ "compileApp ended"
 
-    ff (Left err, infos) = Left (showErr err, infos)
-    ff (Right (m, _), infos) = Right (m, infos)
+    toTypeInfo (s,e,m) = TypeInfo
+      { startLine   = sourceLine s
+      , startColumn = sourceColumn s
+      , endLine     = sourceLine e
+      , endColumn   = sourceColumn e
+      , text        = m
+      }
 
-    er e = return $ encodePretty . MyEither $ Left ((dummyPos, dummyPos, "\n!FAIL err\n" ++ e), [])
+    ff (Left (ErrorMsg err), infos) = MyLeft (TypeInfo 0 0 0 0 err) $ toTypeInfo <$> V.fromList infos
+    ff (Right (m, _), infos) = MyRight m $ toTypeInfo <$> V.fromList infos
+
+    er e = return $ encodePretty $ MyLeft (TypeInfo 0 0 0 0 ("\n!FAIL err\n" ++ e :: String)) mempty
 
 --------------------------------------------------------------------------------
 main :: IO ()
