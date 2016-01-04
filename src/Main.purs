@@ -1,11 +1,12 @@
 module Main (main,run) where
 
 import Prelude
-import Extensions
+import Extensions (fail)
 
 import qualified Control.Monad.Eff.Console as C
 
 import Control.Bind
+import TypeInfo
 import Timer
 import Control.Monad.Eff
 import Control.Monad.Eff.Ref
@@ -35,12 +36,13 @@ import Data.Int
 
 import Backend
 import IR
+import LinearBase
 import Mesh
 import Type
 import Input
 
-import MeshJsonDecode
-import PipelineJsonDecode
+--import MeshJsonDecode
+--import PipelineJsonDecode
 import Data.Argonaut.Parser (jsonParser)
 import Data.Argonaut.Decode (DecodeJson, decodeJson)
 import qualified Data.Argonaut.Core as AC
@@ -52,8 +54,11 @@ import Data.Vector3
 
 import qualified DOM as DOM
 
-main :: forall m. (Applicative m) => m Unit
-main = return unit
+main :: forall e. Eff (console :: C.CONSOLE | e) Unit
+main = do
+  C.log "Start LambdaCube 3D Editor"
+--main :: forall m. (Applicative m) => m Unit
+--main = return unit
 --run :: forall m. (Applicative m) => m Unit
 --run = return unit
 
@@ -62,6 +67,14 @@ foreign import getJSON :: forall eff a. String -> (AC.Json -> Eff (dom :: DOM.DO
 
 --  control-b - compile/build
 --  control-n - new
+
+type TypeInfoRecord =
+  { startLine :: Int
+  , startColumn :: Int
+  , endLine :: Int
+  , endColumn :: Int
+  , text :: String
+  }
 
 foreign import addCommand :: forall eff . Editor -> String -> String -> String -> (Editor -> Eff (ace :: ACE | eff) Unit) -> Eff (ace :: ACE | eff) Unit
 foreign import tokenTooltip :: forall eff . Editor -> (Int -> Int -> Eff (ace :: ACE | eff) TypeInfoRecord) -> Eff (ace :: ACE | eff) Unit
@@ -125,7 +138,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
   let addRemoteModel sname uri = getJSON uri $ \m -> do
         case decodeJson m of
           Left e -> C.log $ "decode error: " ++ e
-          Right (MeshData mesh) -> do
+          Right (mesh) -> do
             gpuMesh <- compileMesh mesh
             addMesh pplInput sname gpuMesh []
             sortSlotObjects pplInput

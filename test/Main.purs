@@ -1,6 +1,9 @@
 module Test.Main where
 
-import Debug.Trace
+import Prelude
+import Control.Monad.Eff
+import Control.Monad.Eff.Console
 
+main :: forall e. Eff (console :: CONSOLE | e) Unit
 main = do
-  trace "You should add some tests."
+  log "You should add some tests."
