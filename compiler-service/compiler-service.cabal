@@ -28,7 +28,7 @@ executable compiler-service
     text >=1.2 && <1.3,
     aeson >=0.9 && <1,
     lambdacube-ir,
-    lambdacube-compiler >=0.2 && <0.3,
+    lambdacube-compiler >=0.3 && <0.4,
     containers,
     vector,
     parsec,
