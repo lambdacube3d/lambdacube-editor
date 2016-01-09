@@ -34,7 +34,6 @@ import Data.Aeson.Encode.Pretty
 import Data.Aeson
 import TypeInfo
 import LambdaCube.Compiler.Driver
-import LambdaCube.Compiler.CGExp
 
 --------------------------------------------------------------------------------
 --runApp x = WS.runWebSocketsSnapWith (WS.ConnectionOptions $ putStrLn "pong received") x
