@@ -2,24 +2,29 @@ module DefaultText where
 
 defaultSrc = """
 
-f x = (x + sin x + sin (1.1 * x)) `mod` 4.0 * 2
+app34 :: (Vec 3 Float -> Vec 3 Float) -> Vec 4 Float -> Vec 4 Float
+app34 f q = let t = f (q%xyz) in V4 (t%x) (t%y) (t%z) (q%w)
+
+p1 = app34 $ \t -> (V3 0.5 0.5 0.5 + cos( (t + V3 0.0 0.1 0.2) *! 6.28318) *! 0.5)
+
+f x = (x + sin x + sin (1.1 * x)) `mod` 4 * 2
 
 makeFrame (time :: Float)
           (projmat :: Mat 4 4 Float)
-          (vertexstream :: VertexStream Triangle (Vec 4 Float))
+          (vertexstream :: Stream (Primitive Triangle (Vec 4 Float)))
 
     = imageFrame (emptyDepthImage 1000, emptyColorImage navy)
   `overlay`
       vertexstream
-    & transformVertices (scale 0.5 . (projmat *.))
-    & rasterize (TriangleCtx CullNone PolygonFill NoOffset LastVertex)
-    & filterFragmentStream PassAll
-    & transformFragmentsRastDepth (\x -> (rotMatrixZ time *. rotMatrixY time *. x) *! f time)
+    & mapPrimitives (\x -> ((scale 0.5 . (projmat *.)) x, x))
+    & rasterizePrimitives (TriangleCtx CullNone PolygonFill NoOffset LastVertex) Smooth
+    & filterFragments (\v -> (v%y * v%y + v%x * v%x + v%z * v%z) > 1.5)
+    & mapFragments (\x -> p1 (rotMatrixZ time *. rotMatrixY time *. (p1 (rotMatrixX time *. rotMatrixY time *. x) *! ((1 + 0.5 * sin time)))) *! f time)
     & accumulateWith (DepthOp Less True, ColorOp NoBlending (V4 True True True True))
 
 main = renderFrame $
    makeFrame (Uniform "Time")
              (Uniform "MVP")
-             (Fetch "stream4" (Attribute "position4"))
+             (fetch_ "stream4" (Attribute "position4"))
 
 """
