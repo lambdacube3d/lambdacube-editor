@@ -11680,13 +11680,16 @@ var PS = { };
       return MyLeft;
   })();
   var MyRight = (function () {
-      function MyRight(value0, value1) {
+      function MyRight(value0, value1, value2) {
           this.value0 = value0;
           this.value1 = value1;
+          this.value2 = value2;
       };
       MyRight.create = function (value0) {
           return function (value1) {
-              return new MyRight(value0, value1);
+              return function (value2) {
+                  return new MyRight(value0, value1, value2);
+              };
           };
       };
       return MyRight;
@@ -11724,9 +11727,9 @@ var PS = { };
                   return Prelude["<*>"](Data_Either.applyEither)(Prelude["<$>"](Data_Either.functorEither)(MyLeft.create)(Data_Argonaut_Combinators[".?"](decodeJsonTypeInfo)(_8)("arg0")))(Data_Argonaut_Combinators[".?"](Data_Argonaut_Decode.decodeArray(decodeJsonTypeInfo))(_8)("arg1"));
               };
               if (_7 === "MyRight") {
-                  return Prelude["<*>"](Data_Either.applyEither)(Prelude["<$>"](Data_Either.functorEither)(MyRight.create)(Data_Argonaut_Combinators[".?"](IR.decodeJsonPipeline)(_8)("arg0")))(Data_Argonaut_Combinators[".?"](Data_Argonaut_Decode.decodeArray(decodeJsonTypeInfo))(_8)("arg1"));
+                  return Prelude["<*>"](Data_Either.applyEither)(Prelude["<*>"](Data_Either.applyEither)(Prelude["<$>"](Data_Either.functorEither)(MyRight.create)(Data_Argonaut_Combinators[".?"](Data_Argonaut_Decode.decodeJsonString)(_8)("arg0")))(Data_Argonaut_Combinators[".?"](IR.decodeJsonPipeline)(_8)("arg1")))(Data_Argonaut_Combinators[".?"](Data_Argonaut_Decode.decodeArray(decodeJsonTypeInfo))(_8)("arg2"));
               };
-              throw new Error("Failed pattern match at TypeInfo line 72, column 1 - line 78, column 57: " + [ _7.constructor.name ]);
+              throw new Error("Failed pattern match at TypeInfo line 72, column 1 - line 78, column 75: " + [ _7.constructor.name ]);
           });
       });
   });
@@ -12445,7 +12448,7 @@ var PS = { };
       return Control_Monad_Eff_Console.log(s);
   })(function (context) {
       return function __do() {
-          var _38 = Timer.nowEpochMilliseconds();
+          var _39 = Timer.nowEpochMilliseconds();
           return (function () {
               var inputSchema = {
                   slots: fromArray([ new Data_Tuple.Tuple("stream", {
@@ -12473,14 +12476,14 @@ var PS = { };
                   uniforms: fromArray([ new Data_Tuple.Tuple("MVP", IR.M44F.value), new Data_Tuple.Tuple("MVP2", IR.M44F.value), new Data_Tuple.Tuple("Time", IR.Float.value), new Data_Tuple.Tuple("Mouse", IR.V2F.value) ])
               };
               return function __do() {
-                  var _37 = Input.mkWebGLPipelineInput(inputSchema)();
+                  var _38 = Input.mkWebGLPipelineInput(inputSchema)();
                   return (function () {
-                      var toLCMat4 = function (_46) {
-                          if (_46.length === 16) {
-                              var v4 = new LinearBase.V4(_46[12], _46[13], _46[14], _46[15]);
-                              var v3 = new LinearBase.V4(_46[8], _46[9], _46[10], _46[11]);
-                              var v2 = new LinearBase.V4(_46[4], _46[5], _46[6], _46[7]);
-                              var v1 = new LinearBase.V4(_46[0], _46[1], _46[2], _46[3]);
+                      var toLCMat4 = function (_47) {
+                          if (_47.length === 16) {
+                              var v4 = new LinearBase.V4(_47[12], _47[13], _47[14], _47[15]);
+                              var v3 = new LinearBase.V4(_47[8], _47[9], _47[10], _47[11]);
+                              var v2 = new LinearBase.V4(_47[4], _47[5], _47[6], _47[7]);
+                              var v1 = new LinearBase.V4(_47[0], _47[1], _47[2], _47[3]);
                               return new LinearBase.V4(v1, v2, v3, v4);
                           };
                           return Extensions.fail("invalid Mat4");
@@ -12489,7 +12492,7 @@ var PS = { };
                           return function __do() {
                               var _1 = Graphics_WebGL.getCanvasWidth(context)();
                               var _0 = Graphics_WebGL.getCanvasHeight(context)();
-                              Input.setScreenSize(_37)(new LinearBase.V2(_1, _0))();
+                              Input.setScreenSize(_38)(new LinearBase.V2(_1, _0))();
                               var pm = Data_Matrix4.makePerspective(30.0)(Data_Int.toNumber(_1) / Data_Int.toNumber(_0))(0.1)(100.0);
                               var cm$prime = Data_Matrix4.makeLookAt(Data_Vector3.vec3(4.0)(0.5)(-0.6))(Data_Vector3.vec3(0.0)(0.0)(0.0))(Data_Vector3.vec3(0.0)(1.0)(0.0));
                               var cm = Data_Matrix4.makeLookAt(Data_Vector3.vec3(3.0)(1.3)(0.3))(Data_Vector3.vec3(0.0)(0.0)(0.0))(Data_Vector3.vec3(0.0)(1.0)(0.0));
@@ -12497,42 +12500,42 @@ var PS = { };
                               var mm = Data_Matrix4.makeRotate(angle)(Data_Vector3.vec3(0.0)(1.0)(0.0));
                               var mvp = Data_Matrix4.mulM(Data_Matrix4.mulM(pm)(cm))(mm);
                               var mvp2 = Data_Matrix4.mulM(Data_Matrix4.mulM(pm)(cm$prime))(mm);
-                              Input.uniformFloat("Time")(_37.uniformSetter)(t)();
-                              Input.uniformM44F("MVP")(_37.uniformSetter)(toLCMat4(mvp))();
-                              return Input.uniformM44F("MVP2")(_37.uniformSetter)(toLCMat4(mvp2))();
+                              Input.uniformFloat("Time")(_38.uniformSetter)(t)();
+                              Input.uniformM44F("MVP")(_38.uniformSetter)(toLCMat4(mvp))();
+                              return Input.uniformM44F("MVP2")(_38.uniformSetter)(toLCMat4(mvp2))();
                           };
                       };
                       return function __do() {
-                          var _36 = Mesh.compileMesh(Sample.myCube)();
-                          Mesh.addMesh(_37)("stream4")(_36)([  ])();
-                          var _35 = Mesh.compileMesh(Sample.myQuad)();
-                          Mesh.addMesh(_37)("quad")(_35)([  ])();
+                          var _37 = Mesh.compileMesh(Sample.myCube)();
+                          Mesh.addMesh(_38)("stream4")(_37)([  ])();
+                          var _36 = Mesh.compileMesh(Sample.myQuad)();
+                          Mesh.addMesh(_38)("quad")(_36)([  ])();
                           var addRemoteModel = function (sname) {
                               return function (uri) {
                                   return $foreign.getJSON(uri)(function (m) {
-                                      var _72 = Data_Argonaut_Decode.decodeJson(Mesh.decodeJsonMesh)(m);
-                                      if (_72 instanceof Data_Either.Left) {
-                                          return Control_Monad_Eff_Console.log("decode error: " + _72.value0);
+                                      var _73 = Data_Argonaut_Decode.decodeJson(Mesh.decodeJsonMesh)(m);
+                                      if (_73 instanceof Data_Either.Left) {
+                                          return Control_Monad_Eff_Console.log("decode error: " + _73.value0);
                                       };
-                                      if (_72 instanceof Data_Either.Right) {
+                                      if (_73 instanceof Data_Either.Right) {
                                           return function __do() {
-                                              var _2 = Mesh.compileMesh(_72.value0)();
-                                              Mesh.addMesh(_37)(sname)(_2)([  ])();
-                                              Input.sortSlotObjects(_37)();
+                                              var _2 = Mesh.compileMesh(_73.value0)();
+                                              Mesh.addMesh(_38)(sname)(_2)([  ])();
+                                              Input.sortSlotObjects(_38)();
                                               return Prelude["return"](Control_Monad_Eff.applicativeEff)(Prelude.unit)();
                                           };
                                       };
-                                      throw new Error("Failed pattern match at Main line 138, column 7 - line 157, column 3: " + [ _72.constructor.name ]);
+                                      throw new Error("Failed pattern match at Main line 138, column 7 - line 157, column 3: " + [ _73.constructor.name ]);
                                   });
                               };
                           };
-                          var _34 = Ace.edit("editor")(Ace.ace)();
-                          var _33 = Ace_Editor.getSession(_34)();
-                          Ace_Editor.setTheme("ace/theme/terminal")(_34)();
-                          Ace_EditSession.setMode("ace/mode/haskell")(_33)();
-                          Ace_EditSession.setValue(DefaultText.defaultSrc)(_33)();
+                          var _35 = Ace.edit("editor")(Ace.ace)();
+                          var _34 = Ace_Editor.getSession(_35)();
+                          Ace_Editor.setTheme("ace/theme/terminal")(_35)();
+                          Ace_EditSession.setMode("ace/mode/haskell")(_34)();
+                          Ace_EditSession.setValue(DefaultText.defaultSrc)(_34)();
+                          var _33 = Control_Monad_Eff_Ref.newRef([  ])();
                           var _32 = Control_Monad_Eff_Ref.newRef([  ])();
-                          var _31 = Control_Monad_Eff_Ref.newRef([  ])();
                           return (function () {
                               var lessEqPos = function (l) {
                                   return function (c) {
@@ -12555,30 +12558,30 @@ var PS = { };
                               var getTypeInfo = function (l) {
                                   return function (c) {
                                       return function __do() {
-                                          var _3 = Control_Monad_Eff_Ref.readRef(_32)();
+                                          var _3 = Control_Monad_Eff_Ref.readRef(_33)();
                                           return (function () {
-                                              var ps = Prelude.flip(Data_Array.filter)(_3)(function (_39) {
-                                                  return lessEqPos(_39.value0.startLine)(_39.value0.startColumn)(l)(c) && lessPos(l)(c)(_39.value0.endLine)(_39.value0.endColumn);
+                                              var ps = Prelude.flip(Data_Array.filter)(_3)(function (_40) {
+                                                  return lessEqPos(_40.value0.startLine)(_40.value0.startColumn)(l)(c) && lessPos(l)(c)(_40.value0.endLine)(_40.value0.endColumn);
                                               });
-                                              var f = function (_47) {
-                                                  return function (_48) {
-                                                      if (_47 instanceof Data_Maybe.Nothing) {
-                                                          return new Data_Maybe.Just(_48.value0);
+                                              var f = function (_48) {
+                                                  return function (_49) {
+                                                      if (_48 instanceof Data_Maybe.Nothing) {
+                                                          return new Data_Maybe.Just(_49.value0);
                                                       };
-                                                      if (_47 instanceof Data_Maybe.Just) {
-                                                          if (lessPos(_47.value0.startLine)(_47.value0.startColumn)(_48.value0.startLine)(_48.value0.startColumn)) {
-                                                              return new Data_Maybe.Just(_48.value0);
+                                                      if (_48 instanceof Data_Maybe.Just) {
+                                                          if (lessPos(_48.value0.startLine)(_48.value0.startColumn)(_49.value0.startLine)(_49.value0.startColumn)) {
+                                                              return new Data_Maybe.Just(_49.value0);
                                                           };
                                                           if (Prelude.otherwise) {
-                                                              return new Data_Maybe.Just(_47.value0);
+                                                              return new Data_Maybe.Just(_48.value0);
                                                           };
                                                       };
-                                                      throw new Error("Failed pattern match at Main line 169, column 13 - line 170, column 13: " + [ _47.constructor.name, _48.constructor.name ]);
+                                                      throw new Error("Failed pattern match at Main line 169, column 13 - line 170, column 13: " + [ _48.constructor.name, _49.constructor.name ]);
                                                   };
                                               };
                                               return Prelude["return"](Control_Monad_Eff.applicativeEff)((function () {
-                                                  var _88 = Data_Foldable.foldl(Data_Foldable.foldableArray)(f)(Data_Maybe.Nothing.value)(ps);
-                                                  if (_88 instanceof Data_Maybe.Nothing) {
+                                                  var _89 = Data_Foldable.foldl(Data_Foldable.foldableArray)(f)(Data_Maybe.Nothing.value)(ps);
+                                                  if (_89 instanceof Data_Maybe.Nothing) {
                                                       return {
                                                           startLine: 0, 
                                                           startColumn: 0, 
@@ -12587,33 +12590,34 @@ var PS = { };
                                                           text: ""
                                                       };
                                                   };
-                                                  if (_88 instanceof Data_Maybe.Just) {
-                                                      return _88.value0;
+                                                  if (_89 instanceof Data_Maybe.Just) {
+                                                      return _89.value0;
                                                   };
-                                                  throw new Error("Failed pattern match at Main line 166, column 7 - line 182, column 3: " + [ _88.constructor.name ]);
+                                                  throw new Error("Failed pattern match at Main line 166, column 7 - line 182, column 3: " + [ _89.constructor.name ]);
                                               })());
                                           })()();
                                       };
                                   };
                               };
                               return function __do() {
-                                  $foreign.tokenTooltip(_34)(getTypeInfo)();
-                                  var _30 = Control_Monad_Eff_JQuery.body();
-                                  var _29 = Control_Monad_Eff_JQuery.find("#messagepanel")(_30)();
-                                  var _28 = Control_Monad_Eff_JQuery.find("#statuspanel")(_30)();
-                                  var _27 = Control_Monad_Eff_JQuery.find("#compilebutton")(_30)();
-                                  var _26 = Control_Monad_Eff_JQuery.find("#exerciseselect")(_30)();
-                                  var _25 = Control_Monad_Eff_JQuery.find("#glcanvas")(_30)();
+                                  $foreign.tokenTooltip(_35)(getTypeInfo)();
+                                  var _31 = Control_Monad_Eff_JQuery.body();
+                                  var _30 = Control_Monad_Eff_JQuery.find("#pipeline")(_31)();
+                                  var _29 = Control_Monad_Eff_JQuery.find("#messagepanel")(_31)();
+                                  var _28 = Control_Monad_Eff_JQuery.find("#statuspanel")(_31)();
+                                  var _27 = Control_Monad_Eff_JQuery.find("#compilebutton")(_31)();
+                                  var _26 = Control_Monad_Eff_JQuery.find("#exerciseselect")(_31)();
+                                  var _25 = Control_Monad_Eff_JQuery.find("#glcanvas")(_31)();
                                   Prelude.flip(Control_Monad_Eff_JQuery.on("mousemove"))(_25)(function (e) {
-                                      return function (_40) {
+                                      return function (_41) {
                                           return function __do() {
                                               var _6 = Graphics_WebGL.getCanvasWidth(context)();
                                               var _5 = Graphics_WebGL.getCanvasHeight(context)();
                                               var _4 = $foreign.getMousePos(e)();
                                               if (_4.length === 2) {
-                                                  return Input.uniformV2F("Mouse")(_37.uniformSetter)(new LinearBase.V2(_4[0] / Data_Int.toNumber(_6), _4[1] / Data_Int.toNumber(_5)))();
+                                                  return Input.uniformV2F("Mouse")(_38.uniformSetter)(new LinearBase.V2(_4[0] / Data_Int.toNumber(_6), _4[1] / Data_Int.toNumber(_5)))();
                                               };
-                                              throw new Error("Failed pattern match at Main line 90, column 1 - line 311, column 14: " + [ _4.constructor.name ]);
+                                              throw new Error("Failed pattern match at Main line 90, column 1 - line 313, column 14: " + [ _4.constructor.name ]);
                                           };
                                       };
                                   })();
@@ -12633,14 +12637,14 @@ var PS = { };
                                                           return Backend.disposePipeline(_9.value0)();
                                                       };
                                                   };
-                                                  throw new Error("Failed pattern match at Main line 197, column 7 - line 203, column 7: " + [ _9.constructor.name ]);
+                                                  throw new Error("Failed pattern match at Main line 198, column 7 - line 204, column 7: " + [ _9.constructor.name ]);
                                               })()();
                                               Control_Monad_Eff_Console.log("allocate new pipeline")();
                                               var _8 = Backend.allocPipeline(ir)();
                                               Control_Monad_Eff_Console.log("attach pipeline input")();
-                                              Backend.setPipelineInput(_8)(new Data_Maybe.Just(_37))();
+                                              Backend.setPipelineInput(_8)(new Data_Maybe.Just(_38))();
                                               Control_Monad_Eff_Console.log("generate object commands")();
-                                              Input.sortSlotObjects(_37)();
+                                              Input.sortSlotObjects(_38)();
                                               return Control_Monad_Eff_Ref.writeRef(_24)(new Data_Maybe.Just(_8))();
                                           };
                                       };
@@ -12648,7 +12652,7 @@ var PS = { };
                                           return function __do() {
                                               Control_Monad_Eff_Console.log("compile")();
                                               Control_Monad_Eff_JQuery.setText("Compiling...")(_28)();
-                                              var _7 = Ace_EditSession.getValue(_33)();
+                                              var _7 = Ace_EditSession.getValue(_34)();
                                               return WebSocket.send(s)(_7)();
                                           };
                                       };
@@ -12663,13 +12667,13 @@ var PS = { };
                                               }, 
                                               onMessage: function (s) {
                                                   return function (m) {
-                                                      var _108 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeArray(Data_Argonaut_Decode.decodeJsonString)));
-                                                      if (_108 instanceof Data_Either.Left) {
-                                                          return Control_Monad_Eff_Console.log("decode error: " + _108.value0);
+                                                      var _110 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeArray(Data_Argonaut_Decode.decodeJsonString)));
+                                                      if (_110 instanceof Data_Either.Left) {
+                                                          return Control_Monad_Eff_Console.log("decode error: " + _110.value0);
                                                       };
-                                                      if (_108 instanceof Data_Either.Right) {
+                                                      if (_110 instanceof Data_Either.Right) {
                                                           return function __do() {
-                                                              Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(_108.value0)(function (e) {
+                                                              Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(_110.value0)(function (e) {
                                                                   return function __do() {
                                                                       var _10 = Control_Monad_Eff_JQuery.create("<option></option>")();
                                                                       Control_Monad_Eff_JQuery.setText(e)(_10)();
@@ -12679,7 +12683,7 @@ var PS = { };
                                                               return Prelude["return"](Control_Monad_Eff.applicativeEff)(Prelude.unit)();
                                                           };
                                                       };
-                                                      throw new Error("Failed pattern match at Main line 90, column 1 - line 311, column 14: " + [ _108.constructor.name ]);
+                                                      throw new Error("Failed pattern match at Main line 90, column 1 - line 313, column 14: " + [ _110.constructor.name ]);
                                                   };
                                               }, 
                                               onError: function (s) {
@@ -12695,7 +12699,7 @@ var PS = { };
                                                       Control_Monad_Eff_Console.log("socket is ready")();
                                                       compile(s)();
                                                       var _12 = Control_Monad_Eff_Ref.newRef(Data_Maybe.Nothing.value)();
-                                                      return Ace_EditSession.onChange(_33)(function __do() {
+                                                      return Ace_EditSession.onChange(_34)(function __do() {
                                                           var _11 = Control_Monad_Eff_Ref.readRef(_12)();
                                                           (function () {
                                                               if (_11 instanceof Data_Maybe.Nothing) {
@@ -12704,7 +12708,7 @@ var PS = { };
                                                               if (_11 instanceof Data_Maybe.Just) {
                                                                   return Timer.clearTimeout(_11.value0);
                                                               };
-                                                              throw new Error("Failed pattern match at Main line 90, column 1 - line 311, column 14: " + [ _11.constructor.name ]);
+                                                              throw new Error("Failed pattern match at Main line 90, column 1 - line 313, column 14: " + [ _11.constructor.name ]);
                                                           })()();
                                                           return Control_Bind["=<<"](Control_Monad_Eff.bindEff)(Control_Monad_Eff_Ref.writeRef(_12))(Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_Maybe.Just.create)(Timer.timeout(1000)(compile(s))))();
                                                       })();
@@ -12715,35 +12719,36 @@ var PS = { };
                                                   return function (m) {
                                                       return function __do() {
                                                           Control_Monad_Eff_Console.log("got response")();
-                                                          var _117 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(TypeInfo.decodeJsonMyEither));
-                                                          if (_117 instanceof Data_Either.Left) {
-                                                              return Control_Monad_Eff_Console.log("decode error: " + _117.value0)();
+                                                          var _119 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(TypeInfo.decodeJsonMyEither));
+                                                          if (_119 instanceof Data_Either.Left) {
+                                                              return Control_Monad_Eff_Console.log("decode error: " + _119.value0)();
                                                           };
-                                                          if (_117 instanceof Data_Either.Right && _117.value0 instanceof TypeInfo.MyLeft) {
+                                                          if (_119 instanceof Data_Either.Right && _119.value0 instanceof TypeInfo.MyLeft) {
                                                               Control_Monad_Eff_JQuery.setText("Error")(_28)();
-                                                              Control_Monad_Eff_JQuery.setText(_117.value0.value0.value0.text)(_29)();
-                                                              var _15 = Ace_Range.create(_117.value0.value0.value0.startLine - 1)(_117.value0.value0.value0.startColumn - 1)(_117.value0.value0.value0.endLine - 1)(_117.value0.value0.value0.endColumn - 1)();
-                                                              var _14 = Control_Monad_Eff_Ref.readRef(_31)();
+                                                              Control_Monad_Eff_JQuery.setText(_119.value0.value0.value0.text)(_29)();
+                                                              var _15 = Ace_Range.create(_119.value0.value0.value0.startLine - 1)(_119.value0.value0.value0.startColumn - 1)(_119.value0.value0.value0.endLine - 1)(_119.value0.value0.value0.endColumn - 1)();
+                                                              var _14 = Control_Monad_Eff_Ref.readRef(_32)();
                                                               Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(_14)(function (mkr) {
-                                                                  return Ace_EditSession.removeMarker(mkr)(_33);
+                                                                  return Ace_EditSession.removeMarker(mkr)(_34);
                                                               })();
-                                                              var _13 = addMarker(_15)("lc_error")("text")(false)(_33)();
-                                                              Control_Monad_Eff_Ref.writeRef(_31)([ _13 ])();
-                                                              Control_Monad_Eff_Ref.writeRef(_32)(_117.value0.value1)();
+                                                              var _13 = addMarker(_15)("lc_error")("text")(false)(_34)();
+                                                              Control_Monad_Eff_Ref.writeRef(_32)([ _13 ])();
+                                                              Control_Monad_Eff_Ref.writeRef(_33)(_119.value0.value1)();
                                                               return Prelude["return"](Control_Monad_Eff.applicativeEff)(Prelude.unit)();
                                                           };
-                                                          if (_117 instanceof Data_Either.Right && _117.value0 instanceof TypeInfo.MyRight) {
+                                                          if (_119 instanceof Data_Either.Right && _119.value0 instanceof TypeInfo.MyRight) {
+                                                              Control_Monad_Eff_JQuery.setText(_119.value0.value0)(_30)();
                                                               Control_Monad_Eff_JQuery.setText("Compiled")(_28)();
                                                               Control_Monad_Eff_JQuery.setText("No errors.")(_29)();
-                                                              Control_Monad_Eff_Ref.writeRef(_32)(_117.value0.value1)();
-                                                              var _16 = Control_Monad_Eff_Ref.readRef(_31)();
+                                                              Control_Monad_Eff_Ref.writeRef(_33)(_119.value0.value2)();
+                                                              var _16 = Control_Monad_Eff_Ref.readRef(_32)();
                                                               Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(_16)(function (mkr) {
-                                                                  return Ace_EditSession.removeMarker(mkr)(_33);
+                                                                  return Ace_EditSession.removeMarker(mkr)(_34);
                                                               })();
-                                                              Control_Monad_Eff_Ref.writeRef(_31)([  ])();
-                                                              return render(_117.value0.value0)();
+                                                              Control_Monad_Eff_Ref.writeRef(_32)([  ])();
+                                                              return render(_119.value0.value1)();
                                                           };
-                                                          throw new Error("Failed pattern match at Main line 90, column 1 - line 311, column 14: " + [ _117.constructor.name ]);
+                                                          throw new Error("Failed pattern match at Main line 90, column 1 - line 313, column 14: " + [ _119.constructor.name ]);
                                                       };
                                                   };
                                               }, 
@@ -12763,8 +12768,8 @@ var PS = { };
                                                           onOpen: function (s) {
                                                               return function __do() {
                                                                   Control_Monad_Eff_Console.log("socket2 is ready")();
-                                                                  Prelude.flip(Control_Monad_Eff_JQuery.on("change"))(_26)(function (_42) {
-                                                                      return function (_41) {
+                                                                  Prelude.flip(Control_Monad_Eff_JQuery.on("change"))(_26)(function (_43) {
+                                                                      return function (_42) {
                                                                           return function __do() {
                                                                               var _18 = Control_Monad_Eff_JQuery.find(":selected")(_26)();
                                                                               var _17 = Control_Monad_Eff_JQuery.getText(_18)();
@@ -12777,18 +12782,18 @@ var PS = { };
                                                           }, 
                                                           onMessage: function (s) {
                                                               return function (m) {
-                                                                  var _137 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeJsonString));
-                                                                  if (_137 instanceof Data_Either.Left) {
-                                                                      return Control_Monad_Eff_Console.log("decode error: " + _137.value0);
+                                                                  var _140 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeJsonString));
+                                                                  if (_140 instanceof Data_Either.Left) {
+                                                                      return Control_Monad_Eff_Console.log("decode error: " + _140.value0);
                                                                   };
-                                                                  if (_137 instanceof Data_Either.Right) {
+                                                                  if (_140 instanceof Data_Either.Right) {
                                                                       return function __do() {
-                                                                          Ace_EditSession.setValue(_137.value0)(_33)();
+                                                                          Ace_EditSession.setValue(_140.value0)(_34)();
                                                                           compile(_22.value0)();
                                                                           return Prelude["return"](Control_Monad_Eff.applicativeEff)(Prelude.unit)();
                                                                       };
                                                                   };
-                                                                  throw new Error("Failed pattern match at Main line 90, column 1 - line 311, column 14: " + [ _137.constructor.name ]);
+                                                                  throw new Error("Failed pattern match at Main line 90, column 1 - line 313, column 14: " + [ _140.constructor.name ]);
                                                               };
                                                           }, 
                                                           onError: function (s) {
@@ -12798,20 +12803,20 @@ var PS = { };
                                                           }, 
                                                           onClose: Control_Monad_Eff_Console.log("socket2 is closed")
                                                       })();
-                                                      Prelude.flip(Control_Monad_Eff_JQuery.on("click"))(_27)(function (_44) {
-                                                          return function (_43) {
+                                                      Prelude.flip(Control_Monad_Eff_JQuery.on("click"))(_27)(function (_45) {
+                                                          return function (_44) {
                                                               return function __do() {
                                                                   compile(_22.value0)();
                                                                   return Control_Monad_Eff_Console.log("clicked compile")();
                                                               };
                                                           };
                                                       })();
-                                                      $foreign.addCommand(_34)("Compile")("Ctrl-B")("Command-B")(function (_45) {
+                                                      $foreign.addCommand(_35)("Compile")("Ctrl-B")("Command-B")(function (_46) {
                                                           return compile(_22.value0);
                                                       })();
                                                       var renderLoop = function __do() {
                                                           var _20 = Timer.nowEpochMilliseconds();
-                                                          updateInput((_20 - _38) / 1000.0)();
+                                                          updateInput((_20 - _39) / 1000.0)();
                                                           var _19 = Control_Monad_Eff_Ref.readRef(_24)();
                                                           (function () {
                                                               if (_19 instanceof Data_Maybe.Nothing) {
@@ -12820,7 +12825,7 @@ var PS = { };
                                                               if (_19 instanceof Data_Maybe.Just) {
                                                                   return Backend.renderPipeline(_19.value0);
                                                               };
-                                                              throw new Error("Failed pattern match at Main line 90, column 1 - line 311, column 14: " + [ _19.constructor.name ]);
+                                                              throw new Error("Failed pattern match at Main line 90, column 1 - line 313, column 14: " + [ _19.constructor.name ]);
                                                           })()();
                                                           return Timer.timeout(1000 / 25 | 0)(renderLoop)();
                                                       };
@@ -12828,7 +12833,7 @@ var PS = { };
                                                       return Prelude["return"](Control_Monad_Eff.applicativeEff)(Prelude.unit)();
                                                   };
                                               };
-                                              throw new Error("Failed pattern match at Main line 90, column 1 - line 311, column 14: " + [ _22.constructor.name ]);
+                                              throw new Error("Failed pattern match at Main line 90, column 1 - line 313, column 14: " + [ _22.constructor.name ]);
                                           })()();
                                       };
                                   })()();

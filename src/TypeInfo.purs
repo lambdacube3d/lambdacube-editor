@@ -1,5 +1,5 @@
 -- generated file, do not modify!
--- 2015-12-21T12:00:19.854088000000Z
+-- 2016-01-18T14:30:08.262123Z
 
 module TypeInfo where
 import Prelude
@@ -30,7 +30,7 @@ data TypeInfo
 
 data MyEither
   = MyLeft TypeInfo (Array TypeInfo)
-  | MyRight Pipeline (Array TypeInfo)
+  | MyRight String Pipeline (Array TypeInfo)
 
 
 
@@ -67,7 +67,7 @@ instance decodeJsonTypeInfo :: DecodeJson TypeInfo where
 instance encodeJsonMyEither :: EncodeJson MyEither where
   encodeJson v = case v of
     MyLeft arg0 arg1 -> "tag" := "MyLeft" ~> "arg0" := arg0 ~> "arg1" := arg1 ~> jsonEmptyObject
-    MyRight arg0 arg1 -> "tag" := "MyRight" ~> "arg0" := arg0 ~> "arg1" := arg1 ~> jsonEmptyObject
+    MyRight arg0 arg1 arg2 -> "tag" := "MyRight" ~> "arg0" := arg0 ~> "arg1" := arg1 ~> "arg2" := arg2 ~> jsonEmptyObject
 
 instance decodeJsonMyEither :: DecodeJson MyEither where
   decodeJson json = do
@@ -75,5 +75,5 @@ instance decodeJsonMyEither :: DecodeJson MyEither where
     tag <- obj .? "tag"
     case tag of
       "MyLeft" -> MyLeft <$> obj .? "arg0" <*> obj .? "arg1"
-      "MyRight" -> MyRight <$> obj .? "arg0" <*> obj .? "arg1"
+      "MyRight" -> MyRight <$> obj .? "arg0" <*> obj .? "arg1" <*> obj .? "arg2"
 

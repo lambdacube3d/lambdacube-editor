@@ -28,6 +28,7 @@ import System.Directory
 --import Control.Exception
 --import Control.Monad.IO.Class
 --import Control.DeepSeq
+import Text.Show.Pretty (ppShow)
 
 import Text.Parsec.Pos
 import Data.Aeson.Encode.Pretty
@@ -96,7 +97,7 @@ app compiler = Snap.route
       }
 
     ff (Left (ErrorMsg err), infos) = MyLeft (TypeInfo 0 0 0 0 err) $ toTypeInfo <$> V.fromList infos
-    ff (Right (m, _), infos) = MyRight m $ toTypeInfo <$> V.fromList infos
+    ff (Right (ppl, _), infos) = MyRight (ppUnlines $ ppShow ppl) ppl $ toTypeInfo <$> V.fromList infos
 
     er e = return $ encodePretty $ MyLeft (TypeInfo 0 0 0 0 ("\n!FAIL err\n" ++ e :: String)) mempty
 
@@ -108,3 +109,20 @@ main = do
   config <- commandLineAppConfig Snap.defaultConfig
   compiler <- preCompile ["."] WebGL1 "DemoUtils"
   Snap.httpServe config $ app compiler
+
+
+ppUnlines :: String -> String
+ppUnlines [] = []
+ppUnlines ('"':xs) | isMultilineString xs = "unlines\n    [ \"" ++ go xs
+  where go ('\\':'n':xs) = "\"\n    , \"" ++ go xs
+        go ('\\':c:xs) = '\\':c:go xs
+        go ('"':xs) = "\"\n    ]" ++ ppUnlines xs
+        go (x:xs) = x : go xs
+
+        isMultilineString ('\\':'n':xs) = True
+        isMultilineString ('\\':c:xs) = isMultilineString xs
+        isMultilineString ('"':xs) = False
+        isMultilineString (x:xs) = isMultilineString xs
+        isMultilineString [] = False
+
+ppUnlines (x:xs) = x : ppUnlines xs

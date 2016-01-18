@@ -29,6 +29,7 @@ executable compiler-service
     aeson >=0.9 && <1,
     lambdacube-ir,
     lambdacube-compiler >=0.3 && <0.4,
+    pretty-show == 1.6.*,
     containers,
     vector,
     parsec,

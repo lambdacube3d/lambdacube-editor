@@ -1,5 +1,5 @@
 -- generated file, do not modify!
--- 2015-10-26T11:19:51.079271000000Z
+-- 2016-01-18T14:30:08.262123Z
 
 {-# LANGUAGE OverloadedStrings, RecordWildCards #-}
 module TypeInfo where
@@ -30,7 +30,7 @@ data TypeInfo
 
 data MyEither
   = MyLeft TypeInfo (Vector TypeInfo)
-  | MyRight Pipeline (Vector TypeInfo)
+  | MyRight String Pipeline (Vector TypeInfo)
   deriving (Show, Eq, Ord)
 
 
@@ -67,13 +67,13 @@ instance FromJSON TypeInfo where
 instance ToJSON MyEither where
   toJSON v = case v of
     MyLeft arg0 arg1 -> object [ "tag" .= ("MyLeft" :: Text), "arg0" .= arg0, "arg1" .= arg1]
-    MyRight arg0 arg1 -> object [ "tag" .= ("MyRight" :: Text), "arg0" .= arg0, "arg1" .= arg1]
+    MyRight arg0 arg1 arg2 -> object [ "tag" .= ("MyRight" :: Text), "arg0" .= arg0, "arg1" .= arg1, "arg2" .= arg2]
 
 instance FromJSON MyEither where
   parseJSON (Object obj) = do
     tag <- obj .: "tag"
     case tag :: Text of
       "MyLeft" -> MyLeft <$> obj .: "arg0" <*> obj .: "arg1"
-      "MyRight" -> MyRight <$> obj .: "arg0" <*> obj .: "arg1"
+      "MyRight" -> MyRight <$> obj .: "arg0" <*> obj .: "arg1" <*> obj .: "arg2"
   parseJSON _ = mzero
 

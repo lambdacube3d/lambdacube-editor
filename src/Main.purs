@@ -182,6 +182,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
   tokenTooltip editor getTypeInfo
 
   b <- J.body
+  pipelinepanel <- J.find "#pipeline" b
   messagepanel <- J.find "#messagepanel" b
   statuspanel <- J.find "#statuspanel" b
   btnCompile <- J.find "#compilebutton" b
@@ -260,7 +261,8 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
             writeRef markerRef [mkr]
             writeRef typeInfoRef infos
             return unit
-          Right (MyRight p infos) -> do
+          Right (MyRight pplSrc p infos) -> do
+            J.setText pplSrc pipelinepanel
             J.setText "Compiled" statuspanel
             J.setText "No errors." messagepanel
             writeRef typeInfoRef infos
