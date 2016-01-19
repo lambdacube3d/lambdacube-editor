@@ -1,4 +1,4 @@
-clear = imageFrame (DepthImage @1 1000, ColorImage @1 black)   -- ...
+clear = imageFrame (DepthImage @1 1000, ColorImage @1 teal)   -- ...
 
 triangleRasterCtx = TriangleCtx CullNone PolygonFill NoOffset LastVertex
 colorFragmentCtx = (DepthOp Less True, ColorOp NoBlending (V4 True True True True))
@@ -12,9 +12,9 @@ cube' (n :: Float) fb =
        clear
    `overlay`
        cubeVertexStream
-     & mapPrimitives (\(v, u) -> (rotMatrix *. scale 0.5 (rotMatrixX (n/10) *. v), u))
+     & mapPrimitives (\(v, u) -> (rotMatrix *. scale 0.4 (rotMatrixX (n/10) *. v), u))
      & rasterizePrimitives triangleRasterCtx Smooth
-     & mapFragments (\a -> setAlpha $ (a%xyxx *! 0.7 + texture2D sampler a) *! 0.7)
+     & mapFragments (\a -> setAlpha $ (a%yyyx *! 0.5 + texture2D sampler a) *! 0.7)
      & accumulateWith colorFragmentCtx
   where
     sampler = Sampler LinearFilter MirroredRepeat $ Texture2D (V2 256 256) (PrjImageColor fb)
