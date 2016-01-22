@@ -96,10 +96,12 @@ app compiler = Snap.route
       , text        = m
       }
 
-    ff (Left (ErrorMsg err), infos) = MyLeft (TypeInfo 0 0 0 0 err) $ toTypeInfo <$> V.fromList infos
-    ff (Right (ppl, _), infos) = MyRight (ppUnlines $ ppShow ppl) ppl $ toTypeInfo <$> V.fromList infos
+    ff (Left (ErrorMsg err), infos) = MyLeft (TypeInfo 0 0 0 0 err) $ convertInfos infos
+    ff (Right (ppl, _), infos) = MyRight (ppUnlines $ ppShow ppl) ppl $ convertInfos infos
 
     er e = return $ encodePretty $ MyLeft (TypeInfo 0 0 0 0 ("\n!FAIL err\n" ++ e :: String)) mempty
+
+    convertInfos is = toTypeInfo <$> V.fromList [ (a, b, unlines c) | (a, b, c) <- listInfos is ]
 
 --------------------------------------------------------------------------------
 main :: IO ()
