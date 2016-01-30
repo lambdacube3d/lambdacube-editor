@@ -8,14 +8,14 @@ import Data.Int
 import Data.Word
 import Data.Map
 import Data.Vector (Vector(..))
-import Linear
 
 import Data.Text
 import Data.Aeson hiding (Value,Bool)
 import Data.Aeson.Types hiding (Value,Bool)
 import Control.Monad
 
-import IR
+import LambdaCube.Linear
+import LambdaCube.IR
 
 data TypeInfo
   = TypeInfo
