@@ -22,7 +22,6 @@ import qualified Graphics.WebGL as GL
 import qualified Control.Monad.Eff.JQuery as J
 
 import WebSocket
-import DefaultText
 import Data.Either
 import Sample
 
@@ -53,6 +52,8 @@ import Data.Matrix4
 import Data.Vector3
 
 import qualified DOM as DOM
+
+defaultExampleName = "LambdaCube2.lc"
 
 main :: forall e. Eff (console :: C.CONSOLE | e) Unit
 main = do
@@ -158,7 +159,6 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
   session <- Editor.getSession editor
   Editor.setTheme "ace/theme/terminal" editor
   Session.setMode "ace/mode/haskell" session
-  Session.setValue defaultSrc session
   typeInfoRef <- newRef []
   markerRef <- newRef []
   let lessEqPos l c l' c' = l < l' || l == l' && c <= c'
@@ -283,6 +283,8 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
                 sel <- J.find ":selected" exerciseselect
                 txt <- J.getText sel
                 send s txt
+            -- get the default example
+            send s defaultExampleName
             return unit
         , onMessage : \s m -> case jsonParser m >>= decodeJson of
               Left e -> C.log $ "decode error: " ++ e

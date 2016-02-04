@@ -1,7 +1,3 @@
-module DefaultText where
-
-defaultSrc = """
-
 app34 :: (Vec 3 Float -> Vec 3 Float) -> Vec 4 Float -> Vec 4 Float
 app34 f q = let t = f (q%xyz) in V4 (t%x) (t%y) (t%z) (q%w)
 
@@ -26,5 +22,3 @@ main = renderFrame $
    makeFrame (Uniform "Time")
              (Uniform "MVP")
              (fetch_ "stream4" (Attribute "position4"))
-
-"""
