@@ -1,4 +1,4 @@
-clear = imageFrame (emptyDepthImage 1000, emptyColorImage teal)
+clear = imageFrame (emptyDepthImage 1, emptyColorImage teal)
 
 triangleRasterCtx = TriangleCtx CullNone PolygonFill NoOffset LastVertex
 colorFragmentCtx = (DepthOp Less True, ColorOp NoBlending (V4 True True True True))

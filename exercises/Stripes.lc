@@ -2,7 +2,7 @@
 makeFrame (time :: Float)
           (vertexstream :: Stream (Primitive Triangle (Vec 4 Float)))
 
-    = foldl' overlay (imageFrame (emptyDepthImage 1000, emptyColorImage navy))
+    = foldl' overlay (imageFrame (emptyDepthImage 1, emptyColorImage navy))
     $ map (f . (/10)) [ 1 .. 10 ]
   where
     f sc =

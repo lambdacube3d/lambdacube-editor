@@ -1,7 +1,7 @@
 makeFrame (projmat :: Mat 4 4 Float)
           (vertexstream :: Stream (Primitive Triangle (Vec 4 Float)))
 
-          = imageFrame (emptyDepthImage 1000, emptyColorImage navy)
+          = imageFrame (emptyDepthImage 1, emptyColorImage navy)
   `overlay` fragments
   where
     fragments =
