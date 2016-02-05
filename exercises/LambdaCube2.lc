@@ -3,7 +3,7 @@ len2 v = v%x*v%x + v%y*v%y + v%z*v%z
 
 makeFrame (time :: Float)
           (projmat :: Mat 4 4 Float)
-          (vertexstream :: Stream (Primitive Triangle (Vec 4 Float)))
+          (vertexstream :: PrimitiveStream Triangle (Vec 4 Float))
 
     = imageFrame (emptyDepthImage 1, emptyColorImage navy)
   `overlay`

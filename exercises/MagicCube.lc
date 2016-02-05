@@ -7,7 +7,7 @@ f x = (x + sin x + sin (1.1 * x)) `mod` 4 * 2
 
 makeFrame (time :: Float)
           (projmat :: Mat 4 4 Float)
-          (vertexstream :: Stream (Primitive Triangle (Vec 4 Float)))
+          (vertexstream :: PrimitiveStream Triangle (Vec 4 Float))
 
     = imageFrame (emptyDepthImage 1, emptyColorImage navy)
   `overlay`

@@ -31,7 +31,7 @@ executable compiler-service
     lambdacube-compiler == 0.4.*,
     pretty-show == 1.6.*,
     containers,
-    vector,
+    vector >= 0.11 && <0.12,
     parsec,
     aeson-pretty,
     process,
