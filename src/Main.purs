@@ -32,6 +32,7 @@ import Data.List(toList)
 import Data.Tuple
 import Data.Array
 import Data.Int
+import qualified Data.StrMap as StrMap
 
 import Backend
 import IR
@@ -39,6 +40,7 @@ import LinearBase
 import Mesh
 import Type
 import Input
+import Data (uploadTexture2DToGPU)
 
 --import MeshJsonDecode
 --import PipelineJsonDecode
@@ -100,7 +102,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
                             , Tuple "quad"    {primitive: Triangles, attributes: fromArray [Tuple "position" TV2F]}
                             , Tuple "cube"    {primitive: Triangles, attributes: fromArray [Tuple "position"  TV3F, Tuple "normal" TV3F]}
                             ]
-        , uniforms : fromArray [Tuple "MVP" M44F, Tuple "MVP2" M44F, Tuple "Time" Float, Tuple "Mouse" V2F]
+        , uniforms : fromArray [Tuple "MVP" M44F, Tuple "MVP2" M44F, Tuple "Time" Float, Tuple "Mouse" V2F, Tuple "Diffuse" FTexture2D]
         }
   pplInput <- mkWebGLPipelineInput inputSchema
 
@@ -135,6 +137,9 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
 
   gpuQuad <- compileMesh myQuad
   addMesh pplInput "quad" gpuQuad []
+
+  -- upload texture
+  uploadTexture2DToGPU "logo.png" (uniformFTexture2D "Diffuse" pplInput.uniformSetter)
 
   let addRemoteModel sname uri = getJSON uri $ \m -> do
         case decodeJson m of
@@ -200,8 +205,16 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
         J.setText "Compiling..." statuspanel
         src <- Session.getValue session
         send s src
-
+{-
+      loadUserTextures (Pipeline p) = do
+        let isFTexture2D unis n = case StrMap.lookup n unis of
+              Just FTexture2D -> true
+              _ -> false
+        for_ (concatMap (\(Slot s) -> filter (isFTexture2D s.slotUniforms) $ StrMap.keys s.slotUniforms) p.slots) $ \n ->
+          uploadTexture2DToGPU n >>= uniformFTexture2D n pplInput.uniformSetter
+-}
       render ir = do
+        --loadUserTextures ir
         old <- readRef pipelineRef
         writeRef pipelineRef Nothing
         case old of

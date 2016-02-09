@@ -1364,6 +1364,11 @@ var PS = { };
      {gl.frontFace(mode);}
      ;}
     
+      exports.generateMipmap_ = function (target)
+      {return function ()
+     {gl.generateMipmap(target);}
+     ;}
+    
       exports.getAttribLocation_ = function (program,name)
       {return function ()
      {var res = gl.getAttribLocation(program,name);
@@ -1420,6 +1425,11 @@ var PS = { };
       exports.linkProgram_ = function (program)
       {return function ()
      {gl.linkProgram(program);}
+     ;}
+    
+      exports.pixelStorei_ = function (pname,param)
+      {return function ()
+     {gl.pixelStorei(pname,param);}
      ;}
     
       exports.polygonOffset_ = function (factor,units)
@@ -1565,9 +1575,16 @@ var PS = { };
   var Data_Function = PS["Data.Function"];
   var Prelude = PS["Prelude"];     
   var _ZERO = 0;       
-  var _VERTEX_SHADER = 35633;         
+  var _VERTEX_SHADER = 35633;  
+  var _UNSIGNED_SHORT_5_6_5 = 33635;
+  var _UNSIGNED_SHORT_5_5_5_1 = 32820;
+  var _UNSIGNED_SHORT_4_4_4_4 = 32819;
   var _UNSIGNED_SHORT = 5123;
-  var _UNSIGNED_BYTE = 5121;   
+  var _UNSIGNED_BYTE = 5121;
+  var _UNPACK_PREMULTIPLY_ALPHA_WEBGL = 37441;
+  var _UNPACK_FLIP_Y_WEBGL = 37440;
+  var _UNPACK_COLORSPACE_CONVERSION_WEBGL = 37443;
+  var _UNPACK_ALIGNMENT = 3317;
   var _TRIANGLE_STRIP = 5;
   var _TRIANGLE_FAN = 6;
   var _TRIANGLES = 4;
@@ -1575,6 +1592,13 @@ var PS = { };
   var _TEXTURE_WRAP_S = 10242;
   var _TEXTURE_MIN_FILTER = 10241;
   var _TEXTURE_MAG_FILTER = 10240;
+  var _TEXTURE_CUBE_MAP_POSITIVE_Z = 34073;
+  var _TEXTURE_CUBE_MAP_POSITIVE_Y = 34071;
+  var _TEXTURE_CUBE_MAP_POSITIVE_X = 34069;
+  var _TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
+  var _TEXTURE_CUBE_MAP_NEGATIVE_Y = 34072;
+  var _TEXTURE_CUBE_MAP_NEGATIVE_X = 34070;
+  var _TEXTURE_CUBE_MAP = 34067;  
   var _TEXTURE_2D = 3553;
   var _TEXTURE0 = 33984;         
   var _STENCIL_TEST = 2960;       
@@ -1585,9 +1609,11 @@ var PS = { };
   var _SRC_ALPHA = 770;
   var _SHORT = 5122; 
   var _RGBA = 6408;   
+  var _RGB = 6407;    
   var _REPEAT = 10497;              
   var _POLYGON_OFFSET_FILL = 32823;  
-  var _POINTS = 0;          
+  var _POINTS = 0;
+  var _PACK_ALIGNMENT = 3333;
   var _ONE_MINUS_SRC_COLOR = 769;
   var _ONE_MINUS_SRC_ALPHA = 771;
   var _ONE_MINUS_DST_COLOR = 775;
@@ -1601,7 +1627,9 @@ var PS = { };
   var _NEAREST_MIPMAP_NEAREST = 9984;
   var _NEAREST_MIPMAP_LINEAR = 9986;
   var _NEAREST = 9728;
-  var _MIRRORED_REPEAT = 33648;
+  var _MIRRORED_REPEAT = 33648;                 
+  var _LUMINANCE_ALPHA = 6410;
+  var _LUMINANCE = 6409; 
   var _LINK_STATUS = 35714;
   var _LINE_STRIP = 3;
   var _LINE_LOOP = 2;
@@ -1641,7 +1669,11 @@ var PS = { };
   var _BLEND = 3042;
   var _BACK = 1029;                 
   var _ARRAY_BUFFER = 34962;
-  var _ALWAYS = 519;
+  var _ALWAYS = 519;     
+  var _ALPHA = 6406;
+  exports["_UNPACK_COLORSPACE_CONVERSION_WEBGL"] = _UNPACK_COLORSPACE_CONVERSION_WEBGL;
+  exports["_UNPACK_PREMULTIPLY_ALPHA_WEBGL"] = _UNPACK_PREMULTIPLY_ALPHA_WEBGL;
+  exports["_UNPACK_FLIP_Y_WEBGL"] = _UNPACK_FLIP_Y_WEBGL;
   exports["_NONE"] = _NONE;
   exports["_DEPTH_ATTACHMENT"] = _DEPTH_ATTACHMENT;
   exports["_COLOR_ATTACHMENT0"] = _COLOR_ATTACHMENT0;
@@ -1651,6 +1683,13 @@ var PS = { };
   exports["_CLAMP_TO_EDGE"] = _CLAMP_TO_EDGE;
   exports["_REPEAT"] = _REPEAT;
   exports["_TEXTURE0"] = _TEXTURE0;
+  exports["_TEXTURE_CUBE_MAP_NEGATIVE_Z"] = _TEXTURE_CUBE_MAP_NEGATIVE_Z;
+  exports["_TEXTURE_CUBE_MAP_POSITIVE_Z"] = _TEXTURE_CUBE_MAP_POSITIVE_Z;
+  exports["_TEXTURE_CUBE_MAP_NEGATIVE_Y"] = _TEXTURE_CUBE_MAP_NEGATIVE_Y;
+  exports["_TEXTURE_CUBE_MAP_POSITIVE_Y"] = _TEXTURE_CUBE_MAP_POSITIVE_Y;
+  exports["_TEXTURE_CUBE_MAP_NEGATIVE_X"] = _TEXTURE_CUBE_MAP_NEGATIVE_X;
+  exports["_TEXTURE_CUBE_MAP_POSITIVE_X"] = _TEXTURE_CUBE_MAP_POSITIVE_X;
+  exports["_TEXTURE_CUBE_MAP"] = _TEXTURE_CUBE_MAP;
   exports["_TEXTURE_WRAP_T"] = _TEXTURE_WRAP_T;
   exports["_TEXTURE_WRAP_S"] = _TEXTURE_WRAP_S;
   exports["_TEXTURE_MIN_FILTER"] = _TEXTURE_MIN_FILTER;
@@ -1672,13 +1711,22 @@ var PS = { };
   exports["_LINK_STATUS"] = _LINK_STATUS;
   exports["_VERTEX_SHADER"] = _VERTEX_SHADER;
   exports["_FRAGMENT_SHADER"] = _FRAGMENT_SHADER;
+  exports["_UNSIGNED_SHORT_5_6_5"] = _UNSIGNED_SHORT_5_6_5;
+  exports["_UNSIGNED_SHORT_5_5_5_1"] = _UNSIGNED_SHORT_5_5_5_1;
+  exports["_UNSIGNED_SHORT_4_4_4_4"] = _UNSIGNED_SHORT_4_4_4_4;
+  exports["_LUMINANCE_ALPHA"] = _LUMINANCE_ALPHA;
+  exports["_LUMINANCE"] = _LUMINANCE;
   exports["_RGBA"] = _RGBA;
+  exports["_RGB"] = _RGB;
+  exports["_ALPHA"] = _ALPHA;
   exports["_DEPTH_COMPONENT"] = _DEPTH_COMPONENT;
   exports["_FLOAT"] = _FLOAT;
   exports["_UNSIGNED_SHORT"] = _UNSIGNED_SHORT;
   exports["_SHORT"] = _SHORT;
   exports["_UNSIGNED_BYTE"] = _UNSIGNED_BYTE;
   exports["_BYTE"] = _BYTE;
+  exports["_PACK_ALIGNMENT"] = _PACK_ALIGNMENT;
+  exports["_UNPACK_ALIGNMENT"] = _UNPACK_ALIGNMENT;
   exports["_CCW"] = _CCW;
   exports["_CW"] = _CW;
   exports["_POLYGON_OFFSET_FILL"] = _POLYGON_OFFSET_FILL;
@@ -1742,6 +1790,7 @@ var PS = { };
   exports["texParameteri_"] = $foreign.texParameteri_;
   exports["shaderSource_"] = $foreign.shaderSource_;
   exports["polygonOffset_"] = $foreign.polygonOffset_;
+  exports["pixelStorei_"] = $foreign.pixelStorei_;
   exports["linkProgram_"] = $foreign.linkProgram_;
   exports["lineWidth_"] = $foreign.lineWidth_;
   exports["getUniformLocation_"] = $foreign.getUniformLocation_;
@@ -1750,6 +1799,7 @@ var PS = { };
   exports["getProgramInfoLog_"] = $foreign.getProgramInfoLog_;
   exports["getProgramParameter_"] = $foreign.getProgramParameter_;
   exports["getAttribLocation_"] = $foreign.getAttribLocation_;
+  exports["generateMipmap_"] = $foreign.generateMipmap_;
   exports["frontFace_"] = $foreign.frontFace_;
   exports["framebufferTexture2D_"] = $foreign.framebufferTexture2D_;
   exports["enableVertexAttribArray_"] = $foreign.enableVertexAttribArray_;
@@ -3134,8 +3184,7 @@ var PS = { };
   exports["eqStrMap"] = eqStrMap;
   exports["showStrMap"] = showStrMap;
   exports["keys"] = $foreign.keys;
-  exports["size"] = $foreign.size;
-  exports["empty"] = $foreign.empty;;
+  exports["size"] = $foreign.size;;
  
 })(PS["Data.StrMap"] = PS["Data.StrMap"] || {});
 (function(exports) {
@@ -9226,6 +9275,13 @@ var PS = { };
               {gl.texImage2D(target,level,internalformat,width,height,border,format,type,null);};};};};};};};};};
 
   exports.nullWebGLTexture = null;
+
+  exports.loadImage_ = function(name,continuation)
+     {return function()
+      {var i = new Image();
+       i.src = name;
+       i.onload = continuation (i);
+        };};
  
 })(PS["Util"] = PS["Util"] || {});
 (function(exports) {
@@ -9881,6 +9937,7 @@ var PS = { };
   exports["blendingFactorToGLType"] = blendingFactorToGLType;
   exports["blendEquationToGLType"] = blendEquationToGLType;
   exports["comparisonFunctionToGLType"] = comparisonFunctionToGLType;
+  exports["loadImage_"] = $foreign.loadImage_;
   exports["bufferSubDataArrayBuffer"] = $foreign.bufferSubDataArrayBuffer;
   exports["bufferDataAlloc"] = $foreign.bufferDataAlloc;
   exports["nullWebGLBuffer"] = $foreign.nullWebGLBuffer;
@@ -9977,6 +10034,15 @@ var PS = { };
           return function (v) {
               return Prelude["return"](Control_Monad_Eff.applicativeEff)(Prelude.unit);
           };
+      };
+  };
+  var uniformFTexture2D = function (n) {
+      return function (is) {
+          var $63 = Data_StrMap.lookup(n)(is);
+          if ($63 instanceof Data_Maybe.Just && $63.value0 instanceof Type.SFTexture2D) {
+              return $63.value0.value0;
+          };
+          return nullSetter(n)("FTexture2D");
       };
   };
   var uniformFloat = function (n) {
@@ -10253,6 +10319,7 @@ var PS = { };
       };
   };
   exports["createObjectCommands"] = createObjectCommands;
+  exports["uniformFTexture2D"] = uniformFTexture2D;
   exports["uniformM44F"] = uniformM44F;
   exports["uniformV2F"] = uniformV2F;
   exports["uniformFloat"] = uniformFloat;
@@ -10264,6 +10331,603 @@ var PS = { };
   exports["mkUniform"] = mkUniform;;
  
 })(PS["Input"] = PS["Input"] || {});
+(function(exports) {
+  /* global exports */
+
+  // module Graphics.WebGLTexture
+
+
+      "use strict";
+
+      exports.texImage2D__ = function(target,level,internalformat,format,type,pixels)
+                 {return function()
+                  {gl.texImage2D(target,level,internalformat,format,type,pixels);};};                  
+
+      exports.bindTexture__ = function(target)
+          {return function()
+           {gl.bindTexture(target,null);};};
+ 
+})(PS["Graphics.WebGLTexture"] = PS["Graphics.WebGLTexture"] || {});
+(function(exports) {
+  /* global exports */
+
+  // module Graphics.WebGL
+
+      "use strict";
+
+
+      exports.initGL_ = function (canvasId, attr) {
+              return function() {
+                var canvas = document.getElementById(canvasId);
+                try {
+                  gl = canvas.getContext("webgl", attr) || canvas.getContext("experimental-webgl", attr);
+                }
+                catch(e) {return false;}
+                if (!gl)
+                {
+                  gl = null;
+                  return false;
+                }
+                return true;
+            };
+        };
+
+          exports.getCanvasWidth_ = function(canvasId) {
+            return function() {
+              var canvas = document.getElementById(canvasId);
+              return canvas.width;
+              };
+          };
+
+          exports.getCanvasHeight_ = function(canvasId) {
+            return function() {
+              var canvas = document.getElementById(canvasId);
+              return canvas.height;
+              };
+          };                                          
+ 
+})(PS["Graphics.WebGL"] = PS["Graphics.WebGL"] || {});
+(function(exports) {
+  /* global exports */
+
+  // module Extensions
+
+
+      "use strict";
+
+      exports.fail = function(s) {
+        throw new Error(s);
+      }
+ 
+})(PS["Extensions"] = PS["Extensions"] || {});
+(function(exports) {
+  // Generated by psc version 0.8.0.0
+  "use strict";
+  var $foreign = PS["Extensions"];
+  var Prelude = PS["Prelude"];
+  var Data_Traversable = PS["Data.Traversable"];
+  var Control_Monad_Eff = PS["Control.Monad.Eff"];
+  var Data_Array = PS["Data.Array"];
+  var $$Math = PS["Math"];
+  exports["fail"] = $foreign.fail;;
+ 
+})(PS["Extensions"] = PS["Extensions"] || {});
+(function(exports) {
+  // Generated by psc version 0.8.0.0
+  "use strict";
+  var $foreign = PS["Graphics.WebGL"];
+  var Prelude = PS["Prelude"];
+  var Control_Monad_Eff_WebGL = PS["Control.Monad.Eff.WebGL"];
+  var Graphics_WebGLRaw = PS["Graphics.WebGLRaw"];
+  var Data_ArrayBuffer_Types = PS["Data.ArrayBuffer.Types"];
+  var Data_TypedArray = PS["Data.TypedArray"];
+  var Control_Monad_Eff = PS["Control.Monad.Eff"];
+  var Data_Foldable = PS["Data.Foldable"];
+  var Data_Maybe = PS["Data.Maybe"];
+  var Data_Array_Unsafe = PS["Data.Array.Unsafe"];
+  var Data_Array = PS["Data.Array"];
+  var Data_Either = PS["Data.Either"];
+  var Data_Int_Bits = PS["Data.Int.Bits"];
+  var Data_Function = PS["Data.Function"];
+  var Extensions = PS["Extensions"];
+  var getCanvasWidth = function (context) {
+      return $foreign.getCanvasWidth_(context.canvasName);
+  };
+  var getCanvasHeight = function (context) {
+      return $foreign.getCanvasHeight_(context.canvasName);
+  };
+  var defContextAttributes = {
+      alpha: true, 
+      depth: true, 
+      stencil: false, 
+      antialias: true, 
+      premultipliedAlpha: true, 
+      preserveDrawingBuffer: false, 
+      preferLowPowerToHighPerformance: false, 
+      failIfMajorPerformanceCaveat: false
+  };
+  var runWebGL = function (canvasId) {
+      return function (failure) {
+          return function (success) {
+              var makeContext = {
+                  canvasName: canvasId
+              };
+              return function __do() {
+                  var v = $foreign.initGL_(canvasId, defContextAttributes)();
+                  if (v) {
+                      return Control_Monad_Eff_WebGL.runWebGl_(success(makeContext))();
+                  };
+                  if (!v) {
+                      return failure("Unable to initialize WebGL. Your browser may not support it.")();
+                  };
+                  throw new Error("Failed pattern match at Graphics.WebGL line 149, column 1 - line 150, column 1: " + [ v.constructor.name ]);
+              };
+          };
+      };
+  };
+  exports["getCanvasHeight"] = getCanvasHeight;
+  exports["getCanvasWidth"] = getCanvasWidth;
+  exports["runWebGL"] = runWebGL;
+  exports["defContextAttributes"] = defContextAttributes;;
+ 
+})(PS["Graphics.WebGL"] = PS["Graphics.WebGL"] || {});
+(function(exports) {
+  // Generated by psc version 0.8.0.0
+  "use strict";
+  var $foreign = PS["Graphics.WebGLTexture"];
+  var Prelude = PS["Prelude"];
+  var Control_Monad_Eff_WebGL = PS["Control.Monad.Eff.WebGL"];
+  var Graphics_WebGL = PS["Graphics.WebGL"];
+  var Graphics_WebGLRaw = PS["Graphics.WebGLRaw"];
+  var Data_Int_Bits = PS["Data.Int.Bits"];
+  var Control_Monad_Eff = PS["Control.Monad.Eff"];
+  var Control_Monad = PS["Control.Monad"];
+  var Extensions = PS["Extensions"];
+  var Data_Function = PS["Data.Function"];
+  var UNSIGNED_BYTE = (function () {
+      function UNSIGNED_BYTE() {
+
+      };
+      UNSIGNED_BYTE.value = new UNSIGNED_BYTE();
+      return UNSIGNED_BYTE;
+  })();
+  var RGBA = (function () {
+      function RGBA() {
+
+      };
+      RGBA.value = new RGBA();
+      return RGBA;
+  })();
+  var FLOAT = (function () {
+      function FLOAT() {
+
+      };
+      FLOAT.value = new FLOAT();
+      return FLOAT;
+  })();
+  var UNSIGNED_SHORT_5_6_5 = (function () {
+      function UNSIGNED_SHORT_5_6_5() {
+
+      };
+      UNSIGNED_SHORT_5_6_5.value = new UNSIGNED_SHORT_5_6_5();
+      return UNSIGNED_SHORT_5_6_5;
+  })();
+  var UNSIGNED_SHORT_4_4_4_4 = (function () {
+      function UNSIGNED_SHORT_4_4_4_4() {
+
+      };
+      UNSIGNED_SHORT_4_4_4_4.value = new UNSIGNED_SHORT_4_4_4_4();
+      return UNSIGNED_SHORT_4_4_4_4;
+  })();
+  var UNSIGNED_SHORT_5_5_5_1 = (function () {
+      function UNSIGNED_SHORT_5_5_5_1() {
+
+      };
+      UNSIGNED_SHORT_5_5_5_1.value = new UNSIGNED_SHORT_5_5_5_1();
+      return UNSIGNED_SHORT_5_5_5_1;
+  })();
+  var TTEXTURE_2D = (function () {
+      function TTEXTURE_2D() {
+
+      };
+      TTEXTURE_2D.value = new TTEXTURE_2D();
+      return TTEXTURE_2D;
+  })();
+  var TTEXTURE_CUBE_MAP = (function () {
+      function TTEXTURE_CUBE_MAP() {
+
+      };
+      TTEXTURE_CUBE_MAP.value = new TTEXTURE_CUBE_MAP();
+      return TTEXTURE_CUBE_MAP;
+  })();
+  var TEXTURE_MIN_FILTER = (function () {
+      function TEXTURE_MIN_FILTER() {
+
+      };
+      TEXTURE_MIN_FILTER.value = new TEXTURE_MIN_FILTER();
+      return TEXTURE_MIN_FILTER;
+  })();
+  var TEXTURE_MAG_FILTER = (function () {
+      function TEXTURE_MAG_FILTER() {
+
+      };
+      TEXTURE_MAG_FILTER.value = new TEXTURE_MAG_FILTER();
+      return TEXTURE_MAG_FILTER;
+  })();
+  var TEXTURE_WRAP_S = (function () {
+      function TEXTURE_WRAP_S() {
+
+      };
+      TEXTURE_WRAP_S.value = new TEXTURE_WRAP_S();
+      return TEXTURE_WRAP_S;
+  })();
+  var TEXTURE_WRAP_T = (function () {
+      function TEXTURE_WRAP_T() {
+
+      };
+      TEXTURE_WRAP_T.value = new TEXTURE_WRAP_T();
+      return TEXTURE_WRAP_T;
+  })();
+  var NEAREST = (function () {
+      function NEAREST() {
+
+      };
+      NEAREST.value = new NEAREST();
+      return NEAREST;
+  })();
+  var LINEAR = (function () {
+      function LINEAR() {
+
+      };
+      LINEAR.value = new LINEAR();
+      return LINEAR;
+  })();
+  var MIPMAP = (function () {
+      function MIPMAP() {
+
+      };
+      MIPMAP.value = new MIPMAP();
+      return MIPMAP;
+  })();
+  var TEXTURE_2D = (function () {
+      function TEXTURE_2D() {
+
+      };
+      TEXTURE_2D.value = new TEXTURE_2D();
+      return TEXTURE_2D;
+  })();
+  var TEXTURE_CUBE_MAP_POSITIVE_X = (function () {
+      function TEXTURE_CUBE_MAP_POSITIVE_X() {
+
+      };
+      TEXTURE_CUBE_MAP_POSITIVE_X.value = new TEXTURE_CUBE_MAP_POSITIVE_X();
+      return TEXTURE_CUBE_MAP_POSITIVE_X;
+  })();
+  var TEXTURE_CUBE_MAP_NEGATIVE_X = (function () {
+      function TEXTURE_CUBE_MAP_NEGATIVE_X() {
+
+      };
+      TEXTURE_CUBE_MAP_NEGATIVE_X.value = new TEXTURE_CUBE_MAP_NEGATIVE_X();
+      return TEXTURE_CUBE_MAP_NEGATIVE_X;
+  })();
+  var TEXTURE_CUBE_MAP_POSITIVE_Y = (function () {
+      function TEXTURE_CUBE_MAP_POSITIVE_Y() {
+
+      };
+      TEXTURE_CUBE_MAP_POSITIVE_Y.value = new TEXTURE_CUBE_MAP_POSITIVE_Y();
+      return TEXTURE_CUBE_MAP_POSITIVE_Y;
+  })();
+  var TEXTURE_CUBE_MAP_NEGATIVE_Y = (function () {
+      function TEXTURE_CUBE_MAP_NEGATIVE_Y() {
+
+      };
+      TEXTURE_CUBE_MAP_NEGATIVE_Y.value = new TEXTURE_CUBE_MAP_NEGATIVE_Y();
+      return TEXTURE_CUBE_MAP_NEGATIVE_Y;
+  })();
+  var TEXTURE_CUBE_MAP_POSITIVE_Z = (function () {
+      function TEXTURE_CUBE_MAP_POSITIVE_Z() {
+
+      };
+      TEXTURE_CUBE_MAP_POSITIVE_Z.value = new TEXTURE_CUBE_MAP_POSITIVE_Z();
+      return TEXTURE_CUBE_MAP_POSITIVE_Z;
+  })();
+  var TEXTURE_CUBE_MAP_NEGATIVE_Z = (function () {
+      function TEXTURE_CUBE_MAP_NEGATIVE_Z() {
+
+      };
+      TEXTURE_CUBE_MAP_NEGATIVE_Z.value = new TEXTURE_CUBE_MAP_NEGATIVE_Z();
+      return TEXTURE_CUBE_MAP_NEGATIVE_Z;
+  })();
+  var PACK_ALIGNMENT = (function () {
+      function PACK_ALIGNMENT() {
+
+      };
+      PACK_ALIGNMENT.value = new PACK_ALIGNMENT();
+      return PACK_ALIGNMENT;
+  })();
+  var UNPACK_ALIGNMENT = (function () {
+      function UNPACK_ALIGNMENT() {
+
+      };
+      UNPACK_ALIGNMENT.value = new UNPACK_ALIGNMENT();
+      return UNPACK_ALIGNMENT;
+  })();
+  var UNPACK_FLIP_Y_WEBGL = (function () {
+      function UNPACK_FLIP_Y_WEBGL() {
+
+      };
+      UNPACK_FLIP_Y_WEBGL.value = new UNPACK_FLIP_Y_WEBGL();
+      return UNPACK_FLIP_Y_WEBGL;
+  })();
+  var UNPACK_PREMULTIPLY_ALPHA_WEBGL = (function () {
+      function UNPACK_PREMULTIPLY_ALPHA_WEBGL() {
+
+      };
+      UNPACK_PREMULTIPLY_ALPHA_WEBGL.value = new UNPACK_PREMULTIPLY_ALPHA_WEBGL();
+      return UNPACK_PREMULTIPLY_ALPHA_WEBGL;
+  })();
+  var UNPACK_COLORSPACE_CONVERSION_WEBGL = (function () {
+      function UNPACK_COLORSPACE_CONVERSION_WEBGL() {
+
+      };
+      UNPACK_COLORSPACE_CONVERSION_WEBGL.value = new UNPACK_COLORSPACE_CONVERSION_WEBGL();
+      return UNPACK_COLORSPACE_CONVERSION_WEBGL;
+  })();
+  var IF_ALPHA = (function () {
+      function IF_ALPHA() {
+
+      };
+      IF_ALPHA.value = new IF_ALPHA();
+      return IF_ALPHA;
+  })();
+  var IF_LUMINANCE = (function () {
+      function IF_LUMINANCE() {
+
+      };
+      IF_LUMINANCE.value = new IF_LUMINANCE();
+      return IF_LUMINANCE;
+  })();
+  var IF_LUMINANCE_ALPHA = (function () {
+      function IF_LUMINANCE_ALPHA() {
+
+      };
+      IF_LUMINANCE_ALPHA.value = new IF_LUMINANCE_ALPHA();
+      return IF_LUMINANCE_ALPHA;
+  })();
+  var IF_RGB = (function () {
+      function IF_RGB() {
+
+      };
+      IF_RGB.value = new IF_RGB();
+      return IF_RGB;
+  })();
+  var IF_RGBA = (function () {
+      function IF_RGBA() {
+
+      };
+      IF_RGBA.value = new IF_RGBA();
+      return IF_RGBA;
+  })();                                                              
+  var textureTypeToConst = function (v) {
+      if (v instanceof UNSIGNED_BYTE) {
+          return Graphics_WebGLRaw._UNSIGNED_BYTE;
+      };
+      if (v instanceof RGBA) {
+          return Graphics_WebGLRaw._RGBA;
+      };
+      if (v instanceof FLOAT) {
+          return Graphics_WebGLRaw._FLOAT;
+      };
+      if (v instanceof UNSIGNED_SHORT_5_6_5) {
+          return Graphics_WebGLRaw._UNSIGNED_SHORT_5_6_5;
+      };
+      if (v instanceof UNSIGNED_SHORT_4_4_4_4) {
+          return Graphics_WebGLRaw._UNSIGNED_SHORT_4_4_4_4;
+      };
+      if (v instanceof UNSIGNED_SHORT_5_5_5_1) {
+          return Graphics_WebGLRaw._UNSIGNED_SHORT_5_5_5_1;
+      };
+      throw new Error("Failed pattern match at Graphics.WebGLTexture line 91, column 1 - line 92, column 1: " + [ v.constructor.name ]);
+  };
+  var texTargetToConst = function (v) {
+      if (v instanceof TTEXTURE_2D) {
+          return Graphics_WebGLRaw._TEXTURE_2D;
+      };
+      if (v instanceof TTEXTURE_CUBE_MAP) {
+          return Graphics_WebGLRaw._TEXTURE_CUBE_MAP;
+      };
+      throw new Error("Failed pattern match at Graphics.WebGLTexture line 117, column 1 - line 118, column 1: " + [ v.constructor.name ]);
+  };
+  var texParNameToConst = function (v) {
+      if (v instanceof TEXTURE_MIN_FILTER) {
+          return Graphics_WebGLRaw._TEXTURE_MIN_FILTER;
+      };
+      if (v instanceof TEXTURE_MAG_FILTER) {
+          return Graphics_WebGLRaw._TEXTURE_MAG_FILTER;
+      };
+      if (v instanceof TEXTURE_WRAP_S) {
+          return Graphics_WebGLRaw._TEXTURE_WRAP_S;
+      };
+      if (v instanceof TEXTURE_WRAP_T) {
+          return Graphics_WebGLRaw._TEXTURE_WRAP_T;
+      };
+      throw new Error("Failed pattern match at Graphics.WebGLTexture line 128, column 1 - line 129, column 1: " + [ v.constructor.name ]);
+  };
+  var texParameteri = function (target) {
+      return function (pname) {
+          return function (param) {
+              return Graphics_WebGLRaw.texParameteri_(texTargetToConst(target), texParNameToConst(pname), param);
+          };
+      };
+  };
+  var texFilterSpecToMinConst = function (v) {
+      if (v instanceof NEAREST) {
+          return Graphics_WebGLRaw._NEAREST;
+      };
+      if (v instanceof LINEAR) {
+          return Graphics_WebGLRaw._LINEAR;
+      };
+      if (v instanceof MIPMAP) {
+          return Graphics_WebGLRaw._LINEAR_MIPMAP_NEAREST;
+      };
+      throw new Error("Failed pattern match at Graphics.WebGLTexture line 145, column 1 - line 146, column 1: " + [ v.constructor.name ]);
+  };
+  var texFilterSpecToMagConst = function (v) {
+      if (v instanceof NEAREST) {
+          return Graphics_WebGLRaw._NEAREST;
+      };
+      if (v instanceof LINEAR) {
+          return Graphics_WebGLRaw._LINEAR;
+      };
+      if (v instanceof MIPMAP) {
+          return Graphics_WebGLRaw._LINEAR;
+      };
+      throw new Error("Failed pattern match at Graphics.WebGLTexture line 140, column 1 - line 141, column 1: " + [ v.constructor.name ]);
+  };
+  var targetTypeToConst = function (v) {
+      if (v instanceof TEXTURE_2D) {
+          return Graphics_WebGLRaw._TEXTURE_2D;
+      };
+      if (v instanceof TEXTURE_CUBE_MAP_POSITIVE_X) {
+          return Graphics_WebGLRaw._TEXTURE_CUBE_MAP_POSITIVE_X;
+      };
+      if (v instanceof TEXTURE_CUBE_MAP_NEGATIVE_X) {
+          return Graphics_WebGLRaw._TEXTURE_CUBE_MAP_NEGATIVE_X;
+      };
+      if (v instanceof TEXTURE_CUBE_MAP_POSITIVE_Y) {
+          return Graphics_WebGLRaw._TEXTURE_CUBE_MAP_POSITIVE_Y;
+      };
+      if (v instanceof TEXTURE_CUBE_MAP_NEGATIVE_Y) {
+          return Graphics_WebGLRaw._TEXTURE_CUBE_MAP_NEGATIVE_Y;
+      };
+      if (v instanceof TEXTURE_CUBE_MAP_POSITIVE_Z) {
+          return Graphics_WebGLRaw._TEXTURE_CUBE_MAP_POSITIVE_Z;
+      };
+      if (v instanceof TEXTURE_CUBE_MAP_NEGATIVE_Z) {
+          return Graphics_WebGLRaw._TEXTURE_CUBE_MAP_NEGATIVE_Z;
+      };
+      throw new Error("Failed pattern match at Graphics.WebGLTexture line 60, column 1 - line 61, column 1: " + [ v.constructor.name ]);
+  };
+  var unbindTexture = function (tt) {
+      return $foreign.bindTexture__(targetTypeToConst(tt));
+  };
+  var symbolicParameterToConst = function (v) {
+      if (v instanceof PACK_ALIGNMENT) {
+          return Graphics_WebGLRaw._PACK_ALIGNMENT;
+      };
+      if (v instanceof UNPACK_ALIGNMENT) {
+          return Graphics_WebGLRaw._UNPACK_ALIGNMENT;
+      };
+      if (v instanceof UNPACK_FLIP_Y_WEBGL) {
+          return Graphics_WebGLRaw._UNPACK_FLIP_Y_WEBGL;
+      };
+      if (v instanceof UNPACK_PREMULTIPLY_ALPHA_WEBGL) {
+          return Graphics_WebGLRaw._UNPACK_PREMULTIPLY_ALPHA_WEBGL;
+      };
+      if (v instanceof UNPACK_COLORSPACE_CONVERSION_WEBGL) {
+          return Graphics_WebGLRaw._UNPACK_COLORSPACE_CONVERSION_WEBGL;
+      };
+      throw new Error("Failed pattern match at Graphics.WebGLTexture line 106, column 1 - line 107, column 1: " + [ v.constructor.name ]);
+  };
+  var pixelStorei = function (symbolicParameter) {
+      return function (num) {
+          return Graphics_WebGLRaw.pixelStorei_(symbolicParameterToConst(symbolicParameter), num);
+      };
+  };
+  var internalFormatToConst = function (v) {
+      if (v instanceof IF_ALPHA) {
+          return Graphics_WebGLRaw._ALPHA;
+      };
+      if (v instanceof IF_LUMINANCE) {
+          return Graphics_WebGLRaw._LUMINANCE;
+      };
+      if (v instanceof IF_LUMINANCE_ALPHA) {
+          return Graphics_WebGLRaw._LUMINANCE_ALPHA;
+      };
+      if (v instanceof IF_RGB) {
+          return Graphics_WebGLRaw._RGB;
+      };
+      if (v instanceof IF_RGBA) {
+          return Graphics_WebGLRaw._RGBA;
+      };
+      throw new Error("Failed pattern match at Graphics.WebGLTexture line 76, column 1 - line 77, column 1: " + [ v.constructor.name ]);
+  };
+  var texImage2D = function (target) {
+      return function (level) {
+          return function (internalFormat) {
+              return function (format) {
+                  return function (typ) {
+                      return function (pixels) {
+                          return $foreign.texImage2D__(targetTypeToConst(target), level, internalFormatToConst(internalFormat), internalFormatToConst(format), textureTypeToConst(typ), pixels);
+                      };
+                  };
+              };
+          };
+      };
+  };
+  var bindTexture = function (tt) {
+      return function (v) {
+          return Graphics_WebGLRaw.bindTexture_(targetTypeToConst(tt), v);
+      };
+  };
+  var handleLoad2D = function (texture) {
+      return function (filterSpec) {
+          return function (whatever) {
+              return function __do() {
+                  bindTexture(TEXTURE_2D.value)(texture)();
+                  pixelStorei(UNPACK_FLIP_Y_WEBGL.value)(1)();
+                  texImage2D(TEXTURE_2D.value)(0)(IF_RGBA.value)(IF_RGBA.value)(UNSIGNED_BYTE.value)(whatever)();
+                  texParameteri(TTEXTURE_2D.value)(TEXTURE_MAG_FILTER.value)(texFilterSpecToMagConst(filterSpec))();
+                  texParameteri(TTEXTURE_2D.value)(TEXTURE_MIN_FILTER.value)(texFilterSpecToMinConst(filterSpec))();
+                  (function () {
+                      if (filterSpec instanceof MIPMAP) {
+                          return Graphics_WebGLRaw.generateMipmap_(Graphics_WebGLRaw._TEXTURE_2D);
+                      };
+                      return Prelude["return"](Control_Monad_Eff.applicativeEff)(Prelude.unit);
+                  })()();
+                  return unbindTexture(TEXTURE_2D.value)();
+              };
+          };
+      };
+  };
+  exports["NEAREST"] = NEAREST;
+  exports["LINEAR"] = LINEAR;
+  exports["MIPMAP"] = MIPMAP;
+  exports["TEXTURE_MIN_FILTER"] = TEXTURE_MIN_FILTER;
+  exports["TEXTURE_MAG_FILTER"] = TEXTURE_MAG_FILTER;
+  exports["TEXTURE_WRAP_S"] = TEXTURE_WRAP_S;
+  exports["TEXTURE_WRAP_T"] = TEXTURE_WRAP_T;
+  exports["TTEXTURE_2D"] = TTEXTURE_2D;
+  exports["TTEXTURE_CUBE_MAP"] = TTEXTURE_CUBE_MAP;
+  exports["PACK_ALIGNMENT"] = PACK_ALIGNMENT;
+  exports["UNPACK_ALIGNMENT"] = UNPACK_ALIGNMENT;
+  exports["UNPACK_FLIP_Y_WEBGL"] = UNPACK_FLIP_Y_WEBGL;
+  exports["UNPACK_PREMULTIPLY_ALPHA_WEBGL"] = UNPACK_PREMULTIPLY_ALPHA_WEBGL;
+  exports["UNPACK_COLORSPACE_CONVERSION_WEBGL"] = UNPACK_COLORSPACE_CONVERSION_WEBGL;
+  exports["UNSIGNED_BYTE"] = UNSIGNED_BYTE;
+  exports["RGBA"] = RGBA;
+  exports["FLOAT"] = FLOAT;
+  exports["UNSIGNED_SHORT_5_6_5"] = UNSIGNED_SHORT_5_6_5;
+  exports["UNSIGNED_SHORT_4_4_4_4"] = UNSIGNED_SHORT_4_4_4_4;
+  exports["UNSIGNED_SHORT_5_5_5_1"] = UNSIGNED_SHORT_5_5_5_1;
+  exports["IF_ALPHA"] = IF_ALPHA;
+  exports["IF_LUMINANCE"] = IF_LUMINANCE;
+  exports["IF_LUMINANCE_ALPHA"] = IF_LUMINANCE_ALPHA;
+  exports["IF_RGB"] = IF_RGB;
+  exports["IF_RGBA"] = IF_RGBA;
+  exports["TEXTURE_2D"] = TEXTURE_2D;
+  exports["TEXTURE_CUBE_MAP_POSITIVE_X"] = TEXTURE_CUBE_MAP_POSITIVE_X;
+  exports["TEXTURE_CUBE_MAP_NEGATIVE_X"] = TEXTURE_CUBE_MAP_NEGATIVE_X;
+  exports["TEXTURE_CUBE_MAP_POSITIVE_Y"] = TEXTURE_CUBE_MAP_POSITIVE_Y;
+  exports["TEXTURE_CUBE_MAP_NEGATIVE_Y"] = TEXTURE_CUBE_MAP_NEGATIVE_Y;
+  exports["TEXTURE_CUBE_MAP_POSITIVE_Z"] = TEXTURE_CUBE_MAP_POSITIVE_Z;
+  exports["TEXTURE_CUBE_MAP_NEGATIVE_Z"] = TEXTURE_CUBE_MAP_NEGATIVE_Z;
+  exports["targetTypeToConst"] = targetTypeToConst;
+  exports["handleLoad2D"] = handleLoad2D;
+  exports["unbindTexture"] = unbindTexture;
+  exports["bindTexture"] = bindTexture;;
+ 
+})(PS["Graphics.WebGLTexture"] = PS["Graphics.WebGLTexture"] || {});
 (function(exports) {
   // Generated by psc version 0.8.0.0
   "use strict";
@@ -10283,7 +10947,20 @@ var PS = { };
   var IR = PS["IR"];
   var LinearBase = PS["LinearBase"];
   var Type = PS["Type"];
-  var Util = PS["Util"];
+  var Util = PS["Util"];     
+  var uploadTexture2DToGPU = function (name) {
+      return function (action) {
+          return function __do() {
+              var v = Graphics_WebGLRaw.createTexture_()();
+              return Util.loadImage_(name, function (image) {
+                  return function __do() {
+                      Graphics_WebGLTexture.handleLoad2D(v)(Graphics_WebGLTexture.MIPMAP.value)(image)();
+                      return action(new Type.TextureData(v))();
+                  };
+              })();
+          };
+      };
+  };
   var compileBuffer = function (arrs) {
       var offsets = Prelude.append(Prelude.semigroupArray)([ 0 ])(Data_Traversable.scanl(Data_Traversable.traversableArray)(function (s) {
           return function (v) {
@@ -10347,6 +11024,7 @@ var PS = { };
           };
       };
   };
+  exports["uploadTexture2DToGPU"] = uploadTexture2DToGPU;
   exports["compileBuffer"] = compileBuffer;;
  
 })(PS["Data"] = PS["Data"] || {});
@@ -10968,65 +11646,63 @@ var PS = { };
           };
       };
   };
-  var compileProgram = function (uniTrie) {
-      return function (v) {
-          return function __do() {
-              var v1 = Graphics_WebGLRaw.createProgram_()();
-              var createAndAttach = function (src) {
-                  return function (t) {
-                      return function __do() {
-                          var v2 = Graphics_WebGLRaw.createShader_(t)();
-                          Graphics_WebGLRaw.shaderSource_(v2, src)();
-                          Graphics_WebGLRaw.compileShader_(v2)();
-                          var v3 = Graphics_WebGLRaw.getShaderInfoLog_(v2)();
-                          Control_Monad_Eff_Console.log(v3)();
-                          var v4 = Graphics_WebGLRaw.getShaderParameter_(v2, Graphics_WebGLRaw._COMPILE_STATUS)();
-                          Control_Monad.when(Control_Monad_Eff.monadEff)(v4 !== true)(Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("compileShader failed!")))();
-                          Graphics_WebGLRaw.attachShader_(v1, v2)();
-                          return v2;
-                      };
+  var compileProgram = function (v) {
+      return function __do() {
+          var v1 = Graphics_WebGLRaw.createProgram_()();
+          var createAndAttach = function (src) {
+              return function (t) {
+                  return function __do() {
+                      var v2 = Graphics_WebGLRaw.createShader_(t)();
+                      Graphics_WebGLRaw.shaderSource_(v2, src)();
+                      Graphics_WebGLRaw.compileShader_(v2)();
+                      var v3 = Graphics_WebGLRaw.getShaderInfoLog_(v2)();
+                      Control_Monad_Eff_Console.log(v3)();
+                      var v4 = Graphics_WebGLRaw.getShaderParameter_(v2, Graphics_WebGLRaw._COMPILE_STATUS)();
+                      Control_Monad.when(Control_Monad_Eff.monadEff)(v4 !== true)(Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("compileShader failed!")))();
+                      Graphics_WebGLRaw.attachShader_(v1, v2)();
+                      return v2;
                   };
               };
-              var v2 = createAndAttach(v.value0.vertexShader)(Graphics_WebGLRaw._VERTEX_SHADER)();
-              var v3 = createAndAttach(v.value0.fragmentShader)(Graphics_WebGLRaw._FRAGMENT_SHADER)();
-              Graphics_WebGLRaw.linkProgram_(v1)();
-              var v4 = Graphics_WebGLRaw.getProgramInfoLog_(v1)();
-              Control_Monad_Eff_Console.log(v4)();
-              var v5 = Graphics_WebGLRaw.getProgramParameter_(v1, Graphics_WebGLRaw._LINK_STATUS)();
-              Control_Monad.when(Control_Monad_Eff.monadEff)(v5 !== true)(Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("link program failed!")))();
-              var v6 = Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_StrMap.fromList)(Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_List.traversableList)(Data_StrMap.toList(v.value0.programUniforms))(function (v6) {
-                  return function __do() {
-                      var v7 = Graphics_WebGLRaw.getUniformLocation_(v1, v6.value0)();
-                      return new Data_Tuple.Tuple(v6.value0, v7);
-                  };
-              }))();
-              var v7 = Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_StrMap.fromList)(Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_List.traversableList)(Data_StrMap.toList(v.value0.programInTextures))(function (v7) {
-                  return function __do() {
-                      var v8 = Graphics_WebGLRaw.getUniformLocation_(v1, v7.value0)();
-                      return new Data_Tuple.Tuple(v7.value0, v8);
-                  };
-              }))();
-              var v8 = Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_StrMap.fromList)(Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_List.traversableList)(Data_StrMap.toList(v.value0.programStreams))(function (v8) {
-                  return function __do() {
-                      var v9 = Graphics_WebGLRaw.getAttribLocation_(v1, v8.value0)();
-                      Control_Monad_Eff_Console.log("attrib location " + (v8.value0 + (" " + Prelude.show(Prelude.showInt)(v9))))();
-                      return new Data_Tuple.Tuple(v8.value0, {
-                          location: v9, 
-                          slotAttribute: v8.value1.value0.name
-                      });
-                  };
-              }))();
-              var texUnis = Data_Array.filter(function (n) {
-                  return Data_StrMap.member(n)(uniTrie);
-              })(Data_StrMap.keys(v7));
-              return {
-                  program: v1, 
-                  shaders: [ v2, v3 ], 
-                  inputUniforms: v6, 
-                  inputSamplers: v7, 
-                  inputStreams: v8, 
-                  inputTextureUniforms: texUnis
+          };
+          var v2 = createAndAttach(v.value0.vertexShader)(Graphics_WebGLRaw._VERTEX_SHADER)();
+          var v3 = createAndAttach(v.value0.fragmentShader)(Graphics_WebGLRaw._FRAGMENT_SHADER)();
+          Graphics_WebGLRaw.linkProgram_(v1)();
+          var v4 = Graphics_WebGLRaw.getProgramInfoLog_(v1)();
+          Control_Monad_Eff_Console.log(v4)();
+          var v5 = Graphics_WebGLRaw.getProgramParameter_(v1, Graphics_WebGLRaw._LINK_STATUS)();
+          Control_Monad.when(Control_Monad_Eff.monadEff)(v5 !== true)(Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("link program failed!")))();
+          var v6 = Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_StrMap.fromList)(Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_List.traversableList)(Data_StrMap.toList(v.value0.programUniforms))(function (v6) {
+              return function __do() {
+                  var v7 = Graphics_WebGLRaw.getUniformLocation_(v1, v6.value0)();
+                  return new Data_Tuple.Tuple(v6.value0, v7);
               };
+          }))();
+          var v7 = Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_StrMap.fromList)(Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_List.traversableList)(Data_StrMap.toList(v.value0.programInTextures))(function (v7) {
+              return function __do() {
+                  var v8 = Graphics_WebGLRaw.getUniformLocation_(v1, v7.value0)();
+                  return new Data_Tuple.Tuple(v7.value0, v8);
+              };
+          }))();
+          var v8 = Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_StrMap.fromList)(Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_List.traversableList)(Data_StrMap.toList(v.value0.programStreams))(function (v8) {
+              return function __do() {
+                  var v9 = Graphics_WebGLRaw.getAttribLocation_(v1, v8.value0)();
+                  Control_Monad_Eff_Console.log("attrib location " + (v8.value0 + (" " + Prelude.show(Prelude.showInt)(v9))))();
+                  return new Data_Tuple.Tuple(v8.value0, {
+                      location: v9, 
+                      slotAttribute: v8.value1.value0.name
+                  });
+              };
+          }))();
+          var texUnis = Data_Array.filter(function (n) {
+              return Data_StrMap.member(n)(v.value0.programUniforms);
+          })(Data_StrMap.keys(v7));
+          return {
+              program: v1, 
+              shaders: [ v2, v3 ], 
+              inputUniforms: v6, 
+              inputSamplers: v7, 
+              inputStreams: v8, 
+              inputTextureUniforms: texUnis
           };
       };
   };
@@ -11116,22 +11792,22 @@ var PS = { };
                           return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("invalid pipeline, no active program"))();
                       };
                       if (cp instanceof Data_Maybe.Just) {
-                          var $374 = Data_StrMap.lookup(cmd.value0)((p.programs[cp.value0]).inputSamplers);
-                          if ($374 instanceof Data_Maybe.Nothing) {
+                          var $373 = Data_StrMap.lookup(cmd.value0)((p.programs[cp.value0]).inputSamplers);
+                          if ($373 instanceof Data_Maybe.Nothing) {
                               return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("internal error (SetSamplerUniform)!"))();
                           };
-                          if ($374 instanceof Data_Maybe.Just) {
-                              var $375 = Data_StrMap.lookup(cmd.value0)(p.texUnitMapping);
-                              if ($375 instanceof Data_Maybe.Nothing) {
+                          if ($373 instanceof Data_Maybe.Just) {
+                              var $374 = Data_StrMap.lookup(cmd.value0)(p.texUnitMapping);
+                              if ($374 instanceof Data_Maybe.Nothing) {
                                   return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("internal error (SetSamplerUniform)!"))();
                               };
-                              if ($375 instanceof Data_Maybe.Just) {
-                                  Control_Monad_Eff_Ref.writeRef($375.value0)(cmd.value1)();
-                                  return Graphics_WebGLRaw.uniform1i_($374.value0, cmd.value1)();
+                              if ($374 instanceof Data_Maybe.Just) {
+                                  Control_Monad_Eff_Ref.writeRef($374.value0)(cmd.value1)();
+                                  return Graphics_WebGLRaw.uniform1i_($373.value0, cmd.value1)();
                               };
-                              throw new Error("Failed pattern match at Backend line 415, column 1 - line 416, column 1: " + [ $375.constructor.name ]);
+                              throw new Error("Failed pattern match at Backend line 415, column 1 - line 416, column 1: " + [ $374.constructor.name ]);
                           };
-                          throw new Error("Failed pattern match at Backend line 415, column 1 - line 416, column 1: " + [ $374.constructor.name ]);
+                          throw new Error("Failed pattern match at Backend line 415, column 1 - line 416, column 1: " + [ $373.constructor.name ]);
                       };
                       throw new Error("Failed pattern match at Backend line 415, column 1 - line 416, column 1: " + [ cp.constructor.name ]);
                   };
@@ -11197,7 +11873,7 @@ var PS = { };
           Graphics_WebGLRaw.getExtension_("WEBGL_depth_texture")();
           var v1 = Data_Traversable.traverse(Data_Traversable.traversableArray)(Control_Monad_Eff.applicativeEff)(Util.compileTexture)(v.value0.textures)();
           var v2 = Data_Traversable.traverse(Data_Traversable.traversableArray)(Control_Monad_Eff.applicativeEff)(compileRenderTarget(v.value0.textures)(v1))(v.value0.targets)();
-          var v3 = Data_Traversable.traverse(Data_Traversable.traversableArray)(Control_Monad_Eff.applicativeEff)(compileProgram(Data_StrMap.empty))(v.value0.programs)();
+          var v3 = Data_Traversable.traverse(Data_Traversable.traversableArray)(Control_Monad_Eff.applicativeEff)(compileProgram)(v.value0.programs)();
           var v4 = Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_StrMap.fromFoldable(Data_Foldable.foldableArray))(Data_Traversable.traverse(Data_Traversable.traversableArray)(Control_Monad_Eff.applicativeEff)(function (k) {
               return Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_Tuple.Tuple.create(k))(Control_Monad_Eff_Ref.newRef(0));
           })(Data_Array.nub(Prelude.eqString)(Data_Array.concatMap(function (v4) {
@@ -11338,31 +12014,6 @@ var PS = { };
   exports["jsonParser"] = jsonParser;;
  
 })(PS["Data.Argonaut.Parser"] = PS["Data.Argonaut.Parser"] || {});
-(function(exports) {
-  /* global exports */
-
-  // module Extensions
-
-
-      "use strict";
-
-      exports.fail = function(s) {
-        throw new Error(s);
-      }
- 
-})(PS["Extensions"] = PS["Extensions"] || {});
-(function(exports) {
-  // Generated by psc version 0.8.0.0
-  "use strict";
-  var $foreign = PS["Extensions"];
-  var Prelude = PS["Prelude"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Control_Monad_Eff = PS["Control.Monad.Eff"];
-  var Data_Array = PS["Data.Array"];
-  var $$Math = PS["Math"];
-  exports["fail"] = $foreign.fail;;
- 
-})(PS["Extensions"] = PS["Extensions"] || {});
 (function(exports) {
   // Generated by psc version 0.8.0.0
   "use strict";
@@ -11572,104 +12223,6 @@ var PS = { };
   exports["makeFrustum"] = makeFrustum;;
  
 })(PS["Data.Matrix4"] = PS["Data.Matrix4"] || {});
-(function(exports) {
-  /* global exports */
-
-  // module Graphics.WebGL
-
-      "use strict";
-
-
-      exports.initGL_ = function (canvasId, attr) {
-              return function() {
-                var canvas = document.getElementById(canvasId);
-                try {
-                  gl = canvas.getContext("webgl", attr) || canvas.getContext("experimental-webgl", attr);
-                }
-                catch(e) {return false;}
-                if (!gl)
-                {
-                  gl = null;
-                  return false;
-                }
-                return true;
-            };
-        };
-
-          exports.getCanvasWidth_ = function(canvasId) {
-            return function() {
-              var canvas = document.getElementById(canvasId);
-              return canvas.width;
-              };
-          };
-
-          exports.getCanvasHeight_ = function(canvasId) {
-            return function() {
-              var canvas = document.getElementById(canvasId);
-              return canvas.height;
-              };
-          };                                          
- 
-})(PS["Graphics.WebGL"] = PS["Graphics.WebGL"] || {});
-(function(exports) {
-  // Generated by psc version 0.8.0.0
-  "use strict";
-  var $foreign = PS["Graphics.WebGL"];
-  var Prelude = PS["Prelude"];
-  var Control_Monad_Eff_WebGL = PS["Control.Monad.Eff.WebGL"];
-  var Graphics_WebGLRaw = PS["Graphics.WebGLRaw"];
-  var Data_ArrayBuffer_Types = PS["Data.ArrayBuffer.Types"];
-  var Data_TypedArray = PS["Data.TypedArray"];
-  var Control_Monad_Eff = PS["Control.Monad.Eff"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Array_Unsafe = PS["Data.Array.Unsafe"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Int_Bits = PS["Data.Int.Bits"];
-  var Data_Function = PS["Data.Function"];
-  var Extensions = PS["Extensions"];
-  var getCanvasWidth = function (context) {
-      return $foreign.getCanvasWidth_(context.canvasName);
-  };
-  var getCanvasHeight = function (context) {
-      return $foreign.getCanvasHeight_(context.canvasName);
-  };
-  var defContextAttributes = {
-      alpha: true, 
-      depth: true, 
-      stencil: false, 
-      antialias: true, 
-      premultipliedAlpha: true, 
-      preserveDrawingBuffer: false, 
-      preferLowPowerToHighPerformance: false, 
-      failIfMajorPerformanceCaveat: false
-  };
-  var runWebGL = function (canvasId) {
-      return function (failure) {
-          return function (success) {
-              var makeContext = {
-                  canvasName: canvasId
-              };
-              return function __do() {
-                  var v = $foreign.initGL_(canvasId, defContextAttributes)();
-                  if (v) {
-                      return Control_Monad_Eff_WebGL.runWebGl_(success(makeContext))();
-                  };
-                  if (!v) {
-                      return failure("Unable to initialize WebGL. Your browser may not support it.")();
-                  };
-                  throw new Error("Failed pattern match at Graphics.WebGL line 149, column 1 - line 150, column 1: " + [ v.constructor.name ]);
-              };
-          };
-      };
-  };
-  exports["getCanvasHeight"] = getCanvasHeight;
-  exports["getCanvasWidth"] = getCanvasWidth;
-  exports["runWebGL"] = runWebGL;
-  exports["defContextAttributes"] = defContextAttributes;;
- 
-})(PS["Graphics.WebGL"] = PS["Graphics.WebGL"] || {});
 (function(exports) {
   /* global exports */
   "use strict";
@@ -12520,6 +13073,7 @@ var PS = { };
   var Mesh = PS["Mesh"];
   var Type = PS["Type"];
   var Input = PS["Input"];
+  var Data = PS["Data"];
   var Data_Argonaut_Parser = PS["Data.Argonaut.Parser"];
   var Data_Argonaut_Decode = PS["Data.Argonaut.Decode"];
   var Data_Argonaut_Core = PS["Data.Argonaut.Core"];
@@ -12571,7 +13125,7 @@ var PS = { };
                   primitive: IR.Triangles.value, 
                   attributes: fromArray([ new Data_Tuple.Tuple("position", Type.TV3F.value), new Data_Tuple.Tuple("normal", Type.TV3F.value) ])
               }) ]), 
-              uniforms: fromArray([ new Data_Tuple.Tuple("MVP", IR.M44F.value), new Data_Tuple.Tuple("MVP2", IR.M44F.value), new Data_Tuple.Tuple("Time", IR.Float.value), new Data_Tuple.Tuple("Mouse", IR.V2F.value) ])
+              uniforms: fromArray([ new Data_Tuple.Tuple("MVP", IR.M44F.value), new Data_Tuple.Tuple("MVP2", IR.M44F.value), new Data_Tuple.Tuple("Time", IR.Float.value), new Data_Tuple.Tuple("Mouse", IR.V2F.value), new Data_Tuple.Tuple("Diffuse", IR.FTexture2D.value) ])
           };
           var v1 = Input.mkWebGLPipelineInput(inputSchema)();
           var toLCMat4 = function (v2) {
@@ -12605,6 +13159,7 @@ var PS = { };
           Mesh.addMesh(v1)("stream4")(v2)([  ])();
           var v3 = Mesh.compileMesh(Sample.myQuad)();
           Mesh.addMesh(v1)("quad")(v3)([  ])();
+          Data.uploadTexture2DToGPU("logo.png")(Input.uniformFTexture2D("Diffuse")(v1.uniformSetter))();
           var addRemoteModel = function (sname) {
               return function (uri) {
                   return $foreign.getJSON(uri)(function (m) {
@@ -12620,7 +13175,7 @@ var PS = { };
                               return Prelude.unit;
                           };
                       };
-                      throw new Error("Failed pattern match at Main line 139, column 7 - line 158, column 3: " + [ $73.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 144, column 7 - line 163, column 3: " + [ $73.constructor.name ]);
                   });
               };
           };
@@ -12668,7 +13223,7 @@ var PS = { };
                                       return new Data_Maybe.Just(v9.value0);
                                   };
                               };
-                              throw new Error("Failed pattern match at Main line 169, column 13 - line 170, column 13: " + [ v9.constructor.name, v10.constructor.name ]);
+                              throw new Error("Failed pattern match at Main line 174, column 13 - line 175, column 13: " + [ v9.constructor.name, v10.constructor.name ]);
                           };
                       };
                       var $89 = Data_Foldable.foldl(Data_Foldable.foldableArray)(f)(Data_Maybe.Nothing.value)(ps);
@@ -12684,7 +13239,7 @@ var PS = { };
                       if ($89 instanceof Data_Maybe.Just) {
                           return $89.value0;
                       };
-                      throw new Error("Failed pattern match at Main line 166, column 7 - line 182, column 3: " + [ $89.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 171, column 7 - line 187, column 3: " + [ $89.constructor.name ]);
                   };
               };
           };
@@ -12705,7 +13260,7 @@ var PS = { };
                       if (v18.length === 2) {
                           return Input.uniformV2F("Mouse")(v1.uniformSetter)(new LinearBase.V2(v18[0] / Data_Int.toNumber(v16), v18[1] / Data_Int.toNumber(v17)))();
                       };
-                      throw new Error("Failed pattern match at Main line 91, column 1 - line 315, column 14: " + [ v18.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 93, column 1 - line 328, column 14: " + [ v18.constructor.name ]);
                   };
               };
           })();
@@ -12724,7 +13279,7 @@ var PS = { };
                               return Backend.disposePipeline(v16.value0)();
                           };
                       };
-                      throw new Error("Failed pattern match at Main line 198, column 7 - line 204, column 7: " + [ v16.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 203, column 7 - line 216, column 7: " + [ v16.constructor.name ]);
                   })()();
                   Control_Monad_Eff_Console.log("allocate new pipeline")();
                   var v17 = Backend.allocPipeline(ir)();
@@ -12769,7 +13324,7 @@ var PS = { };
                               return Prelude.unit;
                           };
                       };
-                      throw new Error("Failed pattern match at Main line 91, column 1 - line 315, column 14: " + [ $110.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 93, column 1 - line 328, column 14: " + [ $110.constructor.name ]);
                   };
               }, 
               onError: function (s) {
@@ -12794,7 +13349,7 @@ var PS = { };
                               if (v18 instanceof Data_Maybe.Just) {
                                   return Timer.clearTimeout(v18.value0);
                               };
-                              throw new Error("Failed pattern match at Main line 91, column 1 - line 315, column 14: " + [ v18.constructor.name ]);
+                              throw new Error("Failed pattern match at Main line 93, column 1 - line 328, column 14: " + [ v18.constructor.name ]);
                           })()();
                           return Control_Bind["=<<"](Control_Monad_Eff.bindEff)(Control_Monad_Eff_Ref.writeRef(v17))(Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_Maybe.Just.create)(Timer.timeout(1000)(compile(s))))();
                       })();
@@ -12834,7 +13389,7 @@ var PS = { };
                               Control_Monad_Eff_Ref.writeRef(v7)([  ])();
                               return render($119.value0.value1)();
                           };
-                          throw new Error("Failed pattern match at Main line 91, column 1 - line 315, column 14: " + [ $119.constructor.name ]);
+                          throw new Error("Failed pattern match at Main line 93, column 1 - line 328, column 14: " + [ $119.constructor.name ]);
                       };
                   };
               }, 
@@ -12878,7 +13433,7 @@ var PS = { };
                                   return Prelude.unit;
                               };
                           };
-                          throw new Error("Failed pattern match at Main line 91, column 1 - line 315, column 14: " + [ $140.constructor.name ]);
+                          throw new Error("Failed pattern match at Main line 93, column 1 - line 328, column 14: " + [ $140.constructor.name ]);
                       };
                   }, 
                   onError: function (s) {
@@ -12910,14 +13465,14 @@ var PS = { };
                       if (v20 instanceof Data_Maybe.Just) {
                           return Backend.renderPipeline(v20.value0);
                       };
-                      throw new Error("Failed pattern match at Main line 91, column 1 - line 315, column 14: " + [ v20.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 93, column 1 - line 328, column 14: " + [ v20.constructor.name ]);
                   })()();
                   return Timer.timeout(1000 / 25 | 0)(renderLoop)();
               };
               renderLoop();
               return Prelude.unit;
           };
-          throw new Error("Failed pattern match at Main line 91, column 1 - line 315, column 14: " + [ v17.constructor.name ]);
+          throw new Error("Failed pattern match at Main line 93, column 1 - line 328, column 14: " + [ v17.constructor.name ]);
       };
   });
   exports["run"] = run;
