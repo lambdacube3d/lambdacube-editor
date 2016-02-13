@@ -30,7 +30,7 @@ import System.Directory
 --import Control.DeepSeq
 import Text.Show.Pretty (ppShow)
 
-import Text.Parsec.Pos
+import Text.Megaparsec.Pos
 import Data.Aeson.Encode.Pretty
 import Data.Aeson
 import TypeInfo
@@ -96,7 +96,7 @@ app compiler = Snap.route
       , text        = m
       }
 
-    ff (Left (ErrorMsg err), infos) = MyLeft (TypeInfo 0 0 0 0 err) $ convertInfos infos
+    ff (Left err, infos) = MyLeft (TypeInfo 0 0 0 0 err) $ convertInfos infos
     ff (Right (ppl, _), infos) = MyRight (ppUnlines $ ppShow ppl) ppl $ convertInfos infos
 
     er e = return $ encodePretty $ MyLeft (TypeInfo 0 0 0 0 ("\n!FAIL err\n" ++ e :: String)) mempty
