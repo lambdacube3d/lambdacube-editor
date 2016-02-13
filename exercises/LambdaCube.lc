@@ -1,3 +1,4 @@
+time = Uniform "Time" :: Float
 deg45 = 0.78539816339
 deg60 = 1.0471975512
 deg360 = 6.28318530718
