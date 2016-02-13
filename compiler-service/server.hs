@@ -101,7 +101,7 @@ app compiler = Snap.route
 
     er e = return $ encodePretty $ MyLeft (TypeInfo 0 0 0 0 ("\n!FAIL err\n" ++ e :: String)) mempty
 
-    convertInfos is = toTypeInfo <$> V.fromList [ (a, b, unlines c) | (Range a b, c) <- listInfos is ]
+    convertInfos is = toTypeInfo <$> V.fromList [ (a, b, unlines c) | (Range a b, c) <- listTypeInfos is ]
 
 --------------------------------------------------------------------------------
 main :: IO ()
