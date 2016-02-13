@@ -1,3 +1,4 @@
+time = Uniform "Time" :: Float
 clear = FrameBuffer $ (DepthImage @1 1, ColorImage @1 red)
 
 triangleRasterCtx = TriangleCtx CullNone PolygonFill NoOffset LastVertex
