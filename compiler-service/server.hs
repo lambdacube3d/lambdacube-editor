@@ -109,7 +109,7 @@ main = do
   IO.hSetBuffering IO.stdout IO.NoBuffering
   IO.hSetBuffering IO.stdin IO.NoBuffering
   config <- commandLineAppConfig Snap.defaultConfig
-  compiler <- preCompile ["."] ["exercises"] WebGL1 "DemoUtils"
+  compiler <- preCompile ["."] ["exercises"] WebGL1 "Prelude"
   Snap.httpServe config $ app compiler
 
 
