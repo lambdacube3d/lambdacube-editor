@@ -68,7 +68,7 @@ app compiler = Snap.route
               b <- doesFileExist fname
               if b then do
                     src <- readFile fname
-                    print fname
+                    --print fname
                     WS.sendTextData c $ encodePretty $ toJSON src
                 else return ()
               go
@@ -82,6 +82,7 @@ app compiler = Snap.route
         let go = do
               WS.sendPing c ("hello" :: B.ByteString)
               bs <- WS.receiveData c
+              --print bs
               json <- catchErr er $ encodePretty . ff <$> compiler (BC.unpack bs)
               WS.sendTextData c json -- $ deepseq json json
               go
@@ -109,6 +110,6 @@ main = do
   IO.hSetBuffering IO.stdout IO.NoBuffering
   IO.hSetBuffering IO.stdin IO.NoBuffering
   config <- commandLineAppConfig Snap.defaultConfig
-  compiler <- preCompile ["."] ["exercises"] WebGL1 "Prelude"
+  compiler <- preCompile [] ["exercises"] WebGL1 "Prelude.lc"
   Snap.httpServe config $ app compiler
 
