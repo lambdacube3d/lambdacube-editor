@@ -48,6 +48,12 @@
           <canvas id="glcanvas" width="400" height="400" style="width: 100%; border: 1px solid black; margin: auto; vertical-align: center">
             Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
           </canvas>
+          <div style="padding-top: 5px;">
+          <label>Pause<input type="checkbox" id="pause" value="first_checkbox"></label>
+          <label>Time<input type="number" id="timeBox" step="any" style="margin-left: 5px;"></label><br>
+          <input type="range" id="timeRange" value="1" min="0" max="100" step="any" style="width: 100%;">
+          </div>
+
           <div id="messagepanel">No errors.</div>
         </div>
 

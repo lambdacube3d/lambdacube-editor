@@ -25,10 +25,10 @@ import WebSocket
 import Data.Either
 import Sample
 
+import Data.Foreign
 import Data.Function
 import Data.Maybe
-import Data.StrMap(fromList,StrMap(..))
-import Data.List(toList)
+import Data.StrMap(fromFoldable,StrMap(..))
 import Data.Tuple
 import Data.Array
 import Data.Int
@@ -42,8 +42,6 @@ import Type
 import Input
 import Data (uploadTexture2DToGPU)
 
---import MeshJsonDecode
---import PipelineJsonDecode
 import Data.Argonaut.Parser (jsonParser)
 import Data.Argonaut.Decode (DecodeJson, decodeJson)
 import qualified Data.Argonaut.Core as AC
@@ -86,25 +84,38 @@ foreign import addMarkerImpl :: forall eff. Fn5 Range String String Boolean Edit
 addMarker :: forall eff. Range -> String -> String -> Boolean -> EditSession -> Eff (ace :: ACE | eff) Int
 addMarker range clazz _type inFront self = runFn5 addMarkerImpl range clazz _type inFront self
 
---fromArray :: forall a f. (Foldable f) => f (Tuple String a) -> StrMap a
-fromArray :: forall a. Array (Tuple String a) -> StrMap a
-fromArray a = fromList (toList a)
-
 run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
   baseTime <- nowEpochMilliseconds
   -- setup pipeline input
   let inputSchema = 
-        { slots : fromArray [ Tuple "stream"  {primitive: Triangles, attributes: fromArray [Tuple "position"  TV3F, Tuple "normal" TV3F]}
-                            , Tuple "stream4" {primitive: Triangles, attributes: fromArray [Tuple "position4" TV4F, Tuple "vertexUV" TV2F]}
-                            , Tuple "line"    {primitive: Triangles, attributes: fromArray [Tuple "position" TV3F]}
-                            , Tuple "grid"    {primitive: Triangles, attributes: fromArray [Tuple "position" TV3F]}
-                            , Tuple "grid3d"  {primitive: Points,    attributes: fromArray [Tuple "position" TV3F]}
-                            , Tuple "quad"    {primitive: Triangles, attributes: fromArray [Tuple "position" TV2F]}
-                            , Tuple "cube"    {primitive: Triangles, attributes: fromArray [Tuple "position"  TV3F, Tuple "normal" TV3F]}
-                            ]
-        , uniforms : fromArray [Tuple "MVP" M44F, Tuple "MVP2" M44F, Tuple "Time" Float, Tuple "Mouse" V2F, Tuple "Diffuse" FTexture2D]
+        { slots : fromFoldable
+                    [ Tuple "stream"  {primitive: Triangles, attributes: fromFoldable [Tuple "position"  TV3F, Tuple "normal" TV3F]}
+                    , Tuple "stream4" {primitive: Triangles, attributes: fromFoldable [Tuple "position4" TV4F, Tuple "vertexUV" TV2F]}
+                    , Tuple "line"    {primitive: Triangles, attributes: fromFoldable [Tuple "position" TV3F]}
+                    , Tuple "grid"    {primitive: Triangles, attributes: fromFoldable [Tuple "position" TV3F]}
+                    , Tuple "grid3d"  {primitive: Points,    attributes: fromFoldable [Tuple "position" TV3F]}
+                    , Tuple "quad"    {primitive: Triangles, attributes: fromFoldable [Tuple "position" TV2F]}
+                    , Tuple "cube"    {primitive: Triangles, attributes: fromFoldable [Tuple "position"  TV3F, Tuple "normal" TV3F]}
+                    ]
+        , uniforms : fromFoldable [Tuple "MVP" M44F, Tuple "Time" Float, Tuple "Mouse" V2F, Tuple "Diffuse" FTexture2D]
         }
   pplInput <- mkWebGLPipelineInput inputSchema
+
+  b <- J.body
+  pipelinepanel <- J.find "#pipeline" b
+  pauseBox <- J.find "#pause" b
+  timeBox <- J.find "#timeBox" b
+  timeRange <- J.find "#timeRange" b
+  messagepanel <- J.find "#messagepanel" b
+  statuspanel <- J.find "#statuspanel" b
+  btnCompile <- J.find "#compilebutton" b
+  exerciseselect <- J.find "#exerciseselect" b
+  glcanvas <- J.find "#glcanvas" b
+  flip (J.on "mousemove") glcanvas $ \e _ -> do
+    w <- GL.getCanvasWidth context
+    h <- GL.getCanvasHeight context
+    [x,y] <- getMousePos e
+    uniformV2F "Mouse" pplInput.uniformSetter $ V2 (x / toNumber w) (y / toNumber h)
 
   let toLCMat4 :: Mat4 -> M44F
       toLCMat4 (Mat [x11, x21, x31, x41, x12, x22, x32, x42, x13, x23, x33, x43, x14, x24, x34, x44]) = let
@@ -125,12 +136,11 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
             mm = makeRotate angle (vec3 0.0 1.0 0.0)
             pm = makePerspective 30.0 (toNumber w / toNumber h) 0.1 100.0
             mvp = pm `mulM` cm `mulM` mm
-            cm' = makeLookAt (vec3 4.0 0.5 (-0.6)) (vec3 0.0 0.0 0.0) (vec3 0.0 1.0 0.0)
-            mvp2 = pm `mulM` cm' `mulM` mm
 
+        J.setValue t timeBox
+        J.setValue t timeRange
         uniformFloat "Time" pplInput.uniformSetter t
         uniformM44F "MVP" pplInput.uniformSetter $ toLCMat4 mvp
-        uniformM44F "MVP2" pplInput.uniformSetter $ toLCMat4 mvp2
 
   gpuCube <- compileMesh myCube
   addMesh pplInput "stream4" gpuCube []
@@ -186,19 +196,6 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
           Just a -> a
   tokenTooltip editor getTypeInfo
 
-  b <- J.body
-  pipelinepanel <- J.find "#pipeline" b
-  messagepanel <- J.find "#messagepanel" b
-  statuspanel <- J.find "#statuspanel" b
-  btnCompile <- J.find "#compilebutton" b
-  exerciseselect <- J.find "#exerciseselect" b
-  glcanvas <- J.find "#glcanvas" b
-  flip (J.on "mousemove") glcanvas $ \e _ -> do
-    w <- GL.getCanvasWidth context
-    h <- GL.getCanvasHeight context
-    [x,y] <- getMousePos e
-    uniformV2F "Mouse" pplInput.uniformSetter $ V2 (x / toNumber w) (y / toNumber h)
-
   pipelineRef <- newRef Nothing
   let compile s = do
         C.log "compile"
@@ -250,7 +247,6 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
   socket <- webSocket "ws://localhost:8000/compile" $
     { onOpen    : \s -> do
         C.log "socket is ready"
-        compile s
         timerRef <- newRef Nothing
         Session.onChange session $ do
           t <- readRef timerRef
@@ -316,7 +312,10 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
       
       let renderLoop = do
             t <- nowEpochMilliseconds
-            updateInput ((t - baseTime) / 1000.0)
+            paused <- J.getProp "checked" pauseBox
+            case readBoolean paused of
+              Right false -> updateInput ((t - baseTime) / 1000.0)
+              _ -> return unit
             mppl <- readRef pipelineRef
             case mppl of
               Nothing -> return unit
