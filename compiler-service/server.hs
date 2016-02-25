@@ -5,6 +5,7 @@ module Main where
 
 
 --------------------------------------------------------------------------------
+import Data.Maybe
 import           Control.Concurrent      (forkIO)
 import           Control.Exception       (finally)
 import           Control.Monad           (forever, unless)
@@ -40,7 +41,7 @@ import LambdaCube.Compiler hiding (ppShow)
 --runApp x = WS.runWebSocketsSnapWith (WS.ConnectionOptions $ putStrLn "pong received") x
 runApp x = WS.runWebSocketsSnap x
 
-app :: (String -> IO (Err (Pipeline, Infos))) -> Snap ()
+app :: (String -> IO (Either String Pipeline, Infos)) -> Snap ()
 app compiler = Snap.route
     [ (,) "compile" $ runApp compileApp
     , (,) "exerciselist" $ runApp exerciselist
@@ -84,7 +85,7 @@ app compiler = Snap.route
               bs <- WS.receiveData c
               --print bs
               json <- catchErr er $ encodePretty . ff <$> compiler (BC.unpack bs)
-              WS.sendTextData c json -- $ deepseq json json
+              WS.sendTextData c json
               go
         go
         putStrLn $ "compileApp ended"
@@ -97,8 +98,10 @@ app compiler = Snap.route
       , text        = m
       }
 
-    ff (Left err, infos) = MyLeft (TypeInfo 0 0 0 0 err) $ convertInfos infos
-    ff (Right (ppl, _), infos) = MyRight (prettyShowUnlines ppl) ppl $ convertInfos infos
+    ff (Left err, infos) = MyLeft (TypeInfo a b c d err) $ convertInfos infos
+      where
+        (a, b, c, d) = fromMaybe (0, 0, 0, 0) $ errorRange infos
+    ff (Right ppl, infos) = MyRight (prettyShowUnlines ppl) ppl $ convertInfos infos
 
     er e = return $ encodePretty $ MyLeft (TypeInfo 0 0 0 0 ("\n!FAIL err\n" ++ e :: String)) mempty
 
