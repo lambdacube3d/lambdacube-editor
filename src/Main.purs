@@ -12,9 +12,10 @@ import Timer
 import Control.Monad.Eff
 import Control.Monad.Eff.Ref
 import Data.Foldable (for_, foldl)
+import Data.Traversable (for)
 
 import Ace
-import Ace.Types
+import Ace.Types as Ace
 import qualified Ace.Editor as Editor
 import qualified Ace.EditSession as Session
 import qualified Ace.Range as Range
@@ -80,9 +81,9 @@ type TypeInfoRecord =
 
 foreign import addCommand :: forall eff . Editor -> String -> String -> String -> (Editor -> Eff (ace :: ACE | eff) Unit) -> Eff (ace :: ACE | eff) Unit
 foreign import tokenTooltip :: forall eff . Editor -> (Int -> Int -> Eff (ace :: ACE | eff) TypeInfoRecord) -> Eff (ace :: ACE | eff) Unit
-foreign import addMarkerImpl :: forall eff. Fn5 Range String String Boolean EditSession (Eff (ace :: ACE | eff) Int)
+foreign import addMarkerImpl :: forall eff. Fn5 Ace.Range String String Boolean EditSession (Eff (ace :: ACE | eff) Int)
 
-addMarker :: forall eff. Range -> String -> String -> Boolean -> EditSession -> Eff (ace :: ACE | eff) Int
+addMarker :: forall eff. Ace.Range -> String -> String -> Boolean -> EditSession -> Eff (ace :: ACE | eff) Int
 addMarker range clazz _type inFront self = runFn5 addMarkerImpl range clazz _type inFront self
 
 run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
@@ -193,16 +194,18 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
   let lessPos l c l' c' = l < l' || l == l' && c < c'
   let getTypeInfo l c = do
         x <- readRef typeInfoRef
-        let ps = flip filter x $ \(TypeInfo i) -> lessEqPos i.range.startLine i.range.startColumn l c && lessPos l c i.range.endLine i.range.endColumn
-        let f Nothing (TypeInfo i) = Just
-              { startLine   : i.range.startLine
-              , startColumn : i.range.startColumn
-              , endLine     : i.range.endLine
-              , endColumn   : i.range.endColumn
-              , text        : i.text
-              }
-            f (Just d) (TypeInfo i)
-                | lessPos d.startLine d.startColumn i.range.startLine i.range.startColumn = Just i
+        let flattenTypeInfo (TypeInfo i) = case i.range of
+              Range r ->
+                { startLine   : r.startLine
+                , startColumn : r.startColumn
+                , endLine     : r.endLine
+                , endColumn   : r.endColumn
+                , text        : i.text
+                }
+            ps = flip filter (map flattenTypeInfo x) $ \ti -> lessEqPos ti.startLine ti.startColumn l c && lessPos l c ti.endLine ti.endColumn
+            f Nothing i = Just i
+            f (Just d) i
+                | lessPos d.startLine d.startColumn i.startLine i.startColumn = Just i
                 | otherwise = Just d
         return $ case foldl f Nothing ps of
           Nothing ->
@@ -284,7 +287,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
             J.setText txt messagepanel
             rs <- readRef markerRef
             for_ rs $ \mkr -> Session.removeMarker mkr session
-            mkr <- for ranges $ \e -> do
+            mkr <- for ranges $ \(Range e) -> do
                 range <- Range.create (e.startLine - 1) (e.startColumn - 1) (e.endLine - 1) (e.endColumn - 1)
                 addMarker range "lc_error" "text" false session
             writeRef markerRef mkr

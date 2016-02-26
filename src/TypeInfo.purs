@@ -8,7 +8,7 @@ import Data.Maybe (Maybe(..))
 import Data.StrMap (StrMap(..))
 import Data.Map (Map(..))
 import Data.List (List(..))
-import Linear
+import LinearBase
 
 import Data.Argonaut.Combinators ((~>), (:=), (.?))
 import Data.Argonaut.Core (jsonEmptyObject)
@@ -16,7 +16,7 @@ import Data.Argonaut.Printer (printJson)
 import Data.Argonaut.Encode (EncodeJson, encodeJson)
 import Data.Argonaut.Decode (DecodeJson, decodeJson)
 
-import LambdaCube.IR
+import IR
 
 data Range
   = Range

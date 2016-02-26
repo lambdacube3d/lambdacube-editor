@@ -36,11 +36,7 @@ data TypeInfo
   deriving (Show, Eq, Ord)
 
 data CompileResult
-<<<<<<< f9ab7ec471add8538568386f24870117cb5a4270
-  = CompileError (Vector TypeInfo) (Vector TypeInfo)
-=======
   = CompileError (Vector Range) String (Vector TypeInfo)
->>>>>>> update
   | Compiled String Pipeline (Vector TypeInfo)
   deriving (Show, Eq, Ord)
 
