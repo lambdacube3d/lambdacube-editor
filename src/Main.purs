@@ -146,15 +146,9 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
         w <- GL.getCanvasWidth context
         h <- GL.getCanvasHeight context
         setScreenSize pplInput (V2 w h)
-        let pi = 3.141592653589793
-            angle = pi / 24.0 * t
-            cm = makeLookAt (vec3 3.0 1.3 0.3) (vec3 0.0 0.0 0.0) (vec3 0.0 1.0 0.0)
-            mm = makeRotate angle (vec3 0.0 1.0 0.0)
-            pm = makePerspective 30.0 (toNumber w / toNumber h) 0.1 100.0
-            mvp = pm `mulM` cm `mulM` mm
 
         uniformFloat "Time" pplInput.uniformSetter t
-        uniformM44F "MVP" pplInput.uniformSetter $ toLCMat4 mvp
+-- todo        uniformFloat "Aspect" pplInput.uniformSetter (toNumber w / toNumber h)
 
   gpuCube <- compileMesh myCube
   addMesh pplInput "stream4" gpuCube []
