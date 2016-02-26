@@ -2,6 +2,7 @@ module Main (main,run) where
 
 import Prelude
 import Extensions (fail)
+import Global
 
 import qualified Control.Monad.Eff.Console as C
 
@@ -85,7 +86,6 @@ addMarker :: forall eff. Range -> String -> String -> Boolean -> EditSession -> 
 addMarker range clazz _type inFront self = runFn5 addMarkerImpl range clazz _type inFront self
 
 run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
-  baseTime <- nowEpochMilliseconds
   -- setup pipeline input
   let inputSchema = 
         { slots : fromFoldable
@@ -101,11 +101,26 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
         }
   pplInput <- mkWebGLPipelineInput inputSchema
 
+  timeRef <- newRef 0.0
   b <- J.body
-  pipelinepanel <- J.find "#pipeline" b
-  pauseBox <- J.find "#pause" b
   timeBox <- J.find "#timeBox" b
   timeRange <- J.find "#timeRange" b
+  let getTime = do
+                  t <- J.getValue timeBox
+                  case readNumber t of
+                    Right time -> return time
+                    _ -> case readString t of
+                        Right timeStr -> return $ readFloat timeStr
+                        _ -> return 0.0
+  flip (J.on "input") timeBox $ \_ _ -> do
+    J.getValue timeBox >>= flip J.setValue timeRange
+    getTime >>= writeRef timeRef
+  flip (J.on "change") timeRange $ \_ _ -> do
+    J.getValue timeRange >>= flip J.setValue timeBox
+    getTime >>= writeRef timeRef
+
+  pauseBox <- J.find "#pause" b
+  pipelinepanel <- J.find "#pipeline" b
   messagepanel <- J.find "#messagepanel" b
   statuspanel <- J.find "#statuspanel" b
   btnCompile <- J.find "#compilebutton" b
@@ -137,8 +152,6 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
             pm = makePerspective 30.0 (toNumber w / toNumber h) 0.1 100.0
             mvp = pm `mulM` cm `mulM` mm
 
-        J.setValue t timeBox
-        J.setValue t timeRange
         uniformFloat "Time" pplInput.uniformSetter t
         uniformM44F "MVP" pplInput.uniformSetter $ toLCMat4 mvp
 
@@ -316,13 +329,25 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
         compile ws
         C.log "clicked compile"
       addCommand editor "Compile" "Ctrl-B" "Command-B" (\_ -> compile ws)
-      
+
+      lastTimeRef <- newRef =<< nowEpochMilliseconds
       let renderLoop = do
             t <- nowEpochMilliseconds
+            lastTime <- readRef lastTimeRef
+            let deltaTime = (t - lastTime) / 1000.0
+            writeRef lastTimeRef t
             paused <- J.getProp "checked" pauseBox
             case readBoolean paused of
-              Right false -> updateInput ((t - baseTime) / 1000.0)
-              _ -> return unit
+              Right false -> do
+                  modifyRef timeRef (deltaTime +)
+                  time <- readRef timeRef
+                  J.setValue time timeBox
+                  J.setValue time timeRange
+                  updateInput time
+              _ -> do
+                  time <- getTime
+                  writeRef timeRef time
+                  updateInput time
             mppl <- readRef pipelineRef
             case mppl of
               Nothing -> return unit
