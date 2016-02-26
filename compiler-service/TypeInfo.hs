@@ -1,5 +1,5 @@
 -- generated file, do not modify!
--- 2016-02-26T10:42:57.376331000000Z
+-- 2016-02-26T11:37:22.609565000000Z
 
 {-# LANGUAGE OverloadedStrings, RecordWildCards #-}
 module TypeInfo where
@@ -17,31 +17,66 @@ import Control.Monad
 
 import LambdaCube.IR
 
-data TypeInfo
-  = TypeInfo
+data Range
+  = Range
   { startLine :: Int
   , startColumn :: Int
   , endLine :: Int
   , endColumn :: Int
+  }
+
+  deriving (Show, Eq, Ord)
+
+data TypeInfo
+  = TypeInfo
+  { range :: Range
   , text :: String
   }
 
   deriving (Show, Eq, Ord)
 
 data CompileResult
+<<<<<<< f9ab7ec471add8538568386f24870117cb5a4270
   = CompileError (Vector TypeInfo) (Vector TypeInfo)
+=======
+  = CompileError (Vector Range) String (Vector TypeInfo)
+>>>>>>> update
   | Compiled String Pipeline (Vector TypeInfo)
   deriving (Show, Eq, Ord)
 
+
+instance ToJSON Range where
+  toJSON v = case v of
+    Range{..} -> object
+      [ "tag" .= ("Range" :: Text)
+      , "startLine" .= startLine
+      , "startColumn" .= startColumn
+      , "endLine" .= endLine
+      , "endColumn" .= endColumn
+      ]
+
+instance FromJSON Range where
+  parseJSON (Object obj) = do
+    tag <- obj .: "tag"
+    case tag :: Text of
+      "Range" -> do
+        startLine <- obj .: "startLine"
+        startColumn <- obj .: "startColumn"
+        endLine <- obj .: "endLine"
+        endColumn <- obj .: "endColumn"
+        pure $ Range
+          { startLine = startLine
+          , startColumn = startColumn
+          , endLine = endLine
+          , endColumn = endColumn
+          } 
+  parseJSON _ = mzero
 
 instance ToJSON TypeInfo where
   toJSON v = case v of
     TypeInfo{..} -> object
       [ "tag" .= ("TypeInfo" :: Text)
-      , "startLine" .= startLine
-      , "startColumn" .= startColumn
-      , "endLine" .= endLine
-      , "endColumn" .= endColumn
+      , "range" .= range
       , "text" .= text
       ]
 
@@ -50,30 +85,24 @@ instance FromJSON TypeInfo where
     tag <- obj .: "tag"
     case tag :: Text of
       "TypeInfo" -> do
-        startLine <- obj .: "startLine"
-        startColumn <- obj .: "startColumn"
-        endLine <- obj .: "endLine"
-        endColumn <- obj .: "endColumn"
+        range <- obj .: "range"
         text <- obj .: "text"
         pure $ TypeInfo
-          { startLine = startLine
-          , startColumn = startColumn
-          , endLine = endLine
-          , endColumn = endColumn
+          { range = range
           , text = text
           } 
   parseJSON _ = mzero
 
 instance ToJSON CompileResult where
   toJSON v = case v of
-    CompileError arg0 arg1 -> object [ "tag" .= ("CompileError" :: Text), "arg0" .= arg0, "arg1" .= arg1]
+    CompileError arg0 arg1 arg2 -> object [ "tag" .= ("CompileError" :: Text), "arg0" .= arg0, "arg1" .= arg1, "arg2" .= arg2]
     Compiled arg0 arg1 arg2 -> object [ "tag" .= ("Compiled" :: Text), "arg0" .= arg0, "arg1" .= arg1, "arg2" .= arg2]
 
 instance FromJSON CompileResult where
   parseJSON (Object obj) = do
     tag <- obj .: "tag"
     case tag :: Text of
-      "CompileError" -> CompileError <$> obj .: "arg0" <*> obj .: "arg1"
+      "CompileError" -> CompileError <$> obj .: "arg0" <*> obj .: "arg1" <*> obj .: "arg2"
       "Compiled" -> Compiled <$> obj .: "arg0" <*> obj .: "arg1" <*> obj .: "arg2"
   parseJSON _ = mzero
 

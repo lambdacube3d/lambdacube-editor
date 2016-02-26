@@ -34,8 +34,8 @@ import Text.Show.Pretty (ppShow)
 import Text.Megaparsec.Pos
 import Data.Aeson.Encode.Pretty
 import Data.Aeson
-import TypeInfo
-import LambdaCube.Compiler hiding (ppShow)
+import TypeInfo as T
+import LambdaCube.Compiler as C hiding (ppShow)
 
 --------------------------------------------------------------------------------
 --runApp x = WS.runWebSocketsSnapWith (WS.ConnectionOptions $ putStrLn "pong received") x
@@ -90,22 +90,16 @@ app compiler = Snap.route
         go
         putStrLn $ "compileApp ended"
 
-    toTypeInfo (s,e,m) = TypeInfo
-      { startLine   = sourceLine s
-      , startColumn = sourceColumn s
-      , endLine     = sourceLine e
-      , endColumn   = sourceColumn e
-      , text        = m
-      }
+    toTypeInfo (s,e,m) = TypeInfo (T.Range (sourceLine s) (sourceColumn s) (sourceLine e) (sourceColumn e)) m
 
-    ff (Left err, infos) = CompileError (V.fromList [TypeInfo a b c d err]) $ convertInfos infos
+    ff (Left err, infos) = CompileError (V.fromList eloc) err $ convertInfos infos
       where
-        (a, b, c, d) = fromMaybe (0, 0, 0, 0) $ errorRange infos
+        eloc = maybe [] (\(a,b,c,d) -> [T.Range a b c d]) $ errorRange infos
     ff (Right ppl, infos) = Compiled (prettyShowUnlines ppl) ppl $ convertInfos infos
 
-    er e = return $ encodePretty $ CompileError (V.fromList [TypeInfo 0 0 0 0 ("\n!FAIL err\n" ++ e :: String)]) mempty
+    er e = return $ encodePretty $ CompileError mempty ("\n!FAIL\n" ++ e) mempty
 
-    convertInfos is = toTypeInfo <$> V.fromList [ (a, b, unlines c) | (Range a b, c) <- listTypeInfos is ]
+    convertInfos is = toTypeInfo <$> V.fromList [ (a, b, unlines c) | (C.Range a b, c) <- listTypeInfos is ]
 
 --------------------------------------------------------------------------------
 main :: IO ()

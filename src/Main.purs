@@ -180,10 +180,16 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
   let lessPos l c l' c' = l < l' || l == l' && c < c'
   let getTypeInfo l c = do
         x <- readRef typeInfoRef
-        let ps = flip filter x $ \(TypeInfo i) -> lessEqPos i.startLine i.startColumn l c && lessPos l c i.endLine i.endColumn
-        let f Nothing (TypeInfo i) = Just i
+        let ps = flip filter x $ \(TypeInfo i) -> lessEqPos i.range.startLine i.range.startColumn l c && lessPos l c i.range.endLine i.range.endColumn
+        let f Nothing (TypeInfo i) = Just
+              { startLine   : i.range.startLine
+              , startColumn : i.range.startColumn
+              , endLine     : i.range.endLine
+              , endColumn   : i.range.endColumn
+              , text        : i.text
+              }
             f (Just d) (TypeInfo i)
-                | lessPos d.startLine d.startColumn i.startLine i.startColumn = Just i
+                | lessPos d.startLine d.startColumn i.range.startLine i.range.startColumn = Just i
                 | otherwise = Just d
         return $ case foldl f Nothing ps of
           Nothing ->
@@ -260,14 +266,15 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
         C.log "got response"
         case jsonParser m >>= decodeJson of
           Left e -> C.log $ "decode error: " ++ e
-          Right (CompileError [TypeInfo e] infos) -> do
+          Right (CompileError ranges txt infos) -> do
             J.setText "Error" statuspanel
-            J.setText e.text messagepanel
-            range <- Range.create (e.startLine - 1) (e.startColumn - 1) (e.endLine - 1) (e.endColumn - 1)
+            J.setText txt messagepanel
             rs <- readRef markerRef
             for_ rs $ \mkr -> Session.removeMarker mkr session
-            mkr <- addMarker range "lc_error" "text" false session
-            writeRef markerRef [mkr]
+            mkr <- for ranges $ \e -> do
+                range <- Range.create (e.startLine - 1) (e.startColumn - 1) (e.endLine - 1) (e.endColumn - 1)
+                addMarker range "lc_error" "text" false session
+            writeRef markerRef mkr
             writeRef typeInfoRef infos
             return unit
           Right (Compiled pplSrc p infos) -> do
