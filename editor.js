@@ -12388,32 +12388,32 @@ var PS = { };
       };
       return TypeInfo;
   })();
-  var MyLeft = (function () {
-      function MyLeft(value0, value1) {
+  var CompileError = (function () {
+      function CompileError(value0, value1) {
           this.value0 = value0;
           this.value1 = value1;
       };
-      MyLeft.create = function (value0) {
+      CompileError.create = function (value0) {
           return function (value1) {
-              return new MyLeft(value0, value1);
+              return new CompileError(value0, value1);
           };
       };
-      return MyLeft;
+      return CompileError;
   })();
-  var MyRight = (function () {
-      function MyRight(value0, value1, value2) {
+  var Compiled = (function () {
+      function Compiled(value0, value1, value2) {
           this.value0 = value0;
           this.value1 = value1;
           this.value2 = value2;
       };
-      MyRight.create = function (value0) {
+      Compiled.create = function (value0) {
           return function (value1) {
               return function (value2) {
-                  return new MyRight(value0, value1, value2);
+                  return new Compiled(value0, value1, value2);
               };
           };
       };
-      return MyRight;
+      return Compiled;
   })();
   var decodeJsonTypeInfo = new Data_Argonaut_Decode.DecodeJson(function (json) {
       return Prelude.bind(Data_Either.bindEither)(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeStrMap(Data_Argonaut_Decode.decodeJsonJson))(json))(function (v) {
@@ -12441,24 +12441,24 @@ var PS = { };
           });
       });
   });
-  var decodeJsonMyEither = new Data_Argonaut_Decode.DecodeJson(function (json) {
+  var decodeJsonCompileResult = new Data_Argonaut_Decode.DecodeJson(function (json) {
       return Prelude.bind(Data_Either.bindEither)(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeStrMap(Data_Argonaut_Decode.decodeJsonJson))(json))(function (v) {
           return Prelude.bind(Data_Either.bindEither)(Data_Argonaut_Combinators[".?"](Data_Argonaut_Decode.decodeJsonString)(v)("tag"))(function (v1) {
-              if (v1 === "MyLeft") {
-                  return Prelude["<*>"](Data_Either.applyEither)(Prelude["<$>"](Data_Either.functorEither)(MyLeft.create)(Data_Argonaut_Combinators[".?"](decodeJsonTypeInfo)(v)("arg0")))(Data_Argonaut_Combinators[".?"](Data_Argonaut_Decode.decodeArray(decodeJsonTypeInfo))(v)("arg1"));
+              if (v1 === "CompileError") {
+                  return Prelude["<*>"](Data_Either.applyEither)(Prelude["<$>"](Data_Either.functorEither)(CompileError.create)(Data_Argonaut_Combinators[".?"](Data_Argonaut_Decode.decodeArray(decodeJsonTypeInfo))(v)("arg0")))(Data_Argonaut_Combinators[".?"](Data_Argonaut_Decode.decodeArray(decodeJsonTypeInfo))(v)("arg1"));
               };
-              if (v1 === "MyRight") {
-                  return Prelude["<*>"](Data_Either.applyEither)(Prelude["<*>"](Data_Either.applyEither)(Prelude["<$>"](Data_Either.functorEither)(MyRight.create)(Data_Argonaut_Combinators[".?"](Data_Argonaut_Decode.decodeJsonString)(v)("arg0")))(Data_Argonaut_Combinators[".?"](IR.decodeJsonPipeline)(v)("arg1")))(Data_Argonaut_Combinators[".?"](Data_Argonaut_Decode.decodeArray(decodeJsonTypeInfo))(v)("arg2"));
+              if (v1 === "Compiled") {
+                  return Prelude["<*>"](Data_Either.applyEither)(Prelude["<*>"](Data_Either.applyEither)(Prelude["<$>"](Data_Either.functorEither)(Compiled.create)(Data_Argonaut_Combinators[".?"](Data_Argonaut_Decode.decodeJsonString)(v)("arg0")))(Data_Argonaut_Combinators[".?"](IR.decodeJsonPipeline)(v)("arg1")))(Data_Argonaut_Combinators[".?"](Data_Argonaut_Decode.decodeArray(decodeJsonTypeInfo))(v)("arg2"));
               };
-              throw new Error("Failed pattern match at TypeInfo line 72, column 1 - line 78, column 75: " + [ v1.constructor.name ]);
+              throw new Error("Failed pattern match at TypeInfo line 72, column 1 - line 78, column 77: " + [ v1.constructor.name ]);
           });
       });
   });
-  exports["MyLeft"] = MyLeft;
-  exports["MyRight"] = MyRight;
+  exports["CompileError"] = CompileError;
+  exports["Compiled"] = Compiled;
   exports["TypeInfo"] = TypeInfo;
   exports["decodeJsonTypeInfo"] = decodeJsonTypeInfo;
-  exports["decodeJsonMyEither"] = decodeJsonMyEither;;
+  exports["decodeJsonCompileResult"] = decodeJsonCompileResult;;
  
 })(PS["TypeInfo"] = PS["TypeInfo"] || {});
 (function(exports) {
@@ -13133,6 +13133,7 @@ var PS = { };
   var Data_StrMap = PS["Data.StrMap"];
   var Data_Tuple = PS["Data.Tuple"];
   var Data_Array = PS["Data.Array"];
+  var Data_Array_Unsafe = PS["Data.Array.Unsafe"];
   var Data_Int = PS["Data.Int"];
   var Backend = PS["Backend"];
   var IR = PS["IR"];
@@ -13211,7 +13212,7 @@ var PS = { };
                       if (v15.length === 2) {
                           return Input.uniformV2F("Mouse")(v1.uniformSetter)(new LinearBase.V2(v15[0] / Data_Int.toNumber(v13), v15[1] / Data_Int.toNumber(v14)))();
                       };
-                      throw new Error("Failed pattern match at Main line 87, column 1 - line 327, column 14: " + [ v15.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 88, column 1 - line 328, column 14: " + [ v15.constructor.name ]);
                   };
               };
           })();
@@ -13261,7 +13262,7 @@ var PS = { };
                               return Prelude.unit;
                           };
                       };
-                      throw new Error("Failed pattern match at Main line 154, column 7 - line 173, column 3: " + [ $93.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 155, column 7 - line 174, column 3: " + [ $93.constructor.name ]);
                   });
               };
           };
@@ -13309,7 +13310,7 @@ var PS = { };
                                       return new Data_Maybe.Just(v19.value0);
                                   };
                               };
-                              throw new Error("Failed pattern match at Main line 184, column 13 - line 185, column 13: " + [ v19.constructor.name, v20.constructor.name ]);
+                              throw new Error("Failed pattern match at Main line 185, column 13 - line 186, column 13: " + [ v19.constructor.name, v20.constructor.name ]);
                           };
                       };
                       var $109 = Data_Foldable.foldl(Data_Foldable.foldableArray)(f)(Data_Maybe.Nothing.value)(ps);
@@ -13325,7 +13326,7 @@ var PS = { };
                       if ($109 instanceof Data_Maybe.Just) {
                           return $109.value0;
                       };
-                      throw new Error("Failed pattern match at Main line 181, column 7 - line 197, column 3: " + [ $109.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 182, column 7 - line 198, column 3: " + [ $109.constructor.name ]);
                   };
               };
           };
@@ -13345,7 +13346,7 @@ var PS = { };
                               return Backend.disposePipeline(v19.value0)();
                           };
                       };
-                      throw new Error("Failed pattern match at Main line 200, column 7 - line 213, column 7: " + [ v19.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 201, column 7 - line 214, column 7: " + [ v19.constructor.name ]);
                   })()();
                   Control_Monad_Eff_Console.log("allocate new pipeline")();
                   var v20 = Backend.allocPipeline(ir)();
@@ -13390,7 +13391,7 @@ var PS = { };
                               return Prelude.unit;
                           };
                       };
-                      throw new Error("Failed pattern match at Main line 87, column 1 - line 327, column 14: " + [ $117.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 88, column 1 - line 328, column 14: " + [ $117.constructor.name ]);
                   };
               }, 
               onError: function (s) {
@@ -13414,7 +13415,7 @@ var PS = { };
                               if (v21 instanceof Data_Maybe.Just) {
                                   return Timer.clearTimeout(v21.value0);
                               };
-                              throw new Error("Failed pattern match at Main line 87, column 1 - line 327, column 14: " + [ v21.constructor.name ]);
+                              throw new Error("Failed pattern match at Main line 88, column 1 - line 328, column 14: " + [ v21.constructor.name ]);
                           })()();
                           return Control_Bind["=<<"](Control_Monad_Eff.bindEff)(Control_Monad_Eff_Ref.writeRef(v20))(Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_Maybe.Just.create)(Timer.timeout(1000)(compile(s))))();
                       })();
@@ -13425,14 +13426,14 @@ var PS = { };
                   return function (m) {
                       return function __do() {
                           Control_Monad_Eff_Console.log("got response")();
-                          var $126 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(TypeInfo.decodeJsonMyEither));
+                          var $126 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(TypeInfo.decodeJsonCompileResult));
                           if ($126 instanceof Data_Either.Left) {
                               return Control_Monad_Eff_Console.log("decode error: " + $126.value0)();
                           };
-                          if ($126 instanceof Data_Either.Right && $126.value0 instanceof TypeInfo.MyLeft) {
+                          if ($126 instanceof Data_Either.Right && ($126.value0 instanceof TypeInfo.CompileError && $126.value0.value0.length === 1)) {
                               Control_Monad_Eff_JQuery.setText("Error")(v8)();
-                              Control_Monad_Eff_JQuery.setText($126.value0.value0.value0.text)(v7)();
-                              var v20 = Ace_Range.create($126.value0.value0.value0.startLine - 1)($126.value0.value0.value0.startColumn - 1)($126.value0.value0.value0.endLine - 1)($126.value0.value0.value0.endColumn - 1)();
+                              Control_Monad_Eff_JQuery.setText(($126.value0.value0[0]).value0.text)(v7)();
+                              var v20 = Ace_Range.create(($126.value0.value0[0]).value0.startLine - 1)(($126.value0.value0[0]).value0.startColumn - 1)(($126.value0.value0[0]).value0.endLine - 1)(($126.value0.value0[0]).value0.endColumn - 1)();
                               var v21 = Control_Monad_Eff_Ref.readRef(v17)();
                               Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(v21)(function (mkr) {
                                   return Ace_EditSession.removeMarker(mkr)(v15);
@@ -13442,7 +13443,7 @@ var PS = { };
                               Control_Monad_Eff_Ref.writeRef(v16)($126.value0.value1)();
                               return Prelude.unit;
                           };
-                          if ($126 instanceof Data_Either.Right && $126.value0 instanceof TypeInfo.MyRight) {
+                          if ($126 instanceof Data_Either.Right && $126.value0 instanceof TypeInfo.Compiled) {
                               Control_Monad_Eff_JQuery.setText($126.value0.value0)(v3)();
                               Control_Monad_Eff_JQuery.setText("Compiled")(v8)();
                               Control_Monad_Eff_JQuery.setText("No errors.")(v7)();
@@ -13454,7 +13455,7 @@ var PS = { };
                               Control_Monad_Eff_Ref.writeRef(v17)([  ])();
                               return render($126.value0.value1)();
                           };
-                          throw new Error("Failed pattern match at Main line 87, column 1 - line 327, column 14: " + [ $126.constructor.name ]);
+                          throw new Error("Failed pattern match at Main line 88, column 1 - line 328, column 14: " + [ $126.constructor.name ]);
                       };
                   };
               }, 
@@ -13487,18 +13488,18 @@ var PS = { };
                   }, 
                   onMessage: function (s) {
                       return function (m) {
-                          var $147 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeJsonString));
-                          if ($147 instanceof Data_Either.Left) {
-                              return Control_Monad_Eff_Console.log("decode error: " + $147.value0);
+                          var $148 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeJsonString));
+                          if ($148 instanceof Data_Either.Left) {
+                              return Control_Monad_Eff_Console.log("decode error: " + $148.value0);
                           };
-                          if ($147 instanceof Data_Either.Right) {
+                          if ($148 instanceof Data_Either.Right) {
                               return function __do() {
-                                  Ace_EditSession.setValue($147.value0)(v15)();
+                                  Ace_EditSession.setValue($148.value0)(v15)();
                                   compile(v20.value0)();
                                   return Prelude.unit;
                               };
                           };
-                          throw new Error("Failed pattern match at Main line 87, column 1 - line 327, column 14: " + [ $147.constructor.name ]);
+                          throw new Error("Failed pattern match at Main line 88, column 1 - line 328, column 14: " + [ $148.constructor.name ]);
                       };
                   }, 
                   onError: function (s) {
@@ -13523,8 +13524,8 @@ var PS = { };
                   var v22 = Timer.nowEpochMilliseconds();
                   var v23 = Control_Monad_Eff_JQuery.getProp("checked")(v4)();
                   (function () {
-                      var $156 = Data_Foreign.readBoolean(v23);
-                      if ($156 instanceof Data_Either.Right && !$156.value0) {
+                      var $157 = Data_Foreign.readBoolean(v23);
+                      if ($157 instanceof Data_Either.Right && !$157.value0) {
                           return updateInput((v22 - v) / 1000.0);
                       };
                       return Prelude["return"](Control_Monad_Eff.applicativeEff)(Prelude.unit);
@@ -13537,14 +13538,14 @@ var PS = { };
                       if (v24 instanceof Data_Maybe.Just) {
                           return Backend.renderPipeline(v24.value0);
                       };
-                      throw new Error("Failed pattern match at Main line 87, column 1 - line 327, column 14: " + [ v24.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 88, column 1 - line 328, column 14: " + [ v24.constructor.name ]);
                   })()();
                   return Timer.timeout(1000 / 25 | 0)(renderLoop)();
               };
               renderLoop();
               return Prelude.unit;
           };
-          throw new Error("Failed pattern match at Main line 87, column 1 - line 327, column 14: " + [ v20.constructor.name ]);
+          throw new Error("Failed pattern match at Main line 88, column 1 - line 328, column 14: " + [ v20.constructor.name ]);
       };
   });
   exports["run"] = run;

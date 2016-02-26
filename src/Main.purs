@@ -260,7 +260,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
         C.log "got response"
         case jsonParser m >>= decodeJson of
           Left e -> C.log $ "decode error: " ++ e
-          Right (MyLeft (TypeInfo e) infos) -> do
+          Right (CompileError [TypeInfo e] infos) -> do
             J.setText "Error" statuspanel
             J.setText e.text messagepanel
             range <- Range.create (e.startLine - 1) (e.startColumn - 1) (e.endLine - 1) (e.endColumn - 1)
@@ -270,7 +270,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
             writeRef markerRef [mkr]
             writeRef typeInfoRef infos
             return unit
-          Right (MyRight pplSrc p infos) -> do
+          Right (Compiled pplSrc p infos) -> do
             J.setText pplSrc pipelinepanel
             J.setText "Compiled" statuspanel
             J.setText "No errors." messagepanel

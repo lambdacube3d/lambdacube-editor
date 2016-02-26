@@ -98,12 +98,12 @@ app compiler = Snap.route
       , text        = m
       }
 
-    ff (Left err, infos) = MyLeft (TypeInfo a b c d err) $ convertInfos infos
+    ff (Left err, infos) = CompileError (V.fromList [TypeInfo a b c d err]) $ convertInfos infos
       where
         (a, b, c, d) = fromMaybe (0, 0, 0, 0) $ errorRange infos
-    ff (Right ppl, infos) = MyRight (prettyShowUnlines ppl) ppl $ convertInfos infos
+    ff (Right ppl, infos) = Compiled (prettyShowUnlines ppl) ppl $ convertInfos infos
 
-    er e = return $ encodePretty $ MyLeft (TypeInfo 0 0 0 0 ("\n!FAIL err\n" ++ e :: String)) mempty
+    er e = return $ encodePretty $ CompileError (V.fromList [TypeInfo 0 0 0 0 ("\n!FAIL err\n" ++ e :: String)]) mempty
 
     convertInfos is = toTypeInfo <$> V.fromList [ (a, b, unlines c) | (Range a b, c) <- listTypeInfos is ]
 
