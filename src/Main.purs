@@ -344,8 +344,9 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
               Right false -> do
                   modifyRef timeRef (deltaTime +)
                   time <- readRef timeRef
-                  J.setValue time timeBox
-                  J.setValue time timeRange
+                  let time' = (toNumber $ floor $ time * 1000.0)/1000.0
+                  J.setValue time' timeBox
+                  J.setValue time' timeRange
                   updateInput time
               _ -> do
                   time <- getTime
