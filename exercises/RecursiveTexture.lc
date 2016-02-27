@@ -4,12 +4,10 @@ triangleRasterCtx = TriangleCtx CullNone PolygonFill NoOffset LastVertex
 colorFragmentCtx = (DepthOp Less True, ColorOp NoBlending (V4 True True True True))
 
 cubeVertexStream = fetch "stream4" (Attribute "position4" :: Vec 4 Float, Attribute "vertexUV" :: Vec 2 Float)
-
 time = Uniform "Time" :: Float
-
-projmat = perspective 0.1 100.0 (30 * pi / 180) 1.0
-      .*. lookat (V3 3.0 1.3 0.3) (V3 0.0 0.0 0.0) (V3 0.0 1.0 0.0)
-      .*. rotMatrixY (pi / 24.0 * time)
+rotMatrix = perspective 0.1 100.0 (30 * pi / 180) 1.0
+        .*. lookat (V3 3.0 1.3 0.3) (V3 0.0 0.0 0.0) (V3 0.0 1.0 0.0)
+        .*. rotMatrixY (pi / 24.0 * time)
 
 setAlpha v = v * V4 1.0 1 1 0 + V4 0 0 0 1
 
@@ -17,7 +15,7 @@ cube' res (n :: Float) fb =
        clear
    `overlay`
        cubeVertexStream
-     & mapPrimitives (\(v, u) -> (projmat *. scale 0.4 (rotMatrixX (n/10) *. v), u))
+     & mapPrimitives (\(v, u) -> (rotMatrix *. scale 0.4 (rotMatrixX (n/10) *. v), u))
      & rasterizePrimitives triangleRasterCtx ((Smooth))
      & mapFragments (\((a)) -> ((setAlpha $ (a%yyyx *! 0.5 + texture2D sampler a) *! 0.7)))
      & accumulateWith colorFragmentCtx
