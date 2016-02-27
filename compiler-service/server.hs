@@ -90,11 +90,12 @@ app compiler = Snap.route
         go
         putStrLn $ "compileApp ended"
 
-    toTypeInfo (s,e,m) = TypeInfo (T.Range (sourceLine s) (sourceColumn s) (sourceLine e) (sourceColumn e)) m
+    toTypeInfo (s,e,m) = TypeInfo (cvtRange $ C.Range s e) m
+    cvtRange (C.Range s e) = T.Range (sourceLine s) (sourceColumn s) (sourceLine e) (sourceColumn e)
 
     ff (Left err, infos) = CompileError (V.fromList eloc) err $ convertInfos infos
       where
-        eloc = maybe [] (\(a,b,c,d) -> [T.Range a b c d]) $ errorRange infos
+        eloc = map cvtRange $ errorRange infos
     ff (Right ppl, infos) = Compiled (prettyShowUnlines ppl) ppl $ convertInfos infos
 
     er e = return $ encodePretty $ CompileError mempty ("\n!FAIL\n" ++ e) mempty
