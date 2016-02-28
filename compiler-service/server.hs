@@ -37,12 +37,15 @@ import Data.Aeson
 import TypeInfo as T
 import LambdaCube.Compiler as C hiding (ppShow)
 
+import Cache
+import Hash
+
 --------------------------------------------------------------------------------
 --runApp x = WS.runWebSocketsSnapWith (WS.ConnectionOptions $ putStrLn "pong received") x
 runApp x = WS.runWebSocketsSnap x
 
-app :: (String -> IO (Either String Pipeline, Infos)) -> Snap ()
-app compiler = Snap.route
+--app :: (String -> IO (Either String Pipeline, Infos)) -> Snap ()
+app compiler ch = Snap.route
     [ (,) "compile" $ runApp compileApp
     , (,) "exerciselist" $ runApp exerciselist
     , (,) "getexercise" $ runApp getexercise
@@ -82,25 +85,32 @@ app compiler = Snap.route
         --WS.forkPingThread c 5 
         let go = do
               WS.sendPing c ("hello" :: B.ByteString)
-              bs <- WS.receiveData c
+              bs <- BC.unpack <$> WS.receiveData c
               --print bs
-              json <- catchErr er $ encodePretty . ff <$> compiler (BC.unpack bs)
+              let h = mkHash bs
+              r <- lookupCache ch h
+              json <- case r of
+                Right add -> do
+                  json <- catchErr er $ encodePretty . ff <$> compiler bs
+                  add json
+                  return json
+                Left x -> return x
               WS.sendTextData c json
               go
         go
         putStrLn $ "compileApp ended"
-
-    toTypeInfo (s,e,m) = TypeInfo (cvtRange $ C.Range s e) m
-    cvtRange (C.Range s e) = T.Range (sourceLine s) (sourceColumn s) (sourceLine e) (sourceColumn e)
-
-    ff (Left err, infos) = CompileError (V.fromList eloc) err $ convertInfos infos
       where
-        eloc = map cvtRange $ errorRange infos
-    ff (Right ppl, infos) = Compiled (prettyShowUnlines ppl) ppl $ convertInfos infos
+        toTypeInfo (s,e,m) = TypeInfo (cvtRange $ C.Range s e) m
+        cvtRange (C.Range s e) = T.Range (sourceLine s) (sourceColumn s) (sourceLine e) (sourceColumn e)
 
-    er e = return $ encodePretty $ CompileError mempty ("\n!FAIL\n" ++ e) mempty
+        ff (Left err, infos) = CompileError (V.fromList eloc) err $ convertInfos infos
+          where
+            eloc = map cvtRange $ errorRange infos
+        ff (Right ppl, infos) = Compiled (prettyShowUnlines ppl) ppl $ convertInfos infos
 
-    convertInfos is = toTypeInfo <$> V.fromList [ (a, b, unlines c) | (C.Range a b, c) <- listTypeInfos is ]
+        er e = return $ encodePretty $ CompileError mempty ("\n!FAIL\n" ++ e) mempty
+
+        convertInfos is = toTypeInfo <$> V.fromList [ (a, b, unlines c) | (C.Range a b, c) <- listTypeInfos is ]
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -109,5 +119,6 @@ main = do
   IO.hSetBuffering IO.stdin IO.NoBuffering
   config <- commandLineAppConfig Snap.defaultConfig
   compiler <- preCompile [] ["exercises"] WebGL1 "Prelude.lc"
-  Snap.httpServe config $ app compiler
+  ch <- newCache 10
+  Snap.httpServe config $ app compiler ch
 
