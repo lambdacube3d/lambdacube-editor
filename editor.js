@@ -105,18 +105,6 @@ var PS = { };
     };
   };
 
-  exports.numDiv = function (n1) {
-    return function (n2) {
-      return n1 / n2;
-    };
-  };
-
-  exports.numSub = function (n1) {
-    return function (n2) {
-      return n1 - n2;
-    };
-  };
-
   //- Eq -------------------------------------------------------------------------
 
   exports.refEq = function (r1) {
@@ -275,22 +263,6 @@ var PS = { };
       this.one = one;
       this.zero = zero;
   };
-  var Ring = function (__superclass_Prelude$dotSemiring_0, sub) {
-      this["__superclass_Prelude.Semiring_0"] = __superclass_Prelude$dotSemiring_0;
-      this.sub = sub;
-  };
-  var ModuloSemiring = function (__superclass_Prelude$dotSemiring_0, div, mod) {
-      this["__superclass_Prelude.Semiring_0"] = __superclass_Prelude$dotSemiring_0;
-      this.div = div;
-      this.mod = mod;
-  };
-  var DivisionRing = function (__superclass_Prelude$dotModuloSemiring_1, __superclass_Prelude$dotRing_0) {
-      this["__superclass_Prelude.ModuloSemiring_1"] = __superclass_Prelude$dotModuloSemiring_1;
-      this["__superclass_Prelude.Ring_0"] = __superclass_Prelude$dotRing_0;
-  };
-  var Num = function (__superclass_Prelude$dotDivisionRing_0) {
-      this["__superclass_Prelude.DivisionRing_0"] = __superclass_Prelude$dotDivisionRing_0;
-  };
   var Eq = function (eq) {
       this.eq = eq;
   };
@@ -323,12 +295,6 @@ var PS = { };
   var unit = {};
   var top = function (dict) {
       return dict.top;
-  };
-  var sub = function (dict) {
-      return dict.sub;
-  };
-  var $minus = function (dictRing) {
-      return sub(dictRing);
   }; 
   var showString = new Show($foreign.showStringImpl);
   var showNumber = new Show($foreign.showNumberImpl);
@@ -356,9 +322,6 @@ var PS = { };
       };
   });
   var semigroupArray = new Semigroup($foreign.concatArray);
-  var ringNumber = new Ring(function () {
-      return semiringNumber;
-  }, $foreign.numSub);
   var pure = function (dict) {
       return dict.pure;
   };
@@ -374,19 +337,6 @@ var PS = { };
   };
   var mul = function (dict) {
       return dict.mul;
-  };
-  var $times = function (dictSemiring) {
-      return mul(dictSemiring);
-  }; 
-  var moduloSemiringNumber = new ModuloSemiring(function () {
-      return semiringNumber;
-  }, $foreign.numDiv, function (v) {
-      return function (v1) {
-          return 0.0;
-      };
-  });                                  
-  var mod = function (dict) {
-      return dict.mod;
   };
   var map = function (dict) {
       return dict.map;
@@ -415,17 +365,6 @@ var PS = { };
   };
   var $eq$eq = function (dictEq) {
       return eq(dictEq);
-  }; 
-  var divisionRingNumber = new DivisionRing(function () {
-      return moduloSemiringNumber;
-  }, function () {
-      return ringNumber;
-  });
-  var numNumber = new Num(function () {
-      return divisionRingNumber;
-  });
-  var div = function (dict) {
-      return dict.div;
   };
   var disj = function (dict) {
       return dict.disj;
@@ -555,10 +494,6 @@ var PS = { };
   exports["Bounded"] = Bounded;
   exports["Ord"] = Ord;
   exports["Eq"] = Eq;
-  exports["DivisionRing"] = DivisionRing;
-  exports["Num"] = Num;
-  exports["Ring"] = Ring;
-  exports["ModuloSemiring"] = ModuloSemiring;
   exports["Semiring"] = Semiring;
   exports["Semigroup"] = Semigroup;
   exports["Monad"] = Monad;
@@ -581,11 +516,6 @@ var PS = { };
   exports["/="] = $div$eq;
   exports["=="] = $eq$eq;
   exports["eq"] = eq;
-  exports["-"] = $minus;
-  exports["sub"] = sub;
-  exports["mod"] = mod;
-  exports["div"] = div;
-  exports["*"] = $times;
   exports["+"] = $plus;
   exports["one"] = one;
   exports["mul"] = mul;
@@ -621,10 +551,6 @@ var PS = { };
   exports["semigroupArray"] = semigroupArray;
   exports["semiringInt"] = semiringInt;
   exports["semiringNumber"] = semiringNumber;
-  exports["ringNumber"] = ringNumber;
-  exports["moduloSemiringNumber"] = moduloSemiringNumber;
-  exports["divisionRingNumber"] = divisionRingNumber;
-  exports["numNumber"] = numNumber;
   exports["eqInt"] = eqInt;
   exports["eqString"] = eqString;
   exports["ordInt"] = ordInt;
@@ -2006,16 +1932,6 @@ var PS = { };
           };
       };
   };
-  var lift2 = function (dictApply) {
-      return function (f) {
-          return function (a) {
-              return function (b) {
-                  return Prelude["<*>"](dictApply)(Prelude["<$>"](dictApply["__superclass_Prelude.Functor_0"]())(f)(a))(b);
-              };
-          };
-      };
-  };
-  exports["lift2"] = lift2;
   exports["*>"] = $times$greater;;
  
 })(PS["Control.Apply"] = PS["Control.Apply"] || {});
@@ -3623,31 +3539,16 @@ var PS = { };
 })(PS["Data.Int"] = PS["Data.Int"] || {});
 (function(exports) {
   /* global exports */
-  "use strict";            
-
-  exports.cos = Math.cos;
+  "use strict";          
 
   exports.floor = Math.floor;
-
-  exports.sin = Math.sin;
-
-  exports.sqrt = Math.sqrt;
-
-  exports.tan = Math.tan;      
-
-  exports.pi = Math.PI;      
  
 })(PS["Math"] = PS["Math"] || {});
 (function(exports) {
   // Generated by psc version 0.8.0.0
   "use strict";
   var $foreign = PS["Math"];
-  exports["pi"] = $foreign.pi;
-  exports["tan"] = $foreign.tan;
-  exports["sqrt"] = $foreign.sqrt;
-  exports["sin"] = $foreign.sin;
-  exports["floor"] = $foreign.floor;
-  exports["cos"] = $foreign.cos;;
+  exports["floor"] = $foreign.floor;;
  
 })(PS["Math"] = PS["Math"] || {});
 (function(exports) {
@@ -3985,7 +3886,6 @@ var PS = { };
   exports["null"] = $$null;
   exports["replicateM"] = replicateM;
   exports[".."] = $dot$dot;
-  exports["zipWith"] = $foreign.zipWith;
   exports["filter"] = $foreign.filter;
   exports["concat"] = $foreign.concat;
   exports["length"] = $foreign.length;
@@ -10077,15 +9977,6 @@ var PS = { };
           return nullSetter(n)("Float");
       };
   };
-  var uniformM44F = function (n) {
-      return function (is) {
-          var $78 = Data_StrMap.lookup(n)(is);
-          if ($78 instanceof Data_Maybe.Just && $78.value0 instanceof Type.SM44F) {
-              return $78.value0.value0;
-          };
-          return nullSetter(n)("M44F");
-      };
-  };
   var uniformV2F = function (n) {
       return function (is) {
           var $84 = Data_StrMap.lookup(n)(is);
@@ -10343,7 +10234,6 @@ var PS = { };
   };
   exports["createObjectCommands"] = createObjectCommands;
   exports["uniformFTexture2D"] = uniformFTexture2D;
-  exports["uniformM44F"] = uniformM44F;
   exports["uniformV2F"] = uniformV2F;
   exports["uniformFloat"] = uniformFloat;
   exports["nullSetter"] = nullSetter;
@@ -12116,215 +12006,6 @@ var PS = { };
  
 })(PS["Data.Argonaut.Parser"] = PS["Data.Argonaut.Parser"] || {});
 (function(exports) {
-  // Generated by psc version 0.8.0.0
-  "use strict";
-  var Prelude = PS["Prelude"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_TypeNat = PS["Data.TypeNat"];
-  var Control_Apply = PS["Control.Apply"];
-  var $$Math = PS["Math"];
-  var Type_Proxy = PS["Type.Proxy"];
-  var Extensions = PS["Extensions"];
-  var functorVec = new Prelude.Functor(function (f) {
-      return function (v) {
-          return Prelude.map(Prelude.functorArray)(f)(v);
-      };
-  });
-  var foldableVector = new Data_Foldable.Foldable(function (dictMonoid) {
-      return function (f) {
-          return function (xs) {
-              return Data_Foldable.foldr(foldableVector)(function (x) {
-                  return function (acc) {
-                      return Prelude["<>"](dictMonoid["__superclass_Prelude.Semigroup_0"]())(f(x))(acc);
-                  };
-              })(Data_Monoid.mempty(dictMonoid))(xs);
-          };
-      };
-  }, function (f) {
-      return function (z) {
-          return function (v) {
-              return Data_Foldable.foldl(Data_Foldable.foldableArray)(f)(z)(v);
-          };
-      };
-  }, function (f) {
-      return function (z) {
-          return function (v) {
-              return Data_Foldable.foldr(Data_Foldable.foldableArray)(f)(z)(v);
-          };
-      };
-  });
-  var vlengthSquared = function (v) {
-      return Data_Foldable.foldl(foldableVector)(Prelude["+"](Prelude.semiringNumber))(0.0)(Prelude["<$>"](functorVec)(function (e) {
-          return e * e;
-      })(v));
-  };
-  var vlength = function ($36) {
-      return $$Math.sqrt(vlengthSquared($36));
-  };
-  var normalize = function (v) {
-      var im = 1.0 / vlength(v);
-      return Prelude["<$>"](functorVec)(function (e) {
-          return e * im;
-      })(v);
-  };
-  var applyVec = new Prelude.Apply(function () {
-      return functorVec;
-  }, function (v) {
-      return function (v1) {
-          return Data_Array.zipWith(function (f$prime) {
-              return function (a$prime) {
-                  return f$prime(a$prime);
-              };
-          })(v)(v1);
-      };
-  });
-  var vSub = function (dictNum) {
-      return Control_Apply.lift2(applyVec)(Prelude["-"]((dictNum["__superclass_Prelude.DivisionRing_0"]())["__superclass_Prelude.Ring_0"]()));
-  };
-  var direction = function (v1) {
-      return function (v2) {
-          return normalize(vSub(Prelude.numNumber)(v1)(v2));
-      };
-  };
-  exports["normalize"] = normalize;
-  exports["vlength"] = vlength;
-  exports["vlengthSquared"] = vlengthSquared;
-  exports["direction"] = direction;
-  exports["vSub"] = vSub;
-  exports["functorVec"] = functorVec;
-  exports["applyVec"] = applyVec;
-  exports["foldableVector"] = foldableVector;;
- 
-})(PS["Data.Vector"] = PS["Data.Vector"] || {});
-(function(exports) {
-  // Generated by psc version 0.8.0.0
-  "use strict";
-  var Prelude = PS["Prelude"];
-  var Data_Vector = PS["Data.Vector"];
-  var Data_TypeNat = PS["Data.TypeNat"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Array_Unsafe = PS["Data.Array.Unsafe"];
-  var Data_Maybe_Unsafe = PS["Data.Maybe.Unsafe"];
-  var Extensions = PS["Extensions"];
-  var vec3 = function (x) {
-      return function (y) {
-          return function (z) {
-              return [ x, y, z ];
-          };
-      };
-  };
-  var cross = function (dictNum) {
-      return function (v) {
-          return function (v1) {
-              if (v.length === 3 && v1.length === 3) {
-                  return [ Prelude["-"]((dictNum["__superclass_Prelude.DivisionRing_0"]())["__superclass_Prelude.Ring_0"]())(Prelude["*"](((dictNum["__superclass_Prelude.DivisionRing_0"]())["__superclass_Prelude.ModuloSemiring_1"]())["__superclass_Prelude.Semiring_0"]())(v[1])(v1[2]))(Prelude["*"](((dictNum["__superclass_Prelude.DivisionRing_0"]())["__superclass_Prelude.ModuloSemiring_1"]())["__superclass_Prelude.Semiring_0"]())(v[2])(v1[1])), Prelude["-"]((dictNum["__superclass_Prelude.DivisionRing_0"]())["__superclass_Prelude.Ring_0"]())(Prelude["*"](((dictNum["__superclass_Prelude.DivisionRing_0"]())["__superclass_Prelude.ModuloSemiring_1"]())["__superclass_Prelude.Semiring_0"]())(v[2])(v1[0]))(Prelude["*"](((dictNum["__superclass_Prelude.DivisionRing_0"]())["__superclass_Prelude.ModuloSemiring_1"]())["__superclass_Prelude.Semiring_0"]())(v[0])(v1[2])), Prelude["-"]((dictNum["__superclass_Prelude.DivisionRing_0"]())["__superclass_Prelude.Ring_0"]())(Prelude["*"](((dictNum["__superclass_Prelude.DivisionRing_0"]())["__superclass_Prelude.ModuloSemiring_1"]())["__superclass_Prelude.Semiring_0"]())(v[0])(v1[1]))(Prelude["*"](((dictNum["__superclass_Prelude.DivisionRing_0"]())["__superclass_Prelude.ModuloSemiring_1"]())["__superclass_Prelude.Semiring_0"]())(v[1])(v1[0])) ];
-              };
-              return Extensions.fail("Vector3>>cross: impossible!");
-          };
-      };
-  };
-  exports["cross"] = cross;
-  exports["vec3"] = vec3;;
- 
-})(PS["Data.Vector3"] = PS["Data.Vector3"] || {});
-(function(exports) {
-  // Generated by psc version 0.8.0.0
-  "use strict";
-  var Prelude = PS["Prelude"];
-  var Data_TypeNat = PS["Data.TypeNat"];
-  var Data_Matrix = PS["Data.Matrix"];
-  var Data_Vector3 = PS["Data.Vector3"];
-  var Data_Vector4 = PS["Data.Vector4"];
-  var Data_Vector = PS["Data.Vector"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var $$Math = PS["Math"];
-  var Extensions = PS["Extensions"];
-  var mulM = function (v) {
-      return function (v1) {
-          if (v.length === 16 && v1.length === 16) {
-              return [ v[0] * v1[0] + v[4] * v1[1] + v[8] * v1[2] + v[12] * v1[3], v[1] * v1[0] + v[5] * v1[1] + v[9] * v1[2] + v[13] * v1[3], v[2] * v1[0] + v[6] * v1[1] + v[10] * v1[2] + v[14] * v1[3], v[3] * v1[0] + v[7] * v1[1] + v[11] * v1[2] + v[15] * v1[3], v[0] * v1[4] + v[4] * v1[5] + v[8] * v1[6] + v[12] * v1[7], v[1] * v1[4] + v[5] * v1[5] + v[9] * v1[6] + v[13] * v1[7], v[2] * v1[4] + v[6] * v1[5] + v[10] * v1[6] + v[14] * v1[7], v[3] * v1[4] + v[7] * v1[5] + v[11] * v1[6] + v[15] * v1[7], v[0] * v1[8] + v[4] * v1[9] + v[8] * v1[10] + v[12] * v1[11], v[1] * v1[8] + v[5] * v1[9] + v[9] * v1[10] + v[13] * v1[11], v[2] * v1[8] + v[6] * v1[9] + v[10] * v1[10] + v[14] * v1[11], v[3] * v1[8] + v[7] * v1[9] + v[11] * v1[10] + v[15] * v1[11], v[0] * v1[12] + v[4] * v1[13] + v[8] * v1[14] + v[12] * v1[15], v[1] * v1[12] + v[5] * v1[13] + v[9] * v1[14] + v[13] * v1[15], v[2] * v1[12] + v[6] * v1[13] + v[10] * v1[14] + v[14] * v1[15], v[3] * v1[12] + v[7] * v1[13] + v[11] * v1[14] + v[15] * v1[15] ];
-          };
-          return Extensions.fail("Matrix4>>mulM: Impossible!");
-      };
-  };
-  var makeRotate = function (angle) {
-      return function (axis) {
-          var $278 = Data_Vector.normalize(axis);
-          if ($278.length === 3) {
-              var s = $$Math.sin(angle);
-              var c = $$Math.cos(angle);
-              var c1 = 1.0 - c;
-              return [ $278[0] * $278[0] * c1 + c, $278[1] * $278[0] * c1 + $278[2] * s, $278[2] * $278[0] * c1 - $278[1] * s, 0.0, $278[0] * $278[1] * c1 - $278[2] * s, $278[1] * $278[1] * c1 + c, $278[1] * $278[2] * c1 + $278[0] * s, 0.0, $278[0] * $278[2] * c1 + $278[1] * s, $278[1] * $278[2] * c1 - $278[0] * s, $278[2] * $278[2] * c1 + c, 0.0, 0.0, 0.0, 0.0, 1.0 ];
-          };
-          return Extensions.fail("Matrix4>>makeRotate: Impossible!");
-      };
-  };
-  var makeLookAt = function (v) {
-      return function (v1) {
-          return function (v2) {
-              if (v.length === 3) {
-                  var $285 = Data_Vector.direction(v)(v1);
-                  if ($285.length === 3) {
-                      var $286 = Data_Vector.normalize(Data_Vector3.cross(Prelude.numNumber)(v2)($285));
-                      if ($286.length === 3) {
-                          var $287 = Data_Vector.normalize(Data_Vector3.cross(Prelude.numNumber)($285)($286));
-                          if ($287.length === 3) {
-                              var m2 = [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, -v[0], -v[1], -v[2], 1.0 ];
-                              var m1 = [ $286[0], $287[0], $285[0], 0.0, $286[1], $287[1], $285[1], 0.0, $286[2], $287[2], $285[2], 0.0, 0.0, 0.0, 0.0, 1.0 ];
-                              return mulM(m1)(m2);
-                          };
-                          return Extensions.fail("Matrix4>>makeRotate: Impossible!");
-                      };
-                      return Extensions.fail("Matrix4>>makeRotate: Impossible!");
-                  };
-                  return Extensions.fail("Matrix4>>makeRotate: Impossible!");
-              };
-              return Extensions.fail("Matrix4>>makeLookAt: Impossible!");
-          };
-      };
-  };
-  var makeFrustum = function (left) {
-      return function (right) {
-          return function (bottom) {
-              return function (top) {
-                  return function (znear) {
-                      return function (zfar) {
-                          var z = (right + left) / (right - left);
-                          var y = (2.0 * znear) / (top - bottom);
-                          var x = (2.0 * znear) / (right - left);
-                          var d = (-2.0 * zfar * znear) / (zfar - znear);
-                          var c = -(zfar + znear) / (zfar - znear);
-                          var b = (top + bottom) / (top - bottom);
-                          return [ (2.0 * znear) / (right - left), 0.0, 0.0, 0.0, 0.0, (2.0 * znear) / (top - bottom), 0.0, 0.0, (right + left) / (right - left), (top + bottom) / (top - bottom), -(zfar + znear) / (zfar - znear), -1.0, 0.0, 0.0, (-2.0 * zfar * znear) / (zfar - znear), 0.0 ];
-                      };
-                  };
-              };
-          };
-      };
-  };
-  var makePerspective = function (fovy) {
-      return function (aspect) {
-          return function (znear) {
-              return function (zfar) {
-                  var ymax = znear * $$Math.tan((fovy * $$Math.pi) / 360.0);
-                  var ymin = -ymax;
-                  var xmin = ymin * aspect;
-                  var xmax = ymax * aspect;
-                  return makeFrustum(xmin)(xmax)(ymin)(ymax)(znear)(zfar);
-              };
-          };
-      };
-  };
-  exports["makeLookAt"] = makeLookAt;
-  exports["makeRotate"] = makeRotate;
-  exports["mulM"] = mulM;
-  exports["makePerspective"] = makePerspective;
-  exports["makeFrustum"] = makeFrustum;;
- 
-})(PS["Data.Matrix4"] = PS["Data.Matrix4"] || {});
-(function(exports) {
   /* globals exports */
   "use strict";
 
@@ -13275,17 +12956,33 @@ var PS = { };
           var v4 = Control_Monad_Eff_JQuery.find("#timeRange")(v2)();
           var getTime = function __do() {
               var v5 = Control_Monad_Eff_JQuery.getValue(v3)();
-              var $69 = Data_Foreign.readNumber(v5);
-              if ($69 instanceof Data_Either.Right) {
-                  return $69.value0;
+              var $73 = Data_Foreign.readNumber(v5);
+              if ($73 instanceof Data_Either.Right) {
+                  return $73.value0;
               };
-              var $71 = Data_Foreign.readString(v5);
-              if ($71 instanceof Data_Either.Right) {
-                  return Global.readFloat($71.value0);
+              var $75 = Data_Foreign.readString(v5);
+              if ($75 instanceof Data_Either.Right) {
+                  return Global.readFloat($75.value0);
               };
               return 0.0;
           };
           Prelude.flip(Control_Monad_Eff_JQuery.on("input"))(v3)(function (v5) {
+              return function (v6) {
+                  return function __do() {
+                      Prelude[">>="](Control_Monad_Eff.bindEff)(Control_Monad_Eff_JQuery.getValue(v3))(Prelude.flip(Control_Monad_Eff_JQuery.setValue)(v4))();
+                      return Prelude[">>="](Control_Monad_Eff.bindEff)(getTime)(Control_Monad_Eff_Ref.writeRef(v1))();
+                  };
+              };
+          })();
+          Prelude.flip(Control_Monad_Eff_JQuery.on("input"))(v4)(function (v5) {
+              return function (v6) {
+                  return function __do() {
+                      Prelude[">>="](Control_Monad_Eff.bindEff)(Control_Monad_Eff_JQuery.getValue(v4))(Prelude.flip(Control_Monad_Eff_JQuery.setValue)(v3))();
+                      return Prelude[">>="](Control_Monad_Eff.bindEff)(getTime)(Control_Monad_Eff_Ref.writeRef(v1))();
+                  };
+              };
+          })();
+          Prelude.flip(Control_Monad_Eff_JQuery.on("change"))(v3)(function (v5) {
               return function (v6) {
                   return function __do() {
                       Prelude[">>="](Control_Monad_Eff.bindEff)(Control_Monad_Eff_JQuery.getValue(v3))(Prelude.flip(Control_Monad_Eff_JQuery.setValue)(v4))();
@@ -13321,6 +13018,14 @@ var PS = { };
                   };
               };
           })();
+          var updateInput = function (t) {
+              return function __do() {
+                  var v12 = Graphics_WebGL.getCanvasWidth(context)();
+                  var v13 = Graphics_WebGL.getCanvasHeight(context)();
+                  Input.setScreenSize(v)(new LinearBase.V2(v12, v13))();
+                  return Input.uniformFloat("Time")(v.uniformSetter)(t)();
+              };
+          };
           var toLCMat4 = function (v12) {
               if (v12.length === 16) {
                   var v41 = new LinearBase.V4(v12[12], v12[13], v12[14], v12[15]);
@@ -13331,20 +13036,6 @@ var PS = { };
               };
               return Extensions.fail("invalid Mat4");
           };
-          var updateInput = function (t) {
-              return function __do() {
-                  var v12 = Graphics_WebGL.getCanvasWidth(context)();
-                  var v13 = Graphics_WebGL.getCanvasHeight(context)();
-                  Input.setScreenSize(v)(new LinearBase.V2(v12, v13))();
-                  var pm = Data_Matrix4.makePerspective(30.0)(Data_Int.toNumber(v12) / Data_Int.toNumber(v13))(0.1)(100.0);
-                  var cm = Data_Matrix4.makeLookAt(Data_Vector3.vec3(3.0)(1.3)(0.3))(Data_Vector3.vec3(0.0)(0.0)(0.0))(Data_Vector3.vec3(0.0)(1.0)(0.0));
-                  var angle = (3.141592653589793 / 24.0) * t;
-                  var mm = Data_Matrix4.makeRotate(angle)(Data_Vector3.vec3(0.0)(1.0)(0.0));
-                  var mvp = Data_Matrix4.mulM(Data_Matrix4.mulM(pm)(cm))(mm);
-                  Input.uniformFloat("Time")(v.uniformSetter)(t)();
-                  return Input.uniformM44F("MVP")(v.uniformSetter)(toLCMat4(mvp))();
-              };
-          };
           var v12 = Mesh.compileMesh(Sample.myCube)();
           Mesh.addMesh(v)("stream4")(v12)([  ])();
           var v13 = Mesh.compileMesh(Sample.myQuad)();
@@ -13353,19 +13044,19 @@ var PS = { };
           var addRemoteModel = function (sname) {
               return function (uri) {
                   return $foreign.getJSON(uri)(function (m) {
-                      var $111 = Data_Argonaut_Decode.decodeJson(Mesh.decodeJsonMesh)(m);
-                      if ($111 instanceof Data_Either.Left) {
-                          return Control_Monad_Eff_Console.log("decode error: " + $111.value0);
+                      var $119 = Data_Argonaut_Decode.decodeJson(Mesh.decodeJsonMesh)(m);
+                      if ($119 instanceof Data_Either.Left) {
+                          return Control_Monad_Eff_Console.log("decode error: " + $119.value0);
                       };
-                      if ($111 instanceof Data_Either.Right) {
+                      if ($119 instanceof Data_Either.Right) {
                           return function __do() {
-                              var v14 = Mesh.compileMesh($111.value0)();
+                              var v14 = Mesh.compileMesh($119.value0)();
                               Mesh.addMesh(v)(sname)(v14)([  ])();
                               Input.sortSlotObjects(v)();
                               return Prelude.unit;
                           };
                       };
-                      throw new Error("Failed pattern match at Main line 168, column 7 - line 187, column 3: " + [ $111.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 168, column 7 - line 187, column 3: " + [ $119.constructor.name ]);
                   });
               };
           };
@@ -13425,8 +13116,8 @@ var PS = { };
                               throw new Error("Failed pattern match at Main line 195, column 7 - line 219, column 3: " + [ v19.constructor.name, i.constructor.name ]);
                           };
                       };
-                      var $127 = Data_Foldable.foldl(Data_Foldable.foldableArray)(f)(Data_Maybe.Nothing.value)(ps);
-                      if ($127 instanceof Data_Maybe.Nothing) {
+                      var $135 = Data_Foldable.foldl(Data_Foldable.foldableArray)(f)(Data_Maybe.Nothing.value)(ps);
+                      if ($135 instanceof Data_Maybe.Nothing) {
                           return {
                               startLine: 0, 
                               startColumn: 0, 
@@ -13435,10 +13126,10 @@ var PS = { };
                               text: ""
                           };
                       };
-                      if ($127 instanceof Data_Maybe.Just) {
-                          return $127.value0;
+                      if ($135 instanceof Data_Maybe.Just) {
+                          return $135.value0;
                       };
-                      throw new Error("Failed pattern match at Main line 195, column 7 - line 219, column 3: " + [ $127.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 195, column 7 - line 219, column 3: " + [ $135.constructor.name ]);
                   };
               };
           };
@@ -13487,13 +13178,13 @@ var PS = { };
               }, 
               onMessage: function (s) {
                   return function (m) {
-                      var $135 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeArray(Data_Argonaut_Decode.decodeJsonString)));
-                      if ($135 instanceof Data_Either.Left) {
-                          return Control_Monad_Eff_Console.log("decode error: " + $135.value0);
+                      var $143 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeArray(Data_Argonaut_Decode.decodeJsonString)));
+                      if ($143 instanceof Data_Either.Left) {
+                          return Control_Monad_Eff_Console.log("decode error: " + $143.value0);
                       };
-                      if ($135 instanceof Data_Either.Right) {
+                      if ($143 instanceof Data_Either.Right) {
                           return function __do() {
-                              Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)($135.value0)(function (e) {
+                              Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)($143.value0)(function (e) {
                                   return function __do() {
                                       var v19 = Control_Monad_Eff_JQuery.create("<option></option>")();
                                       Control_Monad_Eff_JQuery.setText(e)(v19)();
@@ -13503,7 +13194,7 @@ var PS = { };
                               return Prelude.unit;
                           };
                       };
-                      throw new Error("Failed pattern match at Main line 89, column 1 - line 363, column 14: " + [ $135.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 89, column 1 - line 363, column 14: " + [ $143.constructor.name ]);
                   };
               }, 
               onError: function (s) {
@@ -13538,40 +13229,40 @@ var PS = { };
                   return function (m) {
                       return function __do() {
                           Control_Monad_Eff_Console.log("got response")();
-                          var $144 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(TypeInfo.decodeJsonCompileResult));
-                          if ($144 instanceof Data_Either.Left) {
-                              return Control_Monad_Eff_Console.log("decode error: " + $144.value0)();
+                          var $152 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(TypeInfo.decodeJsonCompileResult));
+                          if ($152 instanceof Data_Either.Left) {
+                              return Control_Monad_Eff_Console.log("decode error: " + $152.value0)();
                           };
-                          if ($144 instanceof Data_Either.Right && $144.value0 instanceof TypeInfo.CompileError) {
+                          if ($152 instanceof Data_Either.Right && $152.value0 instanceof TypeInfo.CompileError) {
                               Control_Monad_Eff_JQuery.setText("Error")(v8)();
-                              Control_Monad_Eff_JQuery.setText($144.value0.value1)(v7)();
+                              Control_Monad_Eff_JQuery.setText($152.value0.value1)(v7)();
                               var v20 = Control_Monad_Eff_Ref.readRef(v17)();
                               Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(v20)(function (mkr) {
                                   return Ace_EditSession.removeMarker(mkr)(v15);
                               })();
-                              var v21 = Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_Traversable.traversableArray)($144.value0.value0)(function (v21) {
+                              var v21 = Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_Traversable.traversableArray)($152.value0.value0)(function (v21) {
                                   return function __do() {
                                       var v22 = Ace_Range.create(v21.value0.startLine - 1)(v21.value0.startColumn - 1)(v21.value0.endLine - 1)(v21.value0.endColumn - 1)();
                                       return addMarker(v22)("lc_error")("text")(false)(v15)();
                                   };
                               })();
                               Control_Monad_Eff_Ref.writeRef(v17)(v21)();
-                              Control_Monad_Eff_Ref.writeRef(v16)($144.value0.value2)();
+                              Control_Monad_Eff_Ref.writeRef(v16)($152.value0.value2)();
                               return Prelude.unit;
                           };
-                          if ($144 instanceof Data_Either.Right && $144.value0 instanceof TypeInfo.Compiled) {
-                              Control_Monad_Eff_JQuery.setText($144.value0.value0)(v6)();
+                          if ($152 instanceof Data_Either.Right && $152.value0 instanceof TypeInfo.Compiled) {
+                              Control_Monad_Eff_JQuery.setText($152.value0.value0)(v6)();
                               Control_Monad_Eff_JQuery.setText("Compiled")(v8)();
                               Control_Monad_Eff_JQuery.setText("No errors.")(v7)();
-                              Control_Monad_Eff_Ref.writeRef(v16)($144.value0.value2)();
+                              Control_Monad_Eff_Ref.writeRef(v16)($152.value0.value2)();
                               var v20 = Control_Monad_Eff_Ref.readRef(v17)();
                               Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(v20)(function (mkr) {
                                   return Ace_EditSession.removeMarker(mkr)(v15);
                               })();
                               Control_Monad_Eff_Ref.writeRef(v17)([  ])();
-                              return render($144.value0.value1)();
+                              return render($152.value0.value1)();
                           };
-                          throw new Error("Failed pattern match at Main line 89, column 1 - line 363, column 14: " + [ $144.constructor.name ]);
+                          throw new Error("Failed pattern match at Main line 89, column 1 - line 363, column 14: " + [ $152.constructor.name ]);
                       };
                   };
               }, 
@@ -13604,18 +13295,18 @@ var PS = { };
                   }, 
                   onMessage: function (s) {
                       return function (m) {
-                          var $167 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeJsonString));
-                          if ($167 instanceof Data_Either.Left) {
-                              return Control_Monad_Eff_Console.log("decode error: " + $167.value0);
+                          var $175 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeJsonString));
+                          if ($175 instanceof Data_Either.Left) {
+                              return Control_Monad_Eff_Console.log("decode error: " + $175.value0);
                           };
-                          if ($167 instanceof Data_Either.Right) {
+                          if ($175 instanceof Data_Either.Right) {
                               return function __do() {
-                                  Ace_EditSession.setValue($167.value0)(v15)();
+                                  Ace_EditSession.setValue($175.value0)(v15)();
                                   compile(v20.value0)();
                                   return Prelude.unit;
                               };
                           };
-                          throw new Error("Failed pattern match at Main line 89, column 1 - line 363, column 14: " + [ $167.constructor.name ]);
+                          throw new Error("Failed pattern match at Main line 89, column 1 - line 363, column 14: " + [ $175.constructor.name ]);
                       };
                   }, 
                   onError: function (s) {
@@ -13644,8 +13335,8 @@ var PS = { };
                   Control_Monad_Eff_Ref.writeRef(v22)(v23)();
                   var v25 = Control_Monad_Eff_JQuery.getProp("checked")(v5)();
                   (function () {
-                      var $178 = Data_Foreign.readBoolean(v25);
-                      if ($178 instanceof Data_Either.Right && !$178.value0) {
+                      var $186 = Data_Foreign.readBoolean(v25);
+                      if ($186 instanceof Data_Either.Right && !$186.value0) {
                           return function __do() {
                               Control_Monad_Eff_Ref.modifyRef(v1)(Prelude["+"](Prelude.semiringNumber)(deltaTime))();
                               var v26 = Control_Monad_Eff_Ref.readRef(v1)();

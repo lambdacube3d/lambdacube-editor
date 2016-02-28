@@ -116,6 +116,12 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
   flip (J.on "input") timeBox $ \_ _ -> do
     J.getValue timeBox >>= flip J.setValue timeRange
     getTime >>= writeRef timeRef
+  flip (J.on "input") timeRange $ \_ _ -> do
+    J.getValue timeRange >>= flip J.setValue timeBox
+    getTime >>= writeRef timeRef
+  flip (J.on "change") timeBox $ \_ _ -> do
+    J.getValue timeBox >>= flip J.setValue timeRange
+    getTime >>= writeRef timeRef
   flip (J.on "change") timeRange $ \_ _ -> do
     J.getValue timeRange >>= flip J.setValue timeBox
     getTime >>= writeRef timeRef
