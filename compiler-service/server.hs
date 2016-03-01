@@ -103,10 +103,10 @@ app compiler ch = Snap.route
         toTypeInfo (s,e,m) = TypeInfo (cvtRange $ C.Range s e) m
         cvtRange (C.Range s e) = T.Range (sourceLine s) (sourceColumn s) (sourceLine e) (sourceColumn e)
 
-        ff (Left err, infos) = CompileError (V.fromList eloc) err $ convertInfos infos
+        ff (Left err, (infos, _)) = CompileError (V.fromList eloc) err $ convertInfos infos
           where
             eloc = map cvtRange $ errorRange infos
-        ff (Right ppl, infos) = Compiled "TODO" (prettyShowUnlines ppl) ppl $ convertInfos infos
+        ff (Right ppl, (infos, dsg)) = Compiled dsg (prettyShowUnlines ppl) ppl $ convertInfos infos
 
         er e = return $ encodePretty $ CompileError mempty ("\n!FAIL\n" ++ e) mempty
 
