@@ -32,7 +32,7 @@ executable compiler-service
     pretty-show == 1.6.*,
     containers,
     vector >= 0.11 && <0.12,
-    megaparsec >= 4.3.0 && <4.4,
+    megaparsec >= 4.3.0 && <4.5,
     aeson-pretty,
     process,
     bytestring,
