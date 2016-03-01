@@ -106,7 +106,7 @@ app compiler ch = Snap.route
         ff (Left err, infos) = CompileError (V.fromList eloc) err $ convertInfos infos
           where
             eloc = map cvtRange $ errorRange infos
-        ff (Right ppl, infos) = Compiled (prettyShowUnlines ppl) ppl $ convertInfos infos
+        ff (Right ppl, infos) = Compiled "TODO" (prettyShowUnlines ppl) ppl $ convertInfos infos
 
         er e = return $ encodePretty $ CompileError mempty ("\n!FAIL\n" ++ e) mempty
 

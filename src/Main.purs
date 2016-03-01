@@ -128,6 +128,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
 
   pauseBox <- J.find "#pause" b
   pipelinepanel <- J.find "#pipeline" b
+  desugaredpanel <- J.find "#desugared" b
   messagepanel <- J.find "#messagepanel" b
   statuspanel <- J.find "#statuspanel" b
   btnCompile <- J.find "#compilebutton" b
@@ -293,7 +294,8 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
             writeRef markerRef mkr
             writeRef typeInfoRef infos
             return unit
-          Right (Compiled pplSrc p infos) -> do
+          Right (Compiled dsSrc pplSrc p infos) -> do
+            J.setText dsSrc desugaredpanel
             J.setText pplSrc pipelinepanel
             J.setText "Compiled" statuspanel
             J.setText "No errors." messagepanel

@@ -1,5 +1,5 @@
 -- generated file, do not modify!
--- 2016-02-26T11:37:22.609565000000Z
+-- 2016-03-01T13:00:40.810157000000Z
 
 module TypeInfo where
 import Prelude
@@ -36,7 +36,7 @@ data TypeInfo
 
 data CompileResult
   = CompileError (Array Range) String (Array TypeInfo)
-  | Compiled String Pipeline (Array TypeInfo)
+  | Compiled String String Pipeline (Array TypeInfo)
 
 
 
@@ -91,7 +91,7 @@ instance decodeJsonTypeInfo :: DecodeJson TypeInfo where
 instance encodeJsonCompileResult :: EncodeJson CompileResult where
   encodeJson v = case v of
     CompileError arg0 arg1 arg2 -> "tag" := "CompileError" ~> "arg0" := arg0 ~> "arg1" := arg1 ~> "arg2" := arg2 ~> jsonEmptyObject
-    Compiled arg0 arg1 arg2 -> "tag" := "Compiled" ~> "arg0" := arg0 ~> "arg1" := arg1 ~> "arg2" := arg2 ~> jsonEmptyObject
+    Compiled arg0 arg1 arg2 arg3 -> "tag" := "Compiled" ~> "arg0" := arg0 ~> "arg1" := arg1 ~> "arg2" := arg2 ~> "arg3" := arg3 ~> jsonEmptyObject
 
 instance decodeJsonCompileResult :: DecodeJson CompileResult where
   decodeJson json = do
@@ -99,5 +99,5 @@ instance decodeJsonCompileResult :: DecodeJson CompileResult where
     tag <- obj .? "tag"
     case tag of
       "CompileError" -> CompileError <$> obj .? "arg0" <*> obj .? "arg1" <*> obj .? "arg2"
-      "Compiled" -> Compiled <$> obj .? "arg0" <*> obj .? "arg1" <*> obj .? "arg2"
+      "Compiled" -> Compiled <$> obj .? "arg0" <*> obj .? "arg1" <*> obj .? "arg2" <*> obj .? "arg3"
 
