@@ -97,8 +97,9 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
                     , Tuple "grid3d"  {primitive: Points,    attributes: fromFoldable [Tuple "position" TV3F]}
                     , Tuple "quad"    {primitive: Triangles, attributes: fromFoldable [Tuple "position" TV2F]}
                     , Tuple "cube"    {primitive: Triangles, attributes: fromFoldable [Tuple "position"  TV3F, Tuple "normal" TV3F]}
+                    , Tuple "lambdaCube" {primitive: Triangles, attributes: fromFoldable [Tuple "position"  TV3F, Tuple "normal" TV3F]}
                     ]
-        , uniforms : fromFoldable [Tuple "MVP" M44F, Tuple "Time" Float, Tuple "Mouse" V2F, Tuple "Diffuse" FTexture2D]
+        , uniforms : fromFoldable [Tuple "MVP" M44F, Tuple "Time" Float, Tuple "Mouse" V2F, Tuple "Diffuse" FTexture2D, Tuple "OcclusionFieldMin" FTexture2D, Tuple "OcclusionFieldMax" FTexture2D]
         }
   pplInput <- mkWebGLPipelineInput inputSchema
 
@@ -163,8 +164,13 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
   gpuQuad <- compileMesh myQuad
   addMesh pplInput "quad" gpuQuad []
 
-  -- upload texture
+  gpuLambdaCube <- compileMesh lambdaCube
+  addMesh pplInput "lambdaCube" gpuLambdaCube []
+
+  -- upload textures
   uploadTexture2DToGPU "logo.png" (uniformFTexture2D "Diffuse" pplInput.uniformSetter)
+  uploadTexture2DToGPU "OcclusionFieldMin.png" (uniformFTexture2D "OcclusionFieldMin" pplInput.uniformSetter)
+  uploadTexture2DToGPU "OcclusionFieldMax.png" (uniformFTexture2D "OcclusionFieldMax" pplInput.uniformSetter)
 
   let addRemoteModel sname uri = getJSON uri $ \m -> do
         case decodeJson m of

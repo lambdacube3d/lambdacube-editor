@@ -2568,7 +2568,7 @@ var PS = { };
               tail: v.value1
           });
       };
-      throw new Error("Failed pattern match at Data.List line 272, column 1 - line 273, column 1: " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at Data.List line 270, column 1 - line 271, column 1: " + [ v.constructor.name ]);
   };
   var toUnfoldable = function (dictUnfoldable) {
       return Data_Unfoldable.unfoldr(dictUnfoldable)(function (xs) {
@@ -2584,7 +2584,7 @@ var PS = { };
       if (v instanceof Cons) {
           return new Data_Maybe.Just(v.value1);
       };
-      throw new Error("Failed pattern match at Data.List line 253, column 1 - line 254, column 1: " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at Data.List line 251, column 1 - line 252, column 1: " + [ v.constructor.name ]);
   };
   var singleton = function (a) {
       return new Cons(a, Nil.value);
@@ -2627,7 +2627,7 @@ var PS = { };
                       v = __tco_v;
                       continue tco;
                   };
-                  throw new Error("Failed pattern match at Data.List line 370, column 1 - line 371, column 1: " + [ acc.constructor.name, v.constructor.name ]);
+                  throw new Error("Failed pattern match at Data.List line 368, column 1 - line 369, column 1: " + [ acc.constructor.name, v.constructor.name ]);
               };
           };
       };
@@ -2658,7 +2658,7 @@ var PS = { };
                                   acc = __tco_acc;
                                   continue tco;
                               };
-                              throw new Error("Failed pattern match at Data.List line 656, column 1 - line 657, column 1: " + [ v.constructor.name, v1.constructor.name, acc.constructor.name ]);
+                              throw new Error("Failed pattern match at Data.List line 654, column 1 - line 655, column 1: " + [ v.constructor.name, v1.constructor.name, acc.constructor.name ]);
                           };
                       };
                   };
@@ -2697,24 +2697,24 @@ var PS = { };
                                       rest = __tco_rest;
                                       continue tco;
                                   };
-                                  throw new Error("Failed pattern match at Data.List line 142, column 1 - line 143, column 1: " + [ s.constructor.name, e.constructor.name, step.constructor.name, rest.constructor.name ]);
+                                  throw new Error("Failed pattern match at Data.List line 140, column 1 - line 141, column 1: " + [ s.constructor.name, e.constructor.name, step.constructor.name, rest.constructor.name ]);
                               };
                           };
                       };
                   };
               };
               return go(end)(start)((function () {
-                  var $210 = start > end;
-                  if ($210) {
+                  var $209 = start > end;
+                  if ($209) {
                       return 1;
                   };
-                  if (!$210) {
+                  if (!$209) {
                       return -1;
                   };
-                  throw new Error("Failed pattern match at Data.List line 142, column 1 - line 143, column 1: " + [ $210.constructor.name ]);
+                  throw new Error("Failed pattern match at Data.List line 140, column 1 - line 141, column 1: " + [ $209.constructor.name ]);
               })())(Nil.value);
           };
-          throw new Error("Failed pattern match at Data.List line 142, column 1 - line 143, column 1: " + [ start.constructor.name, end.constructor.name ]);
+          throw new Error("Failed pattern match at Data.List line 140, column 1 - line 141, column 1: " + [ start.constructor.name, end.constructor.name ]);
       };
   };                     
   var head = function (v) {
@@ -2724,7 +2724,7 @@ var PS = { };
       if (v instanceof Cons) {
           return new Data_Maybe.Just(v.value0);
       };
-      throw new Error("Failed pattern match at Data.List line 238, column 1 - line 239, column 1: " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at Data.List line 236, column 1 - line 237, column 1: " + [ v.constructor.name ]);
   };
   var functorList = new Prelude.Functor(function (f) {
       return function (lst) {
@@ -2743,7 +2743,7 @@ var PS = { };
                           acc = __tco_acc;
                           continue tco;
                       };
-                      throw new Error("Failed pattern match at Data.List line 757, column 1 - line 764, column 1: " + [ v.constructor.name, acc.constructor.name ]);
+                      throw new Error("Failed pattern match at Data.List line 731, column 1 - line 738, column 1: " + [ v.constructor.name, acc.constructor.name ]);
                   };
               };
           };
@@ -2762,8 +2762,8 @@ var PS = { };
   var foldableList = new Data_Foldable.Foldable(function (dictMonoid) {
       return function (f) {
           return Data_Foldable.foldl(foldableList)(function (acc) {
-              return function ($373) {
-                  return Prelude.append(dictMonoid["__superclass_Prelude.Semigroup_0"]())(acc)(f($373));
+              return function ($365) {
+                  return Prelude.append(dictMonoid["__superclass_Prelude.Semigroup_0"]())(acc)(f($365));
               };
           })(Data_Monoid.mempty(dictMonoid));
       };
@@ -2858,7 +2858,7 @@ var PS = { };
                           continue tco;
                       };
                   };
-                  throw new Error("Failed pattern match at Data.List line 393, column 1 - line 394, column 1: " + [ acc.constructor.name, v.constructor.name ]);
+                  throw new Error("Failed pattern match at Data.List line 391, column 1 - line 392, column 1: " + [ acc.constructor.name, v.constructor.name ]);
               };
           };
       };
@@ -3801,7 +3801,7 @@ var PS = { };
                   if ($46 instanceof Prelude.LT) {
                       return -1;
                   };
-                  throw new Error("Failed pattern match at Data.Array line 417, column 3 - line 422, column 1: " + [ $46.constructor.name ]);
+                  throw new Error("Failed pattern match at Data.Array line 409, column 3 - line 414, column 1: " + [ $46.constructor.name ]);
               };
           };
           return $foreign.sortImpl(comp$prime)(xs);
@@ -3816,7 +3816,7 @@ var PS = { };
               if (Prelude.otherwise) {
                   return Data_Traversable.sequence(Data_Traversable.traversableArray)(dictMonad["__superclass_Prelude.Applicative_0"]())($foreign.replicate(n)(m));
               };
-              throw new Error("Failed pattern match at Data.Array line 137, column 1 - line 138, column 1: " + [ n.constructor.name, m.constructor.name ]);
+              throw new Error("Failed pattern match at Data.Array line 136, column 1 - line 137, column 1: " + [ n.constructor.name, m.constructor.name ]);
           };
       };
   };
@@ -12851,6 +12851,13 @@ var PS = { };
       primitive: Mesh.P_Triangles.value, 
       gpuData: Data_Maybe.Nothing.value
   });
+  var lambdaCubeVertices = [ new LinearBase.V3(5.0, -5.0, -4.0), new LinearBase.V3(5.0, -4.0, -4.0), new LinearBase.V3(-5.0, -4.0, -4.0), new LinearBase.V3(5.0, -5.0, -4.0), new LinearBase.V3(-5.0, -4.0, -4.0), new LinearBase.V3(-5.0, -5.0, -4.0), new LinearBase.V3(5.0, -4.0, -4.0), new LinearBase.V3(5.0, -4.0, -5.0), new LinearBase.V3(-5.0, -4.0, -5.0), new LinearBase.V3(5.0, -4.0, -4.0), new LinearBase.V3(-5.0, -4.0, -5.0), new LinearBase.V3(-5.0, -4.0, -4.0), new LinearBase.V3(5.0, -4.0, -5.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(-5.0, -5.0, -5.0), new LinearBase.V3(5.0, -4.0, -5.0), new LinearBase.V3(-5.0, -5.0, -5.0), new LinearBase.V3(-5.0, -4.0, -5.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(5.0, -5.0, -4.0), new LinearBase.V3(-5.0, -5.0, -4.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(-5.0, -5.0, -4.0), new LinearBase.V3(-5.0, -5.0, -5.0), new LinearBase.V3(-5.0, -5.0, -4.0), new LinearBase.V3(-5.0, -4.0, -4.0), new LinearBase.V3(-5.0, -4.0, -5.0), new LinearBase.V3(-5.0, -5.0, -4.0), new LinearBase.V3(-5.0, -4.0, -5.0), new LinearBase.V3(-5.0, -5.0, -5.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(5.0, -4.0, -5.0), new LinearBase.V3(5.0, -4.0, -4.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(5.0, -4.0, -4.0), new LinearBase.V3(5.0, -5.0, -4.0), new LinearBase.V3(5.0, 4.0, -4.0), new LinearBase.V3(5.0, 5.0, -4.0), new LinearBase.V3(-5.0, 5.0, -4.0), new LinearBase.V3(5.0, 4.0, -4.0), new LinearBase.V3(-5.0, 5.0, -4.0), new LinearBase.V3(-5.0, 4.0, -4.0), new LinearBase.V3(5.0, 5.0, -4.0), new LinearBase.V3(5.0, 5.0, -5.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(5.0, 5.0, -4.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-5.0, 5.0, -4.0), new LinearBase.V3(5.0, 5.0, -5.0), new LinearBase.V3(5.0, 4.0, -5.0), new LinearBase.V3(-5.0, 4.0, -5.0), new LinearBase.V3(5.0, 5.0, -5.0), new LinearBase.V3(-5.0, 4.0, -5.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(5.0, 4.0, -5.0), new LinearBase.V3(5.0, 4.0, -4.0), new LinearBase.V3(-5.0, 4.0, -4.0), new LinearBase.V3(5.0, 4.0, -5.0), new LinearBase.V3(-5.0, 4.0, -4.0), new LinearBase.V3(-5.0, 4.0, -5.0), new LinearBase.V3(-5.0, 4.0, -4.0), new LinearBase.V3(-5.0, 5.0, -4.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-5.0, 4.0, -4.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-5.0, 4.0, -5.0), new LinearBase.V3(5.0, 4.0, -5.0), new LinearBase.V3(5.0, 5.0, -5.0), new LinearBase.V3(5.0, 5.0, -4.0), new LinearBase.V3(5.0, 4.0, -5.0), new LinearBase.V3(5.0, 5.0, -4.0), new LinearBase.V3(5.0, 4.0, -4.0), new LinearBase.V3(5.0, 4.0, 5.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(-5.0, 5.0, 5.0), new LinearBase.V3(5.0, 4.0, 5.0), new LinearBase.V3(-5.0, 5.0, 5.0), new LinearBase.V3(-5.0, 4.0, 5.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(5.0, 5.0, 4.0), new LinearBase.V3(-5.0, 5.0, 4.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(-5.0, 5.0, 4.0), new LinearBase.V3(-5.0, 5.0, 5.0), new LinearBase.V3(5.0, 5.0, 4.0), new LinearBase.V3(5.0, 4.0, 4.0), new LinearBase.V3(-5.0, 4.0, 4.0), new LinearBase.V3(5.0, 5.0, 4.0), new LinearBase.V3(-5.0, 4.0, 4.0), new LinearBase.V3(-5.0, 5.0, 4.0), new LinearBase.V3(5.0, 4.0, 4.0), new LinearBase.V3(5.0, 4.0, 5.0), new LinearBase.V3(-5.0, 4.0, 5.0), new LinearBase.V3(5.0, 4.0, 4.0), new LinearBase.V3(-5.0, 4.0, 5.0), new LinearBase.V3(-5.0, 4.0, 4.0), new LinearBase.V3(-5.0, 4.0, 5.0), new LinearBase.V3(-5.0, 5.0, 5.0), new LinearBase.V3(-5.0, 5.0, 4.0), new LinearBase.V3(-5.0, 4.0, 5.0), new LinearBase.V3(-5.0, 5.0, 4.0), new LinearBase.V3(-5.0, 4.0, 4.0), new LinearBase.V3(5.0, 4.0, 4.0), new LinearBase.V3(5.0, 5.0, 4.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(5.0, 4.0, 4.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(5.0, 4.0, 5.0), new LinearBase.V3(5.0, -5.0, 5.0), new LinearBase.V3(5.0, -4.0, 5.0), new LinearBase.V3(-5.0, -4.0, 5.0), new LinearBase.V3(5.0, -5.0, 5.0), new LinearBase.V3(-5.0, -4.0, 5.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(5.0, -4.0, 5.0), new LinearBase.V3(5.0, -4.0, 4.0), new LinearBase.V3(-5.0, -4.0, 4.0), new LinearBase.V3(5.0, -4.0, 5.0), new LinearBase.V3(-5.0, -4.0, 4.0), new LinearBase.V3(-5.0, -4.0, 5.0), new LinearBase.V3(5.0, -4.0, 4.0), new LinearBase.V3(5.0, -5.0, 4.0), new LinearBase.V3(-5.0, -5.0, 4.0), new LinearBase.V3(5.0, -4.0, 4.0), new LinearBase.V3(-5.0, -5.0, 4.0), new LinearBase.V3(-5.0, -4.0, 4.0), new LinearBase.V3(5.0, -5.0, 4.0), new LinearBase.V3(5.0, -5.0, 5.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(5.0, -5.0, 4.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-5.0, -5.0, 4.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-5.0, -4.0, 5.0), new LinearBase.V3(-5.0, -4.0, 4.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-5.0, -4.0, 4.0), new LinearBase.V3(-5.0, -5.0, 4.0), new LinearBase.V3(5.0, -5.0, 4.0), new LinearBase.V3(5.0, -4.0, 4.0), new LinearBase.V3(5.0, -4.0, 5.0), new LinearBase.V3(5.0, -5.0, 4.0), new LinearBase.V3(5.0, -4.0, 5.0), new LinearBase.V3(5.0, -5.0, 5.0), new LinearBase.V3(-4.0, -5.0, -4.0), new LinearBase.V3(-4.0, 5.0, -4.0), new LinearBase.V3(-5.0, 5.0, -4.0), new LinearBase.V3(-4.0, -5.0, -4.0), new LinearBase.V3(-5.0, 5.0, -4.0), new LinearBase.V3(-5.0, -5.0, -4.0), new LinearBase.V3(-4.0, 5.0, -4.0), new LinearBase.V3(-4.0, 5.0, -5.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-4.0, 5.0, -4.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-5.0, 5.0, -4.0), new LinearBase.V3(-4.0, 5.0, -5.0), new LinearBase.V3(-4.0, -5.0, -5.0), new LinearBase.V3(-5.0, -5.0, -5.0), new LinearBase.V3(-4.0, 5.0, -5.0), new LinearBase.V3(-5.0, -5.0, -5.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-4.0, -5.0, -5.0), new LinearBase.V3(-4.0, -5.0, -4.0), new LinearBase.V3(-5.0, -5.0, -4.0), new LinearBase.V3(-4.0, -5.0, -5.0), new LinearBase.V3(-5.0, -5.0, -4.0), new LinearBase.V3(-5.0, -5.0, -5.0), new LinearBase.V3(-5.0, -5.0, -4.0), new LinearBase.V3(-5.0, 5.0, -4.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-5.0, -5.0, -4.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-5.0, -5.0, -5.0), new LinearBase.V3(-4.0, -5.0, -5.0), new LinearBase.V3(-4.0, 5.0, -5.0), new LinearBase.V3(-4.0, 5.0, -4.0), new LinearBase.V3(-4.0, -5.0, -5.0), new LinearBase.V3(-4.0, 5.0, -4.0), new LinearBase.V3(-4.0, -5.0, -4.0), new LinearBase.V3(-4.0, -5.0, 5.0), new LinearBase.V3(-4.0, 5.0, 5.0), new LinearBase.V3(-5.0, 5.0, 5.0), new LinearBase.V3(-4.0, -5.0, 5.0), new LinearBase.V3(-5.0, 5.0, 5.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-4.0, 5.0, 5.0), new LinearBase.V3(-4.0, 5.0, 4.0), new LinearBase.V3(-5.0, 5.0, 4.0), new LinearBase.V3(-4.0, 5.0, 5.0), new LinearBase.V3(-5.0, 5.0, 4.0), new LinearBase.V3(-5.0, 5.0, 5.0), new LinearBase.V3(-4.0, 5.0, 4.0), new LinearBase.V3(-4.0, -5.0, 4.0), new LinearBase.V3(-5.0, -5.0, 4.0), new LinearBase.V3(-4.0, 5.0, 4.0), new LinearBase.V3(-5.0, -5.0, 4.0), new LinearBase.V3(-5.0, 5.0, 4.0), new LinearBase.V3(-4.0, -5.0, 4.0), new LinearBase.V3(-4.0, -5.0, 5.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-4.0, -5.0, 4.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-5.0, -5.0, 4.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-5.0, 5.0, 5.0), new LinearBase.V3(-5.0, 5.0, 4.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-5.0, 5.0, 4.0), new LinearBase.V3(-5.0, -5.0, 4.0), new LinearBase.V3(-4.0, -5.0, 4.0), new LinearBase.V3(-4.0, 5.0, 4.0), new LinearBase.V3(-4.0, 5.0, 5.0), new LinearBase.V3(-4.0, -5.0, 4.0), new LinearBase.V3(-4.0, 5.0, 5.0), new LinearBase.V3(-4.0, -5.0, 5.0), new LinearBase.V3(5.0, -5.0, 5.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(4.0, 5.0, 5.0), new LinearBase.V3(5.0, -5.0, 5.0), new LinearBase.V3(4.0, 5.0, 5.0), new LinearBase.V3(4.0, -5.0, 5.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(5.0, 5.0, 4.0), new LinearBase.V3(4.0, 5.0, 4.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(4.0, 5.0, 4.0), new LinearBase.V3(4.0, 5.0, 5.0), new LinearBase.V3(5.0, 5.0, 4.0), new LinearBase.V3(5.0, -5.0, 4.0), new LinearBase.V3(4.0, -5.0, 4.0), new LinearBase.V3(5.0, 5.0, 4.0), new LinearBase.V3(4.0, -5.0, 4.0), new LinearBase.V3(4.0, 5.0, 4.0), new LinearBase.V3(5.0, -5.0, 4.0), new LinearBase.V3(5.0, -5.0, 5.0), new LinearBase.V3(4.0, -5.0, 5.0), new LinearBase.V3(5.0, -5.0, 4.0), new LinearBase.V3(4.0, -5.0, 5.0), new LinearBase.V3(4.0, -5.0, 4.0), new LinearBase.V3(4.0, -5.0, 5.0), new LinearBase.V3(4.0, 5.0, 5.0), new LinearBase.V3(4.0, 5.0, 4.0), new LinearBase.V3(4.0, -5.0, 5.0), new LinearBase.V3(4.0, 5.0, 4.0), new LinearBase.V3(4.0, -5.0, 4.0), new LinearBase.V3(5.0, -5.0, 4.0), new LinearBase.V3(5.0, 5.0, 4.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(5.0, -5.0, 4.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(5.0, -5.0, 5.0), new LinearBase.V3(5.0, -5.0, -4.0), new LinearBase.V3(5.0, 5.0, -4.0), new LinearBase.V3(4.0, 5.0, -4.0), new LinearBase.V3(5.0, -5.0, -4.0), new LinearBase.V3(4.0, 5.0, -4.0), new LinearBase.V3(4.0, -5.0, -4.0), new LinearBase.V3(5.0, 5.0, -4.0), new LinearBase.V3(5.0, 5.0, -5.0), new LinearBase.V3(4.0, 5.0, -5.0), new LinearBase.V3(5.0, 5.0, -4.0), new LinearBase.V3(4.0, 5.0, -5.0), new LinearBase.V3(4.0, 5.0, -4.0), new LinearBase.V3(5.0, 5.0, -5.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(4.0, -5.0, -5.0), new LinearBase.V3(5.0, 5.0, -5.0), new LinearBase.V3(4.0, -5.0, -5.0), new LinearBase.V3(4.0, 5.0, -5.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(5.0, -5.0, -4.0), new LinearBase.V3(4.0, -5.0, -4.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(4.0, -5.0, -4.0), new LinearBase.V3(4.0, -5.0, -5.0), new LinearBase.V3(4.0, -5.0, -4.0), new LinearBase.V3(4.0, 5.0, -4.0), new LinearBase.V3(4.0, 5.0, -5.0), new LinearBase.V3(4.0, -5.0, -4.0), new LinearBase.V3(4.0, 5.0, -5.0), new LinearBase.V3(4.0, -5.0, -5.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(5.0, 5.0, -5.0), new LinearBase.V3(5.0, 5.0, -4.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(5.0, 5.0, -4.0), new LinearBase.V3(5.0, -5.0, -4.0), new LinearBase.V3(-4.0, -5.0, 5.0), new LinearBase.V3(-4.0, -4.0, 5.0), new LinearBase.V3(-5.0, -4.0, 5.0), new LinearBase.V3(-4.0, -5.0, 5.0), new LinearBase.V3(-5.0, -4.0, 5.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-4.0, -4.0, 5.0), new LinearBase.V3(-4.0, -4.0, -5.0), new LinearBase.V3(-5.0, -4.0, -5.0), new LinearBase.V3(-4.0, -4.0, 5.0), new LinearBase.V3(-5.0, -4.0, -5.0), new LinearBase.V3(-5.0, -4.0, 5.0), new LinearBase.V3(-4.0, -4.0, -5.0), new LinearBase.V3(-4.0, -5.0, -5.0), new LinearBase.V3(-5.0, -5.0, -5.0), new LinearBase.V3(-4.0, -4.0, -5.0), new LinearBase.V3(-5.0, -5.0, -5.0), new LinearBase.V3(-5.0, -4.0, -5.0), new LinearBase.V3(-4.0, -5.0, -5.0), new LinearBase.V3(-4.0, -5.0, 5.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-4.0, -5.0, -5.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-5.0, -5.0, -5.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-5.0, -4.0, 5.0), new LinearBase.V3(-5.0, -4.0, -5.0), new LinearBase.V3(-5.0, -5.0, 5.0), new LinearBase.V3(-5.0, -4.0, -5.0), new LinearBase.V3(-5.0, -5.0, -5.0), new LinearBase.V3(-4.0, -5.0, -5.0), new LinearBase.V3(-4.0, -4.0, -5.0), new LinearBase.V3(-4.0, -4.0, 5.0), new LinearBase.V3(-4.0, -5.0, -5.0), new LinearBase.V3(-4.0, -4.0, 5.0), new LinearBase.V3(-4.0, -5.0, 5.0), new LinearBase.V3(5.0, -5.0, 5.0), new LinearBase.V3(5.0, -4.0, 5.0), new LinearBase.V3(4.0, -4.0, 5.0), new LinearBase.V3(5.0, -5.0, 5.0), new LinearBase.V3(4.0, -4.0, 5.0), new LinearBase.V3(4.0, -5.0, 5.0), new LinearBase.V3(5.0, -4.0, 5.0), new LinearBase.V3(5.0, -4.0, -5.0), new LinearBase.V3(4.0, -4.0, -5.0), new LinearBase.V3(5.0, -4.0, 5.0), new LinearBase.V3(4.0, -4.0, -5.0), new LinearBase.V3(4.0, -4.0, 5.0), new LinearBase.V3(5.0, -4.0, -5.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(4.0, -5.0, -5.0), new LinearBase.V3(5.0, -4.0, -5.0), new LinearBase.V3(4.0, -5.0, -5.0), new LinearBase.V3(4.0, -4.0, -5.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(5.0, -5.0, 5.0), new LinearBase.V3(4.0, -5.0, 5.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(4.0, -5.0, 5.0), new LinearBase.V3(4.0, -5.0, -5.0), new LinearBase.V3(4.0, -5.0, 5.0), new LinearBase.V3(4.0, -4.0, 5.0), new LinearBase.V3(4.0, -4.0, -5.0), new LinearBase.V3(4.0, -5.0, 5.0), new LinearBase.V3(4.0, -4.0, -5.0), new LinearBase.V3(4.0, -5.0, -5.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(5.0, -4.0, -5.0), new LinearBase.V3(5.0, -4.0, 5.0), new LinearBase.V3(5.0, -5.0, -5.0), new LinearBase.V3(5.0, -4.0, 5.0), new LinearBase.V3(5.0, -5.0, 5.0), new LinearBase.V3(5.0, 4.0, 5.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(4.0, 5.0, 5.0), new LinearBase.V3(5.0, 4.0, 5.0), new LinearBase.V3(4.0, 5.0, 5.0), new LinearBase.V3(4.0, 4.0, 5.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(5.0, 5.0, -5.0), new LinearBase.V3(4.0, 5.0, -5.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(4.0, 5.0, -5.0), new LinearBase.V3(4.0, 5.0, 5.0), new LinearBase.V3(5.0, 5.0, -5.0), new LinearBase.V3(5.0, 4.0, -5.0), new LinearBase.V3(4.0, 4.0, -5.0), new LinearBase.V3(5.0, 5.0, -5.0), new LinearBase.V3(4.0, 4.0, -5.0), new LinearBase.V3(4.0, 5.0, -5.0), new LinearBase.V3(5.0, 4.0, -5.0), new LinearBase.V3(5.0, 4.0, 5.0), new LinearBase.V3(4.0, 4.0, 5.0), new LinearBase.V3(5.0, 4.0, -5.0), new LinearBase.V3(4.0, 4.0, 5.0), new LinearBase.V3(4.0, 4.0, -5.0), new LinearBase.V3(4.0, 4.0, 5.0), new LinearBase.V3(4.0, 5.0, 5.0), new LinearBase.V3(4.0, 5.0, -5.0), new LinearBase.V3(4.0, 4.0, 5.0), new LinearBase.V3(4.0, 5.0, -5.0), new LinearBase.V3(4.0, 4.0, -5.0), new LinearBase.V3(5.0, 4.0, -5.0), new LinearBase.V3(5.0, 5.0, -5.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(5.0, 4.0, -5.0), new LinearBase.V3(5.0, 5.0, 5.0), new LinearBase.V3(5.0, 4.0, 5.0), new LinearBase.V3(-4.0, 4.0, 5.0), new LinearBase.V3(-4.0, 5.0, 5.0), new LinearBase.V3(-5.0, 5.0, 5.0), new LinearBase.V3(-4.0, 4.0, 5.0), new LinearBase.V3(-5.0, 5.0, 5.0), new LinearBase.V3(-5.0, 4.0, 5.0), new LinearBase.V3(-4.0, 5.0, 5.0), new LinearBase.V3(-4.0, 5.0, -5.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-4.0, 5.0, 5.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-5.0, 5.0, 5.0), new LinearBase.V3(-4.0, 5.0, -5.0), new LinearBase.V3(-4.0, 4.0, -5.0), new LinearBase.V3(-5.0, 4.0, -5.0), new LinearBase.V3(-4.0, 5.0, -5.0), new LinearBase.V3(-5.0, 4.0, -5.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-4.0, 4.0, -5.0), new LinearBase.V3(-4.0, 4.0, 5.0), new LinearBase.V3(-5.0, 4.0, 5.0), new LinearBase.V3(-4.0, 4.0, -5.0), new LinearBase.V3(-5.0, 4.0, 5.0), new LinearBase.V3(-5.0, 4.0, -5.0), new LinearBase.V3(-5.0, 4.0, 5.0), new LinearBase.V3(-5.0, 5.0, 5.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-5.0, 4.0, 5.0), new LinearBase.V3(-5.0, 5.0, -5.0), new LinearBase.V3(-5.0, 4.0, -5.0), new LinearBase.V3(-4.0, 4.0, -5.0), new LinearBase.V3(-4.0, 5.0, -5.0), new LinearBase.V3(-4.0, 5.0, 5.0), new LinearBase.V3(-4.0, 4.0, -5.0), new LinearBase.V3(-4.0, 5.0, 5.0), new LinearBase.V3(-4.0, 4.0, 5.0), new LinearBase.V3(4.596, 3.8890000000000002, -4.0), new LinearBase.V3(3.8890000000000002, 4.596, -4.0), new LinearBase.V3(-4.596, -3.8890000000000002, -4.0), new LinearBase.V3(4.596, 3.8890000000000002, -4.0), new LinearBase.V3(-4.596, -3.8890000000000002, -4.0), new LinearBase.V3(-3.8890000000000002, -4.596, -4.0), new LinearBase.V3(3.8890000000000002, 4.596, -4.0), new LinearBase.V3(3.8890000000000002, 4.596, -5.0), new LinearBase.V3(-4.596, -3.8890000000000002, -5.0), new LinearBase.V3(3.8890000000000002, 4.596, -4.0), new LinearBase.V3(-4.596, -3.8890000000000002, -5.0), new LinearBase.V3(-4.596, -3.8890000000000002, -4.0), new LinearBase.V3(3.8890000000000002, 4.596, -5.0), new LinearBase.V3(4.596, 3.8890000000000002, -5.0), new LinearBase.V3(-3.8890000000000002, -4.596, -5.0), new LinearBase.V3(3.8890000000000002, 4.596, -5.0), new LinearBase.V3(-3.8890000000000002, -4.596, -5.0), new LinearBase.V3(-4.596, -3.8890000000000002, -5.0), new LinearBase.V3(4.596, 3.8890000000000002, -5.0), new LinearBase.V3(4.596, 3.8890000000000002, -4.0), new LinearBase.V3(-3.8890000000000002, -4.596, -4.0), new LinearBase.V3(4.596, 3.8890000000000002, -5.0), new LinearBase.V3(-3.8890000000000002, -4.596, -4.0), new LinearBase.V3(-3.8890000000000002, -4.596, -5.0), new LinearBase.V3(-3.8890000000000002, -4.596, -4.0), new LinearBase.V3(-4.596, -3.8890000000000002, -4.0), new LinearBase.V3(-4.596, -3.8890000000000002, -5.0), new LinearBase.V3(-3.8890000000000002, -4.596, -4.0), new LinearBase.V3(-4.596, -3.8890000000000002, -5.0), new LinearBase.V3(-3.8890000000000002, -4.596, -5.0), new LinearBase.V3(4.596, 3.8890000000000002, -5.0), new LinearBase.V3(3.8890000000000002, 4.596, -5.0), new LinearBase.V3(3.8890000000000002, 4.596, -4.0), new LinearBase.V3(4.596, 3.8890000000000002, -5.0), new LinearBase.V3(3.8890000000000002, 4.596, -4.0), new LinearBase.V3(4.596, 3.8890000000000002, -4.0), new LinearBase.V3(3.8890000000000002, -4.596, -4.0), new LinearBase.V3(4.596, -3.8890000000000002, -4.0), new LinearBase.V3(-3.8890000000000002, 4.596, -4.0), new LinearBase.V3(3.8890000000000002, -4.596, -4.0), new LinearBase.V3(-3.8890000000000002, 4.596, -4.0), new LinearBase.V3(-4.596, 3.8890000000000002, -4.0), new LinearBase.V3(4.596, -3.8890000000000002, -4.0), new LinearBase.V3(4.596, -3.8890000000000002, -5.0), new LinearBase.V3(-3.8890000000000002, 4.596, -5.0), new LinearBase.V3(4.596, -3.8890000000000002, -4.0), new LinearBase.V3(-3.8890000000000002, 4.596, -5.0), new LinearBase.V3(-3.8890000000000002, 4.596, -4.0), new LinearBase.V3(4.596, -3.8890000000000002, -5.0), new LinearBase.V3(3.8890000000000002, -4.596, -5.0), new LinearBase.V3(-4.596, 3.8890000000000002, -5.0), new LinearBase.V3(4.596, -3.8890000000000002, -5.0), new LinearBase.V3(-4.596, 3.8890000000000002, -5.0), new LinearBase.V3(-3.8890000000000002, 4.596, -5.0), new LinearBase.V3(3.8890000000000002, -4.596, -5.0), new LinearBase.V3(3.8890000000000002, -4.596, -4.0), new LinearBase.V3(-4.596, 3.8890000000000002, -4.0), new LinearBase.V3(3.8890000000000002, -4.596, -5.0), new LinearBase.V3(-4.596, 3.8890000000000002, -4.0), new LinearBase.V3(-4.596, 3.8890000000000002, -5.0), new LinearBase.V3(-4.596, 3.8890000000000002, -4.0), new LinearBase.V3(-3.8890000000000002, 4.596, -4.0), new LinearBase.V3(-3.8890000000000002, 4.596, -5.0), new LinearBase.V3(-4.596, 3.8890000000000002, -4.0), new LinearBase.V3(-3.8890000000000002, 4.596, -5.0), new LinearBase.V3(-4.596, 3.8890000000000002, -5.0), new LinearBase.V3(3.8890000000000002, -4.596, -5.0), new LinearBase.V3(4.596, -3.8890000000000002, -5.0), new LinearBase.V3(4.596, -3.8890000000000002, -4.0), new LinearBase.V3(3.8890000000000002, -4.596, -5.0), new LinearBase.V3(4.596, -3.8890000000000002, -4.0), new LinearBase.V3(3.8890000000000002, -4.596, -4.0), new LinearBase.V3(0.5, -0.5, -5.0), new LinearBase.V3(0.5, 0.5, -5.0), new LinearBase.V3(-0.5, 0.5, -5.0), new LinearBase.V3(0.5, -0.5, -5.0), new LinearBase.V3(-0.5, 0.5, -5.0), new LinearBase.V3(-0.5, -0.5, -5.0), new LinearBase.V3(0.5, 0.5, -5.0), new LinearBase.V3(0.5, 0.5, -7.0), new LinearBase.V3(-0.5, 0.5, -7.0), new LinearBase.V3(0.5, 0.5, -5.0), new LinearBase.V3(-0.5, 0.5, -7.0), new LinearBase.V3(-0.5, 0.5, -5.0), new LinearBase.V3(0.5, 0.5, -7.0), new LinearBase.V3(0.5, -0.5, -7.0), new LinearBase.V3(-0.5, -0.5, -7.0), new LinearBase.V3(0.5, 0.5, -7.0), new LinearBase.V3(-0.5, -0.5, -7.0), new LinearBase.V3(-0.5, 0.5, -7.0), new LinearBase.V3(0.5, -0.5, -7.0), new LinearBase.V3(0.5, -0.5, -5.0), new LinearBase.V3(-0.5, -0.5, -5.0), new LinearBase.V3(0.5, -0.5, -7.0), new LinearBase.V3(-0.5, -0.5, -5.0), new LinearBase.V3(-0.5, -0.5, -7.0), new LinearBase.V3(-0.5, -0.5, -5.0), new LinearBase.V3(-0.5, 0.5, -5.0), new LinearBase.V3(-0.5, 0.5, -7.0), new LinearBase.V3(-0.5, -0.5, -5.0), new LinearBase.V3(-0.5, 0.5, -7.0), new LinearBase.V3(-0.5, -0.5, -7.0), new LinearBase.V3(0.5, -0.5, -7.0), new LinearBase.V3(0.5, 0.5, -7.0), new LinearBase.V3(0.5, 0.5, -5.0), new LinearBase.V3(0.5, -0.5, -7.0), new LinearBase.V3(0.5, 0.5, -5.0), new LinearBase.V3(0.5, -0.5, -5.0), new LinearBase.V3(3.134, -7.428, -6.0), new LinearBase.V3(4.866, -6.428, -6.0), new LinearBase.V3(-3.134, 7.428, -6.0), new LinearBase.V3(3.134, -7.428, -6.0), new LinearBase.V3(-3.134, 7.428, -6.0), new LinearBase.V3(-4.866, 6.428, -6.0), new LinearBase.V3(4.866, -6.428, -6.0), new LinearBase.V3(4.866, -6.428, -8.0), new LinearBase.V3(-3.134, 7.428, -8.0), new LinearBase.V3(4.866, -6.428, -6.0), new LinearBase.V3(-3.134, 7.428, -8.0), new LinearBase.V3(-3.134, 7.428, -6.0), new LinearBase.V3(4.866, -6.428, -8.0), new LinearBase.V3(3.134, -7.428, -8.0), new LinearBase.V3(-4.866, 6.428, -8.0), new LinearBase.V3(4.866, -6.428, -8.0), new LinearBase.V3(-4.866, 6.428, -8.0), new LinearBase.V3(-3.134, 7.428, -8.0), new LinearBase.V3(3.134, -7.428, -8.0), new LinearBase.V3(3.134, -7.428, -6.0), new LinearBase.V3(-4.866, 6.428, -6.0), new LinearBase.V3(3.134, -7.428, -8.0), new LinearBase.V3(-4.866, 6.428, -6.0), new LinearBase.V3(-4.866, 6.428, -8.0), new LinearBase.V3(-4.866, 6.428, -6.0), new LinearBase.V3(-3.134, 7.428, -6.0), new LinearBase.V3(-3.134, 7.428, -8.0), new LinearBase.V3(-4.866, 6.428, -6.0), new LinearBase.V3(-3.134, 7.428, -8.0), new LinearBase.V3(-4.866, 6.428, -8.0), new LinearBase.V3(3.134, -7.428, -8.0), new LinearBase.V3(4.866, -6.428, -8.0), new LinearBase.V3(4.866, -6.428, -6.0), new LinearBase.V3(3.134, -7.428, -8.0), new LinearBase.V3(4.866, -6.428, -6.0), new LinearBase.V3(3.134, -7.428, -6.0), new LinearBase.V3(1.366, -0.536, -6.0), new LinearBase.V3(-0.366, 0.46399999999999997, -6.0), new LinearBase.V3(-4.366, -6.464, -6.0), new LinearBase.V3(1.366, -0.536, -6.0), new LinearBase.V3(-4.366, -6.464, -6.0), new LinearBase.V3(-2.634, -7.464, -6.0), new LinearBase.V3(-0.366, 0.46399999999999997, -6.0), new LinearBase.V3(-0.366, 0.46399999999999997, -8.0), new LinearBase.V3(-4.366, -6.464, -8.0), new LinearBase.V3(-0.366, 0.46399999999999997, -6.0), new LinearBase.V3(-4.366, -6.464, -8.0), new LinearBase.V3(-4.366, -6.464, -6.0), new LinearBase.V3(-0.366, 0.46399999999999997, -8.0), new LinearBase.V3(1.366, -0.536, -8.0), new LinearBase.V3(-2.634, -7.464, -8.0), new LinearBase.V3(-0.366, 0.46399999999999997, -8.0), new LinearBase.V3(-2.634, -7.464, -8.0), new LinearBase.V3(-4.366, -6.464, -8.0), new LinearBase.V3(1.366, -0.536, -8.0), new LinearBase.V3(1.366, -0.536, -6.0), new LinearBase.V3(-2.634, -7.464, -6.0), new LinearBase.V3(1.366, -0.536, -8.0), new LinearBase.V3(-2.634, -7.464, -6.0), new LinearBase.V3(-2.634, -7.464, -8.0), new LinearBase.V3(-2.634, -7.464, -6.0), new LinearBase.V3(-4.366, -6.464, -6.0), new LinearBase.V3(-4.366, -6.464, -8.0), new LinearBase.V3(-2.634, -7.464, -6.0), new LinearBase.V3(-4.366, -6.464, -8.0), new LinearBase.V3(-2.634, -7.464, -8.0), new LinearBase.V3(1.366, -0.536, -8.0), new LinearBase.V3(-0.366, 0.46399999999999997, -8.0), new LinearBase.V3(-0.366, 0.46399999999999997, -6.0), new LinearBase.V3(1.366, -0.536, -8.0), new LinearBase.V3(-0.366, 0.46399999999999997, -6.0), new LinearBase.V3(1.366, -0.536, -6.0) ];
+  var lambdaCubeNormals = [ new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(-0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(-0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(-0.7070000000000001, 0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(0.7070000000000001, -0.7070000000000001, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 1.0, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(0.0, -1.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(-1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(1.0, 0.0, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.866, 0.5, 0.0), new LinearBase.V3(0.866, 0.5, 0.0), new LinearBase.V3(0.866, 0.5, 0.0), new LinearBase.V3(0.866, 0.5, 0.0), new LinearBase.V3(0.866, 0.5, 0.0), new LinearBase.V3(0.866, 0.5, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(-0.866, -0.5, 0.0), new LinearBase.V3(-0.866, -0.5, 0.0), new LinearBase.V3(-0.866, -0.5, 0.0), new LinearBase.V3(-0.866, -0.5, 0.0), new LinearBase.V3(-0.866, -0.5, 0.0), new LinearBase.V3(-0.866, -0.5, 0.0), new LinearBase.V3(-0.5, 0.866, 0.0), new LinearBase.V3(-0.5, 0.866, 0.0), new LinearBase.V3(-0.5, 0.866, 0.0), new LinearBase.V3(-0.5, 0.866, 0.0), new LinearBase.V3(-0.5, 0.866, 0.0), new LinearBase.V3(-0.5, 0.866, 0.0), new LinearBase.V3(0.5, -0.866, 0.0), new LinearBase.V3(0.5, -0.866, 0.0), new LinearBase.V3(0.5, -0.866, 0.0), new LinearBase.V3(0.5, -0.866, 0.0), new LinearBase.V3(0.5, -0.866, 0.0), new LinearBase.V3(0.5, -0.866, 0.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(0.0, 0.0, 1.0), new LinearBase.V3(-0.866, 0.5, 0.0), new LinearBase.V3(-0.866, 0.5, 0.0), new LinearBase.V3(-0.866, 0.5, 0.0), new LinearBase.V3(-0.866, 0.5, 0.0), new LinearBase.V3(-0.866, 0.5, 0.0), new LinearBase.V3(-0.866, 0.5, 0.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.0, 0.0, -1.0), new LinearBase.V3(0.866, -0.5, 0.0), new LinearBase.V3(0.866, -0.5, 0.0), new LinearBase.V3(0.866, -0.5, 0.0), new LinearBase.V3(0.866, -0.5, 0.0), new LinearBase.V3(0.866, -0.5, 0.0), new LinearBase.V3(0.866, -0.5, 0.0), new LinearBase.V3(-0.5, -0.866, 0.0), new LinearBase.V3(-0.5, -0.866, 0.0), new LinearBase.V3(-0.5, -0.866, 0.0), new LinearBase.V3(-0.5, -0.866, 0.0), new LinearBase.V3(-0.5, -0.866, 0.0), new LinearBase.V3(-0.5, -0.866, 0.0), new LinearBase.V3(0.5, 0.866, 0.0), new LinearBase.V3(0.5, 0.866, 0.0), new LinearBase.V3(0.5, 0.866, 0.0), new LinearBase.V3(0.5, 0.866, 0.0), new LinearBase.V3(0.5, 0.866, 0.0), new LinearBase.V3(0.5, 0.866, 0.0) ];
+  var lambdaCube = new Mesh.Mesh({
+      attributes: Data_StrMap.fromList(Data_List.toList(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", new Mesh.A_V3F(lambdaCubeVertices)), new Data_Tuple.Tuple("normal", new Mesh.A_V3F(lambdaCubeNormals)) ])), 
+      primitive: Mesh.P_Triangles.value, 
+      gpuData: Data_Maybe.Nothing.value
+  });
   var g_vertex_buffer_data = [ new LinearBase.V4(1.0, 1.0, -1.0, 1.0), new LinearBase.V4(1.0, -1.0, -1.0, 1.0), new LinearBase.V4(-1.0, -1.0, -1.0, 1.0), new LinearBase.V4(1.0, 1.0, -1.0, 1.0), new LinearBase.V4(-1.0, -1.0, -1.0, 1.0), new LinearBase.V4(-1.0, 1.0, -1.0, 1.0), new LinearBase.V4(1.0, 1.0, -1.0, 1.0), new LinearBase.V4(1.0, 1.0, 1.0, 1.0), new LinearBase.V4(1.0, -1.0, 1.0, 1.0), new LinearBase.V4(1.0, 1.0, -1.0, 1.0), new LinearBase.V4(1.0, -1.0, 1.0, 1.0), new LinearBase.V4(1.0, -1.0, -1.0, 1.0), new LinearBase.V4(1.0, 1.0, 1.0, 1.0), new LinearBase.V4(-1.0, -1.0, 1.0, 1.0), new LinearBase.V4(1.0, -1.0, 1.0, 1.0), new LinearBase.V4(1.0, 1.0, 1.0, 1.0), new LinearBase.V4(-1.0, 1.0, 1.0, 1.0), new LinearBase.V4(-1.0, -1.0, 1.0, 1.0), new LinearBase.V4(-1.0, 1.0, 1.0, 1.0), new LinearBase.V4(-1.0, -1.0, -1.0, 1.0), new LinearBase.V4(-1.0, -1.0, 1.0, 1.0), new LinearBase.V4(-1.0, 1.0, 1.0, 1.0), new LinearBase.V4(-1.0, 1.0, -1.0, 1.0), new LinearBase.V4(-1.0, -1.0, -1.0, 1.0), new LinearBase.V4(1.0, 1.0, -1.0, 1.0), new LinearBase.V4(-1.0, 1.0, -1.0, 1.0), new LinearBase.V4(-1.0, 1.0, 1.0, 1.0), new LinearBase.V4(1.0, 1.0, -1.0, 1.0), new LinearBase.V4(-1.0, 1.0, 1.0, 1.0), new LinearBase.V4(1.0, 1.0, 1.0, 1.0), new LinearBase.V4(1.0, -1.0, -1.0, 1.0), new LinearBase.V4(1.0, -1.0, 1.0, 1.0), new LinearBase.V4(-1.0, -1.0, 1.0, 1.0), new LinearBase.V4(1.0, -1.0, -1.0, 1.0), new LinearBase.V4(-1.0, -1.0, 1.0, 1.0), new LinearBase.V4(-1.0, -1.0, -1.0, 1.0) ];
   var g_uv_buffer_data = [ new LinearBase.V2(0.0, 1.0), new LinearBase.V2(0.0, 0.0), new LinearBase.V2(1.0, 0.0), new LinearBase.V2(0.0, 1.0), new LinearBase.V2(1.0, 0.0), new LinearBase.V2(1.0, 1.0), new LinearBase.V2(1.0, 1.0), new LinearBase.V2(0.0, 1.0), new LinearBase.V2(0.0, 0.0), new LinearBase.V2(1.0, 1.0), new LinearBase.V2(0.0, 0.0), new LinearBase.V2(1.0, 0.0), new LinearBase.V2(1.0, 1.0), new LinearBase.V2(0.0, 0.0), new LinearBase.V2(1.0, 0.0), new LinearBase.V2(1.0, 1.0), new LinearBase.V2(0.0, 1.0), new LinearBase.V2(0.0, 0.0), new LinearBase.V2(1.0, 1.0), new LinearBase.V2(0.0, 0.0), new LinearBase.V2(1.0, 0.0), new LinearBase.V2(1.0, 1.0), new LinearBase.V2(0.0, 1.0), new LinearBase.V2(0.0, 0.0), new LinearBase.V2(1.0, 1.0), new LinearBase.V2(0.0, 1.0), new LinearBase.V2(0.0, 0.0), new LinearBase.V2(1.0, 1.0), new LinearBase.V2(0.0, 0.0), new LinearBase.V2(1.0, 0.0), new LinearBase.V2(0.0, 1.0), new LinearBase.V2(0.0, 0.0), new LinearBase.V2(1.0, 0.0), new LinearBase.V2(0.0, 1.0), new LinearBase.V2(1.0, 0.0), new LinearBase.V2(1.0, 1.0) ];
   var myCube = new Mesh.Mesh({
@@ -12858,6 +12865,9 @@ var PS = { };
       primitive: Mesh.P_Triangles.value, 
       gpuData: Data_Maybe.Nothing.value
   });
+  exports["lambdaCubeNormals"] = lambdaCubeNormals;
+  exports["lambdaCubeVertices"] = lambdaCubeVertices;
+  exports["lambdaCube"] = lambdaCube;
   exports["myQuad"] = myQuad;
   exports["myCube"] = myCube;
   exports["g_uv_buffer_data"] = g_uv_buffer_data;
@@ -12948,8 +12958,11 @@ var PS = { };
           }), new Data_Tuple.Tuple("cube", {
               primitive: IR.Triangles.value, 
               attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value), new Data_Tuple.Tuple("normal", Type.TV3F.value) ])
+          }), new Data_Tuple.Tuple("lambdaCube", {
+              primitive: IR.Triangles.value, 
+              attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value), new Data_Tuple.Tuple("normal", Type.TV3F.value) ])
           }) ]), 
-          uniforms: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("MVP", IR.M44F.value), new Data_Tuple.Tuple("Time", IR.Float.value), new Data_Tuple.Tuple("Mouse", IR.V2F.value), new Data_Tuple.Tuple("Diffuse", IR.FTexture2D.value) ])
+          uniforms: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("MVP", IR.M44F.value), new Data_Tuple.Tuple("Time", IR.Float.value), new Data_Tuple.Tuple("Mouse", IR.V2F.value), new Data_Tuple.Tuple("Diffuse", IR.FTexture2D.value), new Data_Tuple.Tuple("OcclusionFieldMin", IR.FTexture2D.value), new Data_Tuple.Tuple("OcclusionFieldMax", IR.FTexture2D.value) ])
       };
       return function __do() {
           var v = Input.mkWebGLPipelineInput(inputSchema)();
@@ -12959,13 +12972,13 @@ var PS = { };
           var v4 = Control_Monad_Eff_JQuery.find("#timeRange")(v2)();
           var getTime = function __do() {
               var v5 = Control_Monad_Eff_JQuery.getValue(v3)();
-              var $74 = Data_Foreign.readNumber(v5);
-              if ($74 instanceof Data_Either.Right) {
-                  return $74.value0;
+              var $75 = Data_Foreign.readNumber(v5);
+              if ($75 instanceof Data_Either.Right) {
+                  return $75.value0;
               };
-              var $76 = Data_Foreign.readString(v5);
-              if ($76 instanceof Data_Either.Right) {
-                  return Global.readFloat($76.value0);
+              var $77 = Data_Foreign.readString(v5);
+              if ($77 instanceof Data_Either.Right) {
+                  return Global.readFloat($77.value0);
               };
               return 0.0;
           };
@@ -13018,7 +13031,7 @@ var PS = { };
                       if (v16.length === 2) {
                           return Input.uniformV2F("Mouse")(v.uniformSetter)(new LinearBase.V2(v16[0] / Data_Int.toNumber(v14), v16[1] / Data_Int.toNumber(v15)))();
                       };
-                      throw new Error("Failed pattern match at Main line 89, column 1 - line 365, column 14: " + [ v16.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 89, column 1 - line 371, column 14: " + [ v16.constructor.name ]);
                   };
               };
           })();
@@ -13044,32 +13057,36 @@ var PS = { };
           Mesh.addMesh(v)("stream4")(v13)([  ])();
           var v14 = Mesh.compileMesh(Sample.myQuad)();
           Mesh.addMesh(v)("quad")(v14)([  ])();
+          var v15 = Mesh.compileMesh(Sample.lambdaCube)();
+          Mesh.addMesh(v)("lambdaCube")(v15)([  ])();
           Data.uploadTexture2DToGPU("logo.png")(Input.uniformFTexture2D("Diffuse")(v.uniformSetter))();
+          Data.uploadTexture2DToGPU("OcclusionFieldMin.png")(Input.uniformFTexture2D("OcclusionFieldMin")(v.uniformSetter))();
+          Data.uploadTexture2DToGPU("OcclusionFieldMax.png")(Input.uniformFTexture2D("OcclusionFieldMax")(v.uniformSetter))();
           var addRemoteModel = function (sname) {
               return function (uri) {
                   return $foreign.getJSON(uri)(function (m) {
-                      var $121 = Data_Argonaut_Decode.decodeJson(Mesh.decodeJsonMesh)(m);
-                      if ($121 instanceof Data_Either.Left) {
-                          return Control_Monad_Eff_Console.log("decode error: " + $121.value0);
+                      var $123 = Data_Argonaut_Decode.decodeJson(Mesh.decodeJsonMesh)(m);
+                      if ($123 instanceof Data_Either.Left) {
+                          return Control_Monad_Eff_Console.log("decode error: " + $123.value0);
                       };
-                      if ($121 instanceof Data_Either.Right) {
+                      if ($123 instanceof Data_Either.Right) {
                           return function __do() {
-                              var v15 = Mesh.compileMesh($121.value0)();
-                              Mesh.addMesh(v)(sname)(v15)([  ])();
+                              var v16 = Mesh.compileMesh($123.value0)();
+                              Mesh.addMesh(v)(sname)(v16)([  ])();
                               Input.sortSlotObjects(v)();
                               return Prelude.unit;
                           };
                       };
-                      throw new Error("Failed pattern match at Main line 169, column 7 - line 188, column 3: " + [ $121.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 175, column 7 - line 194, column 3: " + [ $123.constructor.name ]);
                   });
               };
           };
-          var v15 = Ace.edit("editor")(Ace.ace)();
-          var v16 = Ace_Editor.getSession(v15)();
-          Ace_Editor.setTheme("ace/theme/terminal")(v15)();
-          Ace_EditSession.setMode("ace/mode/haskell")(v16)();
-          var v17 = Control_Monad_Eff_Ref.newRef([  ])();
+          var v16 = Ace.edit("editor")(Ace.ace)();
+          var v17 = Ace_Editor.getSession(v16)();
+          Ace_Editor.setTheme("ace/theme/terminal")(v16)();
+          Ace_EditSession.setMode("ace/mode/haskell")(v17)();
           var v18 = Control_Monad_Eff_Ref.newRef([  ])();
+          var v19 = Control_Monad_Eff_Ref.newRef([  ])();
           var lessEqPos = function (l) {
               return function (c) {
                   return function (l$prime) {
@@ -13091,37 +13108,37 @@ var PS = { };
           var getTypeInfo = function (l) {
               return function (c) {
                   return function __do() {
-                      var v19 = Control_Monad_Eff_Ref.readRef(v17)();
-                      var flattenTypeInfo = function (v20) {
+                      var v20 = Control_Monad_Eff_Ref.readRef(v18)();
+                      var flattenTypeInfo = function (v21) {
                           return {
-                              startLine: v20.value0.range.value0.startLine, 
-                              startColumn: v20.value0.range.value0.startColumn, 
-                              endLine: v20.value0.range.value0.endLine, 
-                              endColumn: v20.value0.range.value0.endColumn, 
-                              text: v20.value0.text
+                              startLine: v21.value0.range.value0.startLine, 
+                              startColumn: v21.value0.range.value0.startColumn, 
+                              endLine: v21.value0.range.value0.endLine, 
+                              endColumn: v21.value0.range.value0.endColumn, 
+                              text: v21.value0.text
                           };
                       };
-                      var ps = Prelude.flip(Data_Array.filter)(Prelude.map(Prelude.functorArray)(flattenTypeInfo)(v19))(function (ti) {
+                      var ps = Prelude.flip(Data_Array.filter)(Prelude.map(Prelude.functorArray)(flattenTypeInfo)(v20))(function (ti) {
                           return lessEqPos(ti.startLine)(ti.startColumn)(l)(c) && lessPos(l)(c)(ti.endLine)(ti.endColumn);
                       });
-                      var f = function (v20) {
+                      var f = function (v21) {
                           return function (i) {
-                              if (v20 instanceof Data_Maybe.Nothing) {
+                              if (v21 instanceof Data_Maybe.Nothing) {
                                   return new Data_Maybe.Just(i);
                               };
-                              if (v20 instanceof Data_Maybe.Just) {
-                                  if (lessPos(v20.value0.startLine)(v20.value0.startColumn)(i.startLine)(i.startColumn)) {
+                              if (v21 instanceof Data_Maybe.Just) {
+                                  if (lessPos(v21.value0.startLine)(v21.value0.startColumn)(i.startLine)(i.startColumn)) {
                                       return new Data_Maybe.Just(i);
                                   };
                                   if (Prelude.otherwise) {
-                                      return new Data_Maybe.Just(v20.value0);
+                                      return new Data_Maybe.Just(v21.value0);
                                   };
                               };
-                              throw new Error("Failed pattern match at Main line 196, column 7 - line 220, column 3: " + [ v20.constructor.name, i.constructor.name ]);
+                              throw new Error("Failed pattern match at Main line 202, column 7 - line 226, column 3: " + [ v21.constructor.name, i.constructor.name ]);
                           };
                       };
-                      var $137 = Data_Foldable.foldl(Data_Foldable.foldableArray)(f)(Data_Maybe.Nothing.value)(ps);
-                      if ($137 instanceof Data_Maybe.Nothing) {
+                      var $139 = Data_Foldable.foldl(Data_Foldable.foldableArray)(f)(Data_Maybe.Nothing.value)(ps);
+                      if ($139 instanceof Data_Maybe.Nothing) {
                           return {
                               startLine: 0, 
                               startColumn: 0, 
@@ -13130,49 +13147,49 @@ var PS = { };
                               text: ""
                           };
                       };
-                      if ($137 instanceof Data_Maybe.Just) {
-                          return $137.value0;
+                      if ($139 instanceof Data_Maybe.Just) {
+                          return $139.value0;
                       };
-                      throw new Error("Failed pattern match at Main line 196, column 7 - line 220, column 3: " + [ $137.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 202, column 7 - line 226, column 3: " + [ $139.constructor.name ]);
                   };
               };
           };
-          $foreign.tokenTooltip(v15)(getTypeInfo)();
-          var v19 = Control_Monad_Eff_Ref.newRef(Data_Maybe.Nothing.value)();
+          $foreign.tokenTooltip(v16)(getTypeInfo)();
+          var v20 = Control_Monad_Eff_Ref.newRef(Data_Maybe.Nothing.value)();
           var render = function (ir) {
               return function __do() {
-                  var v20 = Control_Monad_Eff_Ref.readRef(v19)();
-                  Control_Monad_Eff_Ref.writeRef(v19)(Data_Maybe.Nothing.value)();
+                  var v21 = Control_Monad_Eff_Ref.readRef(v20)();
+                  Control_Monad_Eff_Ref.writeRef(v20)(Data_Maybe.Nothing.value)();
                   (function () {
-                      if (v20 instanceof Data_Maybe.Nothing) {
+                      if (v21 instanceof Data_Maybe.Nothing) {
                           return Prelude["return"](Control_Monad_Eff.applicativeEff)(Prelude.unit);
                       };
-                      if (v20 instanceof Data_Maybe.Just) {
+                      if (v21 instanceof Data_Maybe.Just) {
                           return function __do() {
                               Control_Monad_Eff_Console.log("dispose old pipeline")();
-                              return Backend.disposePipeline(v20.value0)();
+                              return Backend.disposePipeline(v21.value0)();
                           };
                       };
-                      throw new Error("Failed pattern match at Main line 223, column 7 - line 236, column 7: " + [ v20.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 229, column 7 - line 242, column 7: " + [ v21.constructor.name ]);
                   })()();
                   Control_Monad_Eff_Console.log("allocate new pipeline")();
-                  var v21 = Backend.allocPipeline(ir)();
+                  var v22 = Backend.allocPipeline(ir)();
                   Control_Monad_Eff_Console.log("attach pipeline input")();
-                  Backend.setPipelineInput(v21)(new Data_Maybe.Just(v))();
+                  Backend.setPipelineInput(v22)(new Data_Maybe.Just(v))();
                   Control_Monad_Eff_Console.log("generate object commands")();
                   Input.sortSlotObjects(v)();
-                  return Control_Monad_Eff_Ref.writeRef(v19)(new Data_Maybe.Just(v21))();
+                  return Control_Monad_Eff_Ref.writeRef(v20)(new Data_Maybe.Just(v22))();
               };
           };
           var compile = function (s) {
               return function __do() {
                   Control_Monad_Eff_Console.log("compile")();
                   Control_Monad_Eff_JQuery.setText("Compiling...")(v9)();
-                  var v20 = Ace_EditSession.getValue(v16)();
-                  return WebSocket.send(s)(v20)();
+                  var v21 = Ace_EditSession.getValue(v17)();
+                  return WebSocket.send(s)(v21)();
               };
           };
-          var v20 = WebSocket.webSocket("ws://localhost:8000/exerciselist")({
+          var v21 = WebSocket.webSocket("ws://localhost:8000/exerciselist")({
               onOpen: function (s) {
                   return function __do() {
                       WebSocket.send(s)("query")();
@@ -13182,23 +13199,23 @@ var PS = { };
               }, 
               onMessage: function (s) {
                   return function (m) {
-                      var $145 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeArray(Data_Argonaut_Decode.decodeJsonString)));
-                      if ($145 instanceof Data_Either.Left) {
-                          return Control_Monad_Eff_Console.log("decode error: " + $145.value0);
+                      var $147 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeArray(Data_Argonaut_Decode.decodeJsonString)));
+                      if ($147 instanceof Data_Either.Left) {
+                          return Control_Monad_Eff_Console.log("decode error: " + $147.value0);
                       };
-                      if ($145 instanceof Data_Either.Right) {
+                      if ($147 instanceof Data_Either.Right) {
                           return function __do() {
-                              Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)($145.value0)(function (e) {
+                              Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)($147.value0)(function (e) {
                                   return function __do() {
-                                      var v20 = Control_Monad_Eff_JQuery.create("<option></option>")();
-                                      Control_Monad_Eff_JQuery.setText(e)(v20)();
-                                      return Control_Monad_Eff_JQuery.append(v20)(v11)();
+                                      var v21 = Control_Monad_Eff_JQuery.create("<option></option>")();
+                                      Control_Monad_Eff_JQuery.setText(e)(v21)();
+                                      return Control_Monad_Eff_JQuery.append(v21)(v11)();
                                   };
                               })();
                               return Prelude.unit;
                           };
                       };
-                      throw new Error("Failed pattern match at Main line 89, column 1 - line 365, column 14: " + [ $145.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 89, column 1 - line 371, column 14: " + [ $147.constructor.name ]);
                   };
               }, 
               onError: function (s) {
@@ -13208,23 +13225,23 @@ var PS = { };
               }, 
               onClose: Control_Monad_Eff_Console.log("socket1 is closed")
           })();
-          var v21 = WebSocket.webSocket("ws://localhost:8000/compile")({
+          var v22 = WebSocket.webSocket("ws://localhost:8000/compile")({
               onOpen: function (s) {
                   return function __do() {
                       Control_Monad_Eff_Console.log("socket is ready")();
-                      var v21 = Control_Monad_Eff_Ref.newRef(Data_Maybe.Nothing.value)();
-                      return Ace_EditSession.onChange(v16)(function __do() {
-                          var v22 = Control_Monad_Eff_Ref.readRef(v21)();
+                      var v22 = Control_Monad_Eff_Ref.newRef(Data_Maybe.Nothing.value)();
+                      return Ace_EditSession.onChange(v17)(function __do() {
+                          var v23 = Control_Monad_Eff_Ref.readRef(v22)();
                           (function () {
-                              if (v22 instanceof Data_Maybe.Nothing) {
+                              if (v23 instanceof Data_Maybe.Nothing) {
                                   return Prelude["return"](Control_Monad_Eff.applicativeEff)(Prelude.unit);
                               };
-                              if (v22 instanceof Data_Maybe.Just) {
-                                  return Timer.clearTimeout(v22.value0);
+                              if (v23 instanceof Data_Maybe.Just) {
+                                  return Timer.clearTimeout(v23.value0);
                               };
-                              throw new Error("Failed pattern match at Main line 89, column 1 - line 365, column 14: " + [ v22.constructor.name ]);
+                              throw new Error("Failed pattern match at Main line 89, column 1 - line 371, column 14: " + [ v23.constructor.name ]);
                           })()();
-                          return Control_Bind["=<<"](Control_Monad_Eff.bindEff)(Control_Monad_Eff_Ref.writeRef(v21))(Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_Maybe.Just.create)(Timer.timeout(1000)(compile(s))))();
+                          return Control_Bind["=<<"](Control_Monad_Eff.bindEff)(Control_Monad_Eff_Ref.writeRef(v22))(Prelude["<$>"](Control_Monad_Eff.functorEff)(Data_Maybe.Just.create)(Timer.timeout(1000)(compile(s))))();
                       })();
                   };
               }, 
@@ -13233,41 +13250,41 @@ var PS = { };
                   return function (m) {
                       return function __do() {
                           Control_Monad_Eff_Console.log("got response")();
-                          var $154 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(TypeInfo.decodeJsonCompileResult));
-                          if ($154 instanceof Data_Either.Left) {
-                              return Control_Monad_Eff_Console.log("decode error: " + $154.value0)();
+                          var $156 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(TypeInfo.decodeJsonCompileResult));
+                          if ($156 instanceof Data_Either.Left) {
+                              return Control_Monad_Eff_Console.log("decode error: " + $156.value0)();
                           };
-                          if ($154 instanceof Data_Either.Right && $154.value0 instanceof TypeInfo.CompileError) {
+                          if ($156 instanceof Data_Either.Right && $156.value0 instanceof TypeInfo.CompileError) {
                               Control_Monad_Eff_JQuery.setText("Error")(v9)();
-                              Control_Monad_Eff_JQuery.setText($154.value0.value1)(v8)();
-                              var v21 = Control_Monad_Eff_Ref.readRef(v18)();
-                              Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(v21)(function (mkr) {
-                                  return Ace_EditSession.removeMarker(mkr)(v16);
+                              Control_Monad_Eff_JQuery.setText($156.value0.value1)(v8)();
+                              var v22 = Control_Monad_Eff_Ref.readRef(v19)();
+                              Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(v22)(function (mkr) {
+                                  return Ace_EditSession.removeMarker(mkr)(v17);
                               })();
-                              var v22 = Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_Traversable.traversableArray)($154.value0.value0)(function (v22) {
+                              var v23 = Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_Traversable.traversableArray)($156.value0.value0)(function (v23) {
                                   return function __do() {
-                                      var v23 = Ace_Range.create(v22.value0.startLine - 1)(v22.value0.startColumn - 1)(v22.value0.endLine - 1)(v22.value0.endColumn - 1)();
-                                      return addMarker(v23)("lc_error")("text")(false)(v16)();
+                                      var v24 = Ace_Range.create(v23.value0.startLine - 1)(v23.value0.startColumn - 1)(v23.value0.endLine - 1)(v23.value0.endColumn - 1)();
+                                      return addMarker(v24)("lc_error")("text")(false)(v17)();
                                   };
                               })();
-                              Control_Monad_Eff_Ref.writeRef(v18)(v22)();
-                              Control_Monad_Eff_Ref.writeRef(v17)($154.value0.value2)();
+                              Control_Monad_Eff_Ref.writeRef(v19)(v23)();
+                              Control_Monad_Eff_Ref.writeRef(v18)($156.value0.value2)();
                               return Prelude.unit;
                           };
-                          if ($154 instanceof Data_Either.Right && $154.value0 instanceof TypeInfo.Compiled) {
-                              Control_Monad_Eff_JQuery.setText($154.value0.value0)(v7)();
-                              Control_Monad_Eff_JQuery.setText($154.value0.value1)(v6)();
+                          if ($156 instanceof Data_Either.Right && $156.value0 instanceof TypeInfo.Compiled) {
+                              Control_Monad_Eff_JQuery.setText($156.value0.value0)(v7)();
+                              Control_Monad_Eff_JQuery.setText($156.value0.value1)(v6)();
                               Control_Monad_Eff_JQuery.setText("Compiled")(v9)();
                               Control_Monad_Eff_JQuery.setText("No errors.")(v8)();
-                              Control_Monad_Eff_Ref.writeRef(v17)($154.value0.value3)();
-                              var v21 = Control_Monad_Eff_Ref.readRef(v18)();
-                              Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(v21)(function (mkr) {
-                                  return Ace_EditSession.removeMarker(mkr)(v16);
+                              Control_Monad_Eff_Ref.writeRef(v18)($156.value0.value3)();
+                              var v22 = Control_Monad_Eff_Ref.readRef(v19)();
+                              Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(v22)(function (mkr) {
+                                  return Ace_EditSession.removeMarker(mkr)(v17);
                               })();
-                              Control_Monad_Eff_Ref.writeRef(v18)([  ])();
-                              return render($154.value0.value2)();
+                              Control_Monad_Eff_Ref.writeRef(v19)([  ])();
+                              return render($156.value0.value2)();
                           };
-                          throw new Error("Failed pattern match at Main line 89, column 1 - line 365, column 14: " + [ $154.constructor.name ]);
+                          throw new Error("Failed pattern match at Main line 89, column 1 - line 371, column 14: " + [ $156.constructor.name ]);
                       };
                   };
               }, 
@@ -13277,20 +13294,20 @@ var PS = { };
                   };
               }
           })();
-          if (v21 instanceof Data_Either.Left) {
-              return Control_Monad_Eff_Console.log("error: " + v21.value0)();
+          if (v22 instanceof Data_Either.Left) {
+              return Control_Monad_Eff_Console.log("error: " + v22.value0)();
           };
-          if (v21 instanceof Data_Either.Right) {
-              var v22 = WebSocket.webSocket("ws://localhost:8000/getexercise")({
+          if (v22 instanceof Data_Either.Right) {
+              var v23 = WebSocket.webSocket("ws://localhost:8000/getexercise")({
                   onOpen: function (s) {
                       return function __do() {
                           Control_Monad_Eff_Console.log("socket2 is ready")();
-                          Prelude.flip(Control_Monad_Eff_JQuery.on("change"))(v11)(function (v22) {
-                              return function (v23) {
+                          Prelude.flip(Control_Monad_Eff_JQuery.on("change"))(v11)(function (v23) {
+                              return function (v24) {
                                   return function __do() {
-                                      var v24 = Control_Monad_Eff_JQuery.find(":selected")(v11)();
-                                      var v25 = Control_Monad_Eff_JQuery.getText(v24)();
-                                      return WebSocket.send(s)(v25)();
+                                      var v25 = Control_Monad_Eff_JQuery.find(":selected")(v11)();
+                                      var v26 = Control_Monad_Eff_JQuery.getText(v25)();
+                                      return WebSocket.send(s)(v26)();
                                   };
                               };
                           })();
@@ -13300,18 +13317,18 @@ var PS = { };
                   }, 
                   onMessage: function (s) {
                       return function (m) {
-                          var $178 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeJsonString));
-                          if ($178 instanceof Data_Either.Left) {
-                              return Control_Monad_Eff_Console.log("decode error: " + $178.value0);
+                          var $180 = Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeJsonString));
+                          if ($180 instanceof Data_Either.Left) {
+                              return Control_Monad_Eff_Console.log("decode error: " + $180.value0);
                           };
-                          if ($178 instanceof Data_Either.Right) {
+                          if ($180 instanceof Data_Either.Right) {
                               return function __do() {
-                                  Ace_EditSession.setValue($178.value0)(v16)();
-                                  compile(v21.value0)();
+                                  Ace_EditSession.setValue($180.value0)(v17)();
+                                  compile(v22.value0)();
                                   return Prelude.unit;
                               };
                           };
-                          throw new Error("Failed pattern match at Main line 89, column 1 - line 365, column 14: " + [ $178.constructor.name ]);
+                          throw new Error("Failed pattern match at Main line 89, column 1 - line 371, column 14: " + [ $180.constructor.name ]);
                       };
                   }, 
                   onError: function (s) {
@@ -13321,58 +13338,58 @@ var PS = { };
                   }, 
                   onClose: Control_Monad_Eff_Console.log("socket2 is closed")
               })();
-              Prelude.flip(Control_Monad_Eff_JQuery.on("click"))(v10)(function (v23) {
-                  return function (v24) {
+              Prelude.flip(Control_Monad_Eff_JQuery.on("click"))(v10)(function (v24) {
+                  return function (v25) {
                       return function __do() {
-                          compile(v21.value0)();
+                          compile(v22.value0)();
                           return Control_Monad_Eff_Console.log("clicked compile")();
                       };
                   };
               })();
-              $foreign.addCommand(v15)("Compile")("Ctrl-B")("Command-B")(function (v23) {
-                  return compile(v21.value0);
+              $foreign.addCommand(v16)("Compile")("Ctrl-B")("Command-B")(function (v24) {
+                  return compile(v22.value0);
               })();
-              var v23 = Control_Bind["=<<"](Control_Monad_Eff.bindEff)(Control_Monad_Eff_Ref.newRef)(Timer.nowEpochMilliseconds)();
+              var v24 = Control_Bind["=<<"](Control_Monad_Eff.bindEff)(Control_Monad_Eff_Ref.newRef)(Timer.nowEpochMilliseconds)();
               var renderLoop = function __do() {
-                  var v24 = Timer.nowEpochMilliseconds();
-                  var v25 = Control_Monad_Eff_Ref.readRef(v23)();
-                  var deltaTime = (v24 - v25) / 1000.0;
-                  Control_Monad_Eff_Ref.writeRef(v23)(v24)();
-                  var v26 = Control_Monad_Eff_JQuery.getProp("checked")(v5)();
+                  var v25 = Timer.nowEpochMilliseconds();
+                  var v26 = Control_Monad_Eff_Ref.readRef(v24)();
+                  var deltaTime = (v25 - v26) / 1000.0;
+                  Control_Monad_Eff_Ref.writeRef(v24)(v25)();
+                  var v27 = Control_Monad_Eff_JQuery.getProp("checked")(v5)();
                   (function () {
-                      var $189 = Data_Foreign.readBoolean(v26);
-                      if ($189 instanceof Data_Either.Right && !$189.value0) {
+                      var $191 = Data_Foreign.readBoolean(v27);
+                      if ($191 instanceof Data_Either.Right && !$191.value0) {
                           return function __do() {
                               Control_Monad_Eff_Ref.modifyRef(v1)(Prelude["+"](Prelude.semiringNumber)(deltaTime))();
-                              var v27 = Control_Monad_Eff_Ref.readRef(v1)();
-                              var time$prime = Data_Int.toNumber(Data_Int.floor(v27 * 1000.0)) / 1000.0;
+                              var v28 = Control_Monad_Eff_Ref.readRef(v1)();
+                              var time$prime = Data_Int.toNumber(Data_Int.floor(v28 * 1000.0)) / 1000.0;
                               Control_Monad_Eff_JQuery.setValue(time$prime)(v3)();
                               Control_Monad_Eff_JQuery.setValue(time$prime)(v4)();
-                              return updateInput(v27)();
+                              return updateInput(v28)();
                           };
                       };
                       return function __do() {
-                          var v27 = getTime();
-                          Control_Monad_Eff_Ref.writeRef(v1)(v27)();
-                          return updateInput(v27)();
+                          var v28 = getTime();
+                          Control_Monad_Eff_Ref.writeRef(v1)(v28)();
+                          return updateInput(v28)();
                       };
                   })()();
-                  var v27 = Control_Monad_Eff_Ref.readRef(v19)();
+                  var v28 = Control_Monad_Eff_Ref.readRef(v20)();
                   (function () {
-                      if (v27 instanceof Data_Maybe.Nothing) {
+                      if (v28 instanceof Data_Maybe.Nothing) {
                           return Prelude["return"](Control_Monad_Eff.applicativeEff)(Prelude.unit);
                       };
-                      if (v27 instanceof Data_Maybe.Just) {
-                          return Backend.renderPipeline(v27.value0);
+                      if (v28 instanceof Data_Maybe.Just) {
+                          return Backend.renderPipeline(v28.value0);
                       };
-                      throw new Error("Failed pattern match at Main line 89, column 1 - line 365, column 14: " + [ v27.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 89, column 1 - line 371, column 14: " + [ v28.constructor.name ]);
                   })()();
                   return Timer.timeout(1000 / 25 | 0)(renderLoop)();
               };
               renderLoop();
               return Prelude.unit;
           };
-          throw new Error("Failed pattern match at Main line 89, column 1 - line 365, column 14: " + [ v21.constructor.name ]);
+          throw new Error("Failed pattern match at Main line 89, column 1 - line 371, column 14: " + [ v22.constructor.name ]);
       };
   });
   exports["run"] = run;
