@@ -10867,7 +10867,7 @@ var PS = { };
               var v = Graphics_WebGLRaw.createTexture_()();
               return Util.loadImage_(name, function (image) {
                   return function __do() {
-                      Graphics_WebGLTexture.handleLoad2D(v)(Graphics_WebGLTexture.MIPMAP.value)(image)();
+                      Graphics_WebGLTexture.handleLoad2D(v)(Graphics_WebGLTexture.LINEAR.value)(image)();
                       return action(new Type.TextureData(v))();
                   };
               })();
