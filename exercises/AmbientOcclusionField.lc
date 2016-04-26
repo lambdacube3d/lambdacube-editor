@@ -68,21 +68,22 @@ makeFrame (time :: Float)
     accumulablefragments modelTrans vertexStream
         = vertexStream
         & mapPrimitives (vert modelTrans)
-        & rasterizePrimitives (TriangleCtx CullNone PolygonFill NoOffset LastVertex) (Smooth, Smooth)
+        & rasterizePrimitives (TriangleCtx CullNone PolygonFill NoOffset LastVertex) (Smooth, Smooth, Smooth)
         & mapFragments frag
         & accumulateWith (DepthOp Less True, ColorOp NoBlending (V4 True True True True))
 
     vert modelTrans (pos, normal) =
-        (scale 0.5 (viewProjection *. modelTrans *. pos'), normal', uvw')
+        (scale 0.5 (viewProjection *. modelTrans *. pos'), normalWorld%xyz, normalField, uvw')
       where
         pos' = V4 pos%x pos%y pos%z 1
-        normal' = normalize (casterInvTrans *. modelTrans *. V4 normal%x normal%y normal%z 0)%xyz
+        normalWorld = modelTrans *. V4 normal%x normal%y normal%z 0
+        normalField = normalize (casterInvTrans *. normalWorld)%xyz
         uvw = ((casterInvTrans *. modelTrans *. pos')%xyz - fieldOffset) * fieldScale
-        uvw' = uvw *! 0.5 +! 0.5 + normal' *! fieldZDimInv
+        uvw' = uvw *! 0.5 +! 0.5 + normalField *! fieldZDimInv
 
-    frag (normal, uvw) = ((V4 shade shade shade 1))
+    frag (normalWorld, normalField, uvw) = ((V4 shade shade shade 1))
       where
-        light = (normal%x + normal%y) * 0.1 + 0.9
+        light = (normalWorld%x + normalWorld%y) * 0.2 + 0.8
         uvw' = min (max uvw zero) one
         u = uvw'%x
         v = uvw'%y * fieldZDimInv
@@ -92,8 +93,8 @@ makeFrame (time :: Float)
         uv2 = V2 u (v + (index + 1) * fieldZDimInv)
         minSmp = mixS (texture2D minSampler uv1) (texture2D minSampler uv2) (fract w)
         maxSmp = mixS (texture2D maxSampler uv1) (texture2D maxSampler uv2) (fract w)
-        minNormal = max (normal *! (-1)) zero
-        maxNormal = max normal zero
+        minNormal = max (normalField *! (-1)) zero
+        maxNormal = max normalField zero
         occlusion = dot minSmp%xyz minNormal + dot maxSmp%xyz maxNormal
         shade = (1 - occlusion * 0.5) * light
 
