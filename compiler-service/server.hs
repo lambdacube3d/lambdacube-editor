@@ -100,8 +100,7 @@ app compiler ch = Snap.route
         go
         putStrLn $ "compileApp ended"
       where
-        toTypeInfo (s,e,m) = TypeInfo (cvtRange $ C.Range s e) m
-        cvtRange (C.Range s e) = T.Range (sourceLine s) (sourceColumn s) (sourceLine e) (sourceColumn e)
+        cvtRange (C.Range _ (SPos r c) (SPos r' c')) = T.Range r c r' c'
 
         ff (Left err, (infos, _)) = CompileError (V.fromList eloc) err $ convertInfos infos
           where
@@ -110,7 +109,7 @@ app compiler ch = Snap.route
 
         er e = return $ encodePretty $ CompileError mempty ("\n!FAIL\n" ++ e) mempty
 
-        convertInfos is = toTypeInfo <$> V.fromList [ (a, b, unlines c) | (C.Range a b, c) <- listTypeInfos is ]
+        convertInfos is = V.fromList [TypeInfo (cvtRange r) $ unlines c | (r, c) <- listTypeInfos is ]
 
 --------------------------------------------------------------------------------
 main :: IO ()
