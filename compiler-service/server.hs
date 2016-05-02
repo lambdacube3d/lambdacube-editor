@@ -17,6 +17,7 @@ import qualified Snap.Core               as Snap
 import qualified Snap.Http.Server        as Snap
 import qualified Snap.Snaplet.Config     as Snap
 
+import LambdaCube.Compiler.Pretty as C
 import LambdaCube.Compiler as C
 
 import TypeInfo as T
@@ -93,5 +94,5 @@ app compiler ch = Snap.route
 
         er e = return $ encodePretty $ CompileError mempty ("\n!FAIL\n" ++ e) mempty
 
-        convertInfos is = V.fromList [TypeInfo (cvtRange r) $ unlines c | (r, c) <- listTypeInfos is ]
+        convertInfos is = V.fromList [TypeInfo (cvtRange r) $ C.plainShow $ C.vcat c | (r, c) <- listTypeInfos is ]
 
