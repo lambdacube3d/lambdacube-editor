@@ -65,6 +65,7 @@ main = do
 --run :: forall m. (Applicative m) => m Unit
 --run = return unit
 
+foreign import getUrlParameter :: forall eff a. String -> Eff (dom :: DOM.DOM | eff) String
 foreign import getMousePos :: forall eff a. J.JQueryEvent -> Eff (dom :: DOM.DOM | eff) (Array Number)
 foreign import getJSON :: forall eff a. String -> (AC.Json -> Eff (dom :: DOM.DOM | eff) a) -> Eff (dom :: DOM.DOM | eff) Unit
 
@@ -324,7 +325,8 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
                 txt <- J.getText sel
                 send s txt
             -- get the default example
-            send s defaultExampleName
+            paramExample <- getUrlParameter "example"
+            send s $ if paramExample == "" then defaultExampleName else paramExample
             return unit
         , onMessage : \s m -> case jsonParser m >>= decodeJson of
               Left e -> C.log $ "decode error: " ++ e
