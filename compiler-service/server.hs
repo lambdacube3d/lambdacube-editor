@@ -5,6 +5,10 @@ module Main where
 import           Data.List               (sort)
 import qualified Data.Vector             as V
 import           Control.Monad           (forever, when)
+import           Control.Monad.IO.Class
+import           Control.Monad.Catch
+import           Control.Exception       (evaluate, ErrorCall, PatternMatchFail)
+import           Control.DeepSeq
 import qualified Data.ByteString         as B
 import qualified Data.ByteString.Char8   as BC
 import           Data.Aeson
@@ -95,4 +99,10 @@ app compiler ch = Snap.route
         er e = return $ encodePretty $ CompileError mempty ("\n!FAIL\n" ++ e) mempty
 
         convertInfos is = V.fromList [TypeInfo (cvtRange r) $ C.plainShow $ C.vcat c | (r, c) <- listTypeInfos is ]
+
+catchErr :: (MonadCatch m, NFData a, MonadIO m) => (String -> m a) -> m a -> m a
+catchErr er m = (force <$> m >>= liftIO . evaluate) `catch` getErr `catch` getPMatchFail
+  where
+    getErr (e :: ErrorCall) = catchErr er $ er $ show e
+    getPMatchFail (e :: PatternMatchFail) = catchErr er $ er $ show e
 
