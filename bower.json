@@ -1,6 +1,6 @@
 {
   "name": "lambdacube-editor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "moduleType": [
     "node"
   ],
@@ -16,8 +16,8 @@
     "output"
   ],
   "dependencies": {
-    "purescript-jquery": "^0.6.0",
-    "purescript-ace": "^0.10.0",
+    "purescript-jquery": "^1.0.0",
+    "purescript-ace": "^1.0.0",
     "purescript-lambdacube-webgl": "git://github.com/lambdacube3d/purescript-lambdacube-webgl.git#master"
   }
 }

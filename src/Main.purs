@@ -4,24 +4,27 @@ import Prelude
 import Extensions (fail)
 import Global
 
-import qualified Control.Monad.Eff.Console as C
+import Control.Monad.Eff.Console as C
 
 import Control.Bind
 import TypeInfo
 import Timer
 import Control.Monad.Eff
+import Control.Monad.Eff.Exception
 import Control.Monad.Eff.Ref
 import Data.Foldable (for_, foldl)
 import Data.Traversable (for)
+import Partial.Unsafe (unsafePartial)
 
 import Ace
+import Ace as Ace
 import Ace.Types as Ace
-import qualified Ace.Editor as Editor
-import qualified Ace.EditSession as Session
-import qualified Ace.Range as Range
+import Ace.Editor as Editor
+import Ace.EditSession as Session
+import Ace.Range as Range
 
-import qualified Graphics.WebGL as GL
-import qualified Control.Monad.Eff.JQuery as J
+import Graphics.WebGL as GL
+import Control.Monad.Eff.JQuery as J
 
 import WebSocket
 import Data.Either
@@ -29,12 +32,13 @@ import Sample
 
 import Data.Foreign
 import Data.Function
+import Data.Function.Uncurried
 import Data.Maybe
 import Data.StrMap(fromFoldable,StrMap(..))
 import Data.Tuple
 import Data.Array
 import Data.Int
-import qualified Data.StrMap as StrMap
+import Data.StrMap as StrMap
 
 import Backend
 import IR
@@ -45,15 +49,15 @@ import Input
 import Data (uploadTexture2DToGPU)
 
 import Data.Argonaut.Parser (jsonParser)
-import Data.Argonaut.Decode (DecodeJson, decodeJson)
-import qualified Data.Argonaut.Core as AC
+import Data.Argonaut.Decode (class DecodeJson, decodeJson)
+import Data.Argonaut.Core as AC
 
 
 import Data.Matrix (Mat(..))
 import Data.Matrix4
 import Data.Vector3
 
-import qualified DOM as DOM
+import DOM as DOM
 
 defaultExampleName = "LambdaCube2.lc"
 
@@ -61,9 +65,9 @@ main :: forall e. Eff (console :: C.CONSOLE | e) Unit
 main = do
   C.log "Start LambdaCube 3D Editor"
 --main :: forall m. (Applicative m) => m Unit
---main = return unit
+--main = pure unit
 --run :: forall m. (Applicative m) => m Unit
---run = return unit
+--run = pure unit
 
 foreign import getUrlParameter :: forall eff a. String -> Eff (dom :: DOM.DOM | eff) String
 foreign import getMousePos :: forall eff a. J.JQueryEvent -> Eff (dom :: DOM.DOM | eff) (Array Number)
@@ -87,7 +91,21 @@ foreign import addMarkerImpl :: forall eff. Fn5 Ace.Range String String Boolean 
 addMarker :: forall eff. Ace.Range -> String -> String -> Boolean -> EditSession -> Eff (ace :: ACE | eff) Int
 addMarker range clazz _type inFront self = runFn5 addMarkerImpl range clazz _type inFront self
 
-run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
+run :: forall e. Eff
+   ( console :: C.CONSOLE
+   , err :: EXCEPTION
+   , ref :: REF
+   , dom :: DOM.DOM
+   , timeout :: TIMEOUT
+   , now :: NOW
+   , ace :: ACE
+   , ws :: WS
+   | e
+   )
+   Unit
+-- unsafePartial is needed to prevent Partial => context; otherwise run cannot be called from .html
+run = unsafePartial $ do
+ GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
   -- setup pipeline input
   let inputSchema = 
         { slots : fromFoldable
@@ -111,10 +129,10 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
   let getTime = do
                   t <- J.getValue timeBox
                   case readNumber t of
-                    Right time -> return time
+                    Right time -> pure time
                     _ -> case readString t of
-                        Right timeStr -> return $ readFloat timeStr
-                        _ -> return 0.0
+                        Right timeStr -> pure $ readFloat timeStr
+                        _ -> pure 0.0
   flip (J.on "input") timeBox $ \_ _ -> do
     J.getValue timeBox >>= flip J.setValue timeRange
     getTime >>= writeRef timeRef
@@ -175,12 +193,12 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
 
   let addRemoteModel sname uri = getJSON uri $ \m -> do
         case decodeJson m of
-          Left e -> C.log $ "decode error: " ++ e
+          Left e -> C.log $ "decode error: " <> e
           Right (mesh) -> do
             gpuMesh <- compileMesh mesh
             addMesh pplInput sname gpuMesh []
             sortSlotObjects pplInput
-            return unit
+            pure unit
 
   --addRemoteModel "grid3d" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/grid3d.mesh.json"
   --addRemoteModel "stream" "http://rawgit.com/lambdacube3d/lambdacube-editor/master/mesh/logo2.mesh.json"
@@ -215,7 +233,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
             f (Just d) i
                 | lessPos d.startLine d.startColumn i.startLine i.startColumn = Just i
                 | otherwise = Just d
-        return $ case foldl f Nothing ps of
+        pure $ case foldl f Nothing ps of
           Nothing ->
               { startLine   : 0
               , startColumn : 0
@@ -245,7 +263,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
         old <- readRef pipelineRef
         writeRef pipelineRef Nothing
         case old of
-          Nothing -> return unit
+          Nothing -> pure unit
           Just p -> do
             C.log "dispose old pipeline"
             disposePipeline p
@@ -261,15 +279,15 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
     { onOpen    : \s -> do
         send s "query"
         C.log "socket1 is ready"
-        return unit
+        pure unit
     , onMessage : \s m -> case jsonParser m >>= decodeJson of
-          Left e -> C.log $ "decode error: " ++ e
+          Left e -> C.log $ "decode error: " <> e
           Right es -> do
             for_ (es :: Array String) $ \e -> do
                 op <- J.create "<option></option>"
                 J.setText e op
                 J.append op exerciseselect
-            return unit
+            pure unit
     , onError   : \s m -> C.log m
     , onClose   : C.log "socket1 is closed"
     }
@@ -281,7 +299,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
         Session.onChange session $ do
           t <- readRef timerRef
           case t of
-            Nothing -> return unit
+            Nothing -> pure unit
             Just a -> clearTimeout a
           writeRef timerRef =<< Just <$> timeout 1000 (compile s)
 
@@ -289,7 +307,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
     , onMessage : \s m -> do
         C.log "got response"
         case jsonParser m >>= decodeJson of
-          Left e -> C.log $ "decode error: " ++ e
+          Left e -> C.log $ "decode error: " <> e
           Right (CompileError ranges txt infos) -> do
             J.setText "Error" statuspanel
             J.setText txt messagepanel
@@ -300,7 +318,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
                 addMarker range "lc_error" "text" false session
             writeRef markerRef mkr
             writeRef typeInfoRef infos
-            return unit
+            pure unit
           Right (Compiled dsSrc pplSrc p infos) -> do
             J.setText dsSrc desugaredpanel
             J.setText pplSrc pipelinepanel
@@ -311,10 +329,10 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
             for_ rs $ \mkr -> Session.removeMarker mkr session
             writeRef markerRef []
             render p
-    , onError   : \s m -> C.log $ "error: " ++ m
+    , onError   : \s m -> C.log $ "error: " <> m
     }
   case socket of
-    Left m -> C.log $ "error: " ++ m
+    Left m -> C.log $ "error: " <> m
     Right ws -> do
 
       socket2 <- webSocket "ws://localhost:8000/getexercise" $
@@ -327,13 +345,13 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
             -- get the default example
             paramExample <- getUrlParameter "example"
             send s $ if paramExample == "" then defaultExampleName else paramExample
-            return unit
+            pure unit
         , onMessage : \s m -> case jsonParser m >>= decodeJson of
-              Left e -> C.log $ "decode error: " ++ e
+              Left e -> C.log $ "decode error: " <> e
               Right src -> do
                 Session.setValue src session
                 compile ws
-                return unit
+                pure unit
         , onError   : \s m -> C.log m
         , onClose   : C.log "socket2 is closed"
         }
@@ -352,7 +370,7 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
             paused <- J.getProp "checked" pauseBox
             case readBoolean paused of
               Right false -> do
-                  modifyRef timeRef (deltaTime +)
+                  modifyRef timeRef (\x -> deltaTime + x)
                   time <- readRef timeRef
                   let time' = (toNumber $ floor $ time * 1000.0)/1000.0
                   J.setValue time' timeBox
@@ -364,10 +382,10 @@ run = GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
                   updateInput time
             mppl <- readRef pipelineRef
             case mppl of
-              Nothing -> return unit
+              Nothing -> pure unit
               Just ppl -> renderPipeline ppl
             timeout (1000/25) renderLoop
       -- render loop
       renderLoop
       
-      return unit
+      pure unit

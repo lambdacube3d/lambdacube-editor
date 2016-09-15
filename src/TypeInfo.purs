@@ -10,11 +10,13 @@ import Data.Map (Map(..))
 import Data.List (List(..))
 import LinearBase
 
-import Data.Argonaut.Combinators ((~>), (:=), (.?))
+import Data.Argonaut.Encode.Combinators ((~>), (:=))
+import Data.Argonaut.Decode.Combinators ((.?))
 import Data.Argonaut.Core (jsonEmptyObject)
 import Data.Argonaut.Printer (printJson)
-import Data.Argonaut.Encode (EncodeJson, encodeJson)
-import Data.Argonaut.Decode (DecodeJson, decodeJson)
+import Data.Argonaut.Encode (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode (class DecodeJson, decodeJson)
+import Partial.Unsafe (unsafeCrashWith)
 
 import IR
 
@@ -66,6 +68,7 @@ instance decodeJsonRange :: DecodeJson Range where
           , endLine:endLine
           , endColumn:endColumn
           } 
+      _ -> unsafeCrashWith "decodeJson @ Range"
 
 instance encodeJsonTypeInfo :: EncodeJson TypeInfo where
   encodeJson v = case v of
@@ -86,7 +89,8 @@ instance decodeJsonTypeInfo :: DecodeJson TypeInfo where
         pure $ TypeInfo
           { range:range
           , text:text
-          } 
+          }
+      _ -> unsafeCrashWith "decodeJson @ TypeInfo"
 
 instance encodeJsonCompileResult :: EncodeJson CompileResult where
   encodeJson v = case v of
@@ -100,4 +104,5 @@ instance decodeJsonCompileResult :: DecodeJson CompileResult where
     case tag of
       "CompileError" -> CompileError <$> obj .? "arg0" <*> obj .? "arg1" <*> obj .? "arg2"
       "Compiled" -> Compiled <$> obj .? "arg0" <*> obj .? "arg1" <*> obj .? "arg2" <*> obj .? "arg3"
+      _ -> unsafeCrashWith "decodeJson @ CompileResult"
 
