@@ -13427,7 +13427,7 @@ var PS = {};
   var Data_Boolean = PS["Data.Boolean"];
   var Data_Ring = PS["Data.Ring"];
   var Data_Semiring = PS["Data.Semiring"];        
-  var main = Control_Monad_Eff_Console.log("Start LambdaCube 3D Editor xx");
+  var main = Control_Monad_Eff_Console.log("Start LambdaCube 3D Editor");
   var defaultExampleName = "LambdaCube2.lc";
   var addMarker = function (range) {
       return function (clazz) {
@@ -13441,301 +13441,421 @@ var PS = {};
       };
   };
   var run = Data_Function.apply(Partial_Unsafe.unsafePartial)(function (dictPartial) {
-      return function __do() {
-          Control_Monad_Eff_Console.log("Start LambdaCube 3D Editor xxxx")();
-          return Data_Function.apply(Graphics_WebGL.runWebGL("glcanvas")(function (s) {
-              return Control_Monad_Eff_Console.log(s);
-          }))(function (context) {
-              return function __do() {
-                  Control_Monad_Eff_Console.log("Start LambdaCube 3D Editor xxx")();
-                  var inputSchema = {
-                      slots: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("stream", {
-                          primitive: IR.Triangles.value, 
-                          attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value), new Data_Tuple.Tuple("normal", Type.TV3F.value) ])
-                      }), new Data_Tuple.Tuple("stream4", {
-                          primitive: IR.Triangles.value, 
-                          attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position4", Type.TV4F.value), new Data_Tuple.Tuple("vertexUV", Type.TV2F.value) ])
-                      }), new Data_Tuple.Tuple("line", {
-                          primitive: IR.Triangles.value, 
-                          attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value) ])
-                      }), new Data_Tuple.Tuple("grid", {
-                          primitive: IR.Triangles.value, 
-                          attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value) ])
-                      }), new Data_Tuple.Tuple("grid3d", {
-                          primitive: IR.Points.value, 
-                          attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value) ])
-                      }), new Data_Tuple.Tuple("quad", {
-                          primitive: IR.Triangles.value, 
-                          attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV2F.value) ])
-                      }), new Data_Tuple.Tuple("cube", {
-                          primitive: IR.Triangles.value, 
-                          attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value), new Data_Tuple.Tuple("normal", Type.TV3F.value) ])
-                      }), new Data_Tuple.Tuple("lambdaCube", {
-                          primitive: IR.Triangles.value, 
-                          attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value), new Data_Tuple.Tuple("normal", Type.TV3F.value) ])
-                      }) ]), 
-                      uniforms: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("MVP", IR.M44F.value), new Data_Tuple.Tuple("Time", IR.Float.value), new Data_Tuple.Tuple("Mouse", IR.V2F.value), new Data_Tuple.Tuple("Diffuse", IR.FTexture2D.value), new Data_Tuple.Tuple("OcclusionFieldMin", IR.FTexture2D.value), new Data_Tuple.Tuple("OcclusionFieldMax", IR.FTexture2D.value) ])
+      return Data_Function.apply(Graphics_WebGL.runWebGL("glcanvas")(function (s) {
+          return Control_Monad_Eff_Console.log(s);
+      }))(function (context) {
+          var inputSchema = {
+              slots: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("stream", {
+                  primitive: IR.Triangles.value, 
+                  attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value), new Data_Tuple.Tuple("normal", Type.TV3F.value) ])
+              }), new Data_Tuple.Tuple("stream4", {
+                  primitive: IR.Triangles.value, 
+                  attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position4", Type.TV4F.value), new Data_Tuple.Tuple("vertexUV", Type.TV2F.value) ])
+              }), new Data_Tuple.Tuple("line", {
+                  primitive: IR.Triangles.value, 
+                  attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value) ])
+              }), new Data_Tuple.Tuple("grid", {
+                  primitive: IR.Triangles.value, 
+                  attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value) ])
+              }), new Data_Tuple.Tuple("grid3d", {
+                  primitive: IR.Points.value, 
+                  attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value) ])
+              }), new Data_Tuple.Tuple("quad", {
+                  primitive: IR.Triangles.value, 
+                  attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV2F.value) ])
+              }), new Data_Tuple.Tuple("cube", {
+                  primitive: IR.Triangles.value, 
+                  attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value), new Data_Tuple.Tuple("normal", Type.TV3F.value) ])
+              }), new Data_Tuple.Tuple("lambdaCube", {
+                  primitive: IR.Triangles.value, 
+                  attributes: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", Type.TV3F.value), new Data_Tuple.Tuple("normal", Type.TV3F.value) ])
+              }) ]), 
+              uniforms: Data_StrMap_1.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("MVP", IR.M44F.value), new Data_Tuple.Tuple("Time", IR.Float.value), new Data_Tuple.Tuple("Mouse", IR.V2F.value), new Data_Tuple.Tuple("Diffuse", IR.FTexture2D.value), new Data_Tuple.Tuple("OcclusionFieldMin", IR.FTexture2D.value), new Data_Tuple.Tuple("OcclusionFieldMax", IR.FTexture2D.value) ])
+          };
+          return function __do() {
+              var v = Input.mkWebGLPipelineInput(inputSchema)();
+              var v1 = Control_Monad_Eff_Ref.newRef(0.0)();
+              var v2 = Control_Monad_Eff_JQuery.body();
+              var v3 = Control_Monad_Eff_JQuery.find("#timeBox")(v2)();
+              var v4 = Control_Monad_Eff_JQuery.find("#timeRange")(v2)();
+              var getTime = function __do() {
+                  var v5 = Control_Monad_Eff_JQuery.getValue(v3)();
+                  var $80 = Data_Foreign.readNumber(v5);
+                  if ($80 instanceof Data_Either.Right) {
+                      return $80.value0;
                   };
-                  var v = Input.mkWebGLPipelineInput(inputSchema)();
-                  var v1 = Control_Monad_Eff_Ref.newRef(0.0)();
-                  var v2 = Control_Monad_Eff_JQuery.body();
-                  var v3 = Control_Monad_Eff_JQuery.find("#timeBox")(v2)();
-                  var v4 = Control_Monad_Eff_JQuery.find("#timeRange")(v2)();
-                  var getTime = function __do() {
-                      var v5 = Control_Monad_Eff_JQuery.getValue(v3)();
-                      var $80 = Data_Foreign.readNumber(v5);
-                      if ($80 instanceof Data_Either.Right) {
-                          return $80.value0;
-                      };
-                      var $82 = Data_Foreign.readString(v5);
-                      if ($82 instanceof Data_Either.Right) {
-                          return Data_Function.apply(Control_Applicative.pure(Control_Monad_Eff.applicativeEff))(Global.readFloat($82.value0))();
-                      };
-                      return 0.0;
+                  var $82 = Data_Foreign.readString(v5);
+                  if ($82 instanceof Data_Either.Right) {
+                      return Data_Function.apply(Control_Applicative.pure(Control_Monad_Eff.applicativeEff))(Global.readFloat($82.value0))();
                   };
-                  Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("input"))(v3))(function (v5) {
-                      return function (v6) {
-                          return function __do() {
-                              Control_Bind.bind(Control_Monad_Eff.bindEff)(Control_Monad_Eff_JQuery.getValue(v3))(Data_Function.flip(Control_Monad_Eff_JQuery.setValue)(v4))();
-                              return Control_Bind.bind(Control_Monad_Eff.bindEff)(getTime)(Control_Monad_Eff_Ref.writeRef(v1))();
-                          };
-                      };
-                  })();
-                  Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("input"))(v4))(function (v5) {
-                      return function (v6) {
-                          return function __do() {
-                              Control_Bind.bind(Control_Monad_Eff.bindEff)(Control_Monad_Eff_JQuery.getValue(v4))(Data_Function.flip(Control_Monad_Eff_JQuery.setValue)(v3))();
-                              return Control_Bind.bind(Control_Monad_Eff.bindEff)(getTime)(Control_Monad_Eff_Ref.writeRef(v1))();
-                          };
-                      };
-                  })();
-                  Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("change"))(v3))(function (v5) {
-                      return function (v6) {
-                          return function __do() {
-                              Control_Bind.bind(Control_Monad_Eff.bindEff)(Control_Monad_Eff_JQuery.getValue(v3))(Data_Function.flip(Control_Monad_Eff_JQuery.setValue)(v4))();
-                              return Control_Bind.bind(Control_Monad_Eff.bindEff)(getTime)(Control_Monad_Eff_Ref.writeRef(v1))();
-                          };
-                      };
-                  })();
-                  Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("change"))(v4))(function (v5) {
-                      return function (v6) {
-                          return function __do() {
-                              Control_Bind.bind(Control_Monad_Eff.bindEff)(Control_Monad_Eff_JQuery.getValue(v4))(Data_Function.flip(Control_Monad_Eff_JQuery.setValue)(v3))();
-                              return Control_Bind.bind(Control_Monad_Eff.bindEff)(getTime)(Control_Monad_Eff_Ref.writeRef(v1))();
-                          };
-                      };
-                  })();
-                  var v5 = Control_Monad_Eff_JQuery.find("#pause")(v2)();
-                  var v6 = Control_Monad_Eff_JQuery.find("#pipeline")(v2)();
-                  var v7 = Control_Monad_Eff_JQuery.find("#desugared")(v2)();
-                  var v8 = Control_Monad_Eff_JQuery.find("#messagepanel")(v2)();
-                  var v9 = Control_Monad_Eff_JQuery.find("#statuspanel")(v2)();
-                  var v10 = Control_Monad_Eff_JQuery.find("#compilebutton")(v2)();
-                  var v11 = Control_Monad_Eff_JQuery.find("#exerciseselect")(v2)();
-                  var v12 = Control_Monad_Eff_JQuery.find("#glcanvas")(v2)();
-                  Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("mousemove"))(v12))(function (e) {
-                      return function (v13) {
-                          return function __do() {
-                              var v14 = Graphics_WebGL.getCanvasWidth(context)();
-                              var v15 = Graphics_WebGL.getCanvasHeight(context)();
-                              var v16 = $foreign.getMousePos(e)();
-                              var __unused = function (dictPartial1) {
-                                  return function ($dollar71) {
-                                      return $dollar71;
-                                  };
-                              };
-                              return __unused(dictPartial)((function () {
-                                  if (v16.length === 2) {
-                                      return Data_Function.apply(Input.uniformV2F("Mouse")(v.uniformSetter))(new LinearBase.V2(v16[0] / Data_Int.toNumber(v14), v16[1] / Data_Int.toNumber(v15)));
-                                  };
-                                  throw new Error("Failed pattern match at Main line 158, column 46 - line 162, column 85: " + [ v16.constructor.name ]);
-                              })())();
-                          };
-                      };
-                  })();
-                  var updateInput = function (t) {
+                  return 0.0;
+              };
+              Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("input"))(v3))(function (v5) {
+                  return function (v6) {
                       return function __do() {
-                          var v13 = Graphics_WebGL.getCanvasWidth(context)();
-                          var v14 = Graphics_WebGL.getCanvasHeight(context)();
-                          Input.setScreenSize(v)(new LinearBase.V2(v13, v14))();
-                          return Input.uniformFloat("Time")(v.uniformSetter)(t)();
+                          Control_Bind.bind(Control_Monad_Eff.bindEff)(Control_Monad_Eff_JQuery.getValue(v3))(Data_Function.flip(Control_Monad_Eff_JQuery.setValue)(v4))();
+                          return Control_Bind.bind(Control_Monad_Eff.bindEff)(getTime)(Control_Monad_Eff_Ref.writeRef(v1))();
                       };
                   };
-                  var toLCMat4 = function (v13) {
-                      if (v13.length === 16) {
-                          var v41 = new LinearBase.V4(v13[12], v13[13], v13[14], v13[15]);
-                          var v31 = new LinearBase.V4(v13[8], v13[9], v13[10], v13[11]);
-                          var v21 = new LinearBase.V4(v13[4], v13[5], v13[6], v13[7]);
-                          var v14 = new LinearBase.V4(v13[0], v13[1], v13[2], v13[3]);
-                          return new LinearBase.V4(v14, v21, v31, v41);
+              })();
+              Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("input"))(v4))(function (v5) {
+                  return function (v6) {
+                      return function __do() {
+                          Control_Bind.bind(Control_Monad_Eff.bindEff)(Control_Monad_Eff_JQuery.getValue(v4))(Data_Function.flip(Control_Monad_Eff_JQuery.setValue)(v3))();
+                          return Control_Bind.bind(Control_Monad_Eff.bindEff)(getTime)(Control_Monad_Eff_Ref.writeRef(v1))();
                       };
-                      return Extensions.fail("invalid Mat4");
                   };
-                  var v13 = Mesh.compileMesh(Sample.myCube)();
-                  Mesh.addMesh(v)("stream4")(v13)([  ])();
-                  var v14 = Mesh.compileMesh(Sample.myQuad)();
-                  Mesh.addMesh(v)("quad")(v14)([  ])();
-                  var v15 = Mesh.compileMesh(Sample.lambdaCube)();
-                  Mesh.addMesh(v)("lambdaCube")(v15)([  ])();
-                  Data.uploadTexture2DToGPU("logo.png")(Input.uniformFTexture2D("Diffuse")(v.uniformSetter))();
-                  Data.uploadTexture2DToGPU("OcclusionFieldMin.png")(Input.uniformFTexture2D("OcclusionFieldMin")(v.uniformSetter))();
-                  Data.uploadTexture2DToGPU("OcclusionFieldMax.png")(Input.uniformFTexture2D("OcclusionFieldMax")(v.uniformSetter))();
-                  var addRemoteModel = function (sname) {
-                      return function (uri) {
-                          return Data_Function.apply($foreign.getJSON(uri))(function (m) {
-                              var $128 = Data_Argonaut_Decode_Class.decodeJson(Mesh.decodeJsonMesh)(m);
-                              if ($128 instanceof Data_Either.Left) {
-                                  return Data_Function.apply(Control_Monad_Eff_Console.log)("decode error: " + $128.value0);
+              })();
+              Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("change"))(v3))(function (v5) {
+                  return function (v6) {
+                      return function __do() {
+                          Control_Bind.bind(Control_Monad_Eff.bindEff)(Control_Monad_Eff_JQuery.getValue(v3))(Data_Function.flip(Control_Monad_Eff_JQuery.setValue)(v4))();
+                          return Control_Bind.bind(Control_Monad_Eff.bindEff)(getTime)(Control_Monad_Eff_Ref.writeRef(v1))();
+                      };
+                  };
+              })();
+              Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("change"))(v4))(function (v5) {
+                  return function (v6) {
+                      return function __do() {
+                          Control_Bind.bind(Control_Monad_Eff.bindEff)(Control_Monad_Eff_JQuery.getValue(v4))(Data_Function.flip(Control_Monad_Eff_JQuery.setValue)(v3))();
+                          return Control_Bind.bind(Control_Monad_Eff.bindEff)(getTime)(Control_Monad_Eff_Ref.writeRef(v1))();
+                      };
+                  };
+              })();
+              var v5 = Control_Monad_Eff_JQuery.find("#pause")(v2)();
+              var v6 = Control_Monad_Eff_JQuery.find("#pipeline")(v2)();
+              var v7 = Control_Monad_Eff_JQuery.find("#desugared")(v2)();
+              var v8 = Control_Monad_Eff_JQuery.find("#messagepanel")(v2)();
+              var v9 = Control_Monad_Eff_JQuery.find("#statuspanel")(v2)();
+              var v10 = Control_Monad_Eff_JQuery.find("#compilebutton")(v2)();
+              var v11 = Control_Monad_Eff_JQuery.find("#exerciseselect")(v2)();
+              var v12 = Control_Monad_Eff_JQuery.find("#glcanvas")(v2)();
+              Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("mousemove"))(v12))(function (e) {
+                  return function (v13) {
+                      return function __do() {
+                          var v14 = Graphics_WebGL.getCanvasWidth(context)();
+                          var v15 = Graphics_WebGL.getCanvasHeight(context)();
+                          var v16 = $foreign.getMousePos(e)();
+                          var __unused = function (dictPartial1) {
+                              return function ($dollar71) {
+                                  return $dollar71;
                               };
-                              if ($128 instanceof Data_Either.Right) {
-                                  return function __do() {
-                                      var v16 = Mesh.compileMesh($128.value0)();
-                                      Mesh.addMesh(v)(sname)(v16)([  ])();
-                                      Input.sortSlotObjects(v)();
-                                      return Data_Unit.unit;
-                                  };
+                          };
+                          return __unused(dictPartial)((function () {
+                              if (v16.length === 2) {
+                                  return Data_Function.apply(Input.uniformV2F("Mouse")(v.uniformSetter))(new LinearBase.V2(v16[0] / Data_Int.toNumber(v14), v16[1] / Data_Int.toNumber(v15)));
                               };
-                              throw new Error("Failed pattern match at Main line 196, column 9 - line 202, column 22: " + [ $128.constructor.name ]);
+                              throw new Error("Failed pattern match at Main line 157, column 46 - line 161, column 85: " + [ v16.constructor.name ]);
+                          })())();
+                      };
+                  };
+              })();
+              var updateInput = function (t) {
+                  return function __do() {
+                      var v13 = Graphics_WebGL.getCanvasWidth(context)();
+                      var v14 = Graphics_WebGL.getCanvasHeight(context)();
+                      Input.setScreenSize(v)(new LinearBase.V2(v13, v14))();
+                      return Input.uniformFloat("Time")(v.uniformSetter)(t)();
+                  };
+              };
+              var toLCMat4 = function (v13) {
+                  if (v13.length === 16) {
+                      var v41 = new LinearBase.V4(v13[12], v13[13], v13[14], v13[15]);
+                      var v31 = new LinearBase.V4(v13[8], v13[9], v13[10], v13[11]);
+                      var v21 = new LinearBase.V4(v13[4], v13[5], v13[6], v13[7]);
+                      var v14 = new LinearBase.V4(v13[0], v13[1], v13[2], v13[3]);
+                      return new LinearBase.V4(v14, v21, v31, v41);
+                  };
+                  return Extensions.fail("invalid Mat4");
+              };
+              var v13 = Mesh.compileMesh(Sample.myCube)();
+              Mesh.addMesh(v)("stream4")(v13)([  ])();
+              var v14 = Mesh.compileMesh(Sample.myQuad)();
+              Mesh.addMesh(v)("quad")(v14)([  ])();
+              var v15 = Mesh.compileMesh(Sample.lambdaCube)();
+              Mesh.addMesh(v)("lambdaCube")(v15)([  ])();
+              Data.uploadTexture2DToGPU("logo.png")(Input.uniformFTexture2D("Diffuse")(v.uniformSetter))();
+              Data.uploadTexture2DToGPU("OcclusionFieldMin.png")(Input.uniformFTexture2D("OcclusionFieldMin")(v.uniformSetter))();
+              Data.uploadTexture2DToGPU("OcclusionFieldMax.png")(Input.uniformFTexture2D("OcclusionFieldMax")(v.uniformSetter))();
+              var addRemoteModel = function (sname) {
+                  return function (uri) {
+                      return Data_Function.apply($foreign.getJSON(uri))(function (m) {
+                          var $128 = Data_Argonaut_Decode_Class.decodeJson(Mesh.decodeJsonMesh)(m);
+                          if ($128 instanceof Data_Either.Left) {
+                              return Data_Function.apply(Control_Monad_Eff_Console.log)("decode error: " + $128.value0);
+                          };
+                          if ($128 instanceof Data_Either.Right) {
+                              return function __do() {
+                                  var v16 = Mesh.compileMesh($128.value0)();
+                                  Mesh.addMesh(v)(sname)(v16)([  ])();
+                                  Input.sortSlotObjects(v)();
+                                  return Data_Unit.unit;
+                              };
+                          };
+                          throw new Error("Failed pattern match at Main line 195, column 9 - line 201, column 22: " + [ $128.constructor.name ]);
+                      });
+                  };
+              };
+              var v16 = Ace_1.edit("editor")(Ace_1.ace)();
+              var v17 = Ace_Editor.getSession(v16)();
+              Ace_Editor.setTheme("ace/theme/terminal")(v16)();
+              Ace_EditSession.setMode("ace/mode/haskell")(v17)();
+              var v18 = Control_Monad_Eff_Ref.newRef([  ])();
+              var v19 = Control_Monad_Eff_Ref.newRef([  ])();
+              var lessEqPos = function (l) {
+                  return function (c) {
+                      return function (l$prime) {
+                          return function (c$prime) {
+                              return l < l$prime || l === l$prime && c <= c$prime;
+                          };
+                      };
+                  };
+              };
+              var lessPos = function (l) {
+                  return function (c) {
+                      return function (l$prime) {
+                          return function (c$prime) {
+                              return l < l$prime || l === l$prime && c < c$prime;
+                          };
+                      };
+                  };
+              };
+              var getTypeInfo = function (l) {
+                  return function (c) {
+                      return function __do() {
+                          var v20 = Control_Monad_Eff_Ref.readRef(v18)();
+                          var flattenTypeInfo = function (v21) {
+                              return {
+                                  startLine: v21.value0.range.value0.startLine, 
+                                  startColumn: v21.value0.range.value0.startColumn, 
+                                  endLine: v21.value0.range.value0.endLine, 
+                                  endColumn: v21.value0.range.value0.endColumn, 
+                                  text: v21.value0.text
+                              };
+                          };
+                          var ps = Data_Function.apply(Data_Function.flip(Data_Array.filter)(Data_Functor.map(Data_Functor.functorArray)(flattenTypeInfo)(v20)))(function (ti) {
+                              return lessEqPos(ti.startLine)(ti.startColumn)(l)(c) && lessPos(l)(c)(ti.endLine)(ti.endColumn);
                           });
-                      };
-                  };
-                  var v16 = Ace_1.edit("editor")(Ace_1.ace)();
-                  var v17 = Ace_Editor.getSession(v16)();
-                  Ace_Editor.setTheme("ace/theme/terminal")(v16)();
-                  Ace_EditSession.setMode("ace/mode/haskell")(v17)();
-                  var v18 = Control_Monad_Eff_Ref.newRef([  ])();
-                  var v19 = Control_Monad_Eff_Ref.newRef([  ])();
-                  var lessEqPos = function (l) {
-                      return function (c) {
-                          return function (l$prime) {
-                              return function (c$prime) {
-                                  return l < l$prime || l === l$prime && c <= c$prime;
-                              };
-                          };
-                      };
-                  };
-                  var lessPos = function (l) {
-                      return function (c) {
-                          return function (l$prime) {
-                              return function (c$prime) {
-                                  return l < l$prime || l === l$prime && c < c$prime;
-                              };
-                          };
-                      };
-                  };
-                  var getTypeInfo = function (l) {
-                      return function (c) {
-                          return function __do() {
-                              var v20 = Control_Monad_Eff_Ref.readRef(v18)();
-                              var flattenTypeInfo = function (v21) {
-                                  return {
-                                      startLine: v21.value0.range.value0.startLine, 
-                                      startColumn: v21.value0.range.value0.startColumn, 
-                                      endLine: v21.value0.range.value0.endLine, 
-                                      endColumn: v21.value0.range.value0.endColumn, 
-                                      text: v21.value0.text
+                          var f = function (v21) {
+                              return function (i) {
+                                  if (v21 instanceof Data_Maybe.Nothing) {
+                                      return new Data_Maybe.Just(i);
                                   };
-                              };
-                              var ps = Data_Function.apply(Data_Function.flip(Data_Array.filter)(Data_Functor.map(Data_Functor.functorArray)(flattenTypeInfo)(v20)))(function (ti) {
-                                  return lessEqPos(ti.startLine)(ti.startColumn)(l)(c) && lessPos(l)(c)(ti.endLine)(ti.endColumn);
-                              });
-                              var f = function (v21) {
-                                  return function (i) {
-                                      if (v21 instanceof Data_Maybe.Nothing) {
+                                  if (v21 instanceof Data_Maybe.Just) {
+                                      if (lessPos(v21.value0.startLine)(v21.value0.startColumn)(i.startLine)(i.startColumn)) {
                                           return new Data_Maybe.Just(i);
                                       };
-                                      if (v21 instanceof Data_Maybe.Just) {
-                                          if (lessPos(v21.value0.startLine)(v21.value0.startColumn)(i.startLine)(i.startColumn)) {
-                                              return new Data_Maybe.Just(i);
-                                          };
-                                          if (Data_Boolean.otherwise) {
-                                              return new Data_Maybe.Just(v21.value0);
-                                          };
+                                      if (Data_Boolean.otherwise) {
+                                          return new Data_Maybe.Just(v21.value0);
                                       };
-                                      throw new Error("Failed pattern match at Main line 222, column 25 - line 245, column 22: " + [ v21.constructor.name, i.constructor.name ]);
+                                  };
+                                  throw new Error("Failed pattern match at Main line 221, column 25 - line 244, column 22: " + [ v21.constructor.name, i.constructor.name ]);
+                              };
+                          };
+                          return Data_Function.apply(Control_Applicative.pure(Control_Monad_Eff.applicativeEff))((function () {
+                              var $144 = Data_Foldable.foldl(Data_Foldable.foldableArray)(f)(Data_Maybe.Nothing.value)(ps);
+                              if ($144 instanceof Data_Maybe.Nothing) {
+                                  return {
+                                      startLine: 0, 
+                                      startColumn: 0, 
+                                      endLine: 0, 
+                                      endColumn: 0, 
+                                      text: ""
                                   };
                               };
-                              return Data_Function.apply(Control_Applicative.pure(Control_Monad_Eff.applicativeEff))((function () {
-                                  var $144 = Data_Foldable.foldl(Data_Foldable.foldableArray)(f)(Data_Maybe.Nothing.value)(ps);
-                                  if ($144 instanceof Data_Maybe.Nothing) {
-                                      return {
-                                          startLine: 0, 
-                                          startColumn: 0, 
-                                          endLine: 0, 
-                                          endColumn: 0, 
-                                          text: ""
+                              if ($144 instanceof Data_Maybe.Just) {
+                                  return $144.value0;
+                              };
+                              throw new Error("Failed pattern match at Main line 236, column 9 - line 244, column 22: " + [ $144.constructor.name ]);
+                          })())();
+                      };
+                  };
+              };
+              $foreign.tokenTooltip(v16)(getTypeInfo)();
+              var v20 = Control_Monad_Eff_Ref.newRef(Data_Maybe.Nothing.value)();
+              var render = function (ir) {
+                  return function __do() {
+                      var v21 = Control_Monad_Eff_Ref.readRef(v20)();
+                      Control_Monad_Eff_Ref.writeRef(v20)(Data_Maybe.Nothing.value)();
+                      (function () {
+                          if (v21 instanceof Data_Maybe.Nothing) {
+                              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Unit.unit);
+                          };
+                          if (v21 instanceof Data_Maybe.Just) {
+                              return function __do() {
+                                  Control_Monad_Eff_Console.log("dispose old pipeline")();
+                                  return Backend.disposePipeline(v21.value0)();
+                              };
+                          };
+                          throw new Error("Failed pattern match at Main line 265, column 9 - line 269, column 30: " + [ v21.constructor.name ]);
+                      })()();
+                      Control_Monad_Eff_Console.log("allocate new pipeline")();
+                      var v22 = Backend.allocPipeline(ir)();
+                      Control_Monad_Eff_Console.log("attach pipeline input")();
+                      Backend.setPipelineInput(v22)(new Data_Maybe.Just(v))();
+                      Control_Monad_Eff_Console.log("generate object commands")();
+                      Input.sortSlotObjects(v)();
+                      return Data_Function.apply(Control_Monad_Eff_Ref.writeRef(v20))(new Data_Maybe.Just(v22))();
+                  };
+              };
+              var compile = function (s) {
+                  return function __do() {
+                      Control_Monad_Eff_Console.log("compile")();
+                      Control_Monad_Eff_JQuery.setText("Compiling...")(v9)();
+                      var v21 = Ace_EditSession.getValue(v17)();
+                      return WebSocket.send(s)(v21)();
+                  };
+              };
+              var v21 = Data_Function.apply(WebSocket.webSocket("ws://localhost:8000/exerciselist"))({
+                  onOpen: function (s) {
+                      return function __do() {
+                          WebSocket.send(s)("query")();
+                          Control_Monad_Eff_Console.log("socket1 is ready")();
+                          return Data_Unit.unit;
+                      };
+                  }, 
+                  onMessage: function (s) {
+                      return function (m) {
+                          var $152 = Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonString)));
+                          if ($152 instanceof Data_Either.Left) {
+                              return Data_Function.apply(Control_Monad_Eff_Console.log)("decode error: " + $152.value0);
+                          };
+                          if ($152 instanceof Data_Either.Right) {
+                              return function __do() {
+                                  Data_Function.apply(Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)($152.value0))(function (e) {
+                                      return function __do() {
+                                          var v21 = Control_Monad_Eff_JQuery.create("<option></option>")();
+                                          Control_Monad_Eff_JQuery.setText(e)(v21)();
+                                          return Control_Monad_Eff_JQuery.append(v21)(v11)();
                                       };
+                                  })();
+                                  return Data_Unit.unit;
+                              };
+                          };
+                          throw new Error("Failed pattern match at Main line 283, column 27 - line 290, column 22: " + [ $152.constructor.name ]);
+                      };
+                  }, 
+                  onError: function (s) {
+                      return function (m) {
+                          return Control_Monad_Eff_Console.log(m);
+                      };
+                  }, 
+                  onClose: Control_Monad_Eff_Console.log("socket1 is closed")
+              })();
+              var v22 = Data_Function.apply(WebSocket.webSocket("ws://localhost:8000/compile"))({
+                  onOpen: function (s) {
+                      return function __do() {
+                          Control_Monad_Eff_Console.log("socket is ready")();
+                          var v22 = Control_Monad_Eff_Ref.newRef(Data_Maybe.Nothing.value)();
+                          return Data_Function.apply(Ace_EditSession.onChange(v17))(function __do() {
+                              var v23 = Control_Monad_Eff_Ref.readRef(v22)();
+                              (function () {
+                                  if (v23 instanceof Data_Maybe.Nothing) {
+                                      return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Unit.unit);
                                   };
-                                  if ($144 instanceof Data_Maybe.Just) {
-                                      return $144.value0;
+                                  if (v23 instanceof Data_Maybe.Just) {
+                                      return Timer.clearTimeout(v23.value0);
                                   };
-                                  throw new Error("Failed pattern match at Main line 237, column 9 - line 245, column 22: " + [ $144.constructor.name ]);
-                              })())();
+                                  throw new Error("Failed pattern match at Main line 301, column 11 - line 303, column 37: " + [ v23.constructor.name ]);
+                              })()();
+                              return Control_Bind.bindFlipped(Control_Monad_Eff.bindEff)(Control_Monad_Eff_Ref.writeRef(v22))(Data_Functor.map(Control_Monad_Eff.functorEff)(Data_Maybe.Just.create)(Timer.timeout(1000)(compile(s))))();
+                          })();
+                      };
+                  }, 
+                  onClose: Control_Monad_Eff_Console.log("socket is closed"), 
+                  onMessage: function (s) {
+                      return function (m) {
+                          return function __do() {
+                              Control_Monad_Eff_Console.log("got response")();
+                              var $161 = Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode_Class.decodeJson(TypeInfo.decodeJsonCompileResult));
+                              if ($161 instanceof Data_Either.Left) {
+                                  return Data_Function.apply(Control_Monad_Eff_Console.log)("decode error: " + $161.value0)();
+                              };
+                              if ($161 instanceof Data_Either.Right && $161.value0 instanceof TypeInfo.CompileError) {
+                                  Control_Monad_Eff_JQuery.setText("Error")(v9)();
+                                  Control_Monad_Eff_JQuery.setText($161.value0.value1)(v8)();
+                                  var v22 = Control_Monad_Eff_Ref.readRef(v19)();
+                                  Data_Function.apply(Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(v22))(function (mkr) {
+                                      return Ace_EditSession.removeMarker(mkr)(v17);
+                                  })();
+                                  var v23 = Data_Function.apply(Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_Traversable.traversableArray)($161.value0.value0))(function (v23) {
+                                      return function __do() {
+                                          var v24 = Ace_Range.create(v23.value0.startLine - 1)(v23.value0.startColumn - 1)(v23.value0.endLine - 1)(v23.value0.endColumn - 1)();
+                                          return addMarker(v24)("lc_error")("text")(false)(v17)();
+                                      };
+                                  })();
+                                  Control_Monad_Eff_Ref.writeRef(v19)(v23)();
+                                  Control_Monad_Eff_Ref.writeRef(v18)($161.value0.value2)();
+                                  return Data_Unit.unit;
+                              };
+                              if ($161 instanceof Data_Either.Right && $161.value0 instanceof TypeInfo.Compiled) {
+                                  Control_Monad_Eff_JQuery.setText($161.value0.value0)(v7)();
+                                  Control_Monad_Eff_JQuery.setText($161.value0.value1)(v6)();
+                                  Control_Monad_Eff_JQuery.setText("Compiled")(v9)();
+                                  Control_Monad_Eff_JQuery.setText("No errors.")(v8)();
+                                  Control_Monad_Eff_Ref.writeRef(v18)($161.value0.value3)();
+                                  var v22 = Control_Monad_Eff_Ref.readRef(v19)();
+                                  Data_Function.apply(Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(v22))(function (mkr) {
+                                      return Ace_EditSession.removeMarker(mkr)(v17);
+                                  })();
+                                  Control_Monad_Eff_Ref.writeRef(v19)([  ])();
+                                  return render($161.value0.value2)();
+                              };
+                              throw new Error("Failed pattern match at Main line 309, column 9 - line 331, column 21: " + [ $161.constructor.name ]);
                           };
                       };
-                  };
-                  $foreign.tokenTooltip(v16)(getTypeInfo)();
-                  var v20 = Control_Monad_Eff_Ref.newRef(Data_Maybe.Nothing.value)();
-                  var render = function (ir) {
-                      return function __do() {
-                          var v21 = Control_Monad_Eff_Ref.readRef(v20)();
-                          Control_Monad_Eff_Ref.writeRef(v20)(Data_Maybe.Nothing.value)();
-                          (function () {
-                              if (v21 instanceof Data_Maybe.Nothing) {
-                                  return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Unit.unit);
-                              };
-                              if (v21 instanceof Data_Maybe.Just) {
-                                  return function __do() {
-                                      Control_Monad_Eff_Console.log("dispose old pipeline")();
-                                      return Backend.disposePipeline(v21.value0)();
-                                  };
-                              };
-                              throw new Error("Failed pattern match at Main line 266, column 9 - line 270, column 30: " + [ v21.constructor.name ]);
-                          })()();
-                          Control_Monad_Eff_Console.log("allocate new pipeline")();
-                          var v22 = Backend.allocPipeline(ir)();
-                          Control_Monad_Eff_Console.log("attach pipeline input")();
-                          Backend.setPipelineInput(v22)(new Data_Maybe.Just(v))();
-                          Control_Monad_Eff_Console.log("generate object commands")();
-                          Input.sortSlotObjects(v)();
-                          return Data_Function.apply(Control_Monad_Eff_Ref.writeRef(v20))(new Data_Maybe.Just(v22))();
+                  }, 
+                  onError: function (s) {
+                      return function (m) {
+                          return Data_Function.apply(Control_Monad_Eff_Console.log)("error: " + m);
                       };
-                  };
-                  var compile = function (s) {
-                      return function __do() {
-                          Control_Monad_Eff_Console.log("compile")();
-                          Control_Monad_Eff_JQuery.setText("Compiling...")(v9)();
-                          var v21 = Ace_EditSession.getValue(v17)();
-                          return WebSocket.send(s)(v21)();
-                      };
-                  };
-                  var v21 = Data_Function.apply(WebSocket.webSocket("ws://localhost:8000/exerciselist"))({
+                  }
+              })();
+              if (v22 instanceof Data_Either.Left) {
+                  return Data_Function.apply(Control_Monad_Eff_Console.log)("error: " + v22.value0)();
+              };
+              if (v22 instanceof Data_Either.Right) {
+                  var v23 = Data_Function.apply(WebSocket.webSocket("ws://localhost:8000/getexercise"))({
                       onOpen: function (s) {
                           return function __do() {
-                              WebSocket.send(s)("query")();
-                              Control_Monad_Eff_Console.log("socket1 is ready")();
+                              Control_Monad_Eff_Console.log("socket2 is ready")();
+                              Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("change"))(v11))(function (v23) {
+                                  return function (v24) {
+                                      return function __do() {
+                                          var v25 = Control_Monad_Eff_JQuery.find(":selected")(v11)();
+                                          var v26 = Control_Monad_Eff_JQuery.getText(v25)();
+                                          return WebSocket.send(s)(v26)();
+                                      };
+                                  };
+                              })();
+                              var v23 = $foreign.getUrlParameter("example")();
+                              Data_Function.apply(WebSocket.send(s))((function () {
+                                  var $186 = v23 === "";
+                                  if ($186) {
+                                      return defaultExampleName;
+                                  };
+                                  if (!$186) {
+                                      return v23;
+                                  };
+                                  throw new Error("Failed pattern match at Main line 347, column 13 - line 347, column 85: " + [ $186.constructor.name ]);
+                              })())();
                               return Data_Unit.unit;
                           };
                       }, 
                       onMessage: function (s) {
                           return function (m) {
-                              var $152 = Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonString)));
-                              if ($152 instanceof Data_Either.Left) {
-                                  return Data_Function.apply(Control_Monad_Eff_Console.log)("decode error: " + $152.value0);
+                              var $187 = Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeJsonString));
+                              if ($187 instanceof Data_Either.Left) {
+                                  return Data_Function.apply(Control_Monad_Eff_Console.log)("decode error: " + $187.value0);
                               };
-                              if ($152 instanceof Data_Either.Right) {
+                              if ($187 instanceof Data_Either.Right) {
                                   return function __do() {
-                                      Data_Function.apply(Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)($152.value0))(function (e) {
-                                          return function __do() {
-                                              var v21 = Control_Monad_Eff_JQuery.create("<option></option>")();
-                                              Control_Monad_Eff_JQuery.setText(e)(v21)();
-                                              return Control_Monad_Eff_JQuery.append(v21)(v11)();
-                                          };
-                                      })();
+                                      Ace_EditSession.setValue($187.value0)(v17)();
+                                      compile(v22.value0)();
                                       return Data_Unit.unit;
                                   };
                               };
-                              throw new Error("Failed pattern match at Main line 284, column 27 - line 291, column 22: " + [ $152.constructor.name ]);
+                              throw new Error("Failed pattern match at Main line 349, column 31 - line 354, column 26: " + [ $187.constructor.name ]);
                           };
                       }, 
                       onError: function (s) {
@@ -13743,188 +13863,64 @@ var PS = {};
                               return Control_Monad_Eff_Console.log(m);
                           };
                       }, 
-                      onClose: Control_Monad_Eff_Console.log("socket1 is closed")
+                      onClose: Control_Monad_Eff_Console.log("socket2 is closed")
                   })();
-                  var v22 = Data_Function.apply(WebSocket.webSocket("ws://localhost:8000/compile"))({
-                      onOpen: function (s) {
+                  Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("click"))(v10))(function (v24) {
+                      return function (v25) {
                           return function __do() {
-                              Control_Monad_Eff_Console.log("socket is ready")();
-                              var v22 = Control_Monad_Eff_Ref.newRef(Data_Maybe.Nothing.value)();
-                              return Data_Function.apply(Ace_EditSession.onChange(v17))(function __do() {
-                                  var v23 = Control_Monad_Eff_Ref.readRef(v22)();
-                                  (function () {
-                                      if (v23 instanceof Data_Maybe.Nothing) {
-                                          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Unit.unit);
-                                      };
-                                      if (v23 instanceof Data_Maybe.Just) {
-                                          return Timer.clearTimeout(v23.value0);
-                                      };
-                                      throw new Error("Failed pattern match at Main line 302, column 11 - line 304, column 37: " + [ v23.constructor.name ]);
-                                  })()();
-                                  return Control_Bind.bindFlipped(Control_Monad_Eff.bindEff)(Control_Monad_Eff_Ref.writeRef(v22))(Data_Functor.map(Control_Monad_Eff.functorEff)(Data_Maybe.Just.create)(Timer.timeout(1000)(compile(s))))();
-                              })();
+                              compile(v22.value0)();
+                              return Control_Monad_Eff_Console.log("clicked compile")();
                           };
-                      }, 
-                      onClose: Control_Monad_Eff_Console.log("socket is closed"), 
-                      onMessage: function (s) {
-                          return function (m) {
-                              return function __do() {
-                                  Control_Monad_Eff_Console.log("got response")();
-                                  var $161 = Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode_Class.decodeJson(TypeInfo.decodeJsonCompileResult));
-                                  if ($161 instanceof Data_Either.Left) {
-                                      return Data_Function.apply(Control_Monad_Eff_Console.log)("decode error: " + $161.value0)();
-                                  };
-                                  if ($161 instanceof Data_Either.Right && $161.value0 instanceof TypeInfo.CompileError) {
-                                      Control_Monad_Eff_JQuery.setText("Error")(v9)();
-                                      Control_Monad_Eff_JQuery.setText($161.value0.value1)(v8)();
-                                      var v22 = Control_Monad_Eff_Ref.readRef(v19)();
-                                      Data_Function.apply(Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(v22))(function (mkr) {
-                                          return Ace_EditSession.removeMarker(mkr)(v17);
-                                      })();
-                                      var v23 = Data_Function.apply(Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_Traversable.traversableArray)($161.value0.value0))(function (v23) {
-                                          return function __do() {
-                                              var v24 = Ace_Range.create(v23.value0.startLine - 1)(v23.value0.startColumn - 1)(v23.value0.endLine - 1)(v23.value0.endColumn - 1)();
-                                              return addMarker(v24)("lc_error")("text")(false)(v17)();
-                                          };
-                                      })();
-                                      Control_Monad_Eff_Ref.writeRef(v19)(v23)();
-                                      Control_Monad_Eff_Ref.writeRef(v18)($161.value0.value2)();
-                                      return Data_Unit.unit;
-                                  };
-                                  if ($161 instanceof Data_Either.Right && $161.value0 instanceof TypeInfo.Compiled) {
-                                      Control_Monad_Eff_JQuery.setText($161.value0.value0)(v7)();
-                                      Control_Monad_Eff_JQuery.setText($161.value0.value1)(v6)();
-                                      Control_Monad_Eff_JQuery.setText("Compiled")(v9)();
-                                      Control_Monad_Eff_JQuery.setText("No errors.")(v8)();
-                                      Control_Monad_Eff_Ref.writeRef(v18)($161.value0.value3)();
-                                      var v22 = Control_Monad_Eff_Ref.readRef(v19)();
-                                      Data_Function.apply(Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(v22))(function (mkr) {
-                                          return Ace_EditSession.removeMarker(mkr)(v17);
-                                      })();
-                                      Control_Monad_Eff_Ref.writeRef(v19)([  ])();
-                                      return render($161.value0.value2)();
-                                  };
-                                  throw new Error("Failed pattern match at Main line 310, column 9 - line 332, column 21: " + [ $161.constructor.name ]);
-                              };
-                          };
-                      }, 
-                      onError: function (s) {
-                          return function (m) {
-                              return Data_Function.apply(Control_Monad_Eff_Console.log)("error: " + m);
-                          };
-                      }
+                      };
                   })();
-                  if (v22 instanceof Data_Either.Left) {
-                      return Data_Function.apply(Control_Monad_Eff_Console.log)("error: " + v22.value0)();
-                  };
-                  if (v22 instanceof Data_Either.Right) {
-                      var v23 = Data_Function.apply(WebSocket.webSocket("ws://localhost:8000/getexercise"))({
-                          onOpen: function (s) {
+                  $foreign.addCommand(v16)("Compile")("Ctrl-B")("Command-B")(function (v24) {
+                      return compile(v22.value0);
+                  })();
+                  var v24 = Control_Bind.bindFlipped(Control_Monad_Eff.bindEff)(Control_Monad_Eff_Ref.newRef)(Timer.nowEpochMilliseconds)();
+                  var renderLoop = function __do() {
+                      var v25 = Timer.nowEpochMilliseconds();
+                      var v26 = Control_Monad_Eff_Ref.readRef(v24)();
+                      var deltaTime = (v25 - v26) / 1000.0;
+                      Control_Monad_Eff_Ref.writeRef(v24)(v25)();
+                      var v27 = Control_Monad_Eff_JQuery.getProp("checked")(v5)();
+                      (function () {
+                          var $198 = Data_Foreign.readBoolean(v27);
+                          if ($198 instanceof Data_Either.Right && !$198.value0) {
                               return function __do() {
-                                  Control_Monad_Eff_Console.log("socket2 is ready")();
-                                  Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("change"))(v11))(function (v23) {
-                                      return function (v24) {
-                                          return function __do() {
-                                              var v25 = Control_Monad_Eff_JQuery.find(":selected")(v11)();
-                                              var v26 = Control_Monad_Eff_JQuery.getText(v25)();
-                                              return WebSocket.send(s)(v26)();
-                                          };
-                                      };
+                                  Control_Monad_Eff_Ref.modifyRef(v1)(function (x) {
+                                      return deltaTime + x;
                                   })();
-                                  var v23 = $foreign.getUrlParameter("example")();
-                                  Data_Function.apply(WebSocket.send(s))((function () {
-                                      var $186 = v23 === "";
-                                      if ($186) {
-                                          return defaultExampleName;
-                                      };
-                                      if (!$186) {
-                                          return v23;
-                                      };
-                                      throw new Error("Failed pattern match at Main line 348, column 13 - line 348, column 85: " + [ $186.constructor.name ]);
-                                  })())();
-                                  return Data_Unit.unit;
-                              };
-                          }, 
-                          onMessage: function (s) {
-                              return function (m) {
-                                  var $187 = Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Parser.jsonParser(m))(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeJsonString));
-                                  if ($187 instanceof Data_Either.Left) {
-                                      return Data_Function.apply(Control_Monad_Eff_Console.log)("decode error: " + $187.value0);
-                                  };
-                                  if ($187 instanceof Data_Either.Right) {
-                                      return function __do() {
-                                          Ace_EditSession.setValue($187.value0)(v17)();
-                                          compile(v22.value0)();
-                                          return Data_Unit.unit;
-                                      };
-                                  };
-                                  throw new Error("Failed pattern match at Main line 350, column 31 - line 355, column 26: " + [ $187.constructor.name ]);
-                              };
-                          }, 
-                          onError: function (s) {
-                              return function (m) {
-                                  return Control_Monad_Eff_Console.log(m);
-                              };
-                          }, 
-                          onClose: Control_Monad_Eff_Console.log("socket2 is closed")
-                      })();
-                      Data_Function.apply(Data_Function.flip(Control_Monad_Eff_JQuery.on("click"))(v10))(function (v24) {
-                          return function (v25) {
-                              return function __do() {
-                                  compile(v22.value0)();
-                                  return Control_Monad_Eff_Console.log("clicked compile")();
-                              };
-                          };
-                      })();
-                      $foreign.addCommand(v16)("Compile")("Ctrl-B")("Command-B")(function (v24) {
-                          return compile(v22.value0);
-                      })();
-                      var v24 = Control_Bind.bindFlipped(Control_Monad_Eff.bindEff)(Control_Monad_Eff_Ref.newRef)(Timer.nowEpochMilliseconds)();
-                      var renderLoop = function __do() {
-                          var v25 = Timer.nowEpochMilliseconds();
-                          var v26 = Control_Monad_Eff_Ref.readRef(v24)();
-                          var deltaTime = (v25 - v26) / 1000.0;
-                          Control_Monad_Eff_Ref.writeRef(v24)(v25)();
-                          var v27 = Control_Monad_Eff_JQuery.getProp("checked")(v5)();
-                          (function () {
-                              var $198 = Data_Foreign.readBoolean(v27);
-                              if ($198 instanceof Data_Either.Right && !$198.value0) {
-                                  return function __do() {
-                                      Control_Monad_Eff_Ref.modifyRef(v1)(function (x) {
-                                          return deltaTime + x;
-                                      })();
-                                      var v28 = Control_Monad_Eff_Ref.readRef(v1)();
-                                      var time$prime = Data_Function.apply(Data_Int.toNumber)(Data_Function.apply(Data_Int.floor)(v28 * 1000.0)) / 1000.0;
-                                      Control_Monad_Eff_JQuery.setValue(time$prime)(v3)();
-                                      Control_Monad_Eff_JQuery.setValue(time$prime)(v4)();
-                                      return updateInput(v28)();
-                                  };
-                              };
-                              return function __do() {
-                                  var v28 = getTime();
-                                  Control_Monad_Eff_Ref.writeRef(v1)(v28)();
+                                  var v28 = Control_Monad_Eff_Ref.readRef(v1)();
+                                  var time$prime = Data_Function.apply(Data_Int.toNumber)(Data_Function.apply(Data_Int.floor)(v28 * 1000.0)) / 1000.0;
+                                  Control_Monad_Eff_JQuery.setValue(time$prime)(v3)();
+                                  Control_Monad_Eff_JQuery.setValue(time$prime)(v4)();
                                   return updateInput(v28)();
                               };
-                          })()();
-                          var v28 = Control_Monad_Eff_Ref.readRef(v20)();
-                          (function () {
-                              if (v28 instanceof Data_Maybe.Nothing) {
-                                  return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Unit.unit);
-                              };
-                              if (v28 instanceof Data_Maybe.Just) {
-                                  return Backend.renderPipeline(v28.value0);
-                              };
-                              throw new Error("Failed pattern match at Main line 385, column 13 - line 387, column 45: " + [ v28.constructor.name ]);
-                          })()();
-                          return Timer.timeout(1000 / 25 | 0)(renderLoop)();
-                      };
-                      renderLoop();
-                      return Data_Unit.unit;
+                          };
+                          return function __do() {
+                              var v28 = getTime();
+                              Control_Monad_Eff_Ref.writeRef(v1)(v28)();
+                              return updateInput(v28)();
+                          };
+                      })()();
+                      var v28 = Control_Monad_Eff_Ref.readRef(v20)();
+                      (function () {
+                          if (v28 instanceof Data_Maybe.Nothing) {
+                              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Unit.unit);
+                          };
+                          if (v28 instanceof Data_Maybe.Just) {
+                              return Backend.renderPipeline(v28.value0);
+                          };
+                          throw new Error("Failed pattern match at Main line 384, column 13 - line 386, column 45: " + [ v28.constructor.name ]);
+                      })()();
+                      return Timer.timeout(1000 / 25 | 0)(renderLoop)();
                   };
-                  throw new Error("Failed pattern match at Main line 335, column 3 - line 392, column 12: " + [ v22.constructor.name ]);
+                  renderLoop();
+                  return Data_Unit.unit;
               };
-          })();
-      };
+              throw new Error("Failed pattern match at Main line 334, column 3 - line 391, column 12: " + [ v22.constructor.name ]);
+          };
+      });
   });
   exports["main"] = main;
   exports["run"] = run;
