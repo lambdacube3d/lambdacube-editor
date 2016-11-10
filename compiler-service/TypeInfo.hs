@@ -1,5 +1,5 @@
 -- generated file, do not modify!
--- 2016-11-10T15:07:11.972496000000Z
+-- 2016-11-10T16:02:38.361054000000Z
 
 {-# LANGUAGE OverloadedStrings, RecordWildCards #-}
 module TypeInfo where
@@ -52,7 +52,7 @@ data ErrorInfo
   deriving (Show, Eq, Ord)
 
 data CompileResult
-  = CompileError (Vector TypeInfo) (Vector WarningInfo) (Vector ErrorInfo)
+  = CompileError String (Vector TypeInfo) (Vector WarningInfo) (Vector ErrorInfo)
   | Compiled String String Pipeline (Vector TypeInfo) (Vector WarningInfo)
   deriving (Show, Eq, Ord)
 
@@ -149,14 +149,14 @@ instance FromJSON ErrorInfo where
 
 instance ToJSON CompileResult where
   toJSON v = case v of
-    CompileError arg0 arg1 arg2 -> object [ "tag" .= ("CompileError" :: Text), "arg0" .= arg0, "arg1" .= arg1, "arg2" .= arg2]
+    CompileError arg0 arg1 arg2 arg3 -> object [ "tag" .= ("CompileError" :: Text), "arg0" .= arg0, "arg1" .= arg1, "arg2" .= arg2, "arg3" .= arg3]
     Compiled arg0 arg1 arg2 arg3 arg4 -> object [ "tag" .= ("Compiled" :: Text), "arg0" .= arg0, "arg1" .= arg1, "arg2" .= arg2, "arg3" .= arg3, "arg4" .= arg4]
 
 instance FromJSON CompileResult where
   parseJSON (Object obj) = do
     tag <- obj .: "tag"
     case tag :: Text of
-      "CompileError" -> CompileError <$> obj .: "arg0" <*> obj .: "arg1" <*> obj .: "arg2"
+      "CompileError" -> CompileError <$> obj .: "arg0" <*> obj .: "arg1" <*> obj .: "arg2" <*> obj .: "arg3"
       "Compiled" -> Compiled <$> obj .: "arg0" <*> obj .: "arg1" <*> obj .: "arg2" <*> obj .: "arg3" <*> obj .: "arg4"
   parseJSON _ = mzero
 
