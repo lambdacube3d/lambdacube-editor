@@ -93,12 +93,14 @@ app compiler ch = Snap.route
       where
         cvtRange (C.Range _ (SPos r c) (SPos r' c')) = T.Range r c r' c'
 
-        ff (Left err, (infos, _))    = CompileError (V.fromList $ cvtRange <$> errorRange infos) (plainShow err) $ convertInfos infos
-        ff (Right ppl, (infos, dsg)) = Compiled dsg (prettyShowUnlines ppl) ppl $ convertInfos infos
+        ff (Left err, (infos, _))    = CompileError (plainShow err) (convertInfos infos) (convertWarnings infos) (convertErrors infos)
+        ff (Right ppl, (infos, dsg)) = Compiled dsg (prettyShowUnlines ppl) ppl (convertInfos infos) (convertWarnings infos)
 
-        er e = return $ encodePretty $ CompileError mempty ("\n!FAIL\n" ++ e) mempty
+        er e = return $ encodePretty $ CompileError ("\n!FAIL\n" ++ e) mempty mempty mempty
 
         convertInfos is = V.fromList [TypeInfo (cvtRange r) $ C.plainShow $ C.vcat c | (r, c) <- listTypeInfos is ]
+        convertErrors is = V.fromList [ErrorInfo (cvtRange r) $ C.plainShow $ C.vcat c | (r, c) <- listTypeInfos is ]
+        convertWarnings is = V.fromList [WarningInfo (cvtRange r) $ C.plainShow $ C.vcat c | (r, c) <- listWarnings is ]
 
 catchErr :: (MonadCatch m, NFData a, MonadIO m) => (String -> m a) -> m a -> m a
 catchErr er m = (force <$> m >>= liftIO . evaluate) `catch` getErr `catch` getPMatchFail
