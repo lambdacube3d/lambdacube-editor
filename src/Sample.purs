@@ -2,8 +2,7 @@ module Sample where
 
 import Prelude
 import Data.Maybe
-import Data.StrMap (fromList)
-import Data.List
+import Data.StrMap (fromFoldable)
 import Data.Tuple
 
 import Backend
@@ -88,7 +87,7 @@ g_uv_buffer_data =
 
 myCube :: Mesh
 myCube = Mesh
-    { attributes: fromList $ fromFoldable
+    { attributes: fromFoldable
         [ Tuple "position4" (A_V4F g_vertex_buffer_data)
         , Tuple "vertexUV"  (A_V2F g_uv_buffer_data)
         ]
@@ -98,7 +97,7 @@ myCube = Mesh
 
 myCube2 :: Mesh
 myCube2 = Mesh
-  { attributes: fromList $ fromFoldable
+  { attributes: fromFoldable
         [ Tuple "normal"    (A_V3F [V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-0.0) 1.0,V3 0.0 (-0.0) 1.0,V3 0.0 (-0.0) 1.0,V3 (-0.0) 0.0 1.0,V3 (-0.0) 0.0 1.0,V3 (-0.0) 0.0 1.0,V3 (-0.0) (-0.0) (-1.0),V3 (-0.0) (-0.0) (-1.0),V3 (-0.0) (-0.0) (-1.0),V3 0.0 0.0 (-1.0),V3 0.0 0.0 (-1.0),V3 0.0 0.0 (-1.0),V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0])
         , Tuple "position"  (A_V3F [V3 1.0 1.0 1.0,V3 (-1.0) 1.0 1.0,V3 (-1.0) 1.0 (-1.0),V3 (-1.0) 1.0 (-1.0),V3 1.0 1.0 (-1.0),V3 1.0 1.0 1.0,V3 1.0 (-1.0) (-1.0),V3 (-1.0) (-1.0) (-1.0),V3 (-1.0) (-1.0) 1.0,V3 (-1.0) (-1.0) 1.0,V3 1.0 (-1.0) 1.0,V3 1.0 (-1.0) (-1.0),V3 1.0 (-1.0) 1.0,V3 (-1.0) (-1.0) 1.0,V3 (-1.0) 1.0 1.0,V3 (-1.0) 1.0 1.0,V3 1.0 1.0 1.0,V3 1.0 (-1.0) 1.0,V3 1.0 1.0 (-1.0),V3 (-1.0) 1.0 (-1.0),V3 (-1.0) (-1.0) (-1.0),V3 (-1.0) (-1.0) (-1.0),V3 1.0 (-1.0) (-1.0),V3 1.0 1.0 (-1.0),V3 (-1.0) (-1.0) 1.0,V3 (-1.0) (-1.0) (-1.0),V3 (-1.0) 1.0 (-1.0),V3 (-1.0) 1.0 (-1.0),V3 (-1.0) 1.0 1.0,V3 (-1.0) (-1.0) 1.0,V3 1.0 (-1.0) (-1.0),V3 1.0 (-1.0) 1.0,V3 1.0 1.0 1.0,V3 1.0 1.0 1.0,V3 1.0 1.0 (-1.0),V3 1.0 (-1.0) (-1.0)])
         ]
@@ -108,7 +107,7 @@ myCube2 = Mesh
 
 myQuad :: Mesh
 myQuad = Mesh
-  { attributes: fromList $ fromFoldable
+  { attributes: fromFoldable
       [ Tuple "position" (A_V2F [V2 (-1.0) 1.0,V2 (-1.0) (-1.0),V2 1.0 (-1.0),V2 1.0 (-1.0),V2 1.0 1.0,V2 (-1.0) 1.0])]
   , primitive: P_Triangles
   , gpuData: Nothing
@@ -116,7 +115,7 @@ myQuad = Mesh
 
 lambdaCube :: Mesh
 lambdaCube = Mesh
-    { attributes: fromList $ fromFoldable
+    { attributes: fromFoldable
         [ Tuple "position"  (A_V3F lambdaCubeVertices)
         , Tuple "normal"    (A_V3F lambdaCubeNormals)
         ]

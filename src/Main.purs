@@ -9,6 +9,7 @@ import Control.Monad.Eff.Console as C
 import Control.Bind
 import TypeInfo
 import Timer
+import Control.Monad.Except
 import Control.Monad.Eff
 import Control.Monad.Eff.Exception
 import Control.Monad.Eff.Ref
@@ -128,9 +129,9 @@ run = unsafePartial $ do
   timeRange <- J.find "#timeRange" b
   let getTime = do
                   t <- J.getValue timeBox
-                  case readNumber t of
+                  case runExcept $ readNumber t of
                     Right time -> pure time
-                    _ -> case readString t of
+                    _ -> case runExcept $ readString t of
                         Right timeStr -> pure $ readFloat timeStr
                         _ -> pure 0.0
   flip (J.on "input") timeBox $ \_ _ -> do
@@ -368,7 +369,7 @@ run = unsafePartial $ do
             let deltaTime = (t - lastTime) / 1000.0
             writeRef lastTimeRef t
             paused <- J.getProp "checked" pauseBox
-            case readBoolean paused of
+            case runExcept $ readBoolean paused of
               Right false -> do
                   modifyRef timeRef (\x -> deltaTime + x)
                   time <- readRef timeRef
