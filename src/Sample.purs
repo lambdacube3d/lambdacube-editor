@@ -5,12 +5,12 @@ import Data.Maybe
 import Data.StrMap (fromFoldable)
 import Data.Tuple
 
-import Backend
-import IR
-import Mesh
-import Type
-import Input
-import LinearBase
+import LambdaCube.IR
+import LambdaCube.LinearBase
+import LambdaCube.WebGL.Backend
+import LambdaCube.WebGL.Mesh
+import LambdaCube.WebGL.Type
+import LambdaCube.WebGL.Input
 
 --  Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 --  A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices

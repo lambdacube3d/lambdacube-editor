@@ -7,7 +7,7 @@ import Global
 import Control.Monad.Eff.Console as C
 
 import Control.Bind
-import TypeInfo
+import LambdaCube.TypeInfo
 import Timer
 import Control.Monad.Except
 import Control.Monad.Eff
@@ -41,14 +41,14 @@ import Data.Array
 import Data.Int
 import Data.StrMap as StrMap
 
-import Backend
-import IR
-import LinearBase
-import Mesh
-import Type
-import Input
-import Util (unlines)
-import Data (uploadTexture2DToGPU)
+import LambdaCube.IR
+import LambdaCube.LinearBase
+import LambdaCube.WebGL.Backend
+import LambdaCube.WebGL.Mesh
+import LambdaCube.WebGL.Type
+import LambdaCube.WebGL.Input
+import LambdaCube.WebGL.Util (unlines)
+import LambdaCube.WebGL.Data (uploadTexture2DToGPU)
 
 import Data.Argonaut.Parser (jsonParser)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
