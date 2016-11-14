@@ -10,7 +10,7 @@
       2. start a local web server e.g. python -m SimpleHTTPServer 8002, then open 0.0.0.0:8002/editor.html in a browser
 
 
-## compile instructions
+## setup build environment
 
 * install purescript
   - cabal update
@@ -31,7 +31,8 @@ on NixOS:
     bower update
 - add "~/node_modules/.bin"  to $PATH
 
-* compile lambdacube-editor (editor.js)
+
+## compile lambdacube-editor (editor.js)
   - cd lambdacube-editor
   - bower update
   - pulp build -O --to editor.js
