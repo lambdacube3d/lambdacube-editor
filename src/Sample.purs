@@ -1,16 +1,11 @@
 module Sample where
 
 import Prelude
-import Data.Maybe
 import Data.StrMap (fromFoldable)
 import Data.Tuple
 
-import LambdaCube.IR
+import LambdaCube.Mesh
 import LambdaCube.LinearBase
-import LambdaCube.WebGL.Backend
-import LambdaCube.WebGL.Mesh
-import LambdaCube.WebGL.Type
-import LambdaCube.WebGL.Input
 
 --  Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 --  A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
@@ -87,40 +82,36 @@ g_uv_buffer_data =
 
 myCube :: Mesh
 myCube = Mesh
-    { attributes: fromFoldable
+    { mAttributes: fromFoldable
         [ Tuple "position4" (A_V4F g_vertex_buffer_data)
         , Tuple "vertexUV"  (A_V2F g_uv_buffer_data)
         ]
-    , primitive: P_Triangles
-    , gpuData: Nothing
+    , mPrimitive: P_Triangles
     }
 
 myCube2 :: Mesh
 myCube2 = Mesh
-  { attributes: fromFoldable
+  { mAttributes: fromFoldable
         [ Tuple "normal"    (A_V3F [V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 1.0 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-1.0) 0.0,V3 0.0 (-0.0) 1.0,V3 0.0 (-0.0) 1.0,V3 0.0 (-0.0) 1.0,V3 (-0.0) 0.0 1.0,V3 (-0.0) 0.0 1.0,V3 (-0.0) 0.0 1.0,V3 (-0.0) (-0.0) (-1.0),V3 (-0.0) (-0.0) (-1.0),V3 (-0.0) (-0.0) (-1.0),V3 0.0 0.0 (-1.0),V3 0.0 0.0 (-1.0),V3 0.0 0.0 (-1.0),V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 (-1.0) 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0,V3 1.0 0.0 0.0])
         , Tuple "position"  (A_V3F [V3 1.0 1.0 1.0,V3 (-1.0) 1.0 1.0,V3 (-1.0) 1.0 (-1.0),V3 (-1.0) 1.0 (-1.0),V3 1.0 1.0 (-1.0),V3 1.0 1.0 1.0,V3 1.0 (-1.0) (-1.0),V3 (-1.0) (-1.0) (-1.0),V3 (-1.0) (-1.0) 1.0,V3 (-1.0) (-1.0) 1.0,V3 1.0 (-1.0) 1.0,V3 1.0 (-1.0) (-1.0),V3 1.0 (-1.0) 1.0,V3 (-1.0) (-1.0) 1.0,V3 (-1.0) 1.0 1.0,V3 (-1.0) 1.0 1.0,V3 1.0 1.0 1.0,V3 1.0 (-1.0) 1.0,V3 1.0 1.0 (-1.0),V3 (-1.0) 1.0 (-1.0),V3 (-1.0) (-1.0) (-1.0),V3 (-1.0) (-1.0) (-1.0),V3 1.0 (-1.0) (-1.0),V3 1.0 1.0 (-1.0),V3 (-1.0) (-1.0) 1.0,V3 (-1.0) (-1.0) (-1.0),V3 (-1.0) 1.0 (-1.0),V3 (-1.0) 1.0 (-1.0),V3 (-1.0) 1.0 1.0,V3 (-1.0) (-1.0) 1.0,V3 1.0 (-1.0) (-1.0),V3 1.0 (-1.0) 1.0,V3 1.0 1.0 1.0,V3 1.0 1.0 1.0,V3 1.0 1.0 (-1.0),V3 1.0 (-1.0) (-1.0)])
         ]
-  , primitive: P_Triangles
-  , gpuData: Nothing
+  , mPrimitive: P_Triangles
   }
 
 myQuad :: Mesh
 myQuad = Mesh
-  { attributes: fromFoldable
+  { mAttributes: fromFoldable
       [ Tuple "position" (A_V2F [V2 (-1.0) 1.0,V2 (-1.0) (-1.0),V2 1.0 (-1.0),V2 1.0 (-1.0),V2 1.0 1.0,V2 (-1.0) 1.0])]
-  , primitive: P_Triangles
-  , gpuData: Nothing
+  , mPrimitive: P_Triangles
   }
 
 lambdaCube :: Mesh
 lambdaCube = Mesh
-    { attributes: fromFoldable
+    { mAttributes: fromFoldable
         [ Tuple "position"  (A_V3F lambdaCubeVertices)
         , Tuple "normal"    (A_V3F lambdaCubeNormals)
         ]
-    , primitive: P_Triangles
-    , gpuData: Nothing
+    , mPrimitive: P_Triangles
     }
 
 lambdaCubeVertices =
