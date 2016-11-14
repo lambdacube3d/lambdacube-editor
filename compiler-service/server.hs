@@ -53,6 +53,7 @@ app compiler ch = Snap.route
     exerciselist :: WS.ServerApp
     exerciselist pending = do
         c <- WS.acceptRequest pending
+        WS.forkPingThread c 5 
         forever $ do
               (_ :: BC.ByteString) <- WS.receiveData c
               list <- sort . filter (`notElem` [".",".."]) <$> getDirectoryContents "exercises"
@@ -62,6 +63,7 @@ app compiler ch = Snap.route
     getexercise :: WS.ServerApp
     getexercise pending = do
         c <- WS.acceptRequest pending
+        WS.forkPingThread c 5 
         forever $ do
               name <- WS.receiveData c
               let fname = "exercises/" ++ BC.unpack name
@@ -75,7 +77,7 @@ app compiler ch = Snap.route
     compileApp pending = do
         putStrLn "compileApp"
         c <- WS.acceptRequest pending
-        --WS.forkPingThread c 5 
+        WS.forkPingThread c 5 
         forever $ do
               WS.sendPing c ("hello" :: B.ByteString)
               bs <- BC.unpack <$> WS.receiveData c
@@ -99,7 +101,7 @@ app compiler ch = Snap.route
         er e = return $ encodePretty $ CompileError ("\n!FAIL\n" ++ e) mempty mempty mempty
 
         convertInfos is = V.fromList [TypeInfo (cvtRange r) $ C.plainShow $ C.vcat c | (r, c) <- listTypeInfos is ]
-        convertErrors is = V.fromList [ErrorInfo (cvtRange r) $ C.plainShow $ C.vcat c | (r, c) <- listTypeInfos is ]
+        convertErrors is = V.fromList [ErrorInfo (cvtRange r) $ C.plainShow $ C.vcat c | (r, c) <- listErrors is ]
         convertWarnings is = V.fromList [WarningInfo (cvtRange r) $ C.plainShow $ C.vcat c | (r, c) <- listWarnings is ]
 
 catchErr :: (MonadCatch m, NFData a, MonadIO m) => (String -> m a) -> m a -> m a
