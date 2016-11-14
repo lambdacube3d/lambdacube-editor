@@ -15,6 +15,14 @@
         width: 100%;
         height: 100%;
     }
+    .lc_warning {
+        background: rgba(0, 255, 0, 0.3);
+        position: absolute;
+        z-index: 1001;
+        border-style: solid;
+        border-width: 0px;
+        color: rgba(0, 255, 0, 1);
+    }
     .lc_error {
         background: rgba(255, 0, 0, 0.3);
         position: absolute;
@@ -57,8 +65,10 @@
           <label>Time<input type="number" id="timeBox" step="any" style="margin-left: 5px;"></label><br>
           <input type="range" id="timeRange" value="1" min="0" max="100" step="0.05" style="width: 100%;">
           </div>
-
-          <div id="messagepanel">No errors.</div>
+          <div>
+            <textarea id="messagepanel" style="width: 100%; height: 18%; padding:10px;" readonly>
+            </textarea>
+          </div>
         </div>
         <textarea style="width: 100%; height: 95%; font-size: 11px; padding:10px;" id="pipeline" readonly>
         </textarea>
