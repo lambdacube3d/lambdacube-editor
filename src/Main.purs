@@ -315,7 +315,7 @@ run = unsafePartial $ do
         case jsonParser m >>= decodeJson of
           Left e -> C.log $ "decode error: " <> e
           Right (CompileError errorMessage types warnings errors) -> do
-            J.setText (show (length errors) <> " Errors" <> if null warnings then "" else ", " <> show (length warnings) <> " Warnings") statuspanel
+            J.setText (show (max 1 $ length errors) <> " Errors" <> if null warnings then "" else ", " <> show (length warnings) <> " Warnings") statuspanel
             let warningsTxt = map (\(WarningInfo wi) -> wi.wText) warnings
                 errorsTxt   = map (\(ErrorInfo ei) -> ei.eText) errors
             J.setText (unlines [errorMessage, unlinesWithCaption "Errors:\n" errorsTxt, unlinesWithCaption "Warnings:\n" warningsTxt]) messagepanel

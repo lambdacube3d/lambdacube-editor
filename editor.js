@@ -711,8 +711,26 @@ var PS = {};
   var compare = function (dict) {
       return dict.compare;
   };
+  var max = function (dictOrd) {
+      return function (x) {
+          return function (y) {
+              var $27 = compare(dictOrd)(x)(y);
+              if ($27 instanceof Data_Ordering.LT) {
+                  return y;
+              };
+              if ($27 instanceof Data_Ordering.EQ) {
+                  return x;
+              };
+              if ($27 instanceof Data_Ordering.GT) {
+                  return x;
+              };
+              throw new Error("Failed pattern match at Data.Ord line 122, column 3 - line 125, column 12: " + [ $27.constructor.name ]);
+          };
+      };
+  };
   exports["Ord"] = Ord;
   exports["compare"] = compare;
+  exports["max"] = max;
   exports["ordInt"] = ordInt;
   exports["ordString"] = ordString;
 })(PS["Data.Ord"] = PS["Data.Ord"] || {});
@@ -14137,7 +14155,7 @@ var PS = {};
                                   return Control_Monad_Eff_Console.log("decode error: " + $170.value0)();
                               };
                               if ($170 instanceof Data_Either.Right && $170.value0 instanceof TypeInfo.CompileError) {
-                                  Control_Monad_Eff_JQuery.setText(Data_Show.show(Data_Show.showInt)(Data_Array.length($170.value0.value3)) + (" Errors" + (function () {
+                                  Control_Monad_Eff_JQuery.setText(Data_Show.show(Data_Show.showInt)(Data_Ord.max(Data_Ord.ordInt)(1)(Data_Array.length($170.value0.value3))) + (" Errors" + (function () {
                                       var $172 = Data_Array["null"]($170.value0.value2);
                                       if ($172) {
                                           return "";
@@ -14145,7 +14163,7 @@ var PS = {};
                                       if (!$172) {
                                           return ", " + (Data_Show.show(Data_Show.showInt)(Data_Array.length($170.value0.value2)) + " Warnings");
                                       };
-                                      throw new Error("Failed pattern match at Main line 318, column 24 - line 318, column 136: " + [ $172.constructor.name ]);
+                                      throw new Error("Failed pattern match at Main line 318, column 24 - line 318, column 144: " + [ $172.constructor.name ]);
                                   })()))(v9)();
                                   var warningsTxt = Data_Functor.map(Data_Functor.functorArray)(function (v22) {
                                       return v22.value0.wText;
