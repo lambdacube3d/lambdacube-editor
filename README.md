@@ -30,5 +30,8 @@ on NixOS:
     - cp Prelude.lc .
     - compiler-service
   - open lambdacube-editor/editor.html
+      1. start a local web server e.g. python -m SimpleHTTPServer 8002
+      2. open editor: 0.0.0.0:8002/editor.html
+
 
 
