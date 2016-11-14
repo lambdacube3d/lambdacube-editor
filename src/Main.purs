@@ -47,6 +47,7 @@ import LinearBase
 import Mesh
 import Type
 import Input
+import Util (unlines)
 import Data (uploadTexture2DToGPU)
 
 import Data.Argonaut.Parser (jsonParser)
@@ -307,28 +308,35 @@ run = unsafePartial $ do
     , onClose   : C.log "socket is closed"
     , onMessage : \s m -> do
         C.log "got response"
+        let addRangeMarker cssClass e = do
+              range <- Range.create (e.startLine - 1) (e.startColumn - 1) (e.endLine - 1) (e.endColumn - 1)
+              addMarker range cssClass "text" false session
+            unlinesWithCaption title a = if null a then "" else show (length a) <> " " <> title <> unlines a
         case jsonParser m >>= decodeJson of
           Left e -> C.log $ "decode error: " <> e
-          Right (CompileError ranges txt infos) -> do
-            J.setText "Error" statuspanel
-            J.setText txt messagepanel
+          Right (CompileError errorMessage types warnings errors) -> do
+            J.setText (show (length errors) <> " Errors" <> if null warnings then "" else ", " <> show (length warnings) <> " Warnings") statuspanel
+            let warningsTxt = map (\(WarningInfo wi) -> wi.wText) warnings
+                errorsTxt   = map (\(ErrorInfo ei) -> ei.eText) errors
+            J.setText (unlines [errorMessage, unlinesWithCaption "Errors:\n" errorsTxt, unlinesWithCaption "Warnings:\n" warningsTxt]) messagepanel
             rs <- readRef markerRef
             for_ rs $ \mkr -> Session.removeMarker mkr session
-            mkr <- for ranges $ \(Range e) -> do
-                range <- Range.create (e.startLine - 1) (e.startColumn - 1) (e.endLine - 1) (e.endColumn - 1)
-                addMarker range "lc_error" "text" false session
-            writeRef markerRef mkr
-            writeRef typeInfoRef infos
+            warningMarkers <- for warnings $ \(WarningInfo {wRange: Range e}) -> addRangeMarker "lc_warning" e
+            errorMarkers <- for errors $ \(ErrorInfo {eRange: Range e}) -> addRangeMarker "lc_error" e
+            writeRef markerRef (concat [warningMarkers, errorMarkers])
+            writeRef typeInfoRef types
             pure unit
-          Right (Compiled dsSrc pplSrc p infos) -> do
+          Right (Compiled dsSrc pplSrc p types warnings) -> do
             J.setText dsSrc desugaredpanel
             J.setText pplSrc pipelinepanel
-            J.setText "Compiled" statuspanel
-            J.setText "No errors." messagepanel
-            writeRef typeInfoRef infos
+            J.setText ("Compiled" <> if null warnings then "" else ", " <> show (length warnings) <> " Warnings") statuspanel
+            let warningsTxt = map (\(WarningInfo wi) -> wi.wText) warnings
+            J.setText (if null warnings then "No errors.\n" else unlinesWithCaption "Warnings:\n" warningsTxt) messagepanel
+            writeRef typeInfoRef types
             rs <- readRef markerRef
             for_ rs $ \mkr -> Session.removeMarker mkr session
-            writeRef markerRef []
+            warningMarkers <- for warnings $ \(WarningInfo {wRange: Range e}) -> addRangeMarker "lc_warning" e
+            writeRef markerRef warningMarkers
             render p
     , onError   : \s m -> C.log $ "error: " <> m
     }

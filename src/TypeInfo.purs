@@ -1,9 +1,10 @@
 -- generated file, do not modify!
--- 2016-03-01T13:00:40.810157000000Z
+-- 2016-11-12T12:48:59.998839000000Z
 
 module TypeInfo where
 import Prelude
 import Data.Generic
+import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
 import Data.StrMap (StrMap(..))
 import Data.Map (Map(..))
@@ -16,7 +17,6 @@ import Data.Argonaut.Core (jsonEmptyObject)
 import Data.Argonaut.Printer (printJson)
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
-import Partial.Unsafe (unsafeCrashWith)
 
 import IR
 
@@ -36,9 +36,23 @@ data TypeInfo
   }
 
 
+data WarningInfo
+  = WarningInfo
+  { wRange :: Range
+  , wText :: String
+  }
+
+
+data ErrorInfo
+  = ErrorInfo
+  { eRange :: Range
+  , eText :: String
+  }
+
+
 data CompileResult
-  = CompileError (Array Range) String (Array TypeInfo)
-  | Compiled String String Pipeline (Array TypeInfo)
+  = CompileError String (Array TypeInfo) (Array WarningInfo) (Array ErrorInfo)
+  | Compiled String String Pipeline (Array TypeInfo) (Array WarningInfo)
 
 
 
@@ -68,7 +82,7 @@ instance decodeJsonRange :: DecodeJson Range where
           , endLine:endLine
           , endColumn:endColumn
           } 
-      _ -> unsafeCrashWith "decodeJson @ Range"
+      _ -> Left ("decodeJsonRange - unknown tag: " <> tag)
 
 instance encodeJsonTypeInfo :: EncodeJson TypeInfo where
   encodeJson v = case v of
@@ -89,20 +103,64 @@ instance decodeJsonTypeInfo :: DecodeJson TypeInfo where
         pure $ TypeInfo
           { range:range
           , text:text
-          }
-      _ -> unsafeCrashWith "decodeJson @ TypeInfo"
+          } 
+      _ -> Left ("decodeJsonTypeInfo - unknown tag: " <> tag)
+
+instance encodeJsonWarningInfo :: EncodeJson WarningInfo where
+  encodeJson v = case v of
+    WarningInfo r ->
+      "tag" := "WarningInfo" ~>
+      "wRange" := r.wRange ~>
+      "wText" := r.wText ~>
+      jsonEmptyObject
+
+instance decodeJsonWarningInfo :: DecodeJson WarningInfo where
+  decodeJson json = do
+    obj <- decodeJson json
+    tag <- obj .? "tag"
+    case tag of
+      "WarningInfo" -> do
+        wRange <- obj .? "wRange"
+        wText <- obj .? "wText"
+        pure $ WarningInfo
+          { wRange:wRange
+          , wText:wText
+          } 
+      _ -> Left ("decodeJsonWarningInfo - unknown tag: " <> tag)
+
+instance encodeJsonErrorInfo :: EncodeJson ErrorInfo where
+  encodeJson v = case v of
+    ErrorInfo r ->
+      "tag" := "ErrorInfo" ~>
+      "eRange" := r.eRange ~>
+      "eText" := r.eText ~>
+      jsonEmptyObject
+
+instance decodeJsonErrorInfo :: DecodeJson ErrorInfo where
+  decodeJson json = do
+    obj <- decodeJson json
+    tag <- obj .? "tag"
+    case tag of
+      "ErrorInfo" -> do
+        eRange <- obj .? "eRange"
+        eText <- obj .? "eText"
+        pure $ ErrorInfo
+          { eRange:eRange
+          , eText:eText
+          } 
+      _ -> Left ("decodeJsonErrorInfo - unknown tag: " <> tag)
 
 instance encodeJsonCompileResult :: EncodeJson CompileResult where
   encodeJson v = case v of
-    CompileError arg0 arg1 arg2 -> "tag" := "CompileError" ~> "arg0" := arg0 ~> "arg1" := arg1 ~> "arg2" := arg2 ~> jsonEmptyObject
-    Compiled arg0 arg1 arg2 arg3 -> "tag" := "Compiled" ~> "arg0" := arg0 ~> "arg1" := arg1 ~> "arg2" := arg2 ~> "arg3" := arg3 ~> jsonEmptyObject
+    CompileError arg0 arg1 arg2 arg3 -> "tag" := "CompileError" ~> "arg0" := arg0 ~> "arg1" := arg1 ~> "arg2" := arg2 ~> "arg3" := arg3 ~> jsonEmptyObject
+    Compiled arg0 arg1 arg2 arg3 arg4 -> "tag" := "Compiled" ~> "arg0" := arg0 ~> "arg1" := arg1 ~> "arg2" := arg2 ~> "arg3" := arg3 ~> "arg4" := arg4 ~> jsonEmptyObject
 
 instance decodeJsonCompileResult :: DecodeJson CompileResult where
   decodeJson json = do
     obj <- decodeJson json
     tag <- obj .? "tag"
     case tag of
-      "CompileError" -> CompileError <$> obj .? "arg0" <*> obj .? "arg1" <*> obj .? "arg2"
-      "Compiled" -> Compiled <$> obj .? "arg0" <*> obj .? "arg1" <*> obj .? "arg2" <*> obj .? "arg3"
-      _ -> unsafeCrashWith "decodeJson @ CompileResult"
+      "CompileError" -> CompileError <$> obj .? "arg0" <*> obj .? "arg1" <*> obj .? "arg2" <*> obj .? "arg3"
+      "Compiled" -> Compiled <$> obj .? "arg0" <*> obj .? "arg1" <*> obj .? "arg2" <*> obj .? "arg3" <*> obj .? "arg4"
+      _ -> Left ("decodeJsonCompileResult - unknown tag: " <> tag)
 
