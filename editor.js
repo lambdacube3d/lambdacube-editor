@@ -9649,6 +9649,251 @@ var PS = {};
   var Data_Argonaut_Printer = PS["Data.Argonaut.Printer"];
   var Data_Argonaut_Encode = PS["Data.Argonaut.Encode"];
   var Data_Argonaut_Decode = PS["Data.Argonaut.Decode"];
+  var Data_Argonaut_Encode_Class = PS["Data.Argonaut.Encode.Class"];
+  var Data_Argonaut_Decode_Class = PS["Data.Argonaut.Decode.Class"];
+  var Control_Bind = PS["Control.Bind"];
+  var Data_Functor = PS["Data.Functor"];
+  var Data_Semigroup = PS["Data.Semigroup"];
+  var Control_Applicative = PS["Control.Applicative"];
+  var Data_Function = PS["Data.Function"];        
+  var P_Points = (function () {
+      function P_Points() {
+
+      };
+      P_Points.value = new P_Points();
+      return P_Points;
+  })();
+  var P_TriangleStrip = (function () {
+      function P_TriangleStrip() {
+
+      };
+      P_TriangleStrip.value = new P_TriangleStrip();
+      return P_TriangleStrip;
+  })();
+  var P_Triangles = (function () {
+      function P_Triangles() {
+
+      };
+      P_Triangles.value = new P_Triangles();
+      return P_Triangles;
+  })();
+  var P_TriangleStripI = (function () {
+      function P_TriangleStripI(value0) {
+          this.value0 = value0;
+      };
+      P_TriangleStripI.create = function (value0) {
+          return new P_TriangleStripI(value0);
+      };
+      return P_TriangleStripI;
+  })();
+  var P_TrianglesI = (function () {
+      function P_TrianglesI(value0) {
+          this.value0 = value0;
+      };
+      P_TrianglesI.create = function (value0) {
+          return new P_TrianglesI(value0);
+      };
+      return P_TrianglesI;
+  })();
+  var A_Float = (function () {
+      function A_Float(value0) {
+          this.value0 = value0;
+      };
+      A_Float.create = function (value0) {
+          return new A_Float(value0);
+      };
+      return A_Float;
+  })();
+  var A_V2F = (function () {
+      function A_V2F(value0) {
+          this.value0 = value0;
+      };
+      A_V2F.create = function (value0) {
+          return new A_V2F(value0);
+      };
+      return A_V2F;
+  })();
+  var A_V3F = (function () {
+      function A_V3F(value0) {
+          this.value0 = value0;
+      };
+      A_V3F.create = function (value0) {
+          return new A_V3F(value0);
+      };
+      return A_V3F;
+  })();
+  var A_V4F = (function () {
+      function A_V4F(value0) {
+          this.value0 = value0;
+      };
+      A_V4F.create = function (value0) {
+          return new A_V4F(value0);
+      };
+      return A_V4F;
+  })();
+  var A_M22F = (function () {
+      function A_M22F(value0) {
+          this.value0 = value0;
+      };
+      A_M22F.create = function (value0) {
+          return new A_M22F(value0);
+      };
+      return A_M22F;
+  })();
+  var A_M33F = (function () {
+      function A_M33F(value0) {
+          this.value0 = value0;
+      };
+      A_M33F.create = function (value0) {
+          return new A_M33F(value0);
+      };
+      return A_M33F;
+  })();
+  var A_M44F = (function () {
+      function A_M44F(value0) {
+          this.value0 = value0;
+      };
+      A_M44F.create = function (value0) {
+          return new A_M44F(value0);
+      };
+      return A_M44F;
+  })();
+  var A_Int = (function () {
+      function A_Int(value0) {
+          this.value0 = value0;
+      };
+      A_Int.create = function (value0) {
+          return new A_Int(value0);
+      };
+      return A_Int;
+  })();
+  var A_Word = (function () {
+      function A_Word(value0) {
+          this.value0 = value0;
+      };
+      A_Word.create = function (value0) {
+          return new A_Word(value0);
+      };
+      return A_Word;
+  })();
+  var Mesh = (function () {
+      function Mesh(value0) {
+          this.value0 = value0;
+      };
+      Mesh.create = function (value0) {
+          return new Mesh(value0);
+      };
+      return Mesh;
+  })();
+  var decodeJsonMeshPrimitive = new Data_Argonaut_Decode_Class.DecodeJson(function (json) {
+      return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeStrMap(Data_Argonaut_Decode_Class.decodeJsonJson))(json))(function (v) {
+          return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeJsonString)(v)("tag"))(function (v1) {
+              if (v1 === "P_Points") {
+                  return Control_Applicative.pure(Data_Either.applicativeEither)(P_Points.value);
+              };
+              if (v1 === "P_TriangleStrip") {
+                  return Control_Applicative.pure(Data_Either.applicativeEither)(P_TriangleStrip.value);
+              };
+              if (v1 === "P_Triangles") {
+                  return Control_Applicative.pure(Data_Either.applicativeEither)(P_Triangles.value);
+              };
+              if (v1 === "P_TriangleStripI") {
+                  return Data_Functor.map(Data_Either.functorEither)(P_TriangleStripI.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonInt))(v)("arg0"));
+              };
+              if (v1 === "P_TrianglesI") {
+                  return Data_Functor.map(Data_Either.functorEither)(P_TrianglesI.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonInt))(v)("arg0"));
+              };
+              return new Data_Either.Left("decodeJsonMeshPrimitive - unknown tag: " + v1);
+          });
+      });
+  });
+  var decodeJsonMeshAttribute = new Data_Argonaut_Decode_Class.DecodeJson(function (json) {
+      return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeStrMap(Data_Argonaut_Decode_Class.decodeJsonJson))(json))(function (v) {
+          return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeJsonString)(v)("tag"))(function (v1) {
+              if (v1 === "A_Float") {
+                  return Data_Functor.map(Data_Either.functorEither)(A_Float.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonNumber))(v)("arg0"));
+              };
+              if (v1 === "A_V2F") {
+                  return Data_Functor.map(Data_Either.functorEither)(A_V2F.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(LambdaCube_LinearBase.decodeJsonV2(Data_Argonaut_Decode_Class.decodeJsonNumber)))(v)("arg0"));
+              };
+              if (v1 === "A_V3F") {
+                  return Data_Functor.map(Data_Either.functorEither)(A_V3F.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(LambdaCube_LinearBase.decodeJsonV3(Data_Argonaut_Decode_Class.decodeJsonNumber)))(v)("arg0"));
+              };
+              if (v1 === "A_V4F") {
+                  return Data_Functor.map(Data_Either.functorEither)(A_V4F.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(LambdaCube_LinearBase.decodeJsonV4(Data_Argonaut_Decode_Class.decodeJsonNumber)))(v)("arg0"));
+              };
+              if (v1 === "A_M22F") {
+                  return Data_Functor.map(Data_Either.functorEither)(A_M22F.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(LambdaCube_LinearBase.decodeJsonV2(LambdaCube_LinearBase.decodeJsonV2(Data_Argonaut_Decode_Class.decodeJsonNumber))))(v)("arg0"));
+              };
+              if (v1 === "A_M33F") {
+                  return Data_Functor.map(Data_Either.functorEither)(A_M33F.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(LambdaCube_LinearBase.decodeJsonV3(LambdaCube_LinearBase.decodeJsonV3(Data_Argonaut_Decode_Class.decodeJsonNumber))))(v)("arg0"));
+              };
+              if (v1 === "A_M44F") {
+                  return Data_Functor.map(Data_Either.functorEither)(A_M44F.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(LambdaCube_LinearBase.decodeJsonV4(LambdaCube_LinearBase.decodeJsonV4(Data_Argonaut_Decode_Class.decodeJsonNumber))))(v)("arg0"));
+              };
+              if (v1 === "A_Int") {
+                  return Data_Functor.map(Data_Either.functorEither)(A_Int.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonInt))(v)("arg0"));
+              };
+              if (v1 === "A_Word") {
+                  return Data_Functor.map(Data_Either.functorEither)(A_Word.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonInt))(v)("arg0"));
+              };
+              return new Data_Either.Left("decodeJsonMeshAttribute - unknown tag: " + v1);
+          });
+      });
+  });
+  var decodeJsonMesh = new Data_Argonaut_Decode_Class.DecodeJson(function (json) {
+      return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeStrMap(Data_Argonaut_Decode_Class.decodeJsonJson))(json))(function (v) {
+          return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeJsonString)(v)("tag"))(function (v1) {
+              if (v1 === "Mesh") {
+                  return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeStrMap(decodeJsonMeshAttribute))(v)("mAttributes"))(function (v2) {
+                      return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Combinators.getField(decodeJsonMeshPrimitive)(v)("mPrimitive"))(function (v3) {
+                          return Control_Applicative.pure(Data_Either.applicativeEither)(new Mesh({
+                              mAttributes: v2, 
+                              mPrimitive: v3
+                          }));
+                      });
+                  });
+              };
+              return new Data_Either.Left("decodeJsonMesh - unknown tag: " + v1);
+          });
+      });
+  });
+  exports["Mesh"] = Mesh;
+  exports["A_Float"] = A_Float;
+  exports["A_V2F"] = A_V2F;
+  exports["A_V3F"] = A_V3F;
+  exports["A_V4F"] = A_V4F;
+  exports["A_M22F"] = A_M22F;
+  exports["A_M33F"] = A_M33F;
+  exports["A_M44F"] = A_M44F;
+  exports["A_Int"] = A_Int;
+  exports["A_Word"] = A_Word;
+  exports["P_Points"] = P_Points;
+  exports["P_TriangleStrip"] = P_TriangleStrip;
+  exports["P_Triangles"] = P_Triangles;
+  exports["P_TriangleStripI"] = P_TriangleStripI;
+  exports["P_TrianglesI"] = P_TrianglesI;
+  exports["decodeJsonMeshAttribute"] = decodeJsonMeshAttribute;
+  exports["decodeJsonMeshPrimitive"] = decodeJsonMeshPrimitive;
+  exports["decodeJsonMesh"] = decodeJsonMesh;
+})(PS["LambdaCube.Mesh"] = PS["LambdaCube.Mesh"] || {});
+(function(exports) {
+  // Generated by psc version 0.10.2
+  "use strict";
+  var Prelude = PS["Prelude"];
+  var Data_Generic = PS["Data.Generic"];
+  var Data_Either = PS["Data.Either"];
+  var Data_Maybe = PS["Data.Maybe"];
+  var Data_StrMap = PS["Data.StrMap"];
+  var Data_Map = PS["Data.Map"];
+  var Data_List = PS["Data.List"];
+  var LambdaCube_LinearBase = PS["LambdaCube.LinearBase"];
+  var Data_Argonaut_Encode_Combinators = PS["Data.Argonaut.Encode.Combinators"];
+  var Data_Argonaut_Decode_Combinators = PS["Data.Argonaut.Decode.Combinators"];
+  var Data_Argonaut_Core = PS["Data.Argonaut.Core"];
+  var Data_Argonaut_Printer = PS["Data.Argonaut.Printer"];
+  var Data_Argonaut_Encode = PS["Data.Argonaut.Encode"];
+  var Data_Argonaut_Decode = PS["Data.Argonaut.Decode"];
   var LambdaCube_IR = PS["LambdaCube.IR"];
   var Data_Argonaut_Encode_Class = PS["Data.Argonaut.Encode.Class"];
   var Data_Argonaut_Decode_Class = PS["Data.Argonaut.Decode.Class"];
@@ -12982,204 +13227,33 @@ var PS = {};
   var Data_Tuple = PS["Data.Tuple"];
   var Data_Int = PS["Data.Int"];
   var Data_List = PS["Data.List"];
-  var Data_Argonaut_Encode_Combinators = PS["Data.Argonaut.Encode.Combinators"];
-  var Data_Argonaut_Decode_Combinators = PS["Data.Argonaut.Decode.Combinators"];
-  var Data_Argonaut_Core = PS["Data.Argonaut.Core"];
-  var Data_Argonaut_Printer = PS["Data.Argonaut.Printer"];
-  var Data_Argonaut_Encode = PS["Data.Argonaut.Encode"];
-  var Data_Argonaut_Decode = PS["Data.Argonaut.Decode"];
   var Partial_Unsafe = PS["Partial.Unsafe"];
+  var LambdaCube_Mesh = PS["LambdaCube.Mesh"];
   var LambdaCube_IR = PS["LambdaCube.IR"];
   var LambdaCube_LinearBase = PS["LambdaCube.LinearBase"];
   var LambdaCube_WebGL_Type = PS["LambdaCube.WebGL.Type"];
   var LambdaCube_WebGL_Data = PS["LambdaCube.WebGL.Data"];
   var LambdaCube_WebGL_Input = PS["LambdaCube.WebGL.Input"];
-  var Data_Argonaut_Decode_Class = PS["Data.Argonaut.Decode.Class"];
+  var Data_Function = PS["Data.Function"];
   var Control_Bind = PS["Control.Bind"];
   var Control_Applicative = PS["Control.Applicative"];
   var Data_Functor = PS["Data.Functor"];
-  var Data_Function = PS["Data.Function"];
-  var Data_EuclideanRing = PS["Data.EuclideanRing"];
-  var Data_Either = PS["Data.Either"];
   var Data_Unfoldable = PS["Data.Unfoldable"];
   var Data_List_Types = PS["Data.List.Types"];        
-  var P_Points = (function () {
-      function P_Points() {
-
-      };
-      P_Points.value = new P_Points();
-      return P_Points;
-  })();
-  var P_TriangleStrip = (function () {
-      function P_TriangleStrip() {
-
-      };
-      P_TriangleStrip.value = new P_TriangleStrip();
-      return P_TriangleStrip;
-  })();
-  var P_Triangles = (function () {
-      function P_Triangles() {
-
-      };
-      P_Triangles.value = new P_Triangles();
-      return P_Triangles;
-  })();
-  var P_TriangleStripI = (function () {
-      function P_TriangleStripI(value0) {
+  var GPUMesh = (function () {
+      function GPUMesh(value0) {
           this.value0 = value0;
       };
-      P_TriangleStripI.create = function (value0) {
-          return new P_TriangleStripI(value0);
+      GPUMesh.create = function (value0) {
+          return new GPUMesh(value0);
       };
-      return P_TriangleStripI;
-  })();
-  var P_TrianglesI = (function () {
-      function P_TrianglesI(value0) {
-          this.value0 = value0;
-      };
-      P_TrianglesI.create = function (value0) {
-          return new P_TrianglesI(value0);
-      };
-      return P_TrianglesI;
-  })();
-  var AT_Float = (function () {
-      function AT_Float() {
-
-      };
-      AT_Float.value = new AT_Float();
-      return AT_Float;
-  })();
-  var AT_V2F = (function () {
-      function AT_V2F() {
-
-      };
-      AT_V2F.value = new AT_V2F();
-      return AT_V2F;
-  })();
-  var AT_V3F = (function () {
-      function AT_V3F() {
-
-      };
-      AT_V3F.value = new AT_V3F();
-      return AT_V3F;
-  })();
-  var AT_V4F = (function () {
-      function AT_V4F() {
-
-      };
-      AT_V4F.value = new AT_V4F();
-      return AT_V4F;
-  })();
-  var AT_M22F = (function () {
-      function AT_M22F() {
-
-      };
-      AT_M22F.value = new AT_M22F();
-      return AT_M22F;
-  })();
-  var AT_M33F = (function () {
-      function AT_M33F() {
-
-      };
-      AT_M33F.value = new AT_M33F();
-      return AT_M33F;
-  })();
-  var AT_M44F = (function () {
-      function AT_M44F() {
-
-      };
-      AT_M44F.value = new AT_M44F();
-      return AT_M44F;
-  })();
-  var A_Float = (function () {
-      function A_Float(value0) {
-          this.value0 = value0;
-      };
-      A_Float.create = function (value0) {
-          return new A_Float(value0);
-      };
-      return A_Float;
-  })();
-  var A_V2F = (function () {
-      function A_V2F(value0) {
-          this.value0 = value0;
-      };
-      A_V2F.create = function (value0) {
-          return new A_V2F(value0);
-      };
-      return A_V2F;
-  })();
-  var A_V3F = (function () {
-      function A_V3F(value0) {
-          this.value0 = value0;
-      };
-      A_V3F.create = function (value0) {
-          return new A_V3F(value0);
-      };
-      return A_V3F;
-  })();
-  var A_V4F = (function () {
-      function A_V4F(value0) {
-          this.value0 = value0;
-      };
-      A_V4F.create = function (value0) {
-          return new A_V4F(value0);
-      };
-      return A_V4F;
-  })();
-  var A_M22F = (function () {
-      function A_M22F(value0) {
-          this.value0 = value0;
-      };
-      A_M22F.create = function (value0) {
-          return new A_M22F(value0);
-      };
-      return A_M22F;
-  })();
-  var A_M33F = (function () {
-      function A_M33F(value0) {
-          this.value0 = value0;
-      };
-      A_M33F.create = function (value0) {
-          return new A_M33F(value0);
-      };
-      return A_M33F;
-  })();
-  var A_M44F = (function () {
-      function A_M44F(value0) {
-          this.value0 = value0;
-      };
-      A_M44F.create = function (value0) {
-          return new A_M44F(value0);
-      };
-      return A_M44F;
-  })();
-  var A_Flat = (function () {
-      function A_Flat(value0, value1) {
-          this.value0 = value0;
-          this.value1 = value1;
-      };
-      A_Flat.create = function (value0) {
-          return function (value1) {
-              return new A_Flat(value0, value1);
-          };
-      };
-      return A_Flat;
-  })();
-  var Mesh = (function () {
-      function Mesh(value0) {
-          this.value0 = value0;
-      };
-      Mesh.create = function (value0) {
-          return new Mesh(value0);
-      };
-      return Mesh;
+      return GPUMesh;
   })();
   var meshAttrToStream = function (b) {
       return function (i) {
           return function (a) {
               return LambdaCube_WebGL_Type.Stream.create((function () {
-                  if (a instanceof A_Float) {
+                  if (a instanceof LambdaCube_Mesh.A_Float) {
                       return {
                           sType: LambdaCube_WebGL_Type.TFloat.value, 
                           buffer: b, 
@@ -13188,7 +13262,7 @@ var PS = {};
                           length: Data_Array.length(a.value0)
                       };
                   };
-                  if (a instanceof A_V2F) {
+                  if (a instanceof LambdaCube_Mesh.A_V2F) {
                       return {
                           sType: LambdaCube_WebGL_Type.TV2F.value, 
                           buffer: b, 
@@ -13197,7 +13271,7 @@ var PS = {};
                           length: Data_Array.length(a.value0)
                       };
                   };
-                  if (a instanceof A_V3F) {
+                  if (a instanceof LambdaCube_Mesh.A_V3F) {
                       return {
                           sType: LambdaCube_WebGL_Type.TV3F.value, 
                           buffer: b, 
@@ -13206,7 +13280,7 @@ var PS = {};
                           length: Data_Array.length(a.value0)
                       };
                   };
-                  if (a instanceof A_V4F) {
+                  if (a instanceof LambdaCube_Mesh.A_V4F) {
                       return {
                           sType: LambdaCube_WebGL_Type.TV4F.value, 
                           buffer: b, 
@@ -13215,7 +13289,7 @@ var PS = {};
                           length: Data_Array.length(a.value0)
                       };
                   };
-                  if (a instanceof A_M22F) {
+                  if (a instanceof LambdaCube_Mesh.A_M22F) {
                       return {
                           sType: LambdaCube_WebGL_Type.TM22F.value, 
                           buffer: b, 
@@ -13224,7 +13298,7 @@ var PS = {};
                           length: Data_Array.length(a.value0)
                       };
                   };
-                  if (a instanceof A_M33F) {
+                  if (a instanceof LambdaCube_Mesh.A_M33F) {
                       return {
                           sType: LambdaCube_WebGL_Type.TM33F.value, 
                           buffer: b, 
@@ -13233,7 +13307,7 @@ var PS = {};
                           length: Data_Array.length(a.value0)
                       };
                   };
-                  if (a instanceof A_M44F) {
+                  if (a instanceof LambdaCube_Mesh.A_M44F) {
                       return {
                           sType: LambdaCube_WebGL_Type.TM44F.value, 
                           buffer: b, 
@@ -13242,249 +13316,109 @@ var PS = {};
                           length: Data_Array.length(a.value0)
                       };
                   };
-                  if (a instanceof A_Flat) {
-                      var tn = (function () {
-                          if (a.value0 instanceof AT_Float) {
-                              return new Data_Tuple.Tuple(LambdaCube_WebGL_Type.TFloat.value, 1);
-                          };
-                          if (a.value0 instanceof AT_V2F) {
-                              return new Data_Tuple.Tuple(LambdaCube_WebGL_Type.TV2F.value, 2);
-                          };
-                          if (a.value0 instanceof AT_V3F) {
-                              return new Data_Tuple.Tuple(LambdaCube_WebGL_Type.TV3F.value, 3);
-                          };
-                          if (a.value0 instanceof AT_V4F) {
-                              return new Data_Tuple.Tuple(LambdaCube_WebGL_Type.TV4F.value, 4);
-                          };
-                          if (a.value0 instanceof AT_M22F) {
-                              return new Data_Tuple.Tuple(LambdaCube_WebGL_Type.TM22F.value, 4);
-                          };
-                          if (a.value0 instanceof AT_M33F) {
-                              return new Data_Tuple.Tuple(LambdaCube_WebGL_Type.TM33F.value, 9);
-                          };
-                          if (a.value0 instanceof AT_M44F) {
-                              return new Data_Tuple.Tuple(LambdaCube_WebGL_Type.TM44F.value, 16);
-                          };
-                          throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 116, column 12 - line 124, column 5: " + [ a.value0.constructor.name ]);
-                      })();
-                      return {
-                          sType: tn.value0, 
-                          buffer: b, 
-                          arrIdx: i, 
-                          start: 0, 
-                          length: Data_Array.length(a.value1) / tn.value1 | 0
-                      };
-                  };
-                  throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 107, column 26 - line 125, column 88: " + [ a.constructor.name ]);
+                  return Partial_Unsafe.unsafeCrashWith("meshAttrToStream - unsupported MeshAttribute");
               })());
           };
       };
   };
   var meshAttrToArray = function (a) {
-      if (a instanceof A_Float) {
+      if (a instanceof LambdaCube_Mesh.A_Float) {
           return (LambdaCube_WebGL_Type["Array"]).create(LambdaCube_WebGL_Type.ArrFloat.value)(LambdaCube_WebGL_Type.toArray(LambdaCube_WebGL_Type.arrStorable(LambdaCube_WebGL_Type.numStorable))(a.value0));
       };
-      if (a instanceof A_V2F) {
+      if (a instanceof LambdaCube_Mesh.A_V2F) {
           return (LambdaCube_WebGL_Type["Array"]).create(LambdaCube_WebGL_Type.ArrFloat.value)(LambdaCube_WebGL_Type.toArray(LambdaCube_WebGL_Type.arrStorable(LambdaCube_WebGL_Type.v2Storable(LambdaCube_WebGL_Type.numStorable)))(a.value0));
       };
-      if (a instanceof A_V3F) {
+      if (a instanceof LambdaCube_Mesh.A_V3F) {
           return (LambdaCube_WebGL_Type["Array"]).create(LambdaCube_WebGL_Type.ArrFloat.value)(LambdaCube_WebGL_Type.toArray(LambdaCube_WebGL_Type.arrStorable(LambdaCube_WebGL_Type.v3Storable(LambdaCube_WebGL_Type.numStorable)))(a.value0));
       };
-      if (a instanceof A_V4F) {
+      if (a instanceof LambdaCube_Mesh.A_V4F) {
           return (LambdaCube_WebGL_Type["Array"]).create(LambdaCube_WebGL_Type.ArrFloat.value)(LambdaCube_WebGL_Type.toArray(LambdaCube_WebGL_Type.arrStorable(LambdaCube_WebGL_Type.v4Storable(LambdaCube_WebGL_Type.numStorable)))(a.value0));
       };
-      if (a instanceof A_M22F) {
+      if (a instanceof LambdaCube_Mesh.A_M22F) {
           return (LambdaCube_WebGL_Type["Array"]).create(LambdaCube_WebGL_Type.ArrFloat.value)(LambdaCube_WebGL_Type.toArray(LambdaCube_WebGL_Type.arrStorable(LambdaCube_WebGL_Type.v2Storable(LambdaCube_WebGL_Type.v2Storable(LambdaCube_WebGL_Type.numStorable))))(a.value0));
       };
-      if (a instanceof A_M33F) {
+      if (a instanceof LambdaCube_Mesh.A_M33F) {
           return (LambdaCube_WebGL_Type["Array"]).create(LambdaCube_WebGL_Type.ArrFloat.value)(LambdaCube_WebGL_Type.toArray(LambdaCube_WebGL_Type.arrStorable(LambdaCube_WebGL_Type.v3Storable(LambdaCube_WebGL_Type.v3Storable(LambdaCube_WebGL_Type.numStorable))))(a.value0));
       };
-      if (a instanceof A_M44F) {
+      if (a instanceof LambdaCube_Mesh.A_M44F) {
           return (LambdaCube_WebGL_Type["Array"]).create(LambdaCube_WebGL_Type.ArrFloat.value)(LambdaCube_WebGL_Type.toArray(LambdaCube_WebGL_Type.arrStorable(LambdaCube_WebGL_Type.v4Storable(LambdaCube_WebGL_Type.v4Storable(LambdaCube_WebGL_Type.numStorable))))(a.value0));
       };
-      if (a instanceof A_Flat) {
-          return new LambdaCube_WebGL_Type["Array"](LambdaCube_WebGL_Type.ArrFloat.value, a.value1);
-      };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 96, column 21 - line 104, column 34: " + [ a.constructor.name ]);
+      return Partial_Unsafe.unsafeCrashWith("meshAttrToArray - unsupported MeshAttribute");
   };
-  var decodeJsonMeshPrimitive = new Data_Argonaut_Decode_Class.DecodeJson(function (json) {
-      return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeStrMap(Data_Argonaut_Decode_Class.decodeJsonJson))(json))(function (v) {
-          return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeJsonString)(v)("tag"))(function (v1) {
-              if (v1 === "P_Points") {
-                  return Control_Applicative.pure(Data_Either.applicativeEither)(P_Points.value);
-              };
-              if (v1 === "P_TriangleStrip") {
-                  return Control_Applicative.pure(Data_Either.applicativeEither)(P_TriangleStrip.value);
-              };
-              if (v1 === "P_Triangles") {
-                  return Control_Applicative.pure(Data_Either.applicativeEither)(P_Triangles.value);
-              };
-              if (v1 === "P_TriangleStripI") {
-                  return Data_Functor.map(Data_Either.functorEither)(P_TriangleStripI.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonInt))(v)("values"));
-              };
-              if (v1 === "P_TrianglesI") {
-                  return Data_Functor.map(Data_Either.functorEither)(P_TrianglesI.create)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonInt))(v)("values"));
-              };
-              return Partial_Unsafe.unsafeCrashWith("decodeJson @ MeshPrimitive");
-          });
-      });
-  });
-  var decodeJsonMeshAttribute = new Data_Argonaut_Decode_Class.DecodeJson(function (json) {
-      return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeStrMap(Data_Argonaut_Decode_Class.decodeJsonJson))(json))(function (v) {
-          return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeJsonString)(v)("tag"))(function (v1) {
-              if (v1 === "A_Float") {
-                  return Data_Functor.map(Data_Either.functorEither)(A_Flat.create(AT_Float.value))(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonNumber))(v)("values"));
-              };
-              if (v1 === "A_V2F") {
-                  return Data_Functor.map(Data_Either.functorEither)(A_Flat.create(AT_V2F.value))(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonNumber))(v)("values"));
-              };
-              if (v1 === "A_V3F") {
-                  return Data_Functor.map(Data_Either.functorEither)(A_Flat.create(AT_V3F.value))(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonNumber))(v)("values"));
-              };
-              if (v1 === "A_V4F") {
-                  return Data_Functor.map(Data_Either.functorEither)(A_Flat.create(AT_V4F.value))(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonNumber))(v)("values"));
-              };
-              if (v1 === "A_M22F") {
-                  return Data_Functor.map(Data_Either.functorEither)(A_Flat.create(AT_M22F.value))(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonNumber))(v)("values"));
-              };
-              if (v1 === "A_M33F") {
-                  return Data_Functor.map(Data_Either.functorEither)(A_Flat.create(AT_M33F.value))(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonNumber))(v)("values"));
-              };
-              if (v1 === "A_M44F") {
-                  return Data_Functor.map(Data_Either.functorEither)(A_Flat.create(AT_M44F.value))(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonNumber))(v)("values"));
-              };
-              return Partial_Unsafe.unsafeCrashWith("decodeJson @ MeshAttribute");
-          });
-      });
-  });
-  var decodeJsonMesh = new Data_Argonaut_Decode_Class.DecodeJson(function (json) {
-      return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeStrMap(Data_Argonaut_Decode_Class.decodeJsonJson))(json))(function (v) {
-          return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Combinators.getField(Data_Argonaut_Decode_Class.decodeStrMap(decodeJsonMeshAttribute))(v)("attributes"))(function (v1) {
-              return Control_Bind.bind(Data_Either.bindEither)(Data_Argonaut_Decode_Combinators.getField(decodeJsonMeshPrimitive)(v)("primitive"))(function (v2) {
-                  return Control_Applicative.pure(Data_Either.applicativeEither)(new Mesh({
-                      attributes: v1, 
-                      primitive: v2, 
-                      gpuData: Data_Maybe.Nothing.value
-                  }));
-              });
-          });
-      });
-  });
   var compileMesh = function (v) {
       return Partial_Unsafe.unsafePartial(function (dictPartial) {
-          if (v.value0.gpuData instanceof Data_Maybe.Just) {
-              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(new Mesh(v.value0));
-          };
-          if (v.value0.gpuData instanceof Data_Maybe.Nothing) {
-              var mkIndexBuf = function (v1) {
-                  return function __do() {
-                      var v2 = LambdaCube_WebGL_Data.compileBuffer([ new LambdaCube_WebGL_Type["Array"](LambdaCube_WebGL_Type.ArrWord16.value, LambdaCube_WebGL_Type.toArray(LambdaCube_WebGL_Type.arrStorable(LambdaCube_WebGL_Type.intStorable))(v1)) ])();
-                      return new Data_Maybe.Just({
-                          buffer: v2, 
-                          arrIdx: 0, 
-                          start: 0, 
-                          length: Data_Array.length(v1)
-                      });
-                  };
-              };
+          var mkIndexBuf = function (v1) {
               return function __do() {
-                  var v1 = LambdaCube_WebGL_Data.compileBuffer(Data_Functor.map(Data_Functor.functorArray)(meshAttrToArray)(Data_List.toUnfoldable(Data_Unfoldable.unfoldableArray)(Data_StrMap.values(v.value0.attributes))))();
-                  var v2 = (function () {
-                      if (v.value0.primitive instanceof P_Points) {
-                          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(new Data_Tuple.Tuple(LambdaCube_WebGL_Type.PointList.value, Data_Maybe.Nothing.value));
-                      };
-                      if (v.value0.primitive instanceof P_TriangleStrip) {
-                          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(new Data_Tuple.Tuple(LambdaCube_WebGL_Type.TriangleStrip.value, Data_Maybe.Nothing.value));
-                      };
-                      if (v.value0.primitive instanceof P_Triangles) {
-                          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(new Data_Tuple.Tuple(LambdaCube_WebGL_Type.TriangleList.value, Data_Maybe.Nothing.value));
-                      };
-                      if (v.value0.primitive instanceof P_TriangleStripI) {
-                          return Data_Functor.map(Control_Monad_Eff.functorEff)(Data_Tuple.Tuple.create(LambdaCube_WebGL_Type.TriangleStrip.value))(mkIndexBuf(v.value0.primitive.value0));
-                      };
-                      if (v.value0.primitive instanceof P_TrianglesI) {
-                          return Data_Functor.map(Control_Monad_Eff.functorEff)(Data_Tuple.Tuple.create(LambdaCube_WebGL_Type.TriangleList.value))(mkIndexBuf(v.value0.primitive.value0));
-                      };
-                      throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 85, column 27 - line 90, column 67: " + [ v.value0.primitive.constructor.name ]);
-                  })()();
-                  var streams = Data_StrMap.fromFoldable(Data_List_Types.foldableList)(Data_List.zipWith(function (i) {
-                      return function (v3) {
-                          return new Data_Tuple.Tuple(v3.value0, meshAttrToStream(v1)(i)(v3.value1));
-                      };
-                  })(Data_List.range(0)(Data_Maybe.fromJust(dictPartial)(Data_Int.fromNumber(Data_StrMap.size(v.value0.attributes)))))(Data_StrMap.toList(v.value0.attributes)));
-                  var gpuData = {
-                      primitive: v2.value0, 
-                      streams: streams, 
-                      indices: v2.value1
-                  };
-                  return Mesh.create((function () {
-                      var $60 = {};
-                      for (var $61 in v.value0) {
-                          if (v.value0.hasOwnProperty($61)) {
-                              $60[$61] = v.value0[$61];
-                          };
-                      };
-                      $60.gpuData = new Data_Maybe.Just(gpuData);
-                      return $60;
-                  })());
+                  var v2 = LambdaCube_WebGL_Data.compileBuffer([ new LambdaCube_WebGL_Type["Array"](LambdaCube_WebGL_Type.ArrWord16.value, LambdaCube_WebGL_Type.toArray(LambdaCube_WebGL_Type.arrStorable(LambdaCube_WebGL_Type.intStorable))(v1)) ])();
+                  return new Data_Maybe.Just({
+                      buffer: v2, 
+                      arrIdx: 0, 
+                      start: 0, 
+                      length: Data_Array.length(v1)
+                  });
               };
           };
-          throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 78, column 27 - line 93, column 48: " + [ v.value0.gpuData.constructor.name ]);
+          return function __do() {
+              var v1 = LambdaCube_WebGL_Data.compileBuffer(Data_Functor.map(Data_Functor.functorArray)(meshAttrToArray)(Data_List.toUnfoldable(Data_Unfoldable.unfoldableArray)(Data_StrMap.values(v.value0.mAttributes))))();
+              var v2 = (function () {
+                  if (v.value0.mPrimitive instanceof LambdaCube_Mesh.P_Points) {
+                      return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(new Data_Tuple.Tuple(LambdaCube_WebGL_Type.PointList.value, Data_Maybe.Nothing.value));
+                  };
+                  if (v.value0.mPrimitive instanceof LambdaCube_Mesh.P_TriangleStrip) {
+                      return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(new Data_Tuple.Tuple(LambdaCube_WebGL_Type.TriangleStrip.value, Data_Maybe.Nothing.value));
+                  };
+                  if (v.value0.mPrimitive instanceof LambdaCube_Mesh.P_Triangles) {
+                      return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(new Data_Tuple.Tuple(LambdaCube_WebGL_Type.TriangleList.value, Data_Maybe.Nothing.value));
+                  };
+                  if (v.value0.mPrimitive instanceof LambdaCube_Mesh.P_TriangleStripI) {
+                      return Data_Functor.map(Control_Monad_Eff.functorEff)(Data_Tuple.Tuple.create(LambdaCube_WebGL_Type.TriangleStrip.value))(mkIndexBuf(v.value0.mPrimitive.value0));
+                  };
+                  if (v.value0.mPrimitive instanceof LambdaCube_Mesh.P_TrianglesI) {
+                      return Data_Functor.map(Control_Monad_Eff.functorEff)(Data_Tuple.Tuple.create(LambdaCube_WebGL_Type.TriangleList.value))(mkIndexBuf(v.value0.mPrimitive.value0));
+                  };
+                  throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 49, column 27 - line 54, column 67: " + [ v.value0.mPrimitive.constructor.name ]);
+              })()();
+              var streams = Data_StrMap.fromFoldable(Data_List_Types.foldableList)(Data_List.zipWith(function (i) {
+                  return function (v3) {
+                      return new Data_Tuple.Tuple(v3.value0, meshAttrToStream(v1)(i)(v3.value1));
+                  };
+              })(Data_List.range(0)(Data_Maybe.fromJust(dictPartial)(Data_Int.fromNumber(Data_StrMap.size(v.value0.mAttributes)))))(Data_StrMap.toList(v.value0.mAttributes)));
+              var gpuData = {
+                  primitive: v2.value0, 
+                  streams: streams, 
+                  indices: v2.value1
+              };
+              return new GPUMesh({
+                  meshData: new LambdaCube_Mesh.Mesh(v.value0), 
+                  gpuData: gpuData
+              });
+          };
       });
   };
   var addMesh = function (input) {
       return function (slotName) {
           return function (v) {
               return function (objUniNames) {
-                  if (v.value0.gpuData instanceof Data_Maybe.Nothing) {
-                      return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("addMesh: only compiled mesh with GPUData is supported"));
+                  var $41 = Data_StrMap.lookup(slotName)(input.schema.slots);
+                  if ($41 instanceof Data_Maybe.Nothing) {
+                      return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("addMesh: slot not found"));
                   };
-                  if (v.value0.gpuData instanceof Data_Maybe.Just) {
-                      var $71 = Data_StrMap.lookup(slotName)(input.schema.slots);
-                      if ($71 instanceof Data_Maybe.Nothing) {
-                          return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("addMesh: slot not found"));
+                  if ($41 instanceof Data_Maybe.Just) {
+                      var filterStream = function (v1) {
+                          return Data_StrMap.member(v1.value0)($41.value0.attributes);
                       };
-                      if ($71 instanceof Data_Maybe.Just) {
-                          var filterStream = function (v1) {
-                              return Data_StrMap.member(v1.value0)($71.value0.attributes);
-                          };
-                          return LambdaCube_WebGL_Input.addObject(input)(slotName)(v.value0.gpuData.value0.primitive)(v.value0.gpuData.value0.indices)(Data_StrMap.fromFoldable(Data_List_Types.foldableList)(Data_List.filter(filterStream)(Data_StrMap.toList(v.value0.gpuData.value0.streams))))(objUniNames);
-                      };
-                      throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 70, column 13 - line 75, column 140: " + [ $71.constructor.name ]);
+                      return LambdaCube_WebGL_Input.addObject(input)(slotName)(v.value0.gpuData.primitive)(v.value0.gpuData.indices)(Data_StrMap.fromFoldable(Data_List_Types.foldableList)(Data_List.filter(filterStream)(Data_StrMap.toList(v.value0.gpuData.streams))))(objUniNames);
                   };
-                  throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 68, column 50 - line 75, column 140: " + [ v.value0.gpuData.constructor.name ]);
+                  throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 36, column 53 - line 41, column 173: " + [ $41.constructor.name ]);
               };
           };
       };
   };
-  exports["AT_Float"] = AT_Float;
-  exports["AT_V2F"] = AT_V2F;
-  exports["AT_V3F"] = AT_V3F;
-  exports["AT_V4F"] = AT_V4F;
-  exports["AT_M22F"] = AT_M22F;
-  exports["AT_M33F"] = AT_M33F;
-  exports["AT_M44F"] = AT_M44F;
-  exports["Mesh"] = Mesh;
-  exports["A_Float"] = A_Float;
-  exports["A_V2F"] = A_V2F;
-  exports["A_V3F"] = A_V3F;
-  exports["A_V4F"] = A_V4F;
-  exports["A_M22F"] = A_M22F;
-  exports["A_M33F"] = A_M33F;
-  exports["A_M44F"] = A_M44F;
-  exports["A_Flat"] = A_Flat;
-  exports["P_Points"] = P_Points;
-  exports["P_TriangleStrip"] = P_TriangleStrip;
-  exports["P_Triangles"] = P_Triangles;
-  exports["P_TriangleStripI"] = P_TriangleStripI;
-  exports["P_TrianglesI"] = P_TrianglesI;
+  exports["GPUMesh"] = GPUMesh;
   exports["addMesh"] = addMesh;
   exports["compileMesh"] = compileMesh;
   exports["meshAttrToArray"] = meshAttrToArray;
   exports["meshAttrToStream"] = meshAttrToStream;
-  exports["decodeJsonMeshPrimitive"] = decodeJsonMeshPrimitive;
-  exports["decodeJsonMeshAttribute"] = decodeJsonMeshAttribute;
-  exports["decodeJsonMesh"] = decodeJsonMesh;
 })(PS["LambdaCube.WebGL.Mesh"] = PS["LambdaCube.WebGL.Mesh"] || {});
 (function(exports) {
   /* global exports */
@@ -13679,35 +13613,27 @@ var PS = {};
   // Generated by psc version 0.10.2
   "use strict";
   var Prelude = PS["Prelude"];
-  var Data_Maybe = PS["Data.Maybe"];
   var Data_StrMap = PS["Data.StrMap"];
   var Data_Tuple = PS["Data.Tuple"];
-  var LambdaCube_IR = PS["LambdaCube.IR"];
+  var LambdaCube_Mesh = PS["LambdaCube.Mesh"];
   var LambdaCube_LinearBase = PS["LambdaCube.LinearBase"];
-  var LambdaCube_WebGL_Backend = PS["LambdaCube.WebGL.Backend"];
-  var LambdaCube_WebGL_Mesh = PS["LambdaCube.WebGL.Mesh"];
-  var LambdaCube_WebGL_Type = PS["LambdaCube.WebGL.Type"];
-  var LambdaCube_WebGL_Input = PS["LambdaCube.WebGL.Input"];
   var Data_Foldable = PS["Data.Foldable"];
   var Data_Ring = PS["Data.Ring"];        
-  var myQuad = new LambdaCube_WebGL_Mesh.Mesh({
-      attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", new LambdaCube_WebGL_Mesh.A_V2F([ new LambdaCube_LinearBase.V2(-1.0, 1.0), new LambdaCube_LinearBase.V2(-1.0, -1.0), new LambdaCube_LinearBase.V2(1.0, -1.0), new LambdaCube_LinearBase.V2(1.0, -1.0), new LambdaCube_LinearBase.V2(1.0, 1.0), new LambdaCube_LinearBase.V2(-1.0, 1.0) ])) ]), 
-      primitive: LambdaCube_WebGL_Mesh.P_Triangles.value, 
-      gpuData: Data_Maybe.Nothing.value
+  var myQuad = new LambdaCube_Mesh.Mesh({
+      mAttributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", new LambdaCube_Mesh.A_V2F([ new LambdaCube_LinearBase.V2(-1.0, 1.0), new LambdaCube_LinearBase.V2(-1.0, -1.0), new LambdaCube_LinearBase.V2(1.0, -1.0), new LambdaCube_LinearBase.V2(1.0, -1.0), new LambdaCube_LinearBase.V2(1.0, 1.0), new LambdaCube_LinearBase.V2(-1.0, 1.0) ])) ]), 
+      mPrimitive: LambdaCube_Mesh.P_Triangles.value
   });
   var lambdaCubeVertices = [ new LambdaCube_LinearBase.V3(5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -4.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -4.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -4.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -4.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(4.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(4.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(4.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(4.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, -4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, -5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(4.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(4.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(4.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(4.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(-5.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-5.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 4.0, -5.0), new LambdaCube_LinearBase.V3(-4.0, 5.0, 5.0), new LambdaCube_LinearBase.V3(-4.0, 4.0, 5.0), new LambdaCube_LinearBase.V3(4.596, 3.889, -4.0), new LambdaCube_LinearBase.V3(3.889, 4.596, -4.0), new LambdaCube_LinearBase.V3(-4.596, -3.889, -4.0), new LambdaCube_LinearBase.V3(4.596, 3.889, -4.0), new LambdaCube_LinearBase.V3(-4.596, -3.889, -4.0), new LambdaCube_LinearBase.V3(-3.889, -4.596, -4.0), new LambdaCube_LinearBase.V3(3.889, 4.596, -4.0), new LambdaCube_LinearBase.V3(3.889, 4.596, -5.0), new LambdaCube_LinearBase.V3(-4.596, -3.889, -5.0), new LambdaCube_LinearBase.V3(3.889, 4.596, -4.0), new LambdaCube_LinearBase.V3(-4.596, -3.889, -5.0), new LambdaCube_LinearBase.V3(-4.596, -3.889, -4.0), new LambdaCube_LinearBase.V3(3.889, 4.596, -5.0), new LambdaCube_LinearBase.V3(4.596, 3.889, -5.0), new LambdaCube_LinearBase.V3(-3.889, -4.596, -5.0), new LambdaCube_LinearBase.V3(3.889, 4.596, -5.0), new LambdaCube_LinearBase.V3(-3.889, -4.596, -5.0), new LambdaCube_LinearBase.V3(-4.596, -3.889, -5.0), new LambdaCube_LinearBase.V3(4.596, 3.889, -5.0), new LambdaCube_LinearBase.V3(4.596, 3.889, -4.0), new LambdaCube_LinearBase.V3(-3.889, -4.596, -4.0), new LambdaCube_LinearBase.V3(4.596, 3.889, -5.0), new LambdaCube_LinearBase.V3(-3.889, -4.596, -4.0), new LambdaCube_LinearBase.V3(-3.889, -4.596, -5.0), new LambdaCube_LinearBase.V3(-3.889, -4.596, -4.0), new LambdaCube_LinearBase.V3(-4.596, -3.889, -4.0), new LambdaCube_LinearBase.V3(-4.596, -3.889, -5.0), new LambdaCube_LinearBase.V3(-3.889, -4.596, -4.0), new LambdaCube_LinearBase.V3(-4.596, -3.889, -5.0), new LambdaCube_LinearBase.V3(-3.889, -4.596, -5.0), new LambdaCube_LinearBase.V3(4.596, 3.889, -5.0), new LambdaCube_LinearBase.V3(3.889, 4.596, -5.0), new LambdaCube_LinearBase.V3(3.889, 4.596, -4.0), new LambdaCube_LinearBase.V3(4.596, 3.889, -5.0), new LambdaCube_LinearBase.V3(3.889, 4.596, -4.0), new LambdaCube_LinearBase.V3(4.596, 3.889, -4.0), new LambdaCube_LinearBase.V3(3.889, -4.596, -4.0), new LambdaCube_LinearBase.V3(4.596, -3.889, -4.0), new LambdaCube_LinearBase.V3(-3.889, 4.596, -4.0), new LambdaCube_LinearBase.V3(3.889, -4.596, -4.0), new LambdaCube_LinearBase.V3(-3.889, 4.596, -4.0), new LambdaCube_LinearBase.V3(-4.596, 3.889, -4.0), new LambdaCube_LinearBase.V3(4.596, -3.889, -4.0), new LambdaCube_LinearBase.V3(4.596, -3.889, -5.0), new LambdaCube_LinearBase.V3(-3.889, 4.596, -5.0), new LambdaCube_LinearBase.V3(4.596, -3.889, -4.0), new LambdaCube_LinearBase.V3(-3.889, 4.596, -5.0), new LambdaCube_LinearBase.V3(-3.889, 4.596, -4.0), new LambdaCube_LinearBase.V3(4.596, -3.889, -5.0), new LambdaCube_LinearBase.V3(3.889, -4.596, -5.0), new LambdaCube_LinearBase.V3(-4.596, 3.889, -5.0), new LambdaCube_LinearBase.V3(4.596, -3.889, -5.0), new LambdaCube_LinearBase.V3(-4.596, 3.889, -5.0), new LambdaCube_LinearBase.V3(-3.889, 4.596, -5.0), new LambdaCube_LinearBase.V3(3.889, -4.596, -5.0), new LambdaCube_LinearBase.V3(3.889, -4.596, -4.0), new LambdaCube_LinearBase.V3(-4.596, 3.889, -4.0), new LambdaCube_LinearBase.V3(3.889, -4.596, -5.0), new LambdaCube_LinearBase.V3(-4.596, 3.889, -4.0), new LambdaCube_LinearBase.V3(-4.596, 3.889, -5.0), new LambdaCube_LinearBase.V3(-4.596, 3.889, -4.0), new LambdaCube_LinearBase.V3(-3.889, 4.596, -4.0), new LambdaCube_LinearBase.V3(-3.889, 4.596, -5.0), new LambdaCube_LinearBase.V3(-4.596, 3.889, -4.0), new LambdaCube_LinearBase.V3(-3.889, 4.596, -5.0), new LambdaCube_LinearBase.V3(-4.596, 3.889, -5.0), new LambdaCube_LinearBase.V3(3.889, -4.596, -5.0), new LambdaCube_LinearBase.V3(4.596, -3.889, -5.0), new LambdaCube_LinearBase.V3(4.596, -3.889, -4.0), new LambdaCube_LinearBase.V3(3.889, -4.596, -5.0), new LambdaCube_LinearBase.V3(4.596, -3.889, -4.0), new LambdaCube_LinearBase.V3(3.889, -4.596, -4.0), new LambdaCube_LinearBase.V3(0.5, -0.5, -5.0), new LambdaCube_LinearBase.V3(0.5, 0.5, -5.0), new LambdaCube_LinearBase.V3(-0.5, 0.5, -5.0), new LambdaCube_LinearBase.V3(0.5, -0.5, -5.0), new LambdaCube_LinearBase.V3(-0.5, 0.5, -5.0), new LambdaCube_LinearBase.V3(-0.5, -0.5, -5.0), new LambdaCube_LinearBase.V3(0.5, 0.5, -5.0), new LambdaCube_LinearBase.V3(0.5, 0.5, -7.0), new LambdaCube_LinearBase.V3(-0.5, 0.5, -7.0), new LambdaCube_LinearBase.V3(0.5, 0.5, -5.0), new LambdaCube_LinearBase.V3(-0.5, 0.5, -7.0), new LambdaCube_LinearBase.V3(-0.5, 0.5, -5.0), new LambdaCube_LinearBase.V3(0.5, 0.5, -7.0), new LambdaCube_LinearBase.V3(0.5, -0.5, -7.0), new LambdaCube_LinearBase.V3(-0.5, -0.5, -7.0), new LambdaCube_LinearBase.V3(0.5, 0.5, -7.0), new LambdaCube_LinearBase.V3(-0.5, -0.5, -7.0), new LambdaCube_LinearBase.V3(-0.5, 0.5, -7.0), new LambdaCube_LinearBase.V3(0.5, -0.5, -7.0), new LambdaCube_LinearBase.V3(0.5, -0.5, -5.0), new LambdaCube_LinearBase.V3(-0.5, -0.5, -5.0), new LambdaCube_LinearBase.V3(0.5, -0.5, -7.0), new LambdaCube_LinearBase.V3(-0.5, -0.5, -5.0), new LambdaCube_LinearBase.V3(-0.5, -0.5, -7.0), new LambdaCube_LinearBase.V3(-0.5, -0.5, -5.0), new LambdaCube_LinearBase.V3(-0.5, 0.5, -5.0), new LambdaCube_LinearBase.V3(-0.5, 0.5, -7.0), new LambdaCube_LinearBase.V3(-0.5, -0.5, -5.0), new LambdaCube_LinearBase.V3(-0.5, 0.5, -7.0), new LambdaCube_LinearBase.V3(-0.5, -0.5, -7.0), new LambdaCube_LinearBase.V3(0.5, -0.5, -7.0), new LambdaCube_LinearBase.V3(0.5, 0.5, -7.0), new LambdaCube_LinearBase.V3(0.5, 0.5, -5.0), new LambdaCube_LinearBase.V3(0.5, -0.5, -7.0), new LambdaCube_LinearBase.V3(0.5, 0.5, -5.0), new LambdaCube_LinearBase.V3(0.5, -0.5, -5.0), new LambdaCube_LinearBase.V3(3.134, -7.428, -6.0), new LambdaCube_LinearBase.V3(4.866, -6.428, -6.0), new LambdaCube_LinearBase.V3(-3.134, 7.428, -6.0), new LambdaCube_LinearBase.V3(3.134, -7.428, -6.0), new LambdaCube_LinearBase.V3(-3.134, 7.428, -6.0), new LambdaCube_LinearBase.V3(-4.866, 6.428, -6.0), new LambdaCube_LinearBase.V3(4.866, -6.428, -6.0), new LambdaCube_LinearBase.V3(4.866, -6.428, -8.0), new LambdaCube_LinearBase.V3(-3.134, 7.428, -8.0), new LambdaCube_LinearBase.V3(4.866, -6.428, -6.0), new LambdaCube_LinearBase.V3(-3.134, 7.428, -8.0), new LambdaCube_LinearBase.V3(-3.134, 7.428, -6.0), new LambdaCube_LinearBase.V3(4.866, -6.428, -8.0), new LambdaCube_LinearBase.V3(3.134, -7.428, -8.0), new LambdaCube_LinearBase.V3(-4.866, 6.428, -8.0), new LambdaCube_LinearBase.V3(4.866, -6.428, -8.0), new LambdaCube_LinearBase.V3(-4.866, 6.428, -8.0), new LambdaCube_LinearBase.V3(-3.134, 7.428, -8.0), new LambdaCube_LinearBase.V3(3.134, -7.428, -8.0), new LambdaCube_LinearBase.V3(3.134, -7.428, -6.0), new LambdaCube_LinearBase.V3(-4.866, 6.428, -6.0), new LambdaCube_LinearBase.V3(3.134, -7.428, -8.0), new LambdaCube_LinearBase.V3(-4.866, 6.428, -6.0), new LambdaCube_LinearBase.V3(-4.866, 6.428, -8.0), new LambdaCube_LinearBase.V3(-4.866, 6.428, -6.0), new LambdaCube_LinearBase.V3(-3.134, 7.428, -6.0), new LambdaCube_LinearBase.V3(-3.134, 7.428, -8.0), new LambdaCube_LinearBase.V3(-4.866, 6.428, -6.0), new LambdaCube_LinearBase.V3(-3.134, 7.428, -8.0), new LambdaCube_LinearBase.V3(-4.866, 6.428, -8.0), new LambdaCube_LinearBase.V3(3.134, -7.428, -8.0), new LambdaCube_LinearBase.V3(4.866, -6.428, -8.0), new LambdaCube_LinearBase.V3(4.866, -6.428, -6.0), new LambdaCube_LinearBase.V3(3.134, -7.428, -8.0), new LambdaCube_LinearBase.V3(4.866, -6.428, -6.0), new LambdaCube_LinearBase.V3(3.134, -7.428, -6.0), new LambdaCube_LinearBase.V3(1.366, -0.536, -6.0), new LambdaCube_LinearBase.V3(-0.366, 0.464, -6.0), new LambdaCube_LinearBase.V3(-4.366, -6.464, -6.0), new LambdaCube_LinearBase.V3(1.366, -0.536, -6.0), new LambdaCube_LinearBase.V3(-4.366, -6.464, -6.0), new LambdaCube_LinearBase.V3(-2.634, -7.464, -6.0), new LambdaCube_LinearBase.V3(-0.366, 0.464, -6.0), new LambdaCube_LinearBase.V3(-0.366, 0.464, -8.0), new LambdaCube_LinearBase.V3(-4.366, -6.464, -8.0), new LambdaCube_LinearBase.V3(-0.366, 0.464, -6.0), new LambdaCube_LinearBase.V3(-4.366, -6.464, -8.0), new LambdaCube_LinearBase.V3(-4.366, -6.464, -6.0), new LambdaCube_LinearBase.V3(-0.366, 0.464, -8.0), new LambdaCube_LinearBase.V3(1.366, -0.536, -8.0), new LambdaCube_LinearBase.V3(-2.634, -7.464, -8.0), new LambdaCube_LinearBase.V3(-0.366, 0.464, -8.0), new LambdaCube_LinearBase.V3(-2.634, -7.464, -8.0), new LambdaCube_LinearBase.V3(-4.366, -6.464, -8.0), new LambdaCube_LinearBase.V3(1.366, -0.536, -8.0), new LambdaCube_LinearBase.V3(1.366, -0.536, -6.0), new LambdaCube_LinearBase.V3(-2.634, -7.464, -6.0), new LambdaCube_LinearBase.V3(1.366, -0.536, -8.0), new LambdaCube_LinearBase.V3(-2.634, -7.464, -6.0), new LambdaCube_LinearBase.V3(-2.634, -7.464, -8.0), new LambdaCube_LinearBase.V3(-2.634, -7.464, -6.0), new LambdaCube_LinearBase.V3(-4.366, -6.464, -6.0), new LambdaCube_LinearBase.V3(-4.366, -6.464, -8.0), new LambdaCube_LinearBase.V3(-2.634, -7.464, -6.0), new LambdaCube_LinearBase.V3(-4.366, -6.464, -8.0), new LambdaCube_LinearBase.V3(-2.634, -7.464, -8.0), new LambdaCube_LinearBase.V3(1.366, -0.536, -8.0), new LambdaCube_LinearBase.V3(-0.366, 0.464, -8.0), new LambdaCube_LinearBase.V3(-0.366, 0.464, -6.0), new LambdaCube_LinearBase.V3(1.366, -0.536, -8.0), new LambdaCube_LinearBase.V3(-0.366, 0.464, -6.0), new LambdaCube_LinearBase.V3(1.366, -0.536, -6.0) ];
   var lambdaCubeNormals = [ new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(-0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(-0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(-0.707, 0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(0.707, -0.707, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(0.0, -1.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(-1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(1.0, 0.0, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.866, 0.5, 0.0), new LambdaCube_LinearBase.V3(0.866, 0.5, 0.0), new LambdaCube_LinearBase.V3(0.866, 0.5, 0.0), new LambdaCube_LinearBase.V3(0.866, 0.5, 0.0), new LambdaCube_LinearBase.V3(0.866, 0.5, 0.0), new LambdaCube_LinearBase.V3(0.866, 0.5, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(-0.866, -0.5, 0.0), new LambdaCube_LinearBase.V3(-0.866, -0.5, 0.0), new LambdaCube_LinearBase.V3(-0.866, -0.5, 0.0), new LambdaCube_LinearBase.V3(-0.866, -0.5, 0.0), new LambdaCube_LinearBase.V3(-0.866, -0.5, 0.0), new LambdaCube_LinearBase.V3(-0.866, -0.5, 0.0), new LambdaCube_LinearBase.V3(-0.5, 0.866, 0.0), new LambdaCube_LinearBase.V3(-0.5, 0.866, 0.0), new LambdaCube_LinearBase.V3(-0.5, 0.866, 0.0), new LambdaCube_LinearBase.V3(-0.5, 0.866, 0.0), new LambdaCube_LinearBase.V3(-0.5, 0.866, 0.0), new LambdaCube_LinearBase.V3(-0.5, 0.866, 0.0), new LambdaCube_LinearBase.V3(0.5, -0.866, 0.0), new LambdaCube_LinearBase.V3(0.5, -0.866, 0.0), new LambdaCube_LinearBase.V3(0.5, -0.866, 0.0), new LambdaCube_LinearBase.V3(0.5, -0.866, 0.0), new LambdaCube_LinearBase.V3(0.5, -0.866, 0.0), new LambdaCube_LinearBase.V3(0.5, -0.866, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, 1.0), new LambdaCube_LinearBase.V3(-0.866, 0.5, 0.0), new LambdaCube_LinearBase.V3(-0.866, 0.5, 0.0), new LambdaCube_LinearBase.V3(-0.866, 0.5, 0.0), new LambdaCube_LinearBase.V3(-0.866, 0.5, 0.0), new LambdaCube_LinearBase.V3(-0.866, 0.5, 0.0), new LambdaCube_LinearBase.V3(-0.866, 0.5, 0.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.0, 0.0, -1.0), new LambdaCube_LinearBase.V3(0.866, -0.5, 0.0), new LambdaCube_LinearBase.V3(0.866, -0.5, 0.0), new LambdaCube_LinearBase.V3(0.866, -0.5, 0.0), new LambdaCube_LinearBase.V3(0.866, -0.5, 0.0), new LambdaCube_LinearBase.V3(0.866, -0.5, 0.0), new LambdaCube_LinearBase.V3(0.866, -0.5, 0.0), new LambdaCube_LinearBase.V3(-0.5, -0.866, 0.0), new LambdaCube_LinearBase.V3(-0.5, -0.866, 0.0), new LambdaCube_LinearBase.V3(-0.5, -0.866, 0.0), new LambdaCube_LinearBase.V3(-0.5, -0.866, 0.0), new LambdaCube_LinearBase.V3(-0.5, -0.866, 0.0), new LambdaCube_LinearBase.V3(-0.5, -0.866, 0.0), new LambdaCube_LinearBase.V3(0.5, 0.866, 0.0), new LambdaCube_LinearBase.V3(0.5, 0.866, 0.0), new LambdaCube_LinearBase.V3(0.5, 0.866, 0.0), new LambdaCube_LinearBase.V3(0.5, 0.866, 0.0), new LambdaCube_LinearBase.V3(0.5, 0.866, 0.0), new LambdaCube_LinearBase.V3(0.5, 0.866, 0.0) ];
-  var lambdaCube = new LambdaCube_WebGL_Mesh.Mesh({
-      attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", new LambdaCube_WebGL_Mesh.A_V3F(lambdaCubeVertices)), new Data_Tuple.Tuple("normal", new LambdaCube_WebGL_Mesh.A_V3F(lambdaCubeNormals)) ]), 
-      primitive: LambdaCube_WebGL_Mesh.P_Triangles.value, 
-      gpuData: Data_Maybe.Nothing.value
+  var lambdaCube = new LambdaCube_Mesh.Mesh({
+      mAttributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", new LambdaCube_Mesh.A_V3F(lambdaCubeVertices)), new Data_Tuple.Tuple("normal", new LambdaCube_Mesh.A_V3F(lambdaCubeNormals)) ]), 
+      mPrimitive: LambdaCube_Mesh.P_Triangles.value
   });
   var g_vertex_buffer_data = [ new LambdaCube_LinearBase.V4(1.0, 1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, -1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, -1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, 1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, -1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, 1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, 1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, 1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, -1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, 1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, -1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, -1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, 1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, -1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, -1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, 1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, 1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, -1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, 1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, -1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, -1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, 1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, 1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, -1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, 1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, 1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, 1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, 1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, 1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, 1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, -1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, -1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, -1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(1.0, -1.0, -1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, -1.0, 1.0, 1.0), new LambdaCube_LinearBase.V4(-1.0, -1.0, -1.0, 1.0) ];
   var g_uv_buffer_data = [ new LambdaCube_LinearBase.V2(0.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 0.0), new LambdaCube_LinearBase.V2(0.0, 1.0), new LambdaCube_LinearBase.V2(1.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 1.0), new LambdaCube_LinearBase.V2(1.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 0.0), new LambdaCube_LinearBase.V2(0.0, 1.0), new LambdaCube_LinearBase.V2(0.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 0.0), new LambdaCube_LinearBase.V2(0.0, 1.0), new LambdaCube_LinearBase.V2(1.0, 0.0), new LambdaCube_LinearBase.V2(1.0, 1.0) ];
-  var myCube = new LambdaCube_WebGL_Mesh.Mesh({
-      attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position4", new LambdaCube_WebGL_Mesh.A_V4F(g_vertex_buffer_data)), new Data_Tuple.Tuple("vertexUV", new LambdaCube_WebGL_Mesh.A_V2F(g_uv_buffer_data)) ]), 
-      primitive: LambdaCube_WebGL_Mesh.P_Triangles.value, 
-      gpuData: Data_Maybe.Nothing.value
+  var myCube = new LambdaCube_Mesh.Mesh({
+      mAttributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position4", new LambdaCube_Mesh.A_V4F(g_vertex_buffer_data)), new Data_Tuple.Tuple("vertexUV", new LambdaCube_Mesh.A_V2F(g_uv_buffer_data)) ]), 
+      mPrimitive: LambdaCube_Mesh.P_Triangles.value
   });
   exports["g_uv_buffer_data"] = g_uv_buffer_data;
   exports["g_vertex_buffer_data"] = g_vertex_buffer_data;
@@ -13771,6 +13697,7 @@ var PS = {};
   var Control_Applicative = PS["Control.Applicative"];
   var Data_EuclideanRing = PS["Data.EuclideanRing"];
   var Data_Argonaut_Decode_Class = PS["Data.Argonaut.Decode.Class"];
+  var LambdaCube_Mesh = PS["LambdaCube.Mesh"];
   var Data_Semigroup = PS["Data.Semigroup"];
   var Data_Unit = PS["Data.Unit"];
   var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
@@ -13934,7 +13861,7 @@ var PS = {};
               var addRemoteModel = function (sname) {
                   return function (uri) {
                       return $foreign.getJSON(uri)(function (m) {
-                          var $135 = Data_Argonaut_Decode_Class.decodeJson(LambdaCube_WebGL_Mesh.decodeJsonMesh)(m);
+                          var $135 = Data_Argonaut_Decode_Class.decodeJson(LambdaCube_Mesh.decodeJsonMesh)(m);
                           if ($135 instanceof Data_Either.Left) {
                               return Control_Monad_Eff_Console.log("decode error: " + $135.value0);
                           };
