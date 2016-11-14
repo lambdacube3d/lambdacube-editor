@@ -1,7 +1,7 @@
 # lambdacube-editor
 
 
-* run lambdacube-editor locally
+## run lambdacube-editor locally
   - cd compiler-service
   - cabal install
   - run compiler-service from lambdacube-editor folder
