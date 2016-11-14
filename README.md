@@ -3,7 +3,7 @@
 
 ## run lambdacube-editor locally
   - cd compiler-service
-  - cabal install
+  - cabal install or cabal new-build
   - run compiler-service from lambdacube-editor folder
   - open lambdacube-editor/editor.html
       1. open in browser
