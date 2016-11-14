@@ -1,5 +1,17 @@
 # lambdacube-editor
 
+
+* run lambdacube-editor locally
+  - cd compiler-service
+  - cabal install
+  - run compiler-service from lambdacube-editor folder
+  - open lambdacube-editor/editor.html
+      1. open in browser
+      2. start a local web server e.g. python -m SimpleHTTPServer 8002, then open 0.0.0.0:8002/editor.html in a browser
+
+
+## compile instructions
+
 * install purescript
   - cabal update
   - cabal install purescript
@@ -19,19 +31,7 @@ on NixOS:
     bower update
 - add "~/node_modules/.bin"  to $PATH
 
-* clone lambdacube-editor
+* compile lambdacube-editor (editor.js)
   - cd lambdacube-editor
   - bower update
   - pulp build -O --to editor.js
-  - cd compiler-service
-  - cabal install
-  - run compiler-service
-    - cd; mkdir lc_tmp; cd lc_tmp
-    - cp Prelude.lc .
-    - compiler-service
-  - open lambdacube-editor/editor.html
-      1. start a local web server e.g. python -m SimpleHTTPServer 8002
-      2. open editor: 0.0.0.0:8002/editor.html
-
-
-
