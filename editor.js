@@ -9895,6 +9895,422 @@ var PS = {};
   var Data_Argonaut_Encode = PS["Data.Argonaut.Encode"];
   var Data_Argonaut_Decode = PS["Data.Argonaut.Decode"];
   var LambdaCube_IR = PS["LambdaCube.IR"];
+  var Data_Show = PS["Data.Show"];
+  var Data_Eq = PS["Data.Eq"];
+  var Data_Argonaut_Encode_Class = PS["Data.Argonaut.Encode.Class"];
+  var Data_Argonaut_Decode_Class = PS["Data.Argonaut.Decode.Class"];
+  var Control_Bind = PS["Control.Bind"];
+  var Control_Applicative = PS["Control.Applicative"];
+  var Data_Semigroup = PS["Data.Semigroup"];
+  var Data_Function = PS["Data.Function"];        
+  var Attribute_Word = (function () {
+      function Attribute_Word() {
+
+      };
+      Attribute_Word.value = new Attribute_Word();
+      return Attribute_Word;
+  })();
+  var Attribute_V2U = (function () {
+      function Attribute_V2U() {
+
+      };
+      Attribute_V2U.value = new Attribute_V2U();
+      return Attribute_V2U;
+  })();
+  var Attribute_V3U = (function () {
+      function Attribute_V3U() {
+
+      };
+      Attribute_V3U.value = new Attribute_V3U();
+      return Attribute_V3U;
+  })();
+  var Attribute_V4U = (function () {
+      function Attribute_V4U() {
+
+      };
+      Attribute_V4U.value = new Attribute_V4U();
+      return Attribute_V4U;
+  })();
+  var Attribute_Int = (function () {
+      function Attribute_Int() {
+
+      };
+      Attribute_Int.value = new Attribute_Int();
+      return Attribute_Int;
+  })();
+  var Attribute_V2I = (function () {
+      function Attribute_V2I() {
+
+      };
+      Attribute_V2I.value = new Attribute_V2I();
+      return Attribute_V2I;
+  })();
+  var Attribute_V3I = (function () {
+      function Attribute_V3I() {
+
+      };
+      Attribute_V3I.value = new Attribute_V3I();
+      return Attribute_V3I;
+  })();
+  var Attribute_V4I = (function () {
+      function Attribute_V4I() {
+
+      };
+      Attribute_V4I.value = new Attribute_V4I();
+      return Attribute_V4I;
+  })();
+  var Attribute_Float = (function () {
+      function Attribute_Float() {
+
+      };
+      Attribute_Float.value = new Attribute_Float();
+      return Attribute_Float;
+  })();
+  var Attribute_V2F = (function () {
+      function Attribute_V2F() {
+
+      };
+      Attribute_V2F.value = new Attribute_V2F();
+      return Attribute_V2F;
+  })();
+  var Attribute_V3F = (function () {
+      function Attribute_V3F() {
+
+      };
+      Attribute_V3F.value = new Attribute_V3F();
+      return Attribute_V3F;
+  })();
+  var Attribute_V4F = (function () {
+      function Attribute_V4F() {
+
+      };
+      Attribute_V4F.value = new Attribute_V4F();
+      return Attribute_V4F;
+  })();
+  var Attribute_M22F = (function () {
+      function Attribute_M22F() {
+
+      };
+      Attribute_M22F.value = new Attribute_M22F();
+      return Attribute_M22F;
+  })();
+  var Attribute_M23F = (function () {
+      function Attribute_M23F() {
+
+      };
+      Attribute_M23F.value = new Attribute_M23F();
+      return Attribute_M23F;
+  })();
+  var Attribute_M24F = (function () {
+      function Attribute_M24F() {
+
+      };
+      Attribute_M24F.value = new Attribute_M24F();
+      return Attribute_M24F;
+  })();
+  var Attribute_M32F = (function () {
+      function Attribute_M32F() {
+
+      };
+      Attribute_M32F.value = new Attribute_M32F();
+      return Attribute_M32F;
+  })();
+  var Attribute_M33F = (function () {
+      function Attribute_M33F() {
+
+      };
+      Attribute_M33F.value = new Attribute_M33F();
+      return Attribute_M33F;
+  })();
+  var Attribute_M34F = (function () {
+      function Attribute_M34F() {
+
+      };
+      Attribute_M34F.value = new Attribute_M34F();
+      return Attribute_M34F;
+  })();
+  var Attribute_M42F = (function () {
+      function Attribute_M42F() {
+
+      };
+      Attribute_M42F.value = new Attribute_M42F();
+      return Attribute_M42F;
+  })();
+  var Attribute_M43F = (function () {
+      function Attribute_M43F() {
+
+      };
+      Attribute_M43F.value = new Attribute_M43F();
+      return Attribute_M43F;
+  })();
+  var Attribute_M44F = (function () {
+      function Attribute_M44F() {
+
+      };
+      Attribute_M44F.value = new Attribute_M44F();
+      return Attribute_M44F;
+  })();
+  var ObjectArraySchema = (function () {
+      function ObjectArraySchema(value0) {
+          this.value0 = value0;
+      };
+      ObjectArraySchema.create = function (value0) {
+          return new ObjectArraySchema(value0);
+      };
+      return ObjectArraySchema;
+  })();
+  var PipelineSchema = (function () {
+      function PipelineSchema(value0) {
+          this.value0 = value0;
+      };
+      PipelineSchema.create = function (value0) {
+          return new PipelineSchema(value0);
+      };
+      return PipelineSchema;
+  })();
+  var genericStreamType = new Data_Generic.Generic(function (v) {
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_Word" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_Word.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_V2U" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_V2U.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_V3U" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_V3U.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_V4U" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_V4U.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_Int" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_Int.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_V2I" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_V2I.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_V3I" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_V3I.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_V4I" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_V4I.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_Float" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_Float.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_V2F" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_V2F.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_V3F" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_V3F.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_V4F" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_V4F.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_M22F" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_M22F.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_M23F" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_M23F.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_M24F" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_M24F.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_M32F" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_M32F.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_M33F" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_M33F.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_M34F" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_M34F.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_M42F" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_M42F.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_M43F" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_M43F.value);
+      };
+      if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.PipelineSchema.Attribute_M44F" && v.value1.length === 0)) {
+          return new Data_Maybe.Just(Attribute_M44F.value);
+      };
+      return Data_Maybe.Nothing.value;
+  }, function ($dollarq) {
+      return new Data_Generic.SigProd("LambdaCube.PipelineSchema.StreamType", [ {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_Word", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_V2U", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_V3U", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_V4U", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_Int", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_V2I", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_V3I", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_V4I", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_Float", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_V2F", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_V3F", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_V4F", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_M22F", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_M23F", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_M24F", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_M32F", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_M33F", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_M34F", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_M42F", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_M43F", 
+          sigValues: [  ]
+      }, {
+          sigConstructor: "LambdaCube.PipelineSchema.Attribute_M44F", 
+          sigValues: [  ]
+      } ]);
+  }, function (v) {
+      if (v instanceof Attribute_Word) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_Word", [  ]);
+      };
+      if (v instanceof Attribute_V2U) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_V2U", [  ]);
+      };
+      if (v instanceof Attribute_V3U) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_V3U", [  ]);
+      };
+      if (v instanceof Attribute_V4U) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_V4U", [  ]);
+      };
+      if (v instanceof Attribute_Int) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_Int", [  ]);
+      };
+      if (v instanceof Attribute_V2I) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_V2I", [  ]);
+      };
+      if (v instanceof Attribute_V3I) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_V3I", [  ]);
+      };
+      if (v instanceof Attribute_V4I) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_V4I", [  ]);
+      };
+      if (v instanceof Attribute_Float) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_Float", [  ]);
+      };
+      if (v instanceof Attribute_V2F) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_V2F", [  ]);
+      };
+      if (v instanceof Attribute_V3F) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_V3F", [  ]);
+      };
+      if (v instanceof Attribute_V4F) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_V4F", [  ]);
+      };
+      if (v instanceof Attribute_M22F) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_M22F", [  ]);
+      };
+      if (v instanceof Attribute_M23F) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_M23F", [  ]);
+      };
+      if (v instanceof Attribute_M24F) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_M24F", [  ]);
+      };
+      if (v instanceof Attribute_M32F) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_M32F", [  ]);
+      };
+      if (v instanceof Attribute_M33F) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_M33F", [  ]);
+      };
+      if (v instanceof Attribute_M34F) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_M34F", [  ]);
+      };
+      if (v instanceof Attribute_M42F) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_M42F", [  ]);
+      };
+      if (v instanceof Attribute_M43F) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_M43F", [  ]);
+      };
+      if (v instanceof Attribute_M44F) {
+          return new Data_Generic.SProd("LambdaCube.PipelineSchema.Attribute_M44F", [  ]);
+      };
+      throw new Error("Failed pattern match at LambdaCube.PipelineSchema line 61, column 1 - line 61, column 56: " + [ v.constructor.name ]);
+  });
+  var showStreamType = new Data_Show.Show(Data_Generic.gShow(genericStreamType));
+  var eqStreamType = new Data_Eq.Eq(Data_Generic.gEq(genericStreamType));
+  exports["ObjectArraySchema"] = ObjectArraySchema;
+  exports["PipelineSchema"] = PipelineSchema;
+  exports["Attribute_Word"] = Attribute_Word;
+  exports["Attribute_V2U"] = Attribute_V2U;
+  exports["Attribute_V3U"] = Attribute_V3U;
+  exports["Attribute_V4U"] = Attribute_V4U;
+  exports["Attribute_Int"] = Attribute_Int;
+  exports["Attribute_V2I"] = Attribute_V2I;
+  exports["Attribute_V3I"] = Attribute_V3I;
+  exports["Attribute_V4I"] = Attribute_V4I;
+  exports["Attribute_Float"] = Attribute_Float;
+  exports["Attribute_V2F"] = Attribute_V2F;
+  exports["Attribute_V3F"] = Attribute_V3F;
+  exports["Attribute_V4F"] = Attribute_V4F;
+  exports["Attribute_M22F"] = Attribute_M22F;
+  exports["Attribute_M23F"] = Attribute_M23F;
+  exports["Attribute_M24F"] = Attribute_M24F;
+  exports["Attribute_M32F"] = Attribute_M32F;
+  exports["Attribute_M33F"] = Attribute_M33F;
+  exports["Attribute_M34F"] = Attribute_M34F;
+  exports["Attribute_M42F"] = Attribute_M42F;
+  exports["Attribute_M43F"] = Attribute_M43F;
+  exports["Attribute_M44F"] = Attribute_M44F;
+  exports["genericStreamType"] = genericStreamType;
+  exports["showStreamType"] = showStreamType;
+  exports["eqStreamType"] = eqStreamType;
+})(PS["LambdaCube.PipelineSchema"] = PS["LambdaCube.PipelineSchema"] || {});
+(function(exports) {
+  // Generated by psc version 0.10.2
+  "use strict";
+  var Prelude = PS["Prelude"];
+  var Data_Generic = PS["Data.Generic"];
+  var Data_Either = PS["Data.Either"];
+  var Data_Maybe = PS["Data.Maybe"];
+  var Data_StrMap = PS["Data.StrMap"];
+  var Data_Map = PS["Data.Map"];
+  var Data_List = PS["Data.List"];
+  var LambdaCube_LinearBase = PS["LambdaCube.LinearBase"];
+  var Data_Argonaut_Encode_Combinators = PS["Data.Argonaut.Encode.Combinators"];
+  var Data_Argonaut_Decode_Combinators = PS["Data.Argonaut.Decode.Combinators"];
+  var Data_Argonaut_Core = PS["Data.Argonaut.Core"];
+  var Data_Argonaut_Printer = PS["Data.Argonaut.Printer"];
+  var Data_Argonaut_Encode = PS["Data.Argonaut.Encode"];
+  var Data_Argonaut_Decode = PS["Data.Argonaut.Decode"];
+  var LambdaCube_IR = PS["LambdaCube.IR"];
   var Data_Argonaut_Encode_Class = PS["Data.Argonaut.Encode.Class"];
   var Data_Argonaut_Decode_Class = PS["Data.Argonaut.Decode.Class"];
   var Control_Bind = PS["Control.Bind"];
@@ -10104,7 +10520,7 @@ var PS = {};
   var Data_ArrayBuffer_Types = PS["Data.ArrayBuffer.Types"];
   var LambdaCube_IR = PS["LambdaCube.IR"];
   var LambdaCube_LinearBase = PS["LambdaCube.LinearBase"];
-  var Data_Eq = PS["Data.Eq"];
+  var LambdaCube_PipelineSchema = PS["LambdaCube.PipelineSchema"];
   var Data_Show = PS["Data.Show"];        
   var TextureData = (function () {
       function TextureData(value0) {
@@ -10114,55 +10530,6 @@ var PS = {};
           return new TextureData(value0);
       };
       return TextureData;
-  })();
-  var TFloat = (function () {
-      function TFloat() {
-
-      };
-      TFloat.value = new TFloat();
-      return TFloat;
-  })();
-  var TV2F = (function () {
-      function TV2F() {
-
-      };
-      TV2F.value = new TV2F();
-      return TV2F;
-  })();
-  var TV3F = (function () {
-      function TV3F() {
-
-      };
-      TV3F.value = new TV3F();
-      return TV3F;
-  })();
-  var TV4F = (function () {
-      function TV4F() {
-
-      };
-      TV4F.value = new TV4F();
-      return TV4F;
-  })();
-  var TM22F = (function () {
-      function TM22F() {
-
-      };
-      TM22F.value = new TM22F();
-      return TM22F;
-  })();
-  var TM33F = (function () {
-      function TM33F() {
-
-      };
-      TM33F.value = new TM33F();
-      return TM33F;
-  })();
-  var TM44F = (function () {
-      function TM44F() {
-
-      };
-      TM44F.value = new TM44F();
-      return TM44F;
   })();
   var ConstFloat = (function () {
       function ConstFloat(value0) {
@@ -10790,30 +11157,30 @@ var PS = {};
   };
   var streamToStreamType = function (s) {
       if (s instanceof ConstFloat) {
-          return TFloat.value;
+          return LambdaCube_PipelineSchema.Attribute_Float.value;
       };
       if (s instanceof ConstV2F) {
-          return TV2F.value;
+          return LambdaCube_PipelineSchema.Attribute_V2F.value;
       };
       if (s instanceof ConstV3F) {
-          return TV3F.value;
+          return LambdaCube_PipelineSchema.Attribute_V3F.value;
       };
       if (s instanceof ConstV4F) {
-          return TV4F.value;
+          return LambdaCube_PipelineSchema.Attribute_V4F.value;
       };
       if (s instanceof ConstM22F) {
-          return TM22F.value;
+          return LambdaCube_PipelineSchema.Attribute_M22F.value;
       };
       if (s instanceof ConstM33F) {
-          return TM33F.value;
+          return LambdaCube_PipelineSchema.Attribute_M33F.value;
       };
       if (s instanceof ConstM44F) {
-          return TM44F.value;
+          return LambdaCube_PipelineSchema.Attribute_M44F.value;
       };
       if (s instanceof Stream) {
           return s.value0.sType;
       };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Type line 272, column 24 - line 280, column 24: " + [ s.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.WebGL.Type line 235, column 24 - line 243, column 24: " + [ s.constructor.name ]);
   };
   var sizeOfArrayType = function (v) {
       if (v instanceof ArrWord8) {
@@ -10831,32 +11198,8 @@ var PS = {};
       if (v instanceof ArrFloat) {
           return 4;
       };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Type line 52, column 1 - line 53, column 1: " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.WebGL.Type line 53, column 1 - line 54, column 1: " + [ v.constructor.name ]);
   };
-  var showStreamType = new Data_Show.Show(function (v) {
-      if (v instanceof TFloat) {
-          return "TFloat";
-      };
-      if (v instanceof TV2F) {
-          return "TV2F";
-      };
-      if (v instanceof TV3F) {
-          return "TV3F";
-      };
-      if (v instanceof TV4F) {
-          return "TV4F";
-      };
-      if (v instanceof TM22F) {
-          return "TM22F";
-      };
-      if (v instanceof TM33F) {
-          return "TM33F";
-      };
-      if (v instanceof TM44F) {
-          return "TM44F";
-      };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Type line 81, column 3 - line 82, column 3: " + [ v.constructor.name ]);
-  });
   var showPrimitive = new Data_Show.Show(function (v) {
       if (v instanceof TriangleStrip) {
           return "TriangleStrip";
@@ -10879,7 +11222,7 @@ var PS = {};
       if (v instanceof PointList) {
           return "PointList";
       };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Type line 122, column 3 - line 123, column 3: " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.WebGL.Type line 95, column 3 - line 96, column 3: " + [ v.constructor.name ]);
   });
   var numStorable = new NumberStorable(function (a) {
       return [ a ];
@@ -10890,32 +11233,6 @@ var PS = {};
   var intIntStorable = new IntStorable(function (a) {
       return [ a ];
   });
-  var eqStreamType = new Data_Eq.Eq(function (v) {
-      return function (v1) {
-          if (v instanceof TFloat && v1 instanceof TFloat) {
-              return true;
-          };
-          if (v instanceof TV2F && v1 instanceof TV2F) {
-              return true;
-          };
-          if (v instanceof TV3F && v1 instanceof TV3F) {
-              return true;
-          };
-          if (v instanceof TV4F && v1 instanceof TV4F) {
-              return true;
-          };
-          if (v instanceof TM22F && v1 instanceof TM22F) {
-              return true;
-          };
-          if (v instanceof TM33F && v1 instanceof TM33F) {
-              return true;
-          };
-          if (v instanceof TM44F && v1 instanceof TM44F) {
-              return true;
-          };
-          return false;
-      };
-  });
   var boolIntStorable = new IntStorable(function (a) {
       return [ (function () {
           if (a) {
@@ -10924,7 +11241,7 @@ var PS = {};
           if (!a) {
               return 0;
           };
-          throw new Error("Failed pattern match at LambdaCube.WebGL.Type line 298, column 71 - line 298, column 89: " + [ a.constructor.name ]);
+          throw new Error("Failed pattern match at LambdaCube.WebGL.Type line 261, column 71 - line 261, column 89: " + [ a.constructor.name ]);
       })() ];
   });
   var arrStorable = function (dictNumberStorable) {
@@ -10995,13 +11312,6 @@ var PS = {};
   exports["ConstM33F"] = ConstM33F;
   exports["ConstM44F"] = ConstM44F;
   exports["Stream"] = Stream;
-  exports["TFloat"] = TFloat;
-  exports["TV2F"] = TV2F;
-  exports["TV3F"] = TV3F;
-  exports["TV4F"] = TV4F;
-  exports["TM22F"] = TM22F;
-  exports["TM33F"] = TM33F;
-  exports["TM44F"] = TM44F;
   exports["TextureData"] = TextureData;
   exports["IntStorable"] = IntStorable;
   exports["NumberStorable"] = NumberStorable;
@@ -11009,8 +11319,6 @@ var PS = {};
   exports["streamToStreamType"] = streamToStreamType;
   exports["toArray"] = toArray;
   exports["toIntArray"] = toIntArray;
-  exports["eqStreamType"] = eqStreamType;
-  exports["showStreamType"] = showStreamType;
   exports["showPrimitive"] = showPrimitive;
   exports["intStorable"] = intStorable;
   exports["numStorable"] = numStorable;
@@ -11163,6 +11471,7 @@ var PS = {};
   var Partial_Unsafe = PS["Partial.Unsafe"];
   var LambdaCube_IR = PS["LambdaCube.IR"];
   var LambdaCube_LinearBase = PS["LambdaCube.LinearBase"];
+  var LambdaCube_PipelineSchema = PS["LambdaCube.PipelineSchema"];
   var LambdaCube_WebGL_Type = PS["LambdaCube.WebGL.Type"];
   var Data_Semigroup = PS["Data.Semigroup"];
   var Control_Applicative = PS["Control.Applicative"];
@@ -11188,31 +11497,31 @@ var PS = {};
           if (!$16) {
               return $15.value0.head + ("\n" + unlines($15.value0.tail));
           };
-          throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 111, column 14 - line 111, column 78: " + [ $16.constructor.name ]);
+          throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 112, column 14 - line 112, column 78: " + [ $16.constructor.name ]);
       };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 109, column 13 - line 111, column 78: " + [ $15.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 110, column 13 - line 112, column 78: " + [ $15.constructor.name ]);
   };
   var toStreamType = function (a) {
       if (a instanceof LambdaCube_IR.Float) {
-          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_WebGL_Type.TFloat.value);
+          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_PipelineSchema.Attribute_Float.value);
       };
       if (a instanceof LambdaCube_IR.V2F) {
-          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_WebGL_Type.TV2F.value);
+          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_PipelineSchema.Attribute_V2F.value);
       };
       if (a instanceof LambdaCube_IR.V3F) {
-          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_WebGL_Type.TV3F.value);
+          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_PipelineSchema.Attribute_V3F.value);
       };
       if (a instanceof LambdaCube_IR.V4F) {
-          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_WebGL_Type.TV4F.value);
+          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_PipelineSchema.Attribute_V4F.value);
       };
       if (a instanceof LambdaCube_IR.M22F) {
-          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_WebGL_Type.TM22F.value);
+          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_PipelineSchema.Attribute_M22F.value);
       };
       if (a instanceof LambdaCube_IR.M33F) {
-          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_WebGL_Type.TM33F.value);
+          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_PipelineSchema.Attribute_M33F.value);
       };
       if (a instanceof LambdaCube_IR.M44F) {
-          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_WebGL_Type.TM44F.value);
+          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(LambdaCube_PipelineSchema.Attribute_M44F.value);
       };
       return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("invalid Stream Type"));
   };
@@ -11242,7 +11551,7 @@ var PS = {};
           if (v instanceof LambdaCube_IR.Stencil) {
               return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("FIXME: This texture format is not yet supported" + Data_Show.show(LambdaCube_IR.showTextureDataType)(a)));
           };
-          throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 236, column 1 - line 240, column 104: " + [ v.constructor.name, a.constructor.name ]);
+          throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 237, column 1 - line 241, column 104: " + [ v.constructor.name, a.constructor.name ]);
       };
   };
   var textureDataTypeToGLArityType = function (v) {
@@ -11271,7 +11580,7 @@ var PS = {};
           if (v instanceof LambdaCube_IR.Stencil) {
               return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("FIXME: This texture format is not yet supported" + Data_Show.show(LambdaCube_IR.showTextureDataType)(a)));
           };
-          throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 249, column 1 - line 253, column 104: " + [ v.constructor.name, a.constructor.name ]);
+          throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 250, column 1 - line 254, column 104: " + [ v.constructor.name, a.constructor.name ]);
       };
   };
   var setUniform = function (i) {
@@ -11407,7 +11716,7 @@ var PS = {};
       if (p instanceof LambdaCube_WebGL_Type.PointList) {
           return Graphics_WebGLRaw._POINTS;
       };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 174, column 23 - line 181, column 30: " + [ p.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 175, column 23 - line 182, column 30: " + [ p.constructor.name ]);
   };
   var primitiveToFetchPrimitive = function (prim) {
       if (prim instanceof LambdaCube_WebGL_Type.TriangleStrip) {
@@ -11431,7 +11740,7 @@ var PS = {};
       if (prim instanceof LambdaCube_WebGL_Type.PointList) {
           return LambdaCube_IR.Points.value;
       };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 99, column 34 - line 106, column 36: " + [ prim.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 100, column 34 - line 107, column 36: " + [ prim.constructor.name ]);
   };
   var mkUniformSetter = function (v) {
       if (v instanceof LambdaCube_IR.Bool) {
@@ -11551,7 +11860,7 @@ var PS = {};
       if (a instanceof LambdaCube_IR.LinearMipmapLinear) {
           return Graphics_WebGLRaw._LINEAR_MIPMAP_LINEAR;
       };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 282, column 20 - line 288, column 56: " + [ a.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 283, column 20 - line 289, column 56: " + [ a.constructor.name ]);
   };
   var edgeModeToGLType = function (a) {
       if (a instanceof LambdaCube_IR.Repeat) {
@@ -11576,7 +11885,7 @@ var PS = {};
                   if (v.value0.samplerWrapT instanceof Data_Maybe.Just) {
                       return Graphics_WebGLRaw.texParameteri_(t)(Graphics_WebGLRaw._TEXTURE_WRAP_T)(edgeModeToGLType(v.value0.samplerWrapT.value0));
                   };
-                  throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 275, column 5 - line 277, column 79: " + [ v.value0.samplerWrapT.constructor.name ]);
+                  throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 276, column 5 - line 278, column 79: " + [ v.value0.samplerWrapT.constructor.name ]);
               })()();
               Graphics_WebGLRaw.texParameteri_(t)(Graphics_WebGLRaw._TEXTURE_MIN_FILTER)(filterToGLType(v.value0.samplerMinFilter))();
               return Graphics_WebGLRaw.texParameteri_(t)(Graphics_WebGLRaw._TEXTURE_MAG_FILTER)(filterToGLType(v.value0.samplerMagFilter))();
@@ -11627,7 +11936,7 @@ var PS = {};
                                       if (!$109) {
                                           return Graphics_WebGLRaw._UNSIGNED_BYTE;
                                       };
-                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 225, column 75 - line 225, column 158: " + [ $109.constructor.name ]);
+                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 226, column 75 - line 226, column 158: " + [ $109.constructor.name ]);
                                   })())();
                                   return Data_Unit.unit;
                               };
@@ -11670,7 +11979,7 @@ var PS = {};
       if (a instanceof LambdaCube_IR.Notequal) {
           return Graphics_WebGLRaw._NOTEQUAL;
       };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 26, column 32 - line 34, column 32: " + [ a.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 27, column 32 - line 35, column 32: " + [ a.constructor.name ]);
   };
   var blendingFactorToGLType = function (a) {
       if (a instanceof LambdaCube_IR.ConstantAlpha) {
@@ -11718,7 +12027,7 @@ var PS = {};
       if (a instanceof LambdaCube_IR.Zero) {
           return Graphics_WebGLRaw._ZERO;
       };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 45, column 28 - line 60, column 40: " + [ a.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 46, column 28 - line 61, column 40: " + [ a.constructor.name ]);
   };
   var blendEquationToGLType = function (a) {
       if (a instanceof LambdaCube_IR.FuncAdd) {
@@ -11736,7 +12045,7 @@ var PS = {};
       if (a instanceof LambdaCube_IR.Min) {
           return Graphics_WebGLRaw._FUNC_ADD;
       };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 37, column 27 - line 42, column 40: " + [ a.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 38, column 27 - line 43, column 40: " + [ a.constructor.name ]);
   };
   var arrayTypeToGLType = function (a) {
       if (a instanceof LambdaCube_WebGL_Type.ArrWord8) {
@@ -11754,7 +12063,7 @@ var PS = {};
       if (a instanceof LambdaCube_WebGL_Type.ArrFloat) {
           return Graphics_WebGLRaw._FLOAT;
       };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 184, column 23 - line 189, column 27: " + [ a.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 185, column 23 - line 190, column 27: " + [ a.constructor.name ]);
   };
   exports["arrayTypeToGLType"] = arrayTypeToGLType;
   exports["blendEquationToGLType"] = blendEquationToGLType;
@@ -11812,6 +12121,7 @@ var PS = {};
   var Partial_Unsafe = PS["Partial.Unsafe"];
   var LambdaCube_IR = PS["LambdaCube.IR"];
   var LambdaCube_LinearBase = PS["LambdaCube.LinearBase"];
+  var LambdaCube_PipelineSchema = PS["LambdaCube.PipelineSchema"];
   var LambdaCube_WebGL_Type = PS["LambdaCube.WebGL.Type"];
   var LambdaCube_WebGL_Util = PS["LambdaCube.WebGL.Util"];
   var Graphics_WebGLRaw = PS["Graphics.WebGLRaw"];
@@ -11836,15 +12146,15 @@ var PS = {};
               };
               var doSort = function (objs) {
                   return Control_Monad_Eff_Ref.writeRef(slotRef)((function () {
-                      var $50 = {};
-                      for (var $51 in v) {
-                          if (v.hasOwnProperty($51)) {
-                              $50[$51] = v[$51];
+                      var $55 = {};
+                      for (var $56 in v) {
+                          if (v.hasOwnProperty($56)) {
+                              $55[$56] = v[$56];
                           };
                       };
-                      $50.sortedObjects = Data_Array.sortBy(cmpFun)(objs);
-                      $50.orderJob = LambdaCube_WebGL_Type.Ordered.value;
-                      return $50;
+                      $55.sortedObjects = Data_Array.sortBy(cmpFun)(objs);
+                      $55.orderJob = LambdaCube_WebGL_Type.Ordered.value;
+                      return $55;
                   })());
               };
               if (v.orderJob instanceof LambdaCube_WebGL_Type.Ordered) {
@@ -11868,7 +12178,7 @@ var PS = {};
                   })();
                   return doSort(v1)();
               };
-              throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 158, column 5 - line 169, column 24: " + [ v.orderJob.constructor.name ]);
+              throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 160, column 5 - line 171, column 24: " + [ v.orderJob.constructor.name ]);
           };
       });
   };
@@ -11886,27 +12196,27 @@ var PS = {};
   };
   var uniformFTexture2D = function (n) {
       return function (is) {
-          var $75 = Data_StrMap.lookup(n)(is);
-          if ($75 instanceof Data_Maybe.Just && $75.value0 instanceof LambdaCube_WebGL_Type.SFTexture2D) {
-              return $75.value0.value0;
+          var $80 = Data_StrMap.lookup(n)(is);
+          if ($80 instanceof Data_Maybe.Just && $80.value0 instanceof LambdaCube_WebGL_Type.SFTexture2D) {
+              return $80.value0.value0;
           };
           return nullSetter(n)("FTexture2D");
       };
   };
   var uniformFloat = function (n) {
       return function (is) {
-          var $78 = Data_StrMap.lookup(n)(is);
-          if ($78 instanceof Data_Maybe.Just && $78.value0 instanceof LambdaCube_WebGL_Type.SFloat) {
-              return $78.value0.value0;
+          var $83 = Data_StrMap.lookup(n)(is);
+          if ($83 instanceof Data_Maybe.Just && $83.value0 instanceof LambdaCube_WebGL_Type.SFloat) {
+              return $83.value0.value0;
           };
           return nullSetter(n)("Float");
       };
   };
   var uniformV2F = function (n) {
       return function (is) {
-          var $96 = Data_StrMap.lookup(n)(is);
-          if ($96 instanceof Data_Maybe.Just && $96.value0 instanceof LambdaCube_WebGL_Type.SV2F) {
-              return $96.value0.value0;
+          var $101 = Data_StrMap.lookup(n)(is);
+          if ($101 instanceof Data_Maybe.Just && $101.value0 instanceof LambdaCube_WebGL_Type.SV2F) {
+              return $101.value0.value0;
           };
           return nullSetter(n)("V2F");
       };
@@ -11925,29 +12235,29 @@ var PS = {};
           return fun(Data_Array.unzip(v));
       };
   };
-  var mkWebGLPipelineInput = function (sch) {
+  var mkWebGLPipelineInput = function (v) {
       return Partial_Unsafe.unsafePartial(function (dictPartial) {
-          var len = Data_Maybe.fromJust(dictPartial)(Data_Int.fromNumber(Data_StrMap.size(sch.slots)));
-          var sm = Data_StrMap.fromFoldable(Data_List_Types.foldableList)(Data_List.zip(Data_List.fromFoldable(Data_Foldable.foldableArray)(Data_StrMap.keys(sch.slots)))(Data_List.range(0)(len)));
+          var len = Data_Maybe.fromJust(dictPartial)(Data_Int.fromNumber(Data_StrMap.size(v.value0.objectArrays)));
+          var sm = Data_StrMap.fromFoldable(Data_List_Types.foldableList)(Data_List.zip(Data_List.fromFoldable(Data_Foldable.foldableArray)(Data_StrMap.keys(v.value0.objectArrays)))(Data_List.range(0)(len)));
           return function __do() {
-              var v = mkUniform(Data_StrMap.toUnfoldable(Data_Unfoldable.unfoldableArray)(sch.uniforms))();
-              var v1 = Data_Unfoldable.replicateA(Control_Monad_Eff.applicativeEff)(Data_Unfoldable.unfoldableArray)(Data_Traversable.traversableArray)(len)(Control_Monad_Eff_Ref.newRef({
+              var v1 = mkUniform(Data_StrMap.toUnfoldable(Data_Unfoldable.unfoldableArray)(v.value0.uniforms))();
+              var v2 = Data_Unfoldable.replicateA(Control_Monad_Eff.applicativeEff)(Data_Unfoldable.unfoldableArray)(Data_Traversable.traversableArray)(len)(Control_Monad_Eff_Ref.newRef({
                   objectMap: Data_Map.empty, 
                   sortedObjects: [  ], 
                   orderJob: LambdaCube_WebGL_Type.Ordered.value
               }))();
-              var v2 = Control_Monad_Eff_Ref.newRef(0)();
-              var v3 = Control_Monad_Eff_Ref.newRef(new LambdaCube_LinearBase.V2(0, 0))();
-              var v4 = Control_Monad_Eff_Ref.newRef([ Data_Maybe.Nothing.value ])();
+              var v3 = Control_Monad_Eff_Ref.newRef(0)();
+              var v4 = Control_Monad_Eff_Ref.newRef(new LambdaCube_LinearBase.V2(0, 0))();
+              var v5 = Control_Monad_Eff_Ref.newRef([ Data_Maybe.Nothing.value ])();
               return {
-                  schema: sch, 
+                  schema: new LambdaCube_PipelineSchema.PipelineSchema(v.value0), 
                   slotMap: sm, 
-                  slotVector: v1, 
-                  objSeed: v2, 
-                  uniformSetter: v.value0, 
-                  uniformSetup: v.value1, 
-                  screenSize: v3, 
-                  pipelines: v4
+                  slotVector: v2, 
+                  objSeed: v3, 
+                  uniformSetter: v1.value0, 
+                  uniformSetup: v1.value1, 
+                  screenSize: v4, 
+                  pipelines: v5
               };
           };
       });
@@ -11960,14 +12270,14 @@ var PS = {};
                       var uniMap = Data_StrMap.toUnfoldable(Data_Unfoldable.unfoldableArray)(prg.inputUniforms);
                       var uniCmds = Data_Function.flip(Data_Functor.map(Data_Functor.functorArray))(uniMap)(function (v) {
                           return LambdaCube_WebGL_Type.GLSetUniform.create(v.value1)((function () {
-                              var $138 = Data_StrMap.lookup(v.value0)(obj.uniSetup);
-                              if ($138 instanceof Data_Maybe.Nothing) {
+                              var $145 = Data_StrMap.lookup(v.value0)(obj.uniSetup);
+                              if ($145 instanceof Data_Maybe.Nothing) {
                                   return Data_StrMap_Unsafe.unsafeIndex(topUnis)(v.value0);
                               };
-                              if ($138 instanceof Data_Maybe.Just) {
-                                  return $138.value0;
+                              if ($145 instanceof Data_Maybe.Just) {
+                                  return $145.value0;
                               };
-                              throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 279, column 53 - line 281, column 23: " + [ $138.constructor.name ]);
+                              throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 281, column 53 - line 283, column 23: " + [ $145.constructor.name ]);
                           })());
                       });
                       var topUni = function (n) {
@@ -11975,14 +12285,14 @@ var PS = {};
                       };
                       var texCmds = Data_Function.flip(Data_Functor.map(Data_Functor.functorArray))(prg.inputTextureUniforms)(function (n) {
                           var u = (function () {
-                              var $142 = Data_StrMap.lookup(n)(obj.uniSetup);
-                              if ($142 instanceof Data_Maybe.Nothing) {
+                              var $149 = Data_StrMap.lookup(n)(obj.uniSetup);
+                              if ($149 instanceof Data_Maybe.Nothing) {
                                   return topUni(n);
                               };
-                              if ($142 instanceof Data_Maybe.Just) {
-                                  return $142.value0;
+                              if ($149 instanceof Data_Maybe.Just) {
+                                  return $149.value0;
                               };
-                              throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 283, column 19 - line 285, column 32: " + [ $142.constructor.name ]);
+                              throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 285, column 19 - line 287, column 32: " + [ $149.constructor.name ]);
                           })();
                           var texUnit = Data_StrMap_Unsafe.unsafeIndex(texUnitMap)(n);
                           return new LambdaCube_WebGL_Type.GLBindTexture(Graphics_WebGLRaw._TEXTURE_2D, texUnit, u);
@@ -12003,28 +12313,35 @@ var PS = {};
                                   return new LambdaCube_WebGL_Type.GLSetVertexAttribArray(is.location, s.value0.buffer.glBuffer, n, glType, ptr(n));
                               };
                               return setFloatAttrib((function () {
-                                  if (s.value0.sType instanceof LambdaCube_WebGL_Type.TFloat) {
-                                      return 1;
+                                  var __unused = function (dictPartial1) {
+                                      return function ($dollar39) {
+                                          return $dollar39;
+                                      };
                                   };
-                                  if (s.value0.sType instanceof LambdaCube_WebGL_Type.TV2F) {
-                                      return 2;
-                                  };
-                                  if (s.value0.sType instanceof LambdaCube_WebGL_Type.TV3F) {
-                                      return 3;
-                                  };
-                                  if (s.value0.sType instanceof LambdaCube_WebGL_Type.TV4F) {
-                                      return 4;
-                                  };
-                                  if (s.value0.sType instanceof LambdaCube_WebGL_Type.TM22F) {
-                                      return 4;
-                                  };
-                                  if (s.value0.sType instanceof LambdaCube_WebGL_Type.TM33F) {
-                                      return 9;
-                                  };
-                                  if (s.value0.sType instanceof LambdaCube_WebGL_Type.TM44F) {
-                                      return 16;
-                                  };
-                                  throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 300, column 16 - line 308, column 13: " + [ s.value0.sType.constructor.name ]);
+                                  return __unused(dictPartial)((function () {
+                                      if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_Float) {
+                                          return 1;
+                                      };
+                                      if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_V2F) {
+                                          return 2;
+                                      };
+                                      if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_V3F) {
+                                          return 3;
+                                      };
+                                      if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_V4F) {
+                                          return 4;
+                                      };
+                                      if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_M22F) {
+                                          return 4;
+                                      };
+                                      if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_M33F) {
+                                          return 9;
+                                      };
+                                      if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_M44F) {
+                                          return 16;
+                                      };
+                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 302, column 16 - line 310, column 13: " + [ s.value0.sType.constructor.name ]);
+                                  })());
                               })());
                           };
                           return new LambdaCube_WebGL_Type.GLSetVertexAttrib(is.location, s);
@@ -12047,7 +12364,7 @@ var PS = {};
                           var ptr = (obj.indices.value0.buffer.arrays[obj.indices.value0.arrIdx]).arrOffset + (obj.indices.value0.start * LambdaCube_WebGL_Type.sizeOfArrayType((obj.indices.value0.buffer.arrays[obj.indices.value0.arrIdx]).arrType) | 0) | 0;
                           return new LambdaCube_WebGL_Type.GLDrawElements(prim, obj.indices.value0.length, idxType, obj.indices.value0.buffer.glBuffer, ptr);
                       };
-                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 265, column 10 - line 271, column 74: " + [ obj.indices.constructor.name ]);
+                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 267, column 10 - line 273, column 74: " + [ obj.indices.constructor.name ]);
                   });
                   return Data_Array.concat([ objUniCmds, objStreamCmds, [ objDrawCmd ] ]);
               };
@@ -12063,108 +12380,108 @@ var PS = {};
                           return Partial_Unsafe.unsafePartial(function (dictPartial) {
                               return function __do() {
                                   Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(uniformNames)(function (n) {
-                                      var $151 = Data_StrMap.lookup(n)(input.schema.uniforms);
-                                      if ($151 instanceof Data_Maybe.Nothing) {
+                                      var $159 = Data_StrMap.lookup(n)(input.schema.value0.uniforms);
+                                      if ($159 instanceof Data_Maybe.Nothing) {
                                           return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("Unknown uniform: " + Data_Show.show(Data_Show.showString)(n)));
                                       };
                                       return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Unit.unit);
                                   })();
                                   (function () {
-                                      var $152 = Data_StrMap.lookup(slotName)(input.schema.slots);
-                                      if ($152 instanceof Data_Maybe.Nothing) {
-                                          return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("Unknown slot: " + slotName));
+                                      var $160 = Data_StrMap.lookup(slotName)(input.schema.value0.objectArrays);
+                                      if ($160 instanceof Data_Maybe.Nothing) {
+                                          return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("Unknown objectArray: " + slotName));
                                       };
-                                      if ($152 instanceof Data_Maybe.Just) {
+                                      if ($160 instanceof Data_Maybe.Just) {
                                           return function __do() {
-                                              Control_Applicative.when(Control_Monad_Eff.applicativeEff)(Data_Eq.notEq(LambdaCube_IR.eqFetchPrimitive)($152.value0.primitive)(LambdaCube_WebGL_Util.primitiveToFetchPrimitive(prim)))(Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("Primitive mismatch for slot (" + (Data_Show.show(Data_Show.showString)(slotName) + (") expected " + (Data_Show.show(LambdaCube_IR.showFetchPrimitive)($152.value0.primitive) + (" but got " + Data_Show.show(LambdaCube_WebGL_Type.showPrimitive)(prim))))))))();
+                                              Control_Applicative.when(Control_Monad_Eff.applicativeEff)(Data_Eq.notEq(LambdaCube_IR.eqFetchPrimitive)($160.value0.value0.primitive)(LambdaCube_WebGL_Util.primitiveToFetchPrimitive(prim)))(Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("Primitive mismatch for slot (" + (Data_Show.show(Data_Show.showString)(slotName) + (") expected " + (Data_Show.show(LambdaCube_IR.showFetchPrimitive)($160.value0.value0.primitive) + (" but got " + Data_Show.show(LambdaCube_WebGL_Type.showPrimitive)(prim))))))))();
                                               var sType = Data_Functor.map(Data_StrMap.functorStrMap)(LambdaCube_WebGL_Type.streamToStreamType)(attribs);
-                                              return Control_Applicative.when(Control_Monad_Eff.applicativeEff)(Data_Eq.notEq(Data_StrMap.eqStrMap(LambdaCube_WebGL_Type.eqStreamType))(sType)($152.value0.attributes))(Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error(LambdaCube_WebGL_Util.unlines([ "Attribute stream mismatch for slot (" + (Data_Show.show(Data_Show.showString)(slotName) + ") expected "), Data_Show.show(Data_StrMap.showStrMap(LambdaCube_WebGL_Type.showStreamType))($152.value0.attributes), " but got ", Data_Show.show(Data_StrMap.showStrMap(LambdaCube_WebGL_Type.showStreamType))(sType) ]))))();
+                                              return Control_Applicative.when(Control_Monad_Eff.applicativeEff)(Data_Eq.notEq(Data_StrMap.eqStrMap(LambdaCube_PipelineSchema.eqStreamType))(sType)($160.value0.value0.attributes))(Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error(LambdaCube_WebGL_Util.unlines([ "Attribute stream mismatch for slot (" + (Data_Show.show(Data_Show.showString)(slotName) + ") expected "), Data_Show.show(Data_StrMap.showStrMap(LambdaCube_PipelineSchema.showStreamType))($160.value0.value0.attributes), " but got ", Data_Show.show(Data_StrMap.showStrMap(LambdaCube_PipelineSchema.showStreamType))(sType) ]))))();
                                           };
                                       };
-                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 75, column 5 - line 86, column 18: " + [ $152.constructor.name ]);
+                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 77, column 5 - line 88, column 18: " + [ $160.constructor.name ]);
                                   })()();
-                                  var v = (function () {
-                                      var $154 = Data_StrMap.lookup(slotName)(input.slotMap);
-                                      if ($154 instanceof Data_Maybe.Nothing) {
+                                  var v1 = (function () {
+                                      var $163 = Data_StrMap.lookup(slotName)(input.slotMap);
+                                      if ($163 instanceof Data_Maybe.Nothing) {
                                           return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("internal error (slot index)"));
                                       };
-                                      if ($154 instanceof Data_Maybe.Just) {
-                                          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)($154.value0);
+                                      if ($163 instanceof Data_Maybe.Just) {
+                                          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)($163.value0);
                                       };
-                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 88, column 16 - line 90, column 24: " + [ $154.constructor.name ]);
+                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 90, column 16 - line 92, column 24: " + [ $163.constructor.name ]);
                                   })()();
-                                  var v1 = Control_Monad_Eff_Ref.newRef(0)();
-                                  var v2 = Control_Monad_Eff_Ref.newRef(true)();
-                                  var v3 = Control_Monad_Eff_Ref.readRef(input.objSeed)();
+                                  var v2 = Control_Monad_Eff_Ref.newRef(0)();
+                                  var v3 = Control_Monad_Eff_Ref.newRef(true)();
+                                  var v4 = Control_Monad_Eff_Ref.readRef(input.objSeed)();
                                   Control_Monad_Eff_Ref.modifyRef(input.objSeed)(function (x) {
                                       return 1 + x | 0;
                                   })();
-                                  var v4 = Control_Bind.bindFlipped(Control_Monad_Eff.bindEff)(mkUniform)(Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_Traversable.traversableArray)(uniformNames)(function (n) {
-                                      var $160 = Data_StrMap.lookup(n)(input.schema.uniforms);
-                                      if ($160 instanceof Data_Maybe.Nothing) {
+                                  var v5 = Control_Bind.bindFlipped(Control_Monad_Eff.bindEff)(mkUniform)(Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_Traversable.traversableArray)(uniformNames)(function (n) {
+                                      var $169 = Data_StrMap.lookup(n)(input.schema.value0.uniforms);
+                                      if ($169 instanceof Data_Maybe.Nothing) {
                                           return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("internal error (uniform setter not found)"));
                                       };
-                                      if ($160 instanceof Data_Maybe.Just) {
-                                          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(new Data_Tuple.Tuple(n, $160.value0));
+                                      if ($169 instanceof Data_Maybe.Just) {
+                                          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(new Data_Tuple.Tuple(n, $169.value0));
                                       };
-                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 95, column 67 - line 97, column 33: " + [ $160.constructor.name ]);
+                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 97, column 67 - line 99, column 33: " + [ $169.constructor.name ]);
                                   }))();
-                                  var v5 = Control_Monad_Eff_Ref.newRef([ [  ] ])();
+                                  var v6 = Control_Monad_Eff_Ref.newRef([ [  ] ])();
                                   var obj = {
-                                      slot: v, 
+                                      slot: v1, 
                                       primitive: prim, 
                                       indices: indices, 
                                       attributes: attribs, 
-                                      uniSetter: v4.value0, 
-                                      uniSetup: v4.value1, 
-                                      order: v1, 
-                                      enabled: v2, 
-                                      id: v3, 
-                                      commands: v5
+                                      uniSetter: v5.value0, 
+                                      uniSetup: v5.value1, 
+                                      order: v2, 
+                                      enabled: v3, 
+                                      id: v4, 
+                                      commands: v6
                                   };
-                                  Control_Monad_Eff_Ref.modifyRef(input.slotVector[v])(function (s) {
+                                  Control_Monad_Eff_Ref.modifyRef(input.slotVector[v1])(function (s) {
                                       return {
-                                          objectMap: Data_Map.insert(Data_Ord.ordInt)(v3)(obj)(s.objectMap), 
+                                          objectMap: Data_Map.insert(Data_Ord.ordInt)(v4)(obj)(s.objectMap), 
                                           sortedObjects: [  ], 
                                           orderJob: LambdaCube_WebGL_Type.Generate.value
                                       };
                                   })();
-                                  var v6 = Control_Monad_Eff_Ref.readRef(input.pipelines)();
-                                  var v7 = Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_Traversable.traversableArray)(v6)(function (mp) {
+                                  var v7 = Control_Monad_Eff_Ref.readRef(input.pipelines)();
+                                  var v8 = Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_Traversable.traversableArray)(v7)(function (mp) {
                                       if (mp instanceof Data_Maybe.Nothing) {
                                           return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)([  ]);
                                       };
                                       if (mp instanceof Data_Maybe.Just) {
                                           return function __do() {
-                                              var v7 = Control_Monad_Eff_Ref.readRef(mp.value0.input)();
+                                              var v8 = Control_Monad_Eff_Ref.readRef(mp.value0.input)();
                                               var __unused = function (dictPartial1) {
-                                                  return function ($dollar40) {
-                                                      return $dollar40;
+                                                  return function ($dollar45) {
+                                                      return $dollar45;
                                                   };
                                               };
                                               return __unused(dictPartial)((function () {
-                                                  if (v7 instanceof Data_Maybe.Just) {
-                                                      if (v7.value0.value0.slotMapInputToPipeline[v] instanceof Data_Maybe.Nothing) {
+                                                  if (v8 instanceof Data_Maybe.Just) {
+                                                      if (v8.value0.value0.slotMapInputToPipeline[v1] instanceof Data_Maybe.Nothing) {
                                                           return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)([  ]);
                                                       };
-                                                      if (v7.value0.value0.slotMapInputToPipeline[v] instanceof Data_Maybe.Just) {
+                                                      if (v8.value0.value0.slotMapInputToPipeline[v1] instanceof Data_Maybe.Just) {
                                                           var emptyV = Data_Unfoldable.replicate(Data_Unfoldable.unfoldableArray)(Data_Array.length(mp.value0.programs))([  ]);
-                                                          var addCmds = function (v8) {
+                                                          var addCmds = function (v9) {
                                                               return function (prgIdx) {
-                                                                  return Data_Maybe.fromJust(dictPartial)(Data_Array.updateAt(prgIdx)(createObjectCommands(mp.value0.texUnitMapping)(input.uniformSetup)(obj)(mp.value0.programs[prgIdx]))(v8));
+                                                                  return Data_Maybe.fromJust(dictPartial)(Data_Array.updateAt(prgIdx)(createObjectCommands(mp.value0.texUnitMapping)(input.uniformSetup)(obj)(mp.value0.programs[prgIdx]))(v9));
                                                               };
                                                           };
-                                                          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldl(Data_Foldable.foldableArray)(addCmds)(emptyV)(mp.value0.slotPrograms[(v7.value0.value0.slotMapInputToPipeline[v]).value0]));
+                                                          return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldl(Data_Foldable.foldableArray)(addCmds)(emptyV)(mp.value0.slotPrograms[(v8.value0.value0.slotMapInputToPipeline[v1]).value0]));
                                                       };
-                                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 125, column 13 - line 131, column 88: " + [ (v7.value0.value0.slotMapInputToPipeline[v]).constructor.name ]);
+                                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 127, column 13 - line 133, column 88: " + [ (v8.value0.value0.slotMapInputToPipeline[v1]).constructor.name ]);
                                                   };
-                                                  throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 123, column 20 - line 131, column 88: " + [ v7.constructor.name ]);
+                                                  throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 125, column 20 - line 133, column 88: " + [ v8.constructor.name ]);
                                               })())();
                                           };
                                       };
-                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 121, column 31 - line 131, column 88: " + [ mp.constructor.name ]);
+                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Input line 123, column 31 - line 133, column 88: " + [ mp.constructor.name ]);
                                   })();
-                                  Control_Monad_Eff_Ref.writeRef(v5)(v7)();
+                                  Control_Monad_Eff_Ref.writeRef(v6)(v8)();
                                   return obj;
                               };
                           });
@@ -12317,6 +12634,7 @@ var PS = {};
   var Partial_Unsafe = PS["Partial.Unsafe"];
   var LambdaCube_IR = PS["LambdaCube.IR"];
   var LambdaCube_LinearBase = PS["LambdaCube.LinearBase"];
+  var LambdaCube_PipelineSchema = PS["LambdaCube.PipelineSchema"];
   var LambdaCube_WebGL_Type = PS["LambdaCube.WebGL.Type"];
   var LambdaCube_WebGL_Util = PS["LambdaCube.WebGL.Util"];
   var LambdaCube_WebGL_Input = PS["LambdaCube.WebGL.Input"];
@@ -12341,7 +12659,7 @@ var PS = {};
           if (ps instanceof LambdaCube_IR.PointSize) {
               return Control_Monad_Eff_Console.error("PointSize is not supported!");
           };
-          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 51, column 23 - line 55, column 5: " + [ ps.constructor.name ]);
+          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 52, column 23 - line 56, column 5: " + [ ps.constructor.name ]);
       };
       var cff = function (v) {
           if (v instanceof LambdaCube_IR.CCW) {
@@ -12350,7 +12668,7 @@ var PS = {};
           if (v instanceof LambdaCube_IR.CW) {
               return Graphics_WebGLRaw._CW;
           };
-          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 39, column 5 - line 39, column 22: " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 40, column 5 - line 40, column 22: " + [ v.constructor.name ]);
       };
       var cvt = function (v) {
           if (v instanceof LambdaCube_IR.PointCtx) {
@@ -12379,7 +12697,7 @@ var PS = {};
                               return Graphics_WebGLRaw.frontFace_(cff(v.value0.value0))();
                           };
                       };
-                      throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 71, column 9 - line 80, column 38: " + [ v.value0.constructor.name ]);
+                      throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 72, column 9 - line 81, column 38: " + [ v.value0.constructor.name ]);
                   })()();
                   Graphics_WebGLRaw.disable_(Graphics_WebGLRaw._POLYGON_OFFSET_FILL)();
                   if (v.value2 instanceof LambdaCube_IR.NoOffset) {
@@ -12389,10 +12707,10 @@ var PS = {};
                       Graphics_WebGLRaw.polygonOffset_(v.value2.value0)(v.value2.value1)();
                       return Graphics_WebGLRaw.enable_(Graphics_WebGLRaw._POLYGON_OFFSET_FILL)();
                   };
-                  throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 98, column 9 - line 102, column 51: " + [ v.value2.constructor.name ]);
+                  throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 99, column 9 - line 103, column 51: " + [ v.value2.constructor.name ]);
               };
           };
-          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 56, column 5 - line 57, column 24: " + [ v.constructor.name ]);
+          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 57, column 5 - line 58, column 24: " + [ v.constructor.name ]);
       };
       return cvt;
   })();
@@ -12419,7 +12737,7 @@ var PS = {};
                                   return Graphics_WebGLRaw.blendFuncSeparate_(LambdaCube_WebGL_Util.blendingFactorToGLType(v2.value0.value0.value0.colorFSrc))(LambdaCube_WebGL_Util.blendingFactorToGLType(v2.value0.value0.value0.colorFDst))(LambdaCube_WebGL_Util.blendingFactorToGLType(v2.value0.value0.value0.alphaFSrc))(LambdaCube_WebGL_Util.blendingFactorToGLType(v2.value0.value0.value0.alphaFDst))();
                               };
                           };
-                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 136, column 9 - line 156, column 127: " + [ v2.value0.value0.constructor.name ]);
+                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 137, column 9 - line 157, column 127: " + [ v2.value0.value0.constructor.name ]);
                       })()();
                       (function () {
                           if (v2.value0.value1 instanceof LambdaCube_IR.VBool) {
@@ -12445,7 +12763,7 @@ var PS = {};
               if (v2 instanceof Data_List_Types.Nil) {
                   return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Unit.unit);
               };
-              throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 134, column 5 - line 163, column 24: " + [ v1.constructor.name, v2.constructor.name ]);
+              throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 135, column 5 - line 164, column 24: " + [ v1.constructor.name, v2.constructor.name ]);
           };
       };
       var cvt = function (v1) {
@@ -12460,18 +12778,18 @@ var PS = {};
                   Graphics_WebGLRaw.disable_(Graphics_WebGLRaw._STENCIL_TEST)();
                   var glDF = LambdaCube_WebGL_Util.comparisonFunctionToGLType(v1.value0.value0);
                   (function () {
-                      var $160 = glDF === LambdaCube_WebGL_Util.comparisonFunctionToGLType(LambdaCube_IR.Always.value) && v1.value0.value1 === false;
-                      if ($160) {
+                      var $163 = glDF === LambdaCube_WebGL_Util.comparisonFunctionToGLType(LambdaCube_IR.Always.value) && v1.value0.value1 === false;
+                      if ($163) {
                           return Graphics_WebGLRaw.disable_(Graphics_WebGLRaw._DEPTH_TEST);
                       };
-                      if (!$160) {
+                      if (!$163) {
                           return function __do() {
                               Graphics_WebGLRaw.enable_(Graphics_WebGLRaw._DEPTH_TEST)();
                               Graphics_WebGLRaw.depthFunc_(glDF)();
                               return Graphics_WebGLRaw.depthMask_(v1.value0.value1)();
                           };
                       };
-                      throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 121, column 9 - line 126, column 33: " + [ $160.constructor.name ]);
+                      throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 122, column 9 - line 127, column 33: " + [ $163.constructor.name ]);
                   })()();
                   return cvtC(0)(v1.value1)();
               };
@@ -12556,28 +12874,35 @@ var PS = {};
                                       return new LambdaCube_WebGL_Type.GLSetVertexAttribArray(is.location, s.value0.buffer.glBuffer, n, glType, ptr(n));
                                   };
                                   return setFloatAttrib((function () {
-                                      if (s.value0.sType instanceof LambdaCube_WebGL_Type.TFloat) {
-                                          return 1;
+                                      var __unused = function (dictPartial1) {
+                                          return function ($dollar83) {
+                                              return $dollar83;
+                                          };
                                       };
-                                      if (s.value0.sType instanceof LambdaCube_WebGL_Type.TV2F) {
-                                          return 2;
-                                      };
-                                      if (s.value0.sType instanceof LambdaCube_WebGL_Type.TV3F) {
-                                          return 3;
-                                      };
-                                      if (s.value0.sType instanceof LambdaCube_WebGL_Type.TV4F) {
-                                          return 4;
-                                      };
-                                      if (s.value0.sType instanceof LambdaCube_WebGL_Type.TM22F) {
-                                          return 4;
-                                      };
-                                      if (s.value0.sType instanceof LambdaCube_WebGL_Type.TM33F) {
-                                          return 9;
-                                      };
-                                      if (s.value0.sType instanceof LambdaCube_WebGL_Type.TM44F) {
-                                          return 16;
-                                      };
-                                      throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 380, column 16 - line 388, column 13: " + [ s.value0.sType.constructor.name ]);
+                                      return __unused(dictPartial)((function () {
+                                          if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_Float) {
+                                              return 1;
+                                          };
+                                          if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_V2F) {
+                                              return 2;
+                                          };
+                                          if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_V3F) {
+                                              return 3;
+                                          };
+                                          if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_V4F) {
+                                              return 4;
+                                          };
+                                          if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_M22F) {
+                                              return 4;
+                                          };
+                                          if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_M33F) {
+                                              return 9;
+                                          };
+                                          if (s.value0.sType instanceof LambdaCube_PipelineSchema.Attribute_M44F) {
+                                              return 16;
+                                          };
+                                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 381, column 16 - line 389, column 13: " + [ s.value0.sType.constructor.name ]);
+                                      })());
                                   })());
                               };
                               return new LambdaCube_WebGL_Type.GLSetVertexAttrib(is.location, s);
@@ -12628,7 +12953,7 @@ var PS = {};
                               })();
                           };
                       };
-                      throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 529, column 5 - line 536, column 82: " + [ v.constructor.name ]);
+                      throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 530, column 5 - line 537, column 82: " + [ v.constructor.name ]);
                   })()();
                   if (input$prime instanceof Data_Maybe.Nothing) {
                       return Control_Monad_Eff_Ref.writeRef(p.input)(Data_Maybe.Nothing.value)();
@@ -12636,8 +12961,8 @@ var PS = {};
                   if (input$prime instanceof Data_Maybe.Just) {
                       var v1 = Control_Monad_Eff_Ref.readRef(input$prime.value0.pipelines)();
                       var v2 = (function () {
-                          var $208 = Data_Array.findIndex(Data_Maybe.isNothing)(v1);
-                          if ($208 instanceof Data_Maybe.Nothing) {
+                          var $211 = Data_Array.findIndex(Data_Maybe.isNothing)(v1);
+                          if ($211 instanceof Data_Maybe.Nothing) {
                               var len = Data_Array.length(v1);
                               return function __do() {
                                   Control_Monad_Eff_Ref.modifyRef(input$prime.value0.pipelines)(function (v2) {
@@ -12646,25 +12971,25 @@ var PS = {};
                                   return new Data_Tuple.Tuple(len, new Data_Maybe.Just(len));
                               };
                           };
-                          if ($208 instanceof Data_Maybe.Just) {
+                          if ($211 instanceof Data_Maybe.Just) {
                               return function __do() {
                                   Control_Monad_Eff_Ref.modifyRef(input$prime.value0.pipelines)(function (v2) {
-                                      return Data_Maybe.fromJust(dictPartial)(Data_Array.updateAt($208.value0)(new Data_Maybe.Just(p))(v2));
+                                      return Data_Maybe.fromJust(dictPartial)(Data_Array.updateAt($211.value0)(new Data_Maybe.Just(p))(v2));
                                   })();
-                                  return new Data_Tuple.Tuple($208.value0, Data_Maybe.Nothing.value);
+                                  return new Data_Tuple.Tuple($211.value0, Data_Maybe.Nothing.value);
                               };
                           };
-                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 548, column 39 - line 556, column 43: " + [ $208.constructor.name ]);
+                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 549, column 39 - line 557, column 43: " + [ $211.constructor.name ]);
                       })()();
                       var v3 = Data_Traversable["for"](Control_Monad_Eff.applicativeEff)(Data_Traversable.traversableArray)(p.slotNames)(function (n) {
-                          var $211 = Data_StrMap.lookup(n)(input$prime.value0.slotMap);
-                          if ($211 instanceof Data_Maybe.Nothing) {
+                          var $214 = Data_StrMap.lookup(n)(input$prime.value0.slotMap);
+                          if ($214 instanceof Data_Maybe.Nothing) {
                               return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("internal error: unknown slot name in input"));
                           };
-                          if ($211 instanceof Data_Maybe.Just) {
-                              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)($211.value0);
+                          if ($214 instanceof Data_Maybe.Just) {
+                              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)($214.value0);
                           };
-                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 558, column 45 - line 560, column 31: " + [ $211.constructor.name ]);
+                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 559, column 45 - line 561, column 31: " + [ $214.constructor.name ]);
                       })();
                       var iToP = Data_Foldable.foldr(Data_Foldable.foldableArray)(function (v4) {
                           return function (p1) {
@@ -12684,7 +13009,7 @@ var PS = {};
                           if (v2.value1 instanceof Data_Maybe.Just) {
                               return Data_Array.concat([ v4, Data_Unfoldable.replicate(Data_Unfoldable.unfoldableArray)(v2.value1.value0)([  ]) ]);
                           };
-                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 574, column 28 - line 576, column 57: " + [ v2.value1.constructor.name ]);
+                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 575, column 28 - line 577, column 57: " + [ v2.value1.constructor.name ]);
                       };
                       var emptyV = Data_Unfoldable.replicate(Data_Unfoldable.unfoldableArray)(Data_Array.length(p.programs))([  ]);
                       Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(Data_Array.zip(v3)(p.slotPrograms))(function (v4) {
@@ -12707,7 +13032,7 @@ var PS = {};
                           return Control_Monad_Eff_Ref.writeRef(s.commands)(createStreamCommands(p.texUnitMapping)(input$prime.value0.uniformSetup)(s.attributes)(s.primitive)(p.programs[s.program]));
                       })();
                   };
-                  throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 544, column 5 - line 586, column 143: " + [ input$prime.constructor.name ]);
+                  throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 545, column 5 - line 587, column 143: " + [ input$prime.constructor.name ]);
               };
           });
       };
@@ -12727,8 +13052,8 @@ var PS = {};
       return Partial_Unsafe.unsafePartial(function (dictPartial) {
           var compileAttr = function (v1) {
               var __unused = function (dictPartial1) {
-                  return function ($dollar87) {
-                      return $dollar87;
+                  return function ($dollar90) {
+                      return $dollar90;
                   };
               };
               return __unused(dictPartial)((function () {
@@ -12741,7 +13066,7 @@ var PS = {};
                   if (v1 instanceof LambdaCube_IR.VWordArray) {
                       return (LambdaCube_WebGL_Type["Array"]).create(LambdaCube_WebGL_Type.ArrWord16.value)(LambdaCube_WebGL_Type.toArray(LambdaCube_WebGL_Type.arrStorable(LambdaCube_WebGL_Type.intStorable))(v1.value0));
                   };
-                  throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 299, column 7 - line 299, column 53: " + [ v1.constructor.name ]);
+                  throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 300, column 7 - line 300, column 53: " + [ v1.constructor.name ]);
               })());
           };
           return function __do() {
@@ -12751,39 +13076,39 @@ var PS = {};
               var getLength = function (n) {
                   return function __do() {
                       var v2 = (function () {
-                          var $237 = Data_StrMap.lookup(n)(v.value0.streamData);
-                          if ($237 instanceof Data_Maybe.Just && $237.value0 instanceof LambdaCube_IR.VFloatArray) {
-                              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Array.length($237.value0.value0));
+                          var $240 = Data_StrMap.lookup(n)(v.value0.streamData);
+                          if ($240 instanceof Data_Maybe.Just && $240.value0 instanceof LambdaCube_IR.VFloatArray) {
+                              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Array.length($240.value0.value0));
                           };
-                          if ($237 instanceof Data_Maybe.Just && $237.value0 instanceof LambdaCube_IR.VIntArray) {
-                              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Array.length($237.value0.value0));
+                          if ($240 instanceof Data_Maybe.Just && $240.value0 instanceof LambdaCube_IR.VIntArray) {
+                              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Array.length($240.value0.value0));
                           };
-                          if ($237 instanceof Data_Maybe.Just && $237.value0 instanceof LambdaCube_IR.VWordArray) {
-                              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Array.length($237.value0.value0));
+                          if ($240 instanceof Data_Maybe.Just && $240.value0 instanceof LambdaCube_IR.VWordArray) {
+                              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Array.length($240.value0.value0));
                           };
                           return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("compileStreamData - getLength"));
                       })()();
                       var v3 = (function () {
-                          var $245 = Data_StrMap.lookup(n)(v.value0.streamType);
-                          if ($245 instanceof Data_Maybe.Just && $245.value0 instanceof LambdaCube_IR.Float) {
+                          var $248 = Data_StrMap.lookup(n)(v.value0.streamType);
+                          if ($248 instanceof Data_Maybe.Just && $248.value0 instanceof LambdaCube_IR.Float) {
                               return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(1);
                           };
-                          if ($245 instanceof Data_Maybe.Just && $245.value0 instanceof LambdaCube_IR.V2F) {
+                          if ($248 instanceof Data_Maybe.Just && $248.value0 instanceof LambdaCube_IR.V2F) {
                               return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(2);
                           };
-                          if ($245 instanceof Data_Maybe.Just && $245.value0 instanceof LambdaCube_IR.V3F) {
+                          if ($248 instanceof Data_Maybe.Just && $248.value0 instanceof LambdaCube_IR.V3F) {
                               return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(3);
                           };
-                          if ($245 instanceof Data_Maybe.Just && $245.value0 instanceof LambdaCube_IR.V4F) {
+                          if ($248 instanceof Data_Maybe.Just && $248.value0 instanceof LambdaCube_IR.V4F) {
                               return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(4);
                           };
-                          if ($245 instanceof Data_Maybe.Just && $245.value0 instanceof LambdaCube_IR.M22F) {
+                          if ($248 instanceof Data_Maybe.Just && $248.value0 instanceof LambdaCube_IR.M22F) {
                               return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(4);
                           };
-                          if ($245 instanceof Data_Maybe.Just && $245.value0 instanceof LambdaCube_IR.M33F) {
+                          if ($248 instanceof Data_Maybe.Just && $248.value0 instanceof LambdaCube_IR.M33F) {
                               return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(9);
                           };
-                          if ($245 instanceof Data_Maybe.Just && $245.value0 instanceof LambdaCube_IR.M44F) {
+                          if ($248 instanceof Data_Maybe.Just && $248.value0 instanceof LambdaCube_IR.M44F) {
                               return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(16);
                           };
                           return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("compileStreamData - getLength element count"));
@@ -12796,14 +13121,14 @@ var PS = {};
               var toStream = function (v4) {
                   return function __do() {
                       var v5 = Control_Bind.bindFlipped(Control_Monad_Eff.bindEff)(LambdaCube_WebGL_Util.toStreamType)((function () {
-                          var $257 = Data_StrMap.lookup(v4.value0)(v.value0.streamType);
-                          if ($257 instanceof Data_Maybe.Just) {
-                              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)($257.value0);
+                          var $260 = Data_StrMap.lookup(v4.value0)(v.value0.streamType);
+                          if ($260 instanceof Data_Maybe.Just) {
+                              return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)($260.value0);
                           };
-                          if ($257 instanceof Data_Maybe.Nothing) {
+                          if ($260 instanceof Data_Maybe.Nothing) {
                               return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("compileStreamData - toStream"));
                           };
-                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 323, column 14 - line 326, column 9: " + [ $257.constructor.name ]);
+                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 324, column 14 - line 327, column 9: " + [ $260.constructor.name ]);
                       })())();
                       var v6 = getLength(v4.value0)();
                       return new Data_Tuple.Tuple(v4.value0, new LambdaCube_WebGL_Type.Stream({
@@ -12820,8 +13145,8 @@ var PS = {};
                   commands: v3, 
                   primitive: (function () {
                       var __unused = function (dictPartial1) {
-                          return function ($dollar89) {
-                              return $dollar89;
+                          return function ($dollar92) {
+                              return $dollar92;
                           };
                       };
                       return __unused(dictPartial)((function () {
@@ -12834,7 +13159,7 @@ var PS = {};
                           if (v.value0.streamPrimitive instanceof LambdaCube_IR.Triangles) {
                               return LambdaCube_WebGL_Type.TriangleList.value;
                           };
-                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 337, column 18 - line 340, column 34: " + [ v.value0.streamPrimitive.constructor.name ]);
+                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 338, column 18 - line 341, column 34: " + [ v.value0.streamPrimitive.constructor.name ]);
                       })());
                   })(), 
                   attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)(v4), 
@@ -12859,8 +13184,8 @@ var PS = {};
                       return Data_Maybe.isJust(v1.value0.targetRef);
                   })(v.value0.renderTargets));
                   var act1 = (function () {
-                      var $277 = Data_Foldable.all(Data_Foldable.foldableArray)(Data_HeytingAlgebra.heytingAlgebraBoolean)(isFB)(images);
-                      if ($277) {
+                      var $280 = Data_Foldable.all(Data_Foldable.foldableArray)(Data_HeytingAlgebra.heytingAlgebraBoolean)(isFB)(images);
+                      if ($280) {
                           var isColor = function (v1) {
                               if (v1 instanceof LambdaCube_IR.Color) {
                                   return true;
@@ -12886,7 +13211,7 @@ var PS = {};
                               };
                           };
                       };
-                      if (!$277) {
+                      if (!$280) {
                           return function __do() {
                               Control_Applicative.when(Control_Monad_Eff.applicativeEff)(Data_Foldable.any(Data_Foldable.foldableArray)(Data_HeytingAlgebra.heytingAlgebraBoolean)(isFB)(images))(Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("internal error (compileRenderTarget)!")))();
                               var v1 = Graphics_WebGLRaw.createFramebuffer_();
@@ -12939,7 +13264,7 @@ var PS = {};
                               };
                           };
                       };
-                      throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 248, column 14 - line 294, column 20: " + [ $277.constructor.name ]);
+                      throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 249, column 14 - line 295, column 20: " + [ $280.constructor.name ]);
                   })();
                   return act1;
               });
@@ -13081,7 +13406,7 @@ var PS = {};
                                       return Graphics_WebGLRaw.viewport_(0)(0)(v1.value0)(v1.value1)();
                                   };
                               };
-                              throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 422, column 9 - line 426, column 45: " + [ v.constructor.name ]);
+                              throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 423, column 9 - line 427, column 45: " + [ v.constructor.name ]);
                           })()();
                           return Graphics_WebGLRaw.bindFramebuffer_(Graphics_WebGLRaw._FRAMEBUFFER)((p.targets[cmd.value0]).framebufferObject)();
                       };
@@ -13093,24 +13418,24 @@ var PS = {};
                               return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("invalid pipeline, no active program"))();
                           };
                           if (cp instanceof Data_Maybe.Just) {
-                              var $388 = Data_StrMap.lookup(cmd.value0)((p.programs[cp.value0]).inputSamplers);
-                              if ($388 instanceof Data_Maybe.Nothing) {
+                              var $391 = Data_StrMap.lookup(cmd.value0)((p.programs[cp.value0]).inputSamplers);
+                              if ($391 instanceof Data_Maybe.Nothing) {
                                   return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("internal error (SetSamplerUniform)!"))();
                               };
-                              if ($388 instanceof Data_Maybe.Just) {
-                                  var $389 = Data_StrMap.lookup(cmd.value0)(p.texUnitMapping);
-                                  if ($389 instanceof Data_Maybe.Nothing) {
+                              if ($391 instanceof Data_Maybe.Just) {
+                                  var $392 = Data_StrMap.lookup(cmd.value0)(p.texUnitMapping);
+                                  if ($392 instanceof Data_Maybe.Nothing) {
                                       return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("internal error (SetSamplerUniform)!"))();
                                   };
-                                  if ($389 instanceof Data_Maybe.Just) {
-                                      Control_Monad_Eff_Ref.writeRef($389.value0)(cmd.value1)();
-                                      return Graphics_WebGLRaw.uniform1i_($388.value0)(cmd.value1)();
+                                  if ($392 instanceof Data_Maybe.Just) {
+                                      Control_Monad_Eff_Ref.writeRef($392.value0)(cmd.value1)();
+                                      return Graphics_WebGLRaw.uniform1i_($391.value0)(cmd.value1)();
                                   };
-                                  throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 441, column 24 - line 445, column 35: " + [ $389.constructor.name ]);
+                                  throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 442, column 24 - line 446, column 35: " + [ $392.constructor.name ]);
                               };
-                              throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 439, column 27 - line 445, column 35: " + [ $388.constructor.name ]);
+                              throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 440, column 27 - line 446, column 35: " + [ $391.constructor.name ]);
                           };
-                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 437, column 41 - line 445, column 35: " + [ cp.constructor.name ]);
+                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 438, column 41 - line 446, column 35: " + [ cp.constructor.name ]);
                       };
                   };
                   if (cmd instanceof LambdaCube_IR.SetTexture) {
@@ -13160,9 +13485,9 @@ var PS = {};
                                       };
                                   })();
                               };
-                              throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 470, column 57 - line 479, column 81: " + [ input.constructor.name ]);
+                              throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 471, column 57 - line 480, column 81: " + [ input.constructor.name ]);
                           };
-                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 468, column 41 - line 479, column 81: " + [ cp.constructor.name ]);
+                          throw new Error("Failed pattern match at LambdaCube.WebGL.Backend line 469, column 41 - line 480, column 81: " + [ cp.constructor.name ]);
                       };
                   };
                   return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Unit.unit);
@@ -13231,6 +13556,7 @@ var PS = {};
   var LambdaCube_Mesh = PS["LambdaCube.Mesh"];
   var LambdaCube_IR = PS["LambdaCube.IR"];
   var LambdaCube_LinearBase = PS["LambdaCube.LinearBase"];
+  var LambdaCube_PipelineSchema = PS["LambdaCube.PipelineSchema"];
   var LambdaCube_WebGL_Type = PS["LambdaCube.WebGL.Type"];
   var LambdaCube_WebGL_Data = PS["LambdaCube.WebGL.Data"];
   var LambdaCube_WebGL_Input = PS["LambdaCube.WebGL.Input"];
@@ -13255,7 +13581,7 @@ var PS = {};
               return LambdaCube_WebGL_Type.Stream.create((function () {
                   if (a instanceof LambdaCube_Mesh.A_Float) {
                       return {
-                          sType: LambdaCube_WebGL_Type.TFloat.value, 
+                          sType: LambdaCube_PipelineSchema.Attribute_Float.value, 
                           buffer: b, 
                           arrIdx: i, 
                           start: 0, 
@@ -13264,7 +13590,7 @@ var PS = {};
                   };
                   if (a instanceof LambdaCube_Mesh.A_V2F) {
                       return {
-                          sType: LambdaCube_WebGL_Type.TV2F.value, 
+                          sType: LambdaCube_PipelineSchema.Attribute_V2F.value, 
                           buffer: b, 
                           arrIdx: i, 
                           start: 0, 
@@ -13273,7 +13599,7 @@ var PS = {};
                   };
                   if (a instanceof LambdaCube_Mesh.A_V3F) {
                       return {
-                          sType: LambdaCube_WebGL_Type.TV3F.value, 
+                          sType: LambdaCube_PipelineSchema.Attribute_V3F.value, 
                           buffer: b, 
                           arrIdx: i, 
                           start: 0, 
@@ -13282,7 +13608,7 @@ var PS = {};
                   };
                   if (a instanceof LambdaCube_Mesh.A_V4F) {
                       return {
-                          sType: LambdaCube_WebGL_Type.TV4F.value, 
+                          sType: LambdaCube_PipelineSchema.Attribute_V4F.value, 
                           buffer: b, 
                           arrIdx: i, 
                           start: 0, 
@@ -13291,7 +13617,7 @@ var PS = {};
                   };
                   if (a instanceof LambdaCube_Mesh.A_M22F) {
                       return {
-                          sType: LambdaCube_WebGL_Type.TM22F.value, 
+                          sType: LambdaCube_PipelineSchema.Attribute_M22F.value, 
                           buffer: b, 
                           arrIdx: i, 
                           start: 0, 
@@ -13300,7 +13626,7 @@ var PS = {};
                   };
                   if (a instanceof LambdaCube_Mesh.A_M33F) {
                       return {
-                          sType: LambdaCube_WebGL_Type.TM33F.value, 
+                          sType: LambdaCube_PipelineSchema.Attribute_M33F.value, 
                           buffer: b, 
                           arrIdx: i, 
                           start: 0, 
@@ -13309,7 +13635,7 @@ var PS = {};
                   };
                   if (a instanceof LambdaCube_Mesh.A_M44F) {
                       return {
-                          sType: LambdaCube_WebGL_Type.TM44F.value, 
+                          sType: LambdaCube_PipelineSchema.Attribute_M44F.value, 
                           buffer: b, 
                           arrIdx: i, 
                           start: 0, 
@@ -13376,7 +13702,7 @@ var PS = {};
                   if (v.value0.mPrimitive instanceof LambdaCube_Mesh.P_TrianglesI) {
                       return Data_Functor.map(Control_Monad_Eff.functorEff)(Data_Tuple.Tuple.create(LambdaCube_WebGL_Type.TriangleList.value))(mkIndexBuf(v.value0.mPrimitive.value0));
                   };
-                  throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 49, column 27 - line 54, column 67: " + [ v.value0.mPrimitive.constructor.name ]);
+                  throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 51, column 27 - line 56, column 67: " + [ v.value0.mPrimitive.constructor.name ]);
               })()();
               var streams = Data_StrMap.fromFoldable(Data_List_Types.foldableList)(Data_List.zipWith(function (i) {
                   return function (v3) {
@@ -13399,17 +13725,17 @@ var PS = {};
       return function (slotName) {
           return function (v) {
               return function (objUniNames) {
-                  var $41 = Data_StrMap.lookup(slotName)(input.schema.slots);
-                  if ($41 instanceof Data_Maybe.Nothing) {
+                  var $42 = Data_StrMap.lookup(slotName)(input.schema.value0.objectArrays);
+                  if ($42 instanceof Data_Maybe.Nothing) {
                       return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("addMesh: slot not found"));
                   };
-                  if ($41 instanceof Data_Maybe.Just) {
+                  if ($42 instanceof Data_Maybe.Just) {
                       var filterStream = function (v1) {
-                          return Data_StrMap.member(v1.value0)($41.value0.attributes);
+                          return Data_StrMap.member(v1.value0)($42.value0.value0.attributes);
                       };
                       return LambdaCube_WebGL_Input.addObject(input)(slotName)(v.value0.gpuData.primitive)(v.value0.gpuData.indices)(Data_StrMap.fromFoldable(Data_List_Types.foldableList)(Data_List.filter(filterStream)(Data_StrMap.toList(v.value0.gpuData.streams))))(objUniNames);
                   };
-                  throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 36, column 53 - line 41, column 173: " + [ $41.constructor.name ]);
+                  throw new Error("Failed pattern match at LambdaCube.WebGL.Mesh line 38, column 28 - line 43, column 173: " + [ $42.constructor.name ]);
               };
           };
       };
@@ -13689,8 +14015,8 @@ var PS = {};
   var Data_Matrix4 = PS["Data.Matrix4"];
   var Data_Vector3 = PS["Data.Vector3"];
   var DOM = PS["DOM"];
+  var LambdaCube_PipelineSchema = PS["LambdaCube.PipelineSchema"];
   var LambdaCube_IR = PS["LambdaCube.IR"];
-  var LambdaCube_WebGL_Type = PS["LambdaCube.WebGL.Type"];
   var LambdaCube_WebGL_Input = PS["LambdaCube.WebGL.Input"];
   var Control_Applicative = PS["Control.Applicative"];
   var LambdaCube_LinearBase = PS["LambdaCube.LinearBase"];
@@ -13726,34 +14052,34 @@ var PS = {};
       return Graphics_WebGL.runWebGL("glcanvas")(function (s) {
           return Control_Monad_Eff_Console.log(s);
       })(function (context) {
-          var inputSchema = {
-              slots: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("stream", {
+          var inputSchema = new LambdaCube_PipelineSchema.PipelineSchema({
+              objectArrays: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ Data_Tuple.Tuple.create("stream")(new LambdaCube_PipelineSchema.ObjectArraySchema({
                   primitive: LambdaCube_IR.Triangles.value, 
-                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_WebGL_Type.TV3F.value), new Data_Tuple.Tuple("normal", LambdaCube_WebGL_Type.TV3F.value) ])
-              }), new Data_Tuple.Tuple("stream4", {
+                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_PipelineSchema.Attribute_V3F.value), new Data_Tuple.Tuple("normal", LambdaCube_PipelineSchema.Attribute_V3F.value) ])
+              })), Data_Tuple.Tuple.create("stream4")(new LambdaCube_PipelineSchema.ObjectArraySchema({
                   primitive: LambdaCube_IR.Triangles.value, 
-                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position4", LambdaCube_WebGL_Type.TV4F.value), new Data_Tuple.Tuple("vertexUV", LambdaCube_WebGL_Type.TV2F.value) ])
-              }), new Data_Tuple.Tuple("line", {
+                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position4", LambdaCube_PipelineSchema.Attribute_V4F.value), new Data_Tuple.Tuple("vertexUV", LambdaCube_PipelineSchema.Attribute_V2F.value) ])
+              })), Data_Tuple.Tuple.create("line")(new LambdaCube_PipelineSchema.ObjectArraySchema({
                   primitive: LambdaCube_IR.Triangles.value, 
-                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_WebGL_Type.TV3F.value) ])
-              }), new Data_Tuple.Tuple("grid", {
+                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_PipelineSchema.Attribute_V3F.value) ])
+              })), Data_Tuple.Tuple.create("grid")(new LambdaCube_PipelineSchema.ObjectArraySchema({
                   primitive: LambdaCube_IR.Triangles.value, 
-                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_WebGL_Type.TV3F.value) ])
-              }), new Data_Tuple.Tuple("grid3d", {
+                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_PipelineSchema.Attribute_V3F.value) ])
+              })), Data_Tuple.Tuple.create("grid3d")(new LambdaCube_PipelineSchema.ObjectArraySchema({
                   primitive: LambdaCube_IR.Points.value, 
-                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_WebGL_Type.TV3F.value) ])
-              }), new Data_Tuple.Tuple("quad", {
+                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_PipelineSchema.Attribute_V3F.value) ])
+              })), Data_Tuple.Tuple.create("quad")(new LambdaCube_PipelineSchema.ObjectArraySchema({
                   primitive: LambdaCube_IR.Triangles.value, 
-                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_WebGL_Type.TV2F.value) ])
-              }), new Data_Tuple.Tuple("cube", {
+                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_PipelineSchema.Attribute_V2F.value) ])
+              })), Data_Tuple.Tuple.create("cube")(new LambdaCube_PipelineSchema.ObjectArraySchema({
                   primitive: LambdaCube_IR.Triangles.value, 
-                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_WebGL_Type.TV3F.value), new Data_Tuple.Tuple("normal", LambdaCube_WebGL_Type.TV3F.value) ])
-              }), new Data_Tuple.Tuple("lambdaCube", {
+                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_PipelineSchema.Attribute_V3F.value), new Data_Tuple.Tuple("normal", LambdaCube_PipelineSchema.Attribute_V3F.value) ])
+              })), Data_Tuple.Tuple.create("lambdaCube")(new LambdaCube_PipelineSchema.ObjectArraySchema({
                   primitive: LambdaCube_IR.Triangles.value, 
-                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_WebGL_Type.TV3F.value), new Data_Tuple.Tuple("normal", LambdaCube_WebGL_Type.TV3F.value) ])
-              }) ]), 
+                  attributes: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("position", LambdaCube_PipelineSchema.Attribute_V3F.value), new Data_Tuple.Tuple("normal", LambdaCube_PipelineSchema.Attribute_V3F.value) ])
+              })) ]), 
               uniforms: Data_StrMap.fromFoldable(Data_Foldable.foldableArray)([ new Data_Tuple.Tuple("MVP", LambdaCube_IR.M44F.value), new Data_Tuple.Tuple("Time", LambdaCube_IR.Float.value), new Data_Tuple.Tuple("Mouse", LambdaCube_IR.V2F.value), new Data_Tuple.Tuple("Diffuse", LambdaCube_IR.FTexture2D.value), new Data_Tuple.Tuple("OcclusionFieldMin", LambdaCube_IR.FTexture2D.value), new Data_Tuple.Tuple("OcclusionFieldMax", LambdaCube_IR.FTexture2D.value) ])
-          };
+          });
           return function __do() {
               var v = LambdaCube_WebGL_Input.mkWebGLPipelineInput(inputSchema)();
               var v1 = Control_Monad_Eff_Ref.newRef(0.0)();

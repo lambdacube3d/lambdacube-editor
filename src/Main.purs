@@ -104,16 +104,16 @@ run :: forall e. Eff
 run = unsafePartial $ do
  GL.runWebGL "glcanvas" (\s -> C.log s) $ \context -> do
   -- setup pipeline input
-  let inputSchema = 
-        { slots : fromFoldable
-                    [ Tuple "stream"  {primitive: Triangles, attributes: fromFoldable [Tuple "position"  TV3F, Tuple "normal" TV3F]}
-                    , Tuple "stream4" {primitive: Triangles, attributes: fromFoldable [Tuple "position4" TV4F, Tuple "vertexUV" TV2F]}
-                    , Tuple "line"    {primitive: Triangles, attributes: fromFoldable [Tuple "position" TV3F]}
-                    , Tuple "grid"    {primitive: Triangles, attributes: fromFoldable [Tuple "position" TV3F]}
-                    , Tuple "grid3d"  {primitive: Points,    attributes: fromFoldable [Tuple "position" TV3F]}
-                    , Tuple "quad"    {primitive: Triangles, attributes: fromFoldable [Tuple "position" TV2F]}
-                    , Tuple "cube"    {primitive: Triangles, attributes: fromFoldable [Tuple "position"  TV3F, Tuple "normal" TV3F]}
-                    , Tuple "lambdaCube" {primitive: Triangles, attributes: fromFoldable [Tuple "position"  TV3F, Tuple "normal" TV3F]}
+  let inputSchema = PipelineSchema
+        { objectArrays : fromFoldable
+                    [ Tuple "stream"  $ ObjectArraySchema {primitive: Triangles, attributes: fromFoldable [Tuple "position"  Attribute_V3F, Tuple "normal" Attribute_V3F]}
+                    , Tuple "stream4" $ ObjectArraySchema {primitive: Triangles, attributes: fromFoldable [Tuple "position4" Attribute_V4F, Tuple "vertexUV" Attribute_V2F]}
+                    , Tuple "line"    $ ObjectArraySchema {primitive: Triangles, attributes: fromFoldable [Tuple "position"  Attribute_V3F]}
+                    , Tuple "grid"    $ ObjectArraySchema {primitive: Triangles, attributes: fromFoldable [Tuple "position"  Attribute_V3F]}
+                    , Tuple "grid3d"  $ ObjectArraySchema {primitive: Points,    attributes: fromFoldable [Tuple "position"  Attribute_V3F]}
+                    , Tuple "quad"    $ ObjectArraySchema {primitive: Triangles, attributes: fromFoldable [Tuple "position"  Attribute_V2F]}
+                    , Tuple "cube"    $ ObjectArraySchema {primitive: Triangles, attributes: fromFoldable [Tuple "position"  Attribute_V3F, Tuple "normal" Attribute_V3F]}
+                    , Tuple "lambdaCube" $ ObjectArraySchema {primitive: Triangles, attributes: fromFoldable [Tuple "position"  Attribute_V3F, Tuple "normal" Attribute_V3F]}
                     ]
         , uniforms : fromFoldable
                       [ Tuple "MVP" M44F
