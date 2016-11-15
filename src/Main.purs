@@ -7,7 +7,6 @@ import Global
 import Control.Monad.Eff.Console as C
 
 import Control.Bind
-import LambdaCube.TypeInfo
 import Timer
 import Control.Monad.Except
 import Control.Monad.Eff
@@ -41,19 +40,15 @@ import Data.Array
 import Data.Int
 import Data.StrMap as StrMap
 
-import LambdaCube.IR
-import LambdaCube.LinearBase
-import LambdaCube.WebGL.Backend
-import LambdaCube.WebGL.Mesh
-import LambdaCube.WebGL.Type
-import LambdaCube.WebGL.Input
+import LambdaCube.WebGL
 import LambdaCube.WebGL.Util (unlines)
-import LambdaCube.WebGL.Data (uploadTexture2DToGPU)
+import LambdaCube.WebGL.Mesh
+
+import LambdaCube.TypeInfo
 
 import Data.Argonaut.Parser (jsonParser)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 import Data.Argonaut.Core as AC
-
 
 import Data.Matrix (Mat(..))
 import Data.Matrix4
@@ -120,7 +115,14 @@ run = unsafePartial $ do
                     , Tuple "cube"    {primitive: Triangles, attributes: fromFoldable [Tuple "position"  TV3F, Tuple "normal" TV3F]}
                     , Tuple "lambdaCube" {primitive: Triangles, attributes: fromFoldable [Tuple "position"  TV3F, Tuple "normal" TV3F]}
                     ]
-        , uniforms : fromFoldable [Tuple "MVP" M44F, Tuple "Time" Float, Tuple "Mouse" V2F, Tuple "Diffuse" FTexture2D, Tuple "OcclusionFieldMin" FTexture2D, Tuple "OcclusionFieldMax" FTexture2D]
+        , uniforms : fromFoldable
+                      [ Tuple "MVP" M44F
+                      , Tuple "Time" Float
+                      , Tuple "Mouse" V2F
+                      , Tuple "Diffuse" FTexture2D
+                      , Tuple "OcclusionFieldMin" FTexture2D
+                      , Tuple "OcclusionFieldMax" FTexture2D
+                      ]
         }
   pplInput <- mkWebGLPipelineInput inputSchema
 
