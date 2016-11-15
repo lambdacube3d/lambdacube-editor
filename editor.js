@@ -8012,7 +8012,7 @@ var PS = {};
           return new Pipeline(value0);
       };
       return Pipeline;
-  })();                                                                                
+  })();
   var genericFetchPrimitive = new Data_Generic.Generic(function (v) {
       if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.IR.Points" && v.value1.length === 0)) {
           return new Data_Maybe.Just(Points.value);
@@ -8063,7 +8063,7 @@ var PS = {};
       if (v instanceof TrianglesAdjacency) {
           return new Data_Generic.SProd("LambdaCube.IR.TrianglesAdjacency", [  ]);
       };
-      throw new Error("Failed pattern match at LambdaCube.IR line 464, column 1 - line 464, column 64: " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.IR line 460, column 1 - line 460, column 64: " + [ v.constructor.name ]);
   });
   var showFetchPrimitive = new Data_Show.Show(Data_Generic.gShow(genericFetchPrimitive));
   var genericColorArity = new Data_Generic.Generic(function (v) {
@@ -8107,7 +8107,7 @@ var PS = {};
       if (v instanceof RGBA) {
           return new Data_Generic.SProd("LambdaCube.IR.RGBA", [  ]);
       };
-      throw new Error("Failed pattern match at LambdaCube.IR line 468, column 1 - line 468, column 56: " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.IR line 464, column 1 - line 464, column 56: " + [ v.constructor.name ]);
   });
   var genericTextureDataType = new Data_Generic.Generic(function (v) {
       if (v instanceof Data_Generic.SProd && (v.value0 === "LambdaCube.IR.FloatT" && v.value1.length === 1)) {
@@ -8162,7 +8162,7 @@ var PS = {};
       if (v instanceof ShadowT) {
           return new Data_Generic.SProd("LambdaCube.IR.ShadowT", [  ]);
       };
-      throw new Error("Failed pattern match at LambdaCube.IR line 472, column 1 - line 472, column 66: " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.IR line 467, column 1 - line 467, column 66: " + [ v.constructor.name ]);
   });
   var showTextureDataType = new Data_Show.Show(Data_Generic.gShow(genericTextureDataType));
   var eqFetchPrimitive = new Data_Eq.Eq(Data_Generic.gEq(genericFetchPrimitive));
