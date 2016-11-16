@@ -2,6 +2,7 @@
 
 
 ## run lambdacube-editor locally
+  To try it out only haskell has to be installed (purescipt is not needed, because the compiled editor.js is included in this repo)
   - cd compiler-service
   - cabal install or cabal new-build
   - run compiler-service from lambdacube-editor folder
@@ -9,6 +10,9 @@
       1. open in browser
       2. start a local web server e.g. python -m SimpleHTTPServer 8002, then open 0.0.0.0:8002/editor.html in a browser
 
+# For developers
+
+To recompile the purescript source to the editor.js first setup the build environment (install: npm,bower,purescript)
 
 ## setup build environment
 
