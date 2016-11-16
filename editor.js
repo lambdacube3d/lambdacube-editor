@@ -4945,11 +4945,6 @@ var PS = {};
        {gl.frontFace(mode);}
        ;}
       ;
-      exports.generateMipmap_ = function (target)
-      {return function()
-       {gl.generateMipmap(target);}
-       ;}
-      ;
       exports.getAttribLocation_ = function (program)
       {return function(name)
        {return function()
@@ -5217,16 +5212,11 @@ var PS = {};
   var Control_Monad_Eff_WebGL = PS["Control.Monad.Eff.WebGL"];
   var Data_ArrayBuffer_Types = PS["Data.ArrayBuffer.Types"];        
   var _ZERO = 0;       
-  var _VERTEX_SHADER = 35633;  
-  var _UNSIGNED_SHORT_5_6_5 = 33635;
-  var _UNSIGNED_SHORT_5_5_5_1 = 32820;
-  var _UNSIGNED_SHORT_4_4_4_4 = 32819;
+  var _VERTEX_SHADER = 35633;         
   var _UNSIGNED_SHORT = 5123;
   var _UNSIGNED_BYTE = 5121;
   var _UNPACK_PREMULTIPLY_ALPHA_WEBGL = 37441;
   var _UNPACK_FLIP_Y_WEBGL = 37440;
-  var _UNPACK_COLORSPACE_CONVERSION_WEBGL = 37443;
-  var _UNPACK_ALIGNMENT = 3317;
   var _TRIANGLE_STRIP = 5;
   var _TRIANGLE_FAN = 6;
   var _TRIANGLES = 4;
@@ -5240,7 +5230,6 @@ var PS = {};
   var _TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
   var _TEXTURE_CUBE_MAP_NEGATIVE_Y = 34072;
   var _TEXTURE_CUBE_MAP_NEGATIVE_X = 34070;
-  var _TEXTURE_CUBE_MAP = 34067;  
   var _TEXTURE_2D = 3553;
   var _TEXTURE0 = 33984;         
   var _STENCIL_TEST = 2960;       
@@ -5251,11 +5240,9 @@ var PS = {};
   var _SRC_ALPHA = 770;
   var _SHORT = 5122; 
   var _RGBA = 6408;   
-  var _RGB = 6407;    
   var _REPEAT = 10497;              
   var _POLYGON_OFFSET_FILL = 32823;  
-  var _POINTS = 0;
-  var _PACK_ALIGNMENT = 3333;
+  var _POINTS = 0;          
   var _ONE_MINUS_SRC_COLOR = 769;
   var _ONE_MINUS_SRC_ALPHA = 771;
   var _ONE_MINUS_DST_COLOR = 775;
@@ -5269,9 +5256,7 @@ var PS = {};
   var _NEAREST_MIPMAP_NEAREST = 9984;
   var _NEAREST_MIPMAP_LINEAR = 9986;
   var _NEAREST = 9728;
-  var _MIRRORED_REPEAT = 33648;                 
-  var _LUMINANCE_ALPHA = 6410;
-  var _LUMINANCE = 6409; 
+  var _MIRRORED_REPEAT = 33648;
   var _LINK_STATUS = 35714;
   var _LINE_STRIP = 3;
   var _LINE_LOOP = 2;
@@ -5311,9 +5296,7 @@ var PS = {};
   var _BLEND = 3042;
   var _BACK = 1029;                 
   var _ARRAY_BUFFER = 34962;
-  var _ALWAYS = 519;     
-  var _ALPHA = 6406;
-  exports["_ALPHA"] = _ALPHA;
+  var _ALWAYS = 519;
   exports["_ALWAYS"] = _ALWAYS;
   exports["_ARRAY_BUFFER"] = _ARRAY_BUFFER;
   exports["_BACK"] = _BACK;
@@ -5354,8 +5337,6 @@ var PS = {};
   exports["_LINE_LOOP"] = _LINE_LOOP;
   exports["_LINE_STRIP"] = _LINE_STRIP;
   exports["_LINK_STATUS"] = _LINK_STATUS;
-  exports["_LUMINANCE"] = _LUMINANCE;
-  exports["_LUMINANCE_ALPHA"] = _LUMINANCE_ALPHA;
   exports["_MIRRORED_REPEAT"] = _MIRRORED_REPEAT;
   exports["_NEAREST"] = _NEAREST;
   exports["_NEAREST_MIPMAP_LINEAR"] = _NEAREST_MIPMAP_LINEAR;
@@ -5370,11 +5351,9 @@ var PS = {};
   exports["_ONE_MINUS_DST_COLOR"] = _ONE_MINUS_DST_COLOR;
   exports["_ONE_MINUS_SRC_ALPHA"] = _ONE_MINUS_SRC_ALPHA;
   exports["_ONE_MINUS_SRC_COLOR"] = _ONE_MINUS_SRC_COLOR;
-  exports["_PACK_ALIGNMENT"] = _PACK_ALIGNMENT;
   exports["_POINTS"] = _POINTS;
   exports["_POLYGON_OFFSET_FILL"] = _POLYGON_OFFSET_FILL;
   exports["_REPEAT"] = _REPEAT;
-  exports["_RGB"] = _RGB;
   exports["_RGBA"] = _RGBA;
   exports["_SHORT"] = _SHORT;
   exports["_SRC_ALPHA"] = _SRC_ALPHA;
@@ -5385,7 +5364,6 @@ var PS = {};
   exports["_STENCIL_TEST"] = _STENCIL_TEST;
   exports["_TEXTURE0"] = _TEXTURE0;
   exports["_TEXTURE_2D"] = _TEXTURE_2D;
-  exports["_TEXTURE_CUBE_MAP"] = _TEXTURE_CUBE_MAP;
   exports["_TEXTURE_CUBE_MAP_NEGATIVE_X"] = _TEXTURE_CUBE_MAP_NEGATIVE_X;
   exports["_TEXTURE_CUBE_MAP_NEGATIVE_Y"] = _TEXTURE_CUBE_MAP_NEGATIVE_Y;
   exports["_TEXTURE_CUBE_MAP_NEGATIVE_Z"] = _TEXTURE_CUBE_MAP_NEGATIVE_Z;
@@ -5399,15 +5377,10 @@ var PS = {};
   exports["_TRIANGLES"] = _TRIANGLES;
   exports["_TRIANGLE_FAN"] = _TRIANGLE_FAN;
   exports["_TRIANGLE_STRIP"] = _TRIANGLE_STRIP;
-  exports["_UNPACK_ALIGNMENT"] = _UNPACK_ALIGNMENT;
-  exports["_UNPACK_COLORSPACE_CONVERSION_WEBGL"] = _UNPACK_COLORSPACE_CONVERSION_WEBGL;
   exports["_UNPACK_FLIP_Y_WEBGL"] = _UNPACK_FLIP_Y_WEBGL;
   exports["_UNPACK_PREMULTIPLY_ALPHA_WEBGL"] = _UNPACK_PREMULTIPLY_ALPHA_WEBGL;
   exports["_UNSIGNED_BYTE"] = _UNSIGNED_BYTE;
   exports["_UNSIGNED_SHORT"] = _UNSIGNED_SHORT;
-  exports["_UNSIGNED_SHORT_4_4_4_4"] = _UNSIGNED_SHORT_4_4_4_4;
-  exports["_UNSIGNED_SHORT_5_5_5_1"] = _UNSIGNED_SHORT_5_5_5_1;
-  exports["_UNSIGNED_SHORT_5_6_5"] = _UNSIGNED_SHORT_5_6_5;
   exports["_VERTEX_SHADER"] = _VERTEX_SHADER;
   exports["_ZERO"] = _ZERO;
   exports["activeTexture_"] = $foreign.activeTexture_;
@@ -5442,7 +5415,6 @@ var PS = {};
   exports["enable_"] = $foreign.enable_;
   exports["framebufferTexture2D_"] = $foreign.framebufferTexture2D_;
   exports["frontFace_"] = $foreign.frontFace_;
-  exports["generateMipmap_"] = $foreign.generateMipmap_;
   exports["getAttribLocation_"] = $foreign.getAttribLocation_;
   exports["getExtension_"] = $foreign.getExtension_;
   exports["getProgramInfoLog_"] = $foreign.getProgramInfoLog_;
@@ -5552,21 +5524,6 @@ var PS = {};
 
       "use strict";
 
-      exports.texImage2D__ = function (target)
-      {return function(level)
-       {return function(internalformat)
-           {return function(format)
-            {return function(type)
-             {return function(pixels)
-              {return function()
-               {gl.texImage2D(target,level,internalformat,format,type,pixels);}
-              ;}
-            ;}
-          ;}
-        ;}
-      ;}
-     ;};
-
       exports.bindTexture__ = function(target)
           {return function()
            {gl.bindTexture(target,null);};};
@@ -5593,111 +5550,6 @@ var PS = {};
   var Data_Semiring = PS["Data.Semiring"];
   var Data_Ord = PS["Data.Ord"];
   var Data_Boolean = PS["Data.Boolean"];
-  var UNSIGNED_BYTE = (function () {
-      function UNSIGNED_BYTE() {
-
-      };
-      UNSIGNED_BYTE.value = new UNSIGNED_BYTE();
-      return UNSIGNED_BYTE;
-  })();
-  var RGBA = (function () {
-      function RGBA() {
-
-      };
-      RGBA.value = new RGBA();
-      return RGBA;
-  })();
-  var FLOAT = (function () {
-      function FLOAT() {
-
-      };
-      FLOAT.value = new FLOAT();
-      return FLOAT;
-  })();
-  var UNSIGNED_SHORT_5_6_5 = (function () {
-      function UNSIGNED_SHORT_5_6_5() {
-
-      };
-      UNSIGNED_SHORT_5_6_5.value = new UNSIGNED_SHORT_5_6_5();
-      return UNSIGNED_SHORT_5_6_5;
-  })();
-  var UNSIGNED_SHORT_4_4_4_4 = (function () {
-      function UNSIGNED_SHORT_4_4_4_4() {
-
-      };
-      UNSIGNED_SHORT_4_4_4_4.value = new UNSIGNED_SHORT_4_4_4_4();
-      return UNSIGNED_SHORT_4_4_4_4;
-  })();
-  var UNSIGNED_SHORT_5_5_5_1 = (function () {
-      function UNSIGNED_SHORT_5_5_5_1() {
-
-      };
-      UNSIGNED_SHORT_5_5_5_1.value = new UNSIGNED_SHORT_5_5_5_1();
-      return UNSIGNED_SHORT_5_5_5_1;
-  })();
-  var TTEXTURE_2D = (function () {
-      function TTEXTURE_2D() {
-
-      };
-      TTEXTURE_2D.value = new TTEXTURE_2D();
-      return TTEXTURE_2D;
-  })();
-  var TTEXTURE_CUBE_MAP = (function () {
-      function TTEXTURE_CUBE_MAP() {
-
-      };
-      TTEXTURE_CUBE_MAP.value = new TTEXTURE_CUBE_MAP();
-      return TTEXTURE_CUBE_MAP;
-  })();
-  var TEXTURE_MIN_FILTER = (function () {
-      function TEXTURE_MIN_FILTER() {
-
-      };
-      TEXTURE_MIN_FILTER.value = new TEXTURE_MIN_FILTER();
-      return TEXTURE_MIN_FILTER;
-  })();
-  var TEXTURE_MAG_FILTER = (function () {
-      function TEXTURE_MAG_FILTER() {
-
-      };
-      TEXTURE_MAG_FILTER.value = new TEXTURE_MAG_FILTER();
-      return TEXTURE_MAG_FILTER;
-  })();
-  var TEXTURE_WRAP_S = (function () {
-      function TEXTURE_WRAP_S() {
-
-      };
-      TEXTURE_WRAP_S.value = new TEXTURE_WRAP_S();
-      return TEXTURE_WRAP_S;
-  })();
-  var TEXTURE_WRAP_T = (function () {
-      function TEXTURE_WRAP_T() {
-
-      };
-      TEXTURE_WRAP_T.value = new TEXTURE_WRAP_T();
-      return TEXTURE_WRAP_T;
-  })();
-  var NEAREST = (function () {
-      function NEAREST() {
-
-      };
-      NEAREST.value = new NEAREST();
-      return NEAREST;
-  })();
-  var LINEAR = (function () {
-      function LINEAR() {
-
-      };
-      LINEAR.value = new LINEAR();
-      return LINEAR;
-  })();
-  var MIPMAP = (function () {
-      function MIPMAP() {
-
-      };
-      MIPMAP.value = new MIPMAP();
-      return MIPMAP;
-  })();
   var TEXTURE_2D = (function () {
       function TEXTURE_2D() {
 
@@ -5747,152 +5599,6 @@ var PS = {};
       TEXTURE_CUBE_MAP_NEGATIVE_Z.value = new TEXTURE_CUBE_MAP_NEGATIVE_Z();
       return TEXTURE_CUBE_MAP_NEGATIVE_Z;
   })();
-  var PACK_ALIGNMENT = (function () {
-      function PACK_ALIGNMENT() {
-
-      };
-      PACK_ALIGNMENT.value = new PACK_ALIGNMENT();
-      return PACK_ALIGNMENT;
-  })();
-  var UNPACK_ALIGNMENT = (function () {
-      function UNPACK_ALIGNMENT() {
-
-      };
-      UNPACK_ALIGNMENT.value = new UNPACK_ALIGNMENT();
-      return UNPACK_ALIGNMENT;
-  })();
-  var UNPACK_FLIP_Y_WEBGL = (function () {
-      function UNPACK_FLIP_Y_WEBGL() {
-
-      };
-      UNPACK_FLIP_Y_WEBGL.value = new UNPACK_FLIP_Y_WEBGL();
-      return UNPACK_FLIP_Y_WEBGL;
-  })();
-  var UNPACK_PREMULTIPLY_ALPHA_WEBGL = (function () {
-      function UNPACK_PREMULTIPLY_ALPHA_WEBGL() {
-
-      };
-      UNPACK_PREMULTIPLY_ALPHA_WEBGL.value = new UNPACK_PREMULTIPLY_ALPHA_WEBGL();
-      return UNPACK_PREMULTIPLY_ALPHA_WEBGL;
-  })();
-  var UNPACK_COLORSPACE_CONVERSION_WEBGL = (function () {
-      function UNPACK_COLORSPACE_CONVERSION_WEBGL() {
-
-      };
-      UNPACK_COLORSPACE_CONVERSION_WEBGL.value = new UNPACK_COLORSPACE_CONVERSION_WEBGL();
-      return UNPACK_COLORSPACE_CONVERSION_WEBGL;
-  })();
-  var IF_ALPHA = (function () {
-      function IF_ALPHA() {
-
-      };
-      IF_ALPHA.value = new IF_ALPHA();
-      return IF_ALPHA;
-  })();
-  var IF_LUMINANCE = (function () {
-      function IF_LUMINANCE() {
-
-      };
-      IF_LUMINANCE.value = new IF_LUMINANCE();
-      return IF_LUMINANCE;
-  })();
-  var IF_LUMINANCE_ALPHA = (function () {
-      function IF_LUMINANCE_ALPHA() {
-
-      };
-      IF_LUMINANCE_ALPHA.value = new IF_LUMINANCE_ALPHA();
-      return IF_LUMINANCE_ALPHA;
-  })();
-  var IF_RGB = (function () {
-      function IF_RGB() {
-
-      };
-      IF_RGB.value = new IF_RGB();
-      return IF_RGB;
-  })();
-  var IF_RGBA = (function () {
-      function IF_RGBA() {
-
-      };
-      IF_RGBA.value = new IF_RGBA();
-      return IF_RGBA;
-  })();                                        
-  var textureTypeToConst = function (v) {
-      if (v instanceof UNSIGNED_BYTE) {
-          return Graphics_WebGLRaw._UNSIGNED_BYTE;
-      };
-      if (v instanceof RGBA) {
-          return Graphics_WebGLRaw._RGBA;
-      };
-      if (v instanceof FLOAT) {
-          return Graphics_WebGLRaw._FLOAT;
-      };
-      if (v instanceof UNSIGNED_SHORT_5_6_5) {
-          return Graphics_WebGLRaw._UNSIGNED_SHORT_5_6_5;
-      };
-      if (v instanceof UNSIGNED_SHORT_4_4_4_4) {
-          return Graphics_WebGLRaw._UNSIGNED_SHORT_4_4_4_4;
-      };
-      if (v instanceof UNSIGNED_SHORT_5_5_5_1) {
-          return Graphics_WebGLRaw._UNSIGNED_SHORT_5_5_5_1;
-      };
-      throw new Error("Failed pattern match at Graphics.WebGLTexture line 101, column 1 - line 101, column 50: " + [ v.constructor.name ]);
-  };
-  var texTargetToConst = function (v) {
-      if (v instanceof TTEXTURE_2D) {
-          return Graphics_WebGLRaw._TEXTURE_2D;
-      };
-      if (v instanceof TTEXTURE_CUBE_MAP) {
-          return Graphics_WebGLRaw._TEXTURE_CUBE_MAP;
-      };
-      throw new Error("Failed pattern match at Graphics.WebGLTexture line 127, column 1 - line 127, column 43: " + [ v.constructor.name ]);
-  };
-  var texParNameToConst = function (v) {
-      if (v instanceof TEXTURE_MIN_FILTER) {
-          return Graphics_WebGLRaw._TEXTURE_MIN_FILTER;
-      };
-      if (v instanceof TEXTURE_MAG_FILTER) {
-          return Graphics_WebGLRaw._TEXTURE_MAG_FILTER;
-      };
-      if (v instanceof TEXTURE_WRAP_S) {
-          return Graphics_WebGLRaw._TEXTURE_WRAP_S;
-      };
-      if (v instanceof TEXTURE_WRAP_T) {
-          return Graphics_WebGLRaw._TEXTURE_WRAP_T;
-      };
-      throw new Error("Failed pattern match at Graphics.WebGLTexture line 138, column 1 - line 138, column 59: " + [ v.constructor.name ]);
-  };
-  var texParameteri = function (target) {
-      return function (pname) {
-          return function (param) {
-              return Graphics_WebGLRaw.texParameteri_(texTargetToConst(target))(texParNameToConst(pname))(param);
-          };
-      };
-  };
-  var texFilterSpecToMinConst = function (v) {
-      if (v instanceof NEAREST) {
-          return Graphics_WebGLRaw._NEAREST;
-      };
-      if (v instanceof LINEAR) {
-          return Graphics_WebGLRaw._LINEAR;
-      };
-      if (v instanceof MIPMAP) {
-          return Graphics_WebGLRaw._LINEAR_MIPMAP_NEAREST;
-      };
-      throw new Error("Failed pattern match at Graphics.WebGLTexture line 155, column 1 - line 155, column 43: " + [ v.constructor.name ]);
-  };
-  var texFilterSpecToMagConst = function (v) {
-      if (v instanceof NEAREST) {
-          return Graphics_WebGLRaw._NEAREST;
-      };
-      if (v instanceof LINEAR) {
-          return Graphics_WebGLRaw._LINEAR;
-      };
-      if (v instanceof MIPMAP) {
-          return Graphics_WebGLRaw._LINEAR;
-      };
-      throw new Error("Failed pattern match at Graphics.WebGLTexture line 150, column 1 - line 150, column 43: " + [ v.constructor.name ]);
-  };
   var targetTypeToConst = function (v) {
       if (v instanceof TEXTURE_2D) {
           return Graphics_WebGLRaw._TEXTURE_2D;
@@ -5920,96 +5626,6 @@ var PS = {};
   var unbindTexture = function (tt) {
       return $foreign.bindTexture__(targetTypeToConst(tt));
   };
-  var symbolicParameterToConst = function (v) {
-      if (v instanceof PACK_ALIGNMENT) {
-          return Graphics_WebGLRaw._PACK_ALIGNMENT;
-      };
-      if (v instanceof UNPACK_ALIGNMENT) {
-          return Graphics_WebGLRaw._UNPACK_ALIGNMENT;
-      };
-      if (v instanceof UNPACK_FLIP_Y_WEBGL) {
-          return Graphics_WebGLRaw._UNPACK_FLIP_Y_WEBGL;
-      };
-      if (v instanceof UNPACK_PREMULTIPLY_ALPHA_WEBGL) {
-          return Graphics_WebGLRaw._UNPACK_PREMULTIPLY_ALPHA_WEBGL;
-      };
-      if (v instanceof UNPACK_COLORSPACE_CONVERSION_WEBGL) {
-          return Graphics_WebGLRaw._UNPACK_COLORSPACE_CONVERSION_WEBGL;
-      };
-      throw new Error("Failed pattern match at Graphics.WebGLTexture line 116, column 1 - line 116, column 58: " + [ v.constructor.name ]);
-  };
-  var pixelStorei = function (symbolicParameter) {
-      return function (num) {
-          return Graphics_WebGLRaw.pixelStorei_(symbolicParameterToConst(symbolicParameter))(num);
-      };
-  };
-  var internalFormatToConst = function (v) {
-      if (v instanceof IF_ALPHA) {
-          return Graphics_WebGLRaw._ALPHA;
-      };
-      if (v instanceof IF_LUMINANCE) {
-          return Graphics_WebGLRaw._LUMINANCE;
-      };
-      if (v instanceof IF_LUMINANCE_ALPHA) {
-          return Graphics_WebGLRaw._LUMINANCE_ALPHA;
-      };
-      if (v instanceof IF_RGB) {
-          return Graphics_WebGLRaw._RGB;
-      };
-      if (v instanceof IF_RGBA) {
-          return Graphics_WebGLRaw._RGBA;
-      };
-      throw new Error("Failed pattern match at Graphics.WebGLTexture line 86, column 1 - line 86, column 44: " + [ v.constructor.name ]);
-  };
-  var texImage2D = function (target) {
-      return function (level) {
-          return function (internalFormat) {
-              return function (format) {
-                  return function (typ) {
-                      return function (pixels) {
-                          return $foreign.texImage2D__(targetTypeToConst(target))(level)(internalFormatToConst(internalFormat))(internalFormatToConst(format))(textureTypeToConst(typ))(pixels);
-                      };
-                  };
-              };
-          };
-      };
-  };
-  var bindTexture = function (tt) {
-      return function (v) {
-          return Graphics_WebGLRaw.bindTexture_(targetTypeToConst(tt))(v);
-      };
-  };
-  var handleLoad2D = function (texture) {
-      return function (filterSpec) {
-          return function (whatever) {
-              return function __do() {
-                  bindTexture(TEXTURE_2D.value)(texture)();
-                  texParameteri(TTEXTURE_2D.value)(TEXTURE_MAG_FILTER.value)(texFilterSpecToMagConst(filterSpec))();
-                  texParameteri(TTEXTURE_2D.value)(TEXTURE_MIN_FILTER.value)(texFilterSpecToMinConst(filterSpec))();
-                  pixelStorei(UNPACK_FLIP_Y_WEBGL.value)(0)();
-                  pixelStorei(UNPACK_PREMULTIPLY_ALPHA_WEBGL.value)(0)();
-                  texImage2D(TEXTURE_2D.value)(0)(IF_RGBA.value)(IF_RGBA.value)(UNSIGNED_BYTE.value)(whatever)();
-                  (function () {
-                      if (filterSpec instanceof MIPMAP) {
-                          return Graphics_WebGLRaw.generateMipmap_(Graphics_WebGLRaw._TEXTURE_2D);
-                      };
-                      return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Unit.unit);
-                  })()();
-                  return unbindTexture(TEXTURE_2D.value)();
-              };
-          };
-      };
-  };
-  exports["IF_ALPHA"] = IF_ALPHA;
-  exports["IF_LUMINANCE"] = IF_LUMINANCE;
-  exports["IF_LUMINANCE_ALPHA"] = IF_LUMINANCE_ALPHA;
-  exports["IF_RGB"] = IF_RGB;
-  exports["IF_RGBA"] = IF_RGBA;
-  exports["PACK_ALIGNMENT"] = PACK_ALIGNMENT;
-  exports["UNPACK_ALIGNMENT"] = UNPACK_ALIGNMENT;
-  exports["UNPACK_FLIP_Y_WEBGL"] = UNPACK_FLIP_Y_WEBGL;
-  exports["UNPACK_PREMULTIPLY_ALPHA_WEBGL"] = UNPACK_PREMULTIPLY_ALPHA_WEBGL;
-  exports["UNPACK_COLORSPACE_CONVERSION_WEBGL"] = UNPACK_COLORSPACE_CONVERSION_WEBGL;
   exports["TEXTURE_2D"] = TEXTURE_2D;
   exports["TEXTURE_CUBE_MAP_POSITIVE_X"] = TEXTURE_CUBE_MAP_POSITIVE_X;
   exports["TEXTURE_CUBE_MAP_NEGATIVE_X"] = TEXTURE_CUBE_MAP_NEGATIVE_X;
@@ -6017,23 +5633,6 @@ var PS = {};
   exports["TEXTURE_CUBE_MAP_NEGATIVE_Y"] = TEXTURE_CUBE_MAP_NEGATIVE_Y;
   exports["TEXTURE_CUBE_MAP_POSITIVE_Z"] = TEXTURE_CUBE_MAP_POSITIVE_Z;
   exports["TEXTURE_CUBE_MAP_NEGATIVE_Z"] = TEXTURE_CUBE_MAP_NEGATIVE_Z;
-  exports["NEAREST"] = NEAREST;
-  exports["LINEAR"] = LINEAR;
-  exports["MIPMAP"] = MIPMAP;
-  exports["TEXTURE_MIN_FILTER"] = TEXTURE_MIN_FILTER;
-  exports["TEXTURE_MAG_FILTER"] = TEXTURE_MAG_FILTER;
-  exports["TEXTURE_WRAP_S"] = TEXTURE_WRAP_S;
-  exports["TEXTURE_WRAP_T"] = TEXTURE_WRAP_T;
-  exports["TTEXTURE_2D"] = TTEXTURE_2D;
-  exports["TTEXTURE_CUBE_MAP"] = TTEXTURE_CUBE_MAP;
-  exports["UNSIGNED_BYTE"] = UNSIGNED_BYTE;
-  exports["RGBA"] = RGBA;
-  exports["FLOAT"] = FLOAT;
-  exports["UNSIGNED_SHORT_5_6_5"] = UNSIGNED_SHORT_5_6_5;
-  exports["UNSIGNED_SHORT_4_4_4_4"] = UNSIGNED_SHORT_4_4_4_4;
-  exports["UNSIGNED_SHORT_5_5_5_1"] = UNSIGNED_SHORT_5_5_5_1;
-  exports["bindTexture"] = bindTexture;
-  exports["handleLoad2D"] = handleLoad2D;
   exports["targetTypeToConst"] = targetTypeToConst;
   exports["unbindTexture"] = unbindTexture;
 })(PS["Graphics.WebGLTexture"] = PS["Graphics.WebGLTexture"] || {});
@@ -11447,6 +11046,16 @@ var PS = {};
          i.src = name;
          i.onload = continuation (i);
         };};};
+
+  exports.texImage2D__
+    = function (target)
+      {return function(level)
+       {return function(internalformat)
+        {return function(format)
+         {return function(type)
+          {return function(pixels)
+           {return function()
+            {gl.texImage2D(target,level,internalformat,format,type,pixels);};};};};};};};
 })(PS["LambdaCube.WebGL.Util"] = PS["LambdaCube.WebGL.Util"] || {});
 (function(exports) {
   // Generated by psc version 0.10.2
@@ -11860,7 +11469,7 @@ var PS = {};
       if (a instanceof LambdaCube_IR.LinearMipmapLinear) {
           return Graphics_WebGLRaw._LINEAR_MIPMAP_LINEAR;
       };
-      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 283, column 20 - line 289, column 56: " + [ a.constructor.name ]);
+      throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 293, column 20 - line 299, column 56: " + [ a.constructor.name ]);
   };
   var edgeModeToGLType = function (a) {
       if (a instanceof LambdaCube_IR.Repeat) {
@@ -11885,7 +11494,7 @@ var PS = {};
                   if (v.value0.samplerWrapT instanceof Data_Maybe.Just) {
                       return Graphics_WebGLRaw.texParameteri_(t)(Graphics_WebGLRaw._TEXTURE_WRAP_T)(edgeModeToGLType(v.value0.samplerWrapT.value0));
                   };
-                  throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 276, column 5 - line 278, column 79: " + [ v.value0.samplerWrapT.constructor.name ]);
+                  throw new Error("Failed pattern match at LambdaCube.WebGL.Util line 286, column 5 - line 288, column 79: " + [ v.value0.samplerWrapT.constructor.name ]);
               })()();
               Graphics_WebGLRaw.texParameteri_(t)(Graphics_WebGLRaw._TEXTURE_MIN_FILTER)(filterToGLType(v.value0.samplerMinFilter))();
               return Graphics_WebGLRaw.texParameteri_(t)(Graphics_WebGLRaw._TEXTURE_MAG_FILTER)(filterToGLType(v.value0.samplerMagFilter))();
@@ -12097,6 +11706,7 @@ var PS = {};
   exports["newWord8View"] = $foreign.newWord8View;
   exports["nullWebGLBuffer"] = $foreign.nullWebGLBuffer;
   exports["setArrayView"] = $foreign.setArrayView;
+  exports["texImage2D__"] = $foreign.texImage2D__;
 })(PS["LambdaCube.WebGL.Util"] = PS["LambdaCube.WebGL.Util"] || {});
 (function(exports) {
   // Generated by psc version 0.10.2
@@ -12533,7 +12143,13 @@ var PS = {};
               var v = Graphics_WebGLRaw.createTexture_();
               return LambdaCube_WebGL_Util.loadImage_(name)(function (image) {
                   return function __do() {
-                      Graphics_WebGLTexture.handleLoad2D(v)(Graphics_WebGLTexture.MIPMAP.value)(image)();
+                      Graphics_WebGLRaw.bindTexture_(Graphics_WebGLRaw._TEXTURE_2D)(v)();
+                      Graphics_WebGLRaw.texParameteri_(Graphics_WebGLRaw._TEXTURE_2D)(Graphics_WebGLRaw._TEXTURE_MAG_FILTER)(Graphics_WebGLRaw._LINEAR)();
+                      Graphics_WebGLRaw.texParameteri_(Graphics_WebGLRaw._TEXTURE_2D)(Graphics_WebGLRaw._TEXTURE_MIN_FILTER)(Graphics_WebGLRaw._LINEAR)();
+                      Graphics_WebGLRaw.pixelStorei_(Graphics_WebGLRaw._UNPACK_FLIP_Y_WEBGL)(1)();
+                      Graphics_WebGLRaw.pixelStorei_(Graphics_WebGLRaw._UNPACK_PREMULTIPLY_ALPHA_WEBGL)(0)();
+                      LambdaCube_WebGL_Util.texImage2D__(Graphics_WebGLRaw._TEXTURE_2D)(0)(Graphics_WebGLRaw._RGBA)(Graphics_WebGLRaw._RGBA)(Graphics_WebGLRaw._UNSIGNED_BYTE)(image)();
+                      Graphics_WebGLTexture.unbindTexture(Graphics_WebGLTexture.TEXTURE_2D.value)();
                       return action(new LambdaCube_WebGL_Type.TextureData(v))();
                   };
               })();
