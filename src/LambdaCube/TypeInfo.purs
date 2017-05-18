@@ -14,7 +14,6 @@ import LambdaCube.LinearBase
 import Data.Argonaut.Encode.Combinators ((~>), (:=))
 import Data.Argonaut.Decode.Combinators ((.?))
 import Data.Argonaut.Core (jsonEmptyObject)
-import Data.Argonaut.Printer (printJson)
 import Data.Argonaut.Encode (class EncodeJson, encodeJson)
 import Data.Argonaut.Decode (class DecodeJson, decodeJson)
 

@@ -22,7 +22,7 @@ import qualified Snap.Http.Server        as Snap
 import qualified Snap.Snaplet.Config     as Snap
 
 import LambdaCube.Compiler.Pretty as C
-import LambdaCube.Compiler as C
+import LambdaCube.Compiler as C hiding(catchErr)
 
 import TypeInfo as T
 import Cache
@@ -87,15 +87,15 @@ app compiler ch = Snap.route
               json <- case r of
                 Left json -> return json
                 Right add -> do
-                  json <- catchErr er $ encodePretty . ff <$> compiler bs
+                  json <- Main.catchErr er $ encodePretty . ff <$> compiler bs
                   add json
                   return json
               WS.sendTextData c json
         putStrLn "compileApp ended"
       where
-        cvtRange (C.Range _ (SPos r c) (SPos r' c')) = T.Range r c r' c'
+        cvtRange (C.Range _ (C.SPos r c) (C.SPos r' c')) = T.Range r c r' c'
 
-        ff (Left err, (infos, _))    = CompileError (plainShow err) (convertInfos infos) (convertWarnings infos) (convertErrors infos)
+        ff (Left err, (infos, _))    = CompileError (C.plainShow err) (convertInfos infos) (convertWarnings infos) (convertErrors infos)
         ff (Right ppl, (infos, dsg)) = Compiled dsg (prettyShowUnlines ppl) ppl (convertInfos infos) (convertWarnings infos)
 
         er e = return $ encodePretty $ CompileError ("\n!FAIL\n" ++ e) mempty mempty mempty

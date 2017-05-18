@@ -1,61 +1,47 @@
 module Main (main,run) where
 
 import Prelude
-import Extensions (fail)
-import Global
-
-import Control.Monad.Eff.Console as C
-
-import Control.Bind
-import Timer
-import Control.Monad.Except
-import Control.Monad.Eff
-import Control.Monad.Eff.Exception
-import Control.Monad.Eff.Ref
-import Data.Foldable (for_, foldl)
-import Data.Traversable (for)
-import Partial.Unsafe (unsafePartial)
-
-import Ace
-import Ace as Ace
-import Ace.Types as Ace
-import Ace.Editor as Editor
 import Ace.EditSession as Session
+import Ace.Editor as Editor
 import Ace.Range as Range
-
-import Graphics.WebGL as GL
+import Control.Monad.Eff.Console as C
 import Control.Monad.Eff.JQuery as J
-
-import WebSocket
-import Data.Either
-import Sample
-
-import Data.Foreign
-import Data.Function
-import Data.Function.Uncurried
-import Data.Maybe
-import Data.StrMap(fromFoldable,StrMap(..))
-import Data.Tuple
-import Data.Array
-import Data.Int
-import Data.StrMap as StrMap
-
-import LambdaCube.WebGL
-import LambdaCube.WebGL.Util (unlines)
-import LambdaCube.WebGL.Mesh
-
-import LambdaCube.TypeInfo
-
-import Data.Argonaut.Parser (jsonParser)
-import Data.Argonaut.Decode (class DecodeJson, decodeJson)
-import Data.Argonaut.Core as AC
-
-import Data.Matrix (Mat(..))
-import Data.Matrix4
-import Data.Vector3
-
 import DOM as DOM
+import Data.Argonaut.Core as AC
+import Graphics.WebGL as GL
+import Ace (ACE, EditSession, Editor, ace)
+import Ace (edit) as Ace
+import Ace.Types (Range) as Ace
+import Control.Monad.Eff (Eff)
+import Control.Monad.Eff.Exception (EXCEPTION)
+import Control.Monad.Eff.Ref (REF, modifyRef, newRef, readRef, writeRef)
+import Control.Monad.Except (runExcept)
+import Data.Argonaut.Decode (decodeJson)
+import Data.Argonaut.Parser (jsonParser)
+import Data.Array (concat, filter, length, null)
+import Data.Either (Either(..))
+import Data.Foldable (for_, foldl)
+import Data.Foreign (readBoolean, readNumber, readString)
+import Data.Function.Uncurried (Fn5, runFn5)
+import Data.Int (floor, toNumber)
+import Data.Matrix (Mat(..))
+import Data.Matrix4 (Mat4)
+import Data.Maybe (Maybe(..))
+import Data.StrMap (fromFoldable)
+import Data.Traversable (for)
+import Data.Tuple (Tuple(..))
+import Extensions (fail)
+import Global (readFloat)
+import LambdaCube.TypeInfo (CompileResult(..), ErrorInfo(..), Range(..), TypeInfo(..), WarningInfo(..))
+import LambdaCube.WebGL (FetchPrimitive(..), InputType(..), M44F, ObjectArraySchema(..), PipelineSchema(..), StreamType(..), V2(..), V4(..), allocPipeline, disposePipeline, mkWebGLPipelineInput, renderPipeline, setPipelineInput, setScreenSize, sortSlotObjects, uniformFTexture2D, uniformFloat, uniformV2F, uploadTexture2DToGPU)
+import LambdaCube.WebGL.Mesh (addMesh, compileMesh)
+import LambdaCube.WebGL.Util (unlines)
+import Partial.Unsafe (unsafePartial)
+import Sample (lambdaCube, myCube, myQuad)
+import Timer (NOW, TIMEOUT, clearTimeout, nowEpochMilliseconds, timeout)
+import WebSocket (WS, send, webSocket)
 
+defaultExampleName :: String
 defaultExampleName = "LambdaCube2.lc"
 
 main :: forall e. Eff (console :: C.CONSOLE | e) Unit
@@ -66,8 +52,8 @@ main = do
 --run :: forall m. (Applicative m) => m Unit
 --run = pure unit
 
-foreign import getUrlParameter :: forall eff a. String -> Eff (dom :: DOM.DOM | eff) String
-foreign import getMousePos :: forall eff a. J.JQueryEvent -> Eff (dom :: DOM.DOM | eff) (Array Number)
+foreign import getUrlParameter :: forall eff. String -> Eff (dom :: DOM.DOM | eff) String
+foreign import getMousePos :: forall eff. J.JQueryEvent -> Eff (dom :: DOM.DOM | eff) (Array Number)
 foreign import getJSON :: forall eff a. String -> (AC.Json -> Eff (dom :: DOM.DOM | eff) a) -> Eff (dom :: DOM.DOM | eff) Unit
 
 --  control-b - compile/build
@@ -90,7 +76,7 @@ addMarker range clazz _type inFront self = runFn5 addMarkerImpl range clazz _typ
 
 run :: forall e. Eff
    ( console :: C.CONSOLE
-   , err :: EXCEPTION
+   , exception :: EXCEPTION
    , ref :: REF
    , dom :: DOM.DOM
    , timeout :: TIMEOUT
@@ -182,13 +168,13 @@ run = unsafePartial $ do
 -- todo        uniformFloat "Aspect" pplInput.uniformSetter (toNumber w / toNumber h)
 
   gpuCube <- compileMesh myCube
-  addMesh pplInput "stream4" gpuCube []
+  _ <- addMesh pplInput "stream4" gpuCube []
 
   gpuQuad <- compileMesh myQuad
-  addMesh pplInput "quad" gpuQuad []
+  _ <- addMesh pplInput "quad" gpuQuad []
 
   gpuLambdaCube <- compileMesh lambdaCube
-  addMesh pplInput "lambdaCube" gpuLambdaCube []
+  _ <- addMesh pplInput "lambdaCube" gpuLambdaCube []
 
   -- upload textures
   uploadTexture2DToGPU "logo.png" (uniformFTexture2D "Diffuse" pplInput.uniformSetter)
@@ -200,7 +186,7 @@ run = unsafePartial $ do
           Left e -> C.log $ "decode error: " <> e
           Right (mesh) -> do
             gpuMesh <- compileMesh mesh
-            addMesh pplInput sname gpuMesh []
+            _ <- addMesh pplInput sname gpuMesh []
             sortSlotObjects pplInput
             pure unit
 
@@ -397,6 +383,6 @@ run = unsafePartial $ do
               Just ppl -> renderPipeline ppl
             timeout (1000/25) renderLoop
       -- render loop
-      renderLoop
+      _ <- renderLoop
       
       pure unit

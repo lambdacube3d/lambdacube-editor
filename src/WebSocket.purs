@@ -4,8 +4,8 @@ import Prelude
 import Control.Monad.Eff
 import Data.Either
 
-foreign import data WS :: !
-foreign import data Socket :: *
+foreign import data WS :: Effect
+foreign import data Socket :: Type
 
 type WSAction eff a = Eff (ws :: WS | eff) a
 
