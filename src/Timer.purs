@@ -3,8 +3,8 @@ module Timer where
 import Prelude
 import Control.Monad.Eff
 
-foreign import data TIMEOUT :: !
-foreign import data Timer :: *
+foreign import data TIMEOUT :: Effect
+foreign import data Timer :: Type
 
 foreign import timeout :: forall eff a. 
                                Int -> 
@@ -15,6 +15,6 @@ foreign import clearTimeout :: forall eff.
                                Timer -> 
                                Eff (timeout :: TIMEOUT | eff) Unit
 
-foreign import data NOW :: !
+foreign import data NOW :: Effect
 
 foreign import nowEpochMilliseconds :: forall e. Eff (now :: NOW | e) Number
